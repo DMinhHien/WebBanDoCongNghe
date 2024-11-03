@@ -1,6 +1,6 @@
 [
   {
-    "ContainingType": "BTTHUCHANH.Controllers.CartController",
+    "ContainingType": "WebBanDoCongNghe.Controllers.CartController",
     "Method": "Create",
     "RelativePath": "Cart/create",
     "HttpMethod": "POST",
@@ -16,7 +16,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "BTTHUCHANH.Controllers.CartController",
+    "ContainingType": "WebBanDoCongNghe.Controllers.CartController",
     "Method": "Delete",
     "RelativePath": "Cart/delete",
     "HttpMethod": "POST",
@@ -32,7 +32,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "BTTHUCHANH.Controllers.CartController",
+    "ContainingType": "WebBanDoCongNghe.Controllers.CartController",
     "Method": "Edit",
     "RelativePath": "Cart/edit",
     "HttpMethod": "POST",
@@ -48,7 +48,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "BTTHUCHANH.Controllers.CartController",
+    "ContainingType": "WebBanDoCongNghe.Controllers.CartController",
     "Method": "getListUse",
     "RelativePath": "Cart/getListUse",
     "HttpMethod": "GET",
@@ -58,7 +58,320 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "BTTHUCHANH.Controllers.ProductController",
+    "ContainingType": "WebBanDoCongNghe.Controllers.CategoriesController",
+    "Method": "getListUse",
+    "RelativePath": "Categories",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBanDoCongNghe.Controllers.CategoriesController",
+    "Method": "Create",
+    "RelativePath": "Categories/create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "json",
+        "Type": "Newtonsoft.Json.Linq.JObject",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBanDoCongNghe.Controllers.CategoriesController",
+    "Method": "Delete",
+    "RelativePath": "Categories/delete",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "json",
+        "Type": "Newtonsoft.Json.Linq.JObject",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBanDoCongNghe.Controllers.CategoriesController",
+    "Method": "Edit",
+    "RelativePath": "Categories/edit",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "json",
+        "Type": "Newtonsoft.Json.Linq.JObject",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBanDoCongNghe.Controllers.CommentController",
+    "Method": "getListUse",
+    "RelativePath": "Comment",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBanDoCongNghe.Controllers.CommentController",
+    "Method": "Create",
+    "RelativePath": "Comment/create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "json",
+        "Type": "Newtonsoft.Json.Linq.JObject",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBanDoCongNghe.Controllers.CommentController",
+    "Method": "Delete",
+    "RelativePath": "Comment/delete",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "json",
+        "Type": "Newtonsoft.Json.Linq.JObject",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBanDoCongNghe.Controllers.CommentController",
+    "Method": "Edit",
+    "RelativePath": "Comment/edit",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "json",
+        "Type": "Newtonsoft.Json.Linq.JObject",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Microsoft.AspNetCore.Routing.IdentityApiEndpointRouteBuilderExtensions\u002B\u003C\u003Ec__1\u00601[[WebBanDoCongNghe.Models.UserManage, WebBanDoCongNghe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "Method": "\u003CMapIdentityApi\u003Eb__1_3",
+    "RelativePath": "confirmEmail",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "code",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "changedEmail",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Microsoft.AspNetCore.Routing.IdentityApiEndpointRouteBuilderExtensions\u002B\u003C\u003Ec__DisplayClass1_0\u00601[[WebBanDoCongNghe.Models.UserManage, WebBanDoCongNghe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "Method": "\u003CMapIdentityApi\u003Eb__6",
+    "RelativePath": "forgotPassword",
+    "HttpMethod": "POST",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "resetRequest",
+        "Type": "Microsoft.AspNetCore.Identity.Data.ForgotPasswordRequest",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Http.HttpValidationProblemDetails",
+        "MediaTypes": [
+          "application/problem\u002Bjson"
+        ],
+        "StatusCode": 400
+      }
+    ]
+  },
+  {
+    "ContainingType": "Microsoft.AspNetCore.Routing.IdentityApiEndpointRouteBuilderExtensions\u002B\u003C\u003Ec__1\u00601[[WebBanDoCongNghe.Models.UserManage, WebBanDoCongNghe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "Method": "\u003CMapIdentityApi\u003Eb__1_1",
+    "RelativePath": "login",
+    "HttpMethod": "POST",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "login",
+        "Type": "Microsoft.AspNetCore.Identity.Data.LoginRequest",
+        "IsRequired": false
+      },
+      {
+        "Name": "useCookies",
+        "Type": "System.Nullable\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "useSessionCookies",
+        "Type": "System.Nullable\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Authentication.BearerToken.AccessTokenResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Microsoft.AspNetCore.Routing.IdentityApiEndpointRouteBuilderExtensions\u002B\u003C\u003Ec__1\u00601[[WebBanDoCongNghe.Models.UserManage, WebBanDoCongNghe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "Method": "\u003CMapIdentityApi\u003Eb__1_8",
+    "RelativePath": "manage/2fa",
+    "HttpMethod": "POST",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "tfaRequest",
+        "Type": "Microsoft.AspNetCore.Identity.Data.TwoFactorRequest",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Identity.Data.TwoFactorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Http.HttpValidationProblemDetails",
+        "MediaTypes": [
+          "application/problem\u002Bjson"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 404
+      }
+    ]
+  },
+  {
+    "ContainingType": "Microsoft.AspNetCore.Routing.IdentityApiEndpointRouteBuilderExtensions\u002B\u003C\u003Ec__1\u00601[[WebBanDoCongNghe.Models.UserManage, WebBanDoCongNghe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "Method": "\u003CMapIdentityApi\u003Eb__1_9",
+    "RelativePath": "manage/info",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Identity.Data.InfoResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Http.HttpValidationProblemDetails",
+        "MediaTypes": [
+          "application/problem\u002Bjson"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 404
+      }
+    ]
+  },
+  {
+    "ContainingType": "Microsoft.AspNetCore.Routing.IdentityApiEndpointRouteBuilderExtensions\u002B\u003C\u003Ec__DisplayClass1_0\u00601[[WebBanDoCongNghe.Models.UserManage, WebBanDoCongNghe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "Method": "\u003CMapIdentityApi\u003Eb__10",
+    "RelativePath": "manage/info",
+    "HttpMethod": "POST",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "infoRequest",
+        "Type": "Microsoft.AspNetCore.Identity.Data.InfoRequest",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Identity.Data.InfoResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Http.HttpValidationProblemDetails",
+        "MediaTypes": [
+          "application/problem\u002Bjson"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 404
+      }
+    ]
+  },
+  {
+    "ContainingType": "WebBanDoCongNghe.Controllers.ProductController",
     "Method": "Create",
     "RelativePath": "Product/create",
     "HttpMethod": "POST",
@@ -74,7 +387,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "BTTHUCHANH.Controllers.ProductController",
+    "ContainingType": "WebBanDoCongNghe.Controllers.ProductController",
     "Method": "Delete",
     "RelativePath": "Product/delete",
     "HttpMethod": "POST",
@@ -90,7 +403,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "BTTHUCHANH.Controllers.ProductController",
+    "ContainingType": "WebBanDoCongNghe.Controllers.ProductController",
     "Method": "Edit",
     "RelativePath": "Product/edit",
     "HttpMethod": "POST",
@@ -106,7 +419,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "BTTHUCHANH.Controllers.ProductController",
+    "ContainingType": "WebBanDoCongNghe.Controllers.ProductController",
     "Method": "getCount",
     "RelativePath": "Product/getCount",
     "HttpMethod": "GET",
@@ -116,7 +429,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "BTTHUCHANH.Controllers.ProductController",
+    "ContainingType": "WebBanDoCongNghe.Controllers.ProductController",
     "Method": "getElementById",
     "RelativePath": "Product/getElementById/{id}",
     "HttpMethod": "GET",
@@ -132,7 +445,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "BTTHUCHANH.Controllers.ProductController",
+    "ContainingType": "WebBanDoCongNghe.Controllers.ProductController",
     "Method": "getListUse",
     "RelativePath": "Product/getListUse",
     "HttpMethod": "GET",
@@ -142,7 +455,28 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "BTTHUCHANH.Controllers.ProductController",
+    "ContainingType": "WebBanDoCongNghe.Controllers.ProductController",
+    "Method": "getListUseCategory",
+    "RelativePath": "Product/getListUseCategory/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "json",
+        "Type": "Newtonsoft.Json.Linq.JObject",
+        "IsRequired": true
+      },
+      {
+        "Name": "id",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBanDoCongNghe.Controllers.ProductController",
     "Method": "getPageListUse",
     "RelativePath": "Product/getPageListUse",
     "HttpMethod": "POST",
@@ -163,7 +497,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "BTTHUCHANH.Controllers.ReceiptController",
+    "ContainingType": "WebBanDoCongNghe.Controllers.ReceiptController",
     "Method": "getListUse",
     "RelativePath": "Receipt",
     "HttpMethod": "GET",
@@ -173,7 +507,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "BTTHUCHANH.Controllers.ReceiptController",
+    "ContainingType": "WebBanDoCongNghe.Controllers.ReceiptController",
     "Method": "Create",
     "RelativePath": "Receipt/create",
     "HttpMethod": "POST",
@@ -189,7 +523,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "BTTHUCHANH.Controllers.ReceiptController",
+    "ContainingType": "WebBanDoCongNghe.Controllers.ReceiptController",
     "Method": "Delete",
     "RelativePath": "Receipt/delete",
     "HttpMethod": "POST",
@@ -205,7 +539,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "BTTHUCHANH.Controllers.ReceiptController",
+    "ContainingType": "WebBanDoCongNghe.Controllers.ReceiptController",
     "Method": "Edit",
     "RelativePath": "Receipt/edit",
     "HttpMethod": "POST",
@@ -221,7 +555,227 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "BTTHUCHANH.Controllers.UserController",
+    "ContainingType": "Microsoft.AspNetCore.Routing.IdentityApiEndpointRouteBuilderExtensions\u002B\u003C\u003Ec__DisplayClass1_0\u00601[[WebBanDoCongNghe.Models.UserManage, WebBanDoCongNghe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "Method": "\u003CMapIdentityApi\u003Eb__2",
+    "RelativePath": "refresh",
+    "HttpMethod": "POST",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "refreshRequest",
+        "Type": "Microsoft.AspNetCore.Identity.Data.RefreshRequest",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Authentication.BearerToken.AccessTokenResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Microsoft.AspNetCore.Routing.IdentityApiEndpointRouteBuilderExtensions\u002B\u003C\u003Ec__DisplayClass1_0\u00601[[WebBanDoCongNghe.Models.UserManage, WebBanDoCongNghe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "Method": "\u003CMapIdentityApi\u003Eb__0",
+    "RelativePath": "register",
+    "HttpMethod": "POST",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "registration",
+        "Type": "Microsoft.AspNetCore.Identity.Data.RegisterRequest",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Http.HttpValidationProblemDetails",
+        "MediaTypes": [
+          "application/problem\u002Bjson"
+        ],
+        "StatusCode": 400
+      }
+    ]
+  },
+  {
+    "ContainingType": "Microsoft.AspNetCore.Routing.IdentityApiEndpointRouteBuilderExtensions\u002B\u003C\u003Ec__DisplayClass1_0\u00601[[WebBanDoCongNghe.Models.UserManage, WebBanDoCongNghe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "Method": "\u003CMapIdentityApi\u003Eb__5",
+    "RelativePath": "resendConfirmationEmail",
+    "HttpMethod": "POST",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "resendRequest",
+        "Type": "Microsoft.AspNetCore.Identity.Data.ResendConfirmationEmailRequest",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Microsoft.AspNetCore.Routing.IdentityApiEndpointRouteBuilderExtensions\u002B\u003C\u003Ec__1\u00601[[WebBanDoCongNghe.Models.UserManage, WebBanDoCongNghe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "Method": "\u003CMapIdentityApi\u003Eb__1_7",
+    "RelativePath": "resetPassword",
+    "HttpMethod": "POST",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "resetRequest",
+        "Type": "Microsoft.AspNetCore.Identity.Data.ResetPasswordRequest",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Http.HttpValidationProblemDetails",
+        "MediaTypes": [
+          "application/problem\u002Bjson"
+        ],
+        "StatusCode": 400
+      }
+    ]
+  },
+  {
+    "ContainingType": "WebBanDoCongNghe.Controllers.SearchController",
+    "Method": "getListUse",
+    "RelativePath": "Search",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBanDoCongNghe.Controllers.SearchController",
+    "Method": "Create",
+    "RelativePath": "Search/create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "json",
+        "Type": "Newtonsoft.Json.Linq.JObject",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBanDoCongNghe.Controllers.SearchController",
+    "Method": "Delete",
+    "RelativePath": "Search/delete",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "json",
+        "Type": "Newtonsoft.Json.Linq.JObject",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBanDoCongNghe.Controllers.SearchController",
+    "Method": "Edit",
+    "RelativePath": "Search/edit",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "json",
+        "Type": "Newtonsoft.Json.Linq.JObject",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBanDoCongNghe.Controllers.ShopController",
+    "Method": "getListUse",
+    "RelativePath": "Shop",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBanDoCongNghe.Controllers.ShopController",
+    "Method": "Create",
+    "RelativePath": "Shop/create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "json",
+        "Type": "Newtonsoft.Json.Linq.JObject",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBanDoCongNghe.Controllers.ShopController",
+    "Method": "Delete",
+    "RelativePath": "Shop/delete",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "json",
+        "Type": "Newtonsoft.Json.Linq.JObject",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBanDoCongNghe.Controllers.ShopController",
+    "Method": "Edit",
+    "RelativePath": "Shop/edit",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "json",
+        "Type": "Newtonsoft.Json.Linq.JObject",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBanDoCongNghe.Controllers.UserController",
     "Method": "getListUse",
     "RelativePath": "User",
     "HttpMethod": "GET",
@@ -231,55 +785,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "BTTHUCHANH.Controllers.UserController",
-    "Method": "Create",
-    "RelativePath": "User/create",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "json",
-        "Type": "Newtonsoft.Json.Linq.JObject",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "BTTHUCHANH.Controllers.UserController",
-    "Method": "Delete",
-    "RelativePath": "User/delete",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "json",
-        "Type": "Newtonsoft.Json.Linq.JObject",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "BTTHUCHANH.Controllers.UserController",
-    "Method": "Edit",
-    "RelativePath": "User/edit",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "json",
-        "Type": "Newtonsoft.Json.Linq.JObject",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "BTTHUCHANH.Controllers.WeatherForecastController",
+    "ContainingType": "WebBanDoCongNghe.Controllers.WeatherForecastController",
     "Method": "Get",
     "RelativePath": "WeatherForecast",
     "HttpMethod": "GET",
@@ -288,7 +794,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[BTTHUCHANH.WeatherForecast, BTTHUCHANH, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[WebBanDoCongNghe.WeatherForecast, WebBanDoCongNghe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",

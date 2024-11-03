@@ -1,19 +1,19 @@
-﻿using BTTHUCHANH.DBContext;
-using BTTHUCHANH.Models;
+﻿using WebBanDoCongNghe.DBContext;
+using WebBanDoCongNghe.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 
-namespace BTTHUCHANH.Controllers
+namespace WebBanDoCongNghe.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class ReceiptController : Controller
+    public class ShopController : Controller
     {
         private readonly ProductDbContext _context;
         // GET: ProductController
-        public ReceiptController(ProductDbContext context)
+        public ShopController(ProductDbContext context)
         {
             _context = context;
         }
@@ -22,30 +22,30 @@ namespace BTTHUCHANH.Controllers
         [HttpPost("create")]
         public ActionResult Create([FromBody] JObject json)
         {
-            var model = JsonConvert.DeserializeObject<Receipt>(json.GetValue("data").ToString());
-            _context.Receipts.Add(model);
+            var model = JsonConvert.DeserializeObject<Shop>(json.GetValue("data").ToString());
+            _context.Shops.Add(model);
             _context.SaveChanges();
             return Json(model);
         }
 
 
-        // POST: ReceiptController/Edit/5
+        // POST: ShopController/Edit/5
         [HttpPost("edit")]
         public ActionResult Edit([FromBody] JObject json)
         {
-            var model = JsonConvert.DeserializeObject<Receipt>(json.GetValue("data").ToString());
-            _context.Receipts.Update(model);
+            var model = JsonConvert.DeserializeObject<Shop>(json.GetValue("data").ToString());
+            _context.Shops.Update(model);
             _context.SaveChanges();
             return Json(model);
         }
 
-        // POST: ReceiptController/Delete/5
+        // POST: ShopController/Delete/5
         [HttpPost("delete")]
         public ActionResult Delete([FromBody] JObject json)
         {
             var id = (json.GetValue("id").ToString());
-            var result = _context.Receipts.SingleOrDefault(p => p.id == id);
-            _context.Receipts.Remove(result);
+            var result = _context.Shops.SingleOrDefault(p => p.id == id);
+            _context.Shops.Remove(result);
             _context.SaveChanges();
             return Json(result);
 
@@ -53,11 +53,11 @@ namespace BTTHUCHANH.Controllers
         [HttpGet]
         public IActionResult getListUse()
         {
-            var result = _context.Receipts.AsQueryable().
+            var result = _context.Shops.AsQueryable().
                  Select(d => new
                  {
                      id = d.id,
-                     name = d.TotalPrice
+                     name = d.name
                  }).ToList();
             return Json(result);
         }

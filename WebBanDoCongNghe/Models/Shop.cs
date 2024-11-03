@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BTTHUCHANH.Models
+namespace WebBanDoCongNghe.Models
 {
     [Table("Shop")]
     public class Shop

@@ -1,14 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-namespace BTTHUCHANH.Models
+namespace WebBanDoCongNghe.Models
 {
-    [Table("Receipt")]
-    public class Receipt
+    [Table("Search")]
+    public class Search
     {
         [Key]
         public string id { get; set; }
         public string userId { get; set; }
-        public double TotalPrice { get; set; }
-        public string date { get; set; }
+        public string content { get; set; }
     }
 }

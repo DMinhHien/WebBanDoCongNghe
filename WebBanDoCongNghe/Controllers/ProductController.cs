@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using BTTHUCHANH.DBContext;
+using WebBanDoCongNghe.DBContext;
 using Newtonsoft.Json;
-using BTTHUCHANH.Models;
+using WebBanDoCongNghe.Models;
 using Newtonsoft.Json.Linq;
 using Microsoft.AspNetCore.Http.HttpResults;
 using System.Net.WebSockets;
-namespace BTTHUCHANH.Controllers
+namespace WebBanDoCongNghe.Controllers
 {
     [ApiController]
     [Route("[controller]")]
@@ -56,6 +56,19 @@ namespace BTTHUCHANH.Controllers
         public IActionResult getListUse()
         {
             var result = _context.Products.AsQueryable().
+                 Select(d => new
+                 {
+                     d.id,
+                     d.productName,
+                     d.unitPrice,
+                 }).ToList();
+            return Json(result);
+        }
+        [HttpGet("getListUseCategory/{id}")]
+        public IActionResult getListUseCategory([FromBody] JObject json)
+        {
+            var categoryId = json.GetValue("data").ToString();
+            var result = _context.Products.AsQueryable().Where(x=>x.categoryId== categoryId).
                  Select(d => new
                  {
                      d.id,

@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using BTTHUCHANH.DBContext;
+using WebBanDoCongNghe.DBContext;
 using Newtonsoft.Json;
-using BTTHUCHANH.Models;
+using WebBanDoCongNghe.Models;
 using Newtonsoft.Json.Linq;
 using Microsoft.AspNetCore.Http.HttpResults;
-namespace BTTHUCHANH.Controllers
+namespace WebBanDoCongNghe.Controllers
 {
     [ApiController]
     [Route("[controller]")]

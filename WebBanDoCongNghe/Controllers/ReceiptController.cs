@@ -1,11 +1,11 @@
-﻿using BTTHUCHANH.DBContext;
-using BTTHUCHANH.Models;
+﻿using WebBanDoCongNghe.DBContext;
+using WebBanDoCongNghe.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 
-namespace BTTHUCHANH.Controllers
+namespace WebBanDoCongNghe.Controllers
 {
     [ApiController]
     [Route("[controller]")]
@@ -57,7 +57,7 @@ namespace BTTHUCHANH.Controllers
                  Select(d => new
                  {
                      id = d.id,
-                     name = d.TotalPrice
+                   
                  }).ToList();
             return Json(result);
         }
