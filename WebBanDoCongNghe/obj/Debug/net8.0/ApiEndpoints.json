@@ -776,9 +776,29 @@
   },
   {
     "ContainingType": "WebBanDoCongNghe.Controllers.UserController",
-    "Method": "getListUse",
-    "RelativePath": "User",
+    "Method": "checkLogin",
+    "RelativePath": "User/checkLogin",
     "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBanDoCongNghe.Controllers.UserController",
+    "Method": "getListUse",
+    "RelativePath": "User/getListUse",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBanDoCongNghe.Controllers.UserController",
+    "Method": "logout",
+    "RelativePath": "User/logout",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [],

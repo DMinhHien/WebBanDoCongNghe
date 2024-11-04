@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
+using System.Security.Claims;
 
 namespace WebBanDoCongNghe.Controllers
 {
@@ -22,10 +23,21 @@ namespace WebBanDoCongNghe.Controllers
         [HttpPost("create")]
         public ActionResult Create([FromBody] JObject json)
         {
-            var model = JsonConvert.DeserializeObject<Receipt>(json.GetValue("data").ToString());
-            _context.Receipts.Add(model);
+            var receipt = new Receipt();
+            var receiptDetailsJson = json.GetValue("data");
+            var receiptDetails = JsonConvert.DeserializeObject<List<ReceiptDetail>>(receiptDetailsJson.ToString());
+            receipt.id = Guid.NewGuid().ToString();
+            receipt.userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            receipt.date = DateTime.Now;
+            _context.Receipts.Add(receipt);
+            foreach (var detail in receiptDetails)
+            {
+                detail.id = Guid.NewGuid().ToString(); 
+                detail.idReceipt = receipt.id;          
+                _context.ReceiptDetails.Add(detail);
+            }
             _context.SaveChanges();
-            return Json(model);
+            return Json(receipt);
         }
 
 
@@ -53,12 +65,30 @@ namespace WebBanDoCongNghe.Controllers
         [HttpGet]
         public IActionResult getListUse()
         {
-            var result = _context.Receipts.AsQueryable().
-                 Select(d => new
-                 {
-                     id = d.id,
-                   
-                 }).ToList();
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var result = _context.Receipts
+                .Where(x => x.userId == userId)
+                .Select(receipt => new
+                {
+                    receipt.id,
+                    receipt.date,
+                    receipt.userId,
+                    ReceiptDetails = _context.ReceiptDetails
+                        .Where(rd => rd.idReceipt == receipt.id)
+                        .Select(rd => new
+                        {
+                            rd.id,
+                            rd.idProduct,
+                            rd.quantity,
+                            Product = _context.Products.Where(p => p.id == rd.idProduct)
+                            .Select(p => new
+                            {
+                                p.id,
+                                p.productName,
+                                p.unitPrice
+                            }).FirstOrDefault()
+                }).ToList()
+                }).ToList();
             return Json(result);
         }
     }

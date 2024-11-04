@@ -8,6 +8,6 @@ namespace WebBanDoCongNghe.Models
         [Key]
         public string id { get; set; }
         public string userId { get; set; }
-        public string date { get; set; }
+        public DateTime date { get; set; }
     }
 }

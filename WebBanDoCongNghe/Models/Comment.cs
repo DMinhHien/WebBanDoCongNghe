@@ -11,6 +11,6 @@ namespace WebBanDoCongNghe.Models
         public string content { get; set; }
         public string productId { get; set; }
         public double rating { get; set; }
-        public string date { get; set; }
+        public DateTime date { get; set; }
     }
 }
