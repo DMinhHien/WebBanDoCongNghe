@@ -4,11 +4,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebBanDoCongNghe.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize]
     public class ShopController : Controller
     {
         private readonly ProductDbContext _context;
@@ -23,6 +25,7 @@ namespace WebBanDoCongNghe.Controllers
         public ActionResult Create([FromBody] JObject json)
         {
             var model = JsonConvert.DeserializeObject<Shop>(json.GetValue("data").ToString());
+            model.id = Guid.NewGuid().ToString().Substring(0, 10);
             _context.Shops.Add(model);
             _context.SaveChanges();
             return Json(model);
