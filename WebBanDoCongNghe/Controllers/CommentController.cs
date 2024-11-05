@@ -4,11 +4,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebBanDoCongNghe.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize]
     public class CommentController : Controller
     {
         private readonly ProductDbContext _context;
@@ -23,6 +25,7 @@ namespace WebBanDoCongNghe.Controllers
         public ActionResult Create([FromBody] JObject json)
         {
             var model = JsonConvert.DeserializeObject<Comment>(json.GetValue("data").ToString());
+            model.id = Guid.NewGuid().ToString().Substring(0, 10);
             _context.Comments.Add(model);
             _context.SaveChanges();
             return Json(model);
@@ -50,16 +53,36 @@ namespace WebBanDoCongNghe.Controllers
             return Json(result);
 
         }
-        [HttpGet]
+        [HttpGet("getListUse")]
         public IActionResult getListUse()
         {
             var result = _context.Comments.AsQueryable().
                  Select(d => new
                  {
                      id = d.id,
-                     content = d.content
+                     content = d.content,
+                     userId= d.userId,
+                     likes=_context.CommentLikes.AsQueryable().Where(x=>x.idComment==d.id).ToList().Count(),
                  }).ToList();
             return Json(result);
+        }
+        [HttpGet("likeComment")]
+        public IActionResult likeComment([FromBody] JObject json)
+        {
+            var model = JsonConvert.DeserializeObject<CommentLike>(json.GetValue("data").ToString());
+            _context.CommentLikes.Add(model);
+            _context.SaveChanges();
+            return Json(model);
+        }
+        [HttpPost("deleteLike/{id}")]
+        public ActionResult deleteLike([FromBody] JObject json)
+        {
+            var id = (json.GetValue("id").ToString());
+            var result = _context.CommentLikes.SingleOrDefault(p => p.id == id);
+            _context.CommentLikes.Remove(result);
+            _context.SaveChanges();
+            return Json(result);
+
         }
     }
 }

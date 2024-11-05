@@ -6,11 +6,13 @@ using WebBanDoCongNghe.Models;
 using Newtonsoft.Json.Linq;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebBanDoCongNghe.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize]
     public class UserController : Controller
     {
         private readonly ProductDbContext _context;

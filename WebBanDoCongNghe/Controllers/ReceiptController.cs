@@ -5,11 +5,13 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebBanDoCongNghe.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize]
     public class ReceiptController : Controller
     {
         private readonly ProductDbContext _context;
@@ -26,7 +28,7 @@ namespace WebBanDoCongNghe.Controllers
             var receipt = new Receipt();
             var receiptDetailsJson = json.GetValue("data");
             var receiptDetails = JsonConvert.DeserializeObject<List<ReceiptDetail>>(receiptDetailsJson.ToString());
-            receipt.id = Guid.NewGuid().ToString();
+            receipt.id = Guid.NewGuid().ToString().Substring(0, 10);
             receipt.userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             receipt.date = DateTime.Now;
             _context.Receipts.Add(receipt);
@@ -89,6 +91,41 @@ namespace WebBanDoCongNghe.Controllers
                             }).FirstOrDefault()
                 }).ToList()
                 }).ToList();
+            return Json(result);
+        }
+        [HttpGet]
+        public IActionResult getListUseShop([FromBody] JObject json)
+        {
+            var shopId = json.GetValue("id").ToString();
+
+            // Truy vấn các ReceiptDetail cho các sản phẩm thuộc shopId
+            var result = _context.ReceiptDetails
+                .Where(rd => _context.Products
+                    .Any(p => p.id == rd.idProduct && p.idShop == shopId)) // Chỉ lấy ReceiptDetail có Product thuộc shopId
+                .Select(receiptDetail => new
+                {
+                    receiptDetail.idProduct,
+                    receiptDetail.quantity,
+                    receiptDetail.idReceipt,
+                    // Lấy thông tin Receipt liên quan
+                    Receipt = _context.Receipts
+                        .Where(r => r.id == receiptDetail.idReceipt)
+                        .Select(r => new
+                        {
+                            r.userId,
+                            r.date
+                        }).FirstOrDefault(),
+                    // Lấy thông tin Product
+                    Product = _context.Products
+                        .Where(p => p.id == receiptDetail.idProduct && p.idShop == shopId)
+                        .Select(p => new
+                        {
+                            p.id,
+                            p.productName,
+                            p.unitPrice
+                        }).FirstOrDefault()
+                }).ToList();
+
             return Json(result);
         }
     }
