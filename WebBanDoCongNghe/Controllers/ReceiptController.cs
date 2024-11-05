@@ -64,7 +64,7 @@ namespace WebBanDoCongNghe.Controllers
             return Json(result);
 
         }
-        [HttpGet]
+        [HttpGet("getListUse")]
         public IActionResult getListUse()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -93,7 +93,7 @@ namespace WebBanDoCongNghe.Controllers
                 }).ToList();
             return Json(result);
         }
-        [HttpGet]
+        [HttpGet("getListUseShop")]
         public IActionResult getListUseShop([FromBody] JObject json)
         {
             var shopId = json.GetValue("id").ToString();

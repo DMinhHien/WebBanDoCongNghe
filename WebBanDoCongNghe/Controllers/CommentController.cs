@@ -66,7 +66,7 @@ namespace WebBanDoCongNghe.Controllers
                  }).ToList();
             return Json(result);
         }
-        [HttpGet("likeComment")]
+        [HttpPost("likeComment")]
         public IActionResult likeComment([FromBody] JObject json)
         {
             var model = JsonConvert.DeserializeObject<CommentLike>(json.GetValue("data").ToString());

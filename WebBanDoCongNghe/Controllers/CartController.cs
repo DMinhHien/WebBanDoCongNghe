@@ -98,6 +98,7 @@ namespace WebBanDoCongNghe.Controllers
                 }).ToList();
             return Json(result);
         }
+        [HttpPost("addCartProduct")]
         public IActionResult addCartProduct([FromBody] JObject json)
         {
             var model = JsonConvert.DeserializeObject<CartDetail>(json.GetValue("data").ToString());

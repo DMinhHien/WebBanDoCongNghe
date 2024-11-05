@@ -1,6 +1,22 @@
 [
   {
     "ContainingType": "WebBanDoCongNghe.Controllers.CartController",
+    "Method": "addCartProduct",
+    "RelativePath": "Cart/addCartProduct",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "json",
+        "Type": "Newtonsoft.Json.Linq.JObject",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBanDoCongNghe.Controllers.CartController",
     "Method": "Create",
     "RelativePath": "Cart/create",
     "HttpMethod": "POST",
@@ -49,18 +65,24 @@
   },
   {
     "ContainingType": "WebBanDoCongNghe.Controllers.CartController",
-    "Method": "getListUse",
-    "RelativePath": "Cart/getListUse",
-    "HttpMethod": "GET",
+    "Method": "EditCartDetail",
+    "RelativePath": "Cart/editCartDetail",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "json",
+        "Type": "Newtonsoft.Json.Linq.JObject",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "WebBanDoCongNghe.Controllers.CategoriesController",
+    "ContainingType": "WebBanDoCongNghe.Controllers.CartController",
     "Method": "getListUse",
-    "RelativePath": "Categories",
+    "RelativePath": "Cart/getListUse",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -116,9 +138,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "WebBanDoCongNghe.Controllers.CommentController",
+    "ContainingType": "WebBanDoCongNghe.Controllers.CategoriesController",
     "Method": "getListUse",
-    "RelativePath": "Comment",
+    "RelativePath": "Categories/getListUse",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -159,8 +181,55 @@
   },
   {
     "ContainingType": "WebBanDoCongNghe.Controllers.CommentController",
+    "Method": "deleteLike",
+    "RelativePath": "Comment/deleteLike/{id}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "json",
+        "Type": "Newtonsoft.Json.Linq.JObject",
+        "IsRequired": true
+      },
+      {
+        "Name": "id",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBanDoCongNghe.Controllers.CommentController",
     "Method": "Edit",
     "RelativePath": "Comment/edit",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "json",
+        "Type": "Newtonsoft.Json.Linq.JObject",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBanDoCongNghe.Controllers.CommentController",
+    "Method": "getListUse",
+    "RelativePath": "Comment/getListUse",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBanDoCongNghe.Controllers.CommentController",
+    "Method": "likeComment",
+    "RelativePath": "Comment/likeComment",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -477,6 +546,22 @@
   },
   {
     "ContainingType": "WebBanDoCongNghe.Controllers.ProductController",
+    "Method": "getListUseSearch",
+    "RelativePath": "Product/getListUseSearch",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "json",
+        "Type": "Newtonsoft.Json.Linq.JObject",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBanDoCongNghe.Controllers.ProductController",
     "Method": "getPageListUse",
     "RelativePath": "Product/getPageListUse",
     "HttpMethod": "POST",
@@ -494,16 +579,6 @@
         "IsRequired": false
       }
     ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "WebBanDoCongNghe.Controllers.ReceiptController",
-    "Method": "getListUse",
-    "RelativePath": "Receipt",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
     "ReturnTypes": []
   },
   {
@@ -543,6 +618,32 @@
     "Method": "Edit",
     "RelativePath": "Receipt/edit",
     "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "json",
+        "Type": "Newtonsoft.Json.Linq.JObject",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBanDoCongNghe.Controllers.ReceiptController",
+    "Method": "getListUse",
+    "RelativePath": "Receipt/getListUse",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBanDoCongNghe.Controllers.ReceiptController",
+    "Method": "getListUseShop",
+    "RelativePath": "Receipt/getListUseShop",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -660,16 +761,6 @@
   },
   {
     "ContainingType": "WebBanDoCongNghe.Controllers.SearchController",
-    "Method": "getListUse",
-    "RelativePath": "Search",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "WebBanDoCongNghe.Controllers.SearchController",
     "Method": "Create",
     "RelativePath": "Search/create",
     "HttpMethod": "POST",
@@ -717,9 +808,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "WebBanDoCongNghe.Controllers.ShopController",
+    "ContainingType": "WebBanDoCongNghe.Controllers.SearchController",
     "Method": "getListUse",
-    "RelativePath": "Shop",
+    "RelativePath": "Search/getListUse",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -772,6 +863,16 @@
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBanDoCongNghe.Controllers.ShopController",
+    "Method": "getListUse",
+    "RelativePath": "Shop/getListUse",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {

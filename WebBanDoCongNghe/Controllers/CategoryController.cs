@@ -50,7 +50,7 @@ namespace WebBanDoCongNghe.Controllers
             return Json(result);
 
         }
-        [HttpGet]
+        [HttpGet("getListUse")]
         public IActionResult getListUse()
         {
             var result = _context.Categories.AsQueryable().

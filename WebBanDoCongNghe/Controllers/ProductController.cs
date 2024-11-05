@@ -77,6 +77,19 @@ namespace WebBanDoCongNghe.Controllers
                  }).ToList();
             return Json(result);
         }
+        [HttpGet("getListUseSearch")]
+        public IActionResult getListUseSearch([FromBody] JObject json)
+        {
+            var searchString = json.GetValue("data").ToString();
+            var result = _context.Products.AsQueryable().Where(x=>x.productName.Contains(searchString)).
+                 Select(d => new
+                 {
+                     d.id,
+                     d.productName,
+                     d.unitPrice,
+                 }).ToList();
+            return Json(result);
+        }
         [HttpGet("getCount")]
         public IActionResult getCount() {
             int total=_context.Products.Count();
