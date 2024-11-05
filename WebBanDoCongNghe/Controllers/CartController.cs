@@ -43,6 +43,14 @@ namespace WebBanDoCongNghe.Controllers
             _context.SaveChanges();
             return Json(model);
         }
+        [HttpPost("editCartDetail")]
+        public ActionResult EditCartDetail([FromBody] JObject json)
+        {
+            var model = JsonConvert.DeserializeObject<CartDetail>(json.GetValue("data").ToString());
+            _context.CartDetails.Update(model);
+            _context.SaveChanges();
+            return Json(model);
+        }
 
 
         [HttpPost("delete")]
@@ -78,7 +86,13 @@ namespace WebBanDoCongNghe.Controllers
                                 p.id,
                                 p.productName,
                                 p.unitPrice,
-                                p.idShop
+                                p.idShop,
+                                Shop=_context.Shops.Where(s => s.id == p.idShop)
+                                 .Select(p => new
+                                 {
+                                     p.name,
+                                     p.image
+                                 }).FirstOrDefault()
                             }).FirstOrDefault()
                         }).ToList()
                 }).ToList();
