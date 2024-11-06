@@ -1,8 +1,10 @@
+
+import ProductList from '../components/ProductList/ProductList';
 function HomePage() {
     return(
-        <div>
-            Homepage Content
-        </div>
+       <div>
+       <ProductList></ProductList>
+       </div>
     );
 }
 export default HomePage;
