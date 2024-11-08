@@ -79,7 +79,7 @@ namespace WebBanDoCongNghe.Controllers
         [HttpGet("getListUseShop/{id}")]
         public IActionResult getListUseShop([FromRoute] string shopId)
         {
-            var result = _context.Products.AsQueryable().Where(x => x.shopId == shopId).
+            var result = _context.Products.AsQueryable().Where(x => x.idShop == shopId).
                  Select(d => new
                  {
                      d.id,
@@ -122,8 +122,9 @@ namespace WebBanDoCongNghe.Controllers
         [HttpGet("getElementById/{id}")]
         public IActionResult getElementById([FromRoute] string id)
         {
-            var model = _context.Products.AsQueryable().Where(m => m.id == id)
-                .Select(d=>new
+            var model = _context.Products
+                .Where(m => m.id == id)
+                .Select(d => new
                 {
                     d.productName,
                     d.unitPrice,
@@ -131,17 +132,14 @@ namespace WebBanDoCongNghe.Controllers
                     d.status,
                     d.image,
                     d.quantity,
-                    //shopName=_context.Shops.AsQueryable().Where(x=>x.id==d.idShop)
-                    //.Select(s=>new
-                    //{
-                    //    s.name
-                    //}).FirstOrDefault(),
-                    categoryName = _context.Categories.AsQueryable().Where(x => x.id == d.categoryId)
-                    .Select(s => new
-                    {
-                        s.name
-                    }).FirstOrDefault()
-                });
+                    // Chỉ lấy giá trị chuỗi của categoryName
+                    categoryName = _context.Categories
+                        .Where(x => x.id == d.categoryId)
+                        .Select(s => s.name) // Lấy chuỗi s.name
+                        .FirstOrDefault()
+                })
+                .FirstOrDefault(); // Thêm FirstOrDefault để lấy kết quả đầu tiên hoặc null
+
             if (model == null)
             {
                 return NotFound();
