@@ -111,7 +111,26 @@ namespace WebBanDoCongNghe.Controllers
         [HttpGet("getElementById/{id}")]
         public IActionResult getElementById([FromRoute] string id)
         {
-            var model = _context.Products.AsQueryable().FirstOrDefault(m => m.id == id); ;
+            var model = _context.Products.AsQueryable().Where(m => m.id == id)
+                .Select(d=>new
+                {
+                    d.productName,
+                    d.unitPrice,
+                    d.description,
+                    d.status,
+                    d.image,
+                    d.quantity,
+                    //shopName=_context.Shops.AsQueryable().Where(x=>x.id==d.idShop)
+                    //.Select(s=>new
+                    //{
+                    //    s.name
+                    //}).FirstOrDefault(),
+                    categoryName = _context.Categories.AsQueryable().Where(x => x.id == d.categoryId)
+                    .Select(s => new
+                    {
+                        s.name
+                    }).FirstOrDefault()
+                });
             if (model == null)
             {
                 return NotFound();
