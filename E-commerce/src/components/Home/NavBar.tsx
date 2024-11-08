@@ -40,9 +40,9 @@ const Navbar = () => {
         gap: isMobile ? "0" : "20px",
       }}
     >
-      <ListItemButton>
+      <ListItemButton component = {Link} to ="/categories">
         <ListItemText
-          primary="Product"
+          primary="Danh mục sản phẩm"
           primaryTypographyProps={{ noWrap: true }}
         />
       </ListItemButton>
@@ -103,8 +103,8 @@ const Navbar = () => {
                 style={{ width: 250 }}
               >
                 <List>
-                  <ListItemButton>
-                    <ListItemText primary="Products" />
+                  <ListItemButton component = {Link} to ="/categories">
+                    <ListItemText primary="Danh mục sản phẩm" />
                   </ListItemButton>
                   <ListItemButton>
                     <ListItemText primary="Offers" />
