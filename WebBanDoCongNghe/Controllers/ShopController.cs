@@ -64,5 +64,11 @@ namespace WebBanDoCongNghe.Controllers
                  }).ToList();
             return Json(result);
         }
+        [HttpGet("getElementById/{id}")]
+        public IActionResult getElementById([FromRoute] string id)
+        {
+            var model = _context.Shops.SingleOrDefault(x=>x.id == id);
+            return Json(model);
+        }
     }
 }

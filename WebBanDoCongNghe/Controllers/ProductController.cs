@@ -65,10 +65,21 @@ namespace WebBanDoCongNghe.Controllers
             return Json(result);
         }
         [HttpGet("getListUseCategory/{id}")]
-        public IActionResult getListUseCategory([FromBody] JObject json)
+        public IActionResult getListUseCategory([FromRoute] string categoryId)
         {
-            var categoryId = json.GetValue("data").ToString();
             var result = _context.Products.AsQueryable().Where(x=>x.categoryId== categoryId).
+                 Select(d => new
+                 {
+                     d.id,
+                     d.productName,
+                     d.unitPrice,
+                 }).ToList();
+            return Json(result);
+        }
+        [HttpGet("getListUseShop/{id}")]
+        public IActionResult getListUseShop([FromRoute] string shopId)
+        {
+            var result = _context.Products.AsQueryable().Where(x => x.shopId == shopId).
                  Select(d => new
                  {
                      d.id,
