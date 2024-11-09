@@ -1,66 +1,66 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using BTTHUCHANH.DBContext;
+using WebBanDoCongNghe.DBContext;
 using Newtonsoft.Json;
-using BTTHUCHANH.Models;
+using WebBanDoCongNghe.Models;
 using Newtonsoft.Json.Linq;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
-namespace BTTHUCHANH.Controllers
+namespace WebBanDoCongNghe.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize]
     public class UserController : Controller
     {
         private readonly ProductDbContext _context;
+        private readonly UserManager<UserManage> _userManager;
+        private readonly SignInManager<UserManage> _signInManager;
         // GET: ProductController
-        public UserController(ProductDbContext context)
+        public UserController(ProductDbContext context, UserManager<UserManage> userManager,
+            SignInManager<UserManage> signInManager)
         {
+            _userManager = userManager;
             _context = context;
+            _signInManager = signInManager;
         }
 
         // POST: ProductController/Create
-        [HttpPost("create")]
-        public ActionResult Create([FromBody] JObject json)
-        {
-            var model = JsonConvert.DeserializeObject<UserManage>(json.GetValue("data").ToString());
-            _context.Users.Add(model);
-            _context.SaveChanges();
-            return Json(model);
-        }
 
-
-        // POST: UserController/Edit/5
-        [HttpPost("edit")]
-        public ActionResult Edit([FromBody] JObject json)
-        {
-            var model = JsonConvert.DeserializeObject<UserManage>(json.GetValue("data").ToString());
-            _context.Users.Update(model);
-            _context.SaveChanges();
-            return Json(model);
-        }
-
-        // POST: UserController/Delete/5
-        [HttpPost("delete")]
-        public ActionResult Delete([FromBody] JObject json)
-        {
-            var id = (json.GetValue("id").ToString());
-            var result = _context.Users.SingleOrDefault(p => p.id == id);
-            _context.Users.Remove(result);
-            _context.SaveChanges();
-            return Json(result);
-
-        }
-        [HttpGet]
+        [HttpGet("getListUse")]
         public IActionResult getListUse()
         {
             var result = _context.Users.AsQueryable().
                  Select(d => new
                  {
-                     id = d.id,
-                     name = d.username
+                     id = d.Id,
+                     name = d.UserName
                  }).ToList();
             return Json(result);
+        }
+        [HttpGet("checkLogin")]
+        public IActionResult checkLogin()
+        {
+            var result = User.Identity.IsAuthenticated;
+            return Json(result);
+        }
+        [HttpPost("logout")]
+        public async Task<IActionResult> logout()
+        {
+            await _signInManager.SignOutAsync();
+            return Json("Logout successfully");
+        }
+        [HttpGet("getElementById/{id}")]
+        public IActionResult getElementById([FromRoute] string id)
+        {
+            var model = _context.Users.AsQueryable().FirstOrDefault(m => m.Id == id); ;
+            if (model == null)
+            {
+                return NotFound();
+            }
+            return Json(model);
         }
     }
 }

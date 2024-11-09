@@ -1,15 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-namespace BTTHUCHANH.Models
+using Microsoft.AspNetCore.Identity;
+namespace WebBanDoCongNghe.Models
 {
-    [Table("UserManage")]
-    public class UserManage
+    public class UserManage : IdentityUser
     {
-        [Key]
-        public string id { get; set; }
-        public string username { get; set; }
-        public string email { get; set; }
-        public string password { get; set; }
-        public string phone { get; set; }
+        public DateTime? birthDate { get; set; }
+        public string? Address { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-namespace BTTHUCHANH.Models
+namespace WebBanDoCongNghe.Models
 {
     [Table("Product")]
     public class Product
@@ -8,7 +8,12 @@ namespace BTTHUCHANH.Models
         [Key]
         public string id { get; set; }
         public string productName {  get; set; }
-        public string picture {  get; set; }
+        public string image {  get; set; }
         public double unitPrice { get; set; }
+        public string categoryId { get; set; }
+        public int quantity { get; set; }
+        public string idShop { get; set; }
+        public string status { get; set; }
+        public string description { get; set; }
     }
 }
