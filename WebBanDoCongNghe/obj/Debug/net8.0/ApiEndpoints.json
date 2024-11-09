@@ -532,9 +532,9 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "json",
-        "Type": "Newtonsoft.Json.Linq.JObject",
-        "IsRequired": true
+        "Name": "categoryId",
+        "Type": "System.String",
+        "IsRequired": false
       },
       {
         "Name": "id",
@@ -555,6 +555,27 @@
       {
         "Name": "json",
         "Type": "Newtonsoft.Json.Linq.JObject",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBanDoCongNghe.Controllers.ProductController",
+    "Method": "getListUseShop",
+    "RelativePath": "Product/getListUseShop/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "shopId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "id",
+        "Type": "",
         "IsRequired": true
       }
     ],
@@ -860,6 +881,22 @@
       {
         "Name": "json",
         "Type": "Newtonsoft.Json.Linq.JObject",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBanDoCongNghe.Controllers.ShopController",
+    "Method": "getElementById",
+    "RelativePath": "Shop/getElementById/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
         "IsRequired": true
       }
     ],
