@@ -9,7 +9,9 @@ const root = ReactDOM.createRoot(
 );
 root.render(
     <BrowserRouter>
-    <App/>
+      <div className='bg-gradient-to-t from-black to-white'>
+        <App/>
+      </div>
     </BrowserRouter>
 );
 
