@@ -526,7 +526,7 @@
   {
     "ContainingType": "WebBanDoCongNghe.Controllers.ProductController",
     "Method": "getListUseCategory",
-    "RelativePath": "Product/getListUseCategory/{id}",
+    "RelativePath": "Product/getListUseCategory/{categoryId}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -534,11 +534,6 @@
       {
         "Name": "categoryId",
         "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "id",
-        "Type": "",
         "IsRequired": true
       }
     ],
