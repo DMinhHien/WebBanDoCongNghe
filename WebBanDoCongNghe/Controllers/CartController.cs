@@ -1,14 +1,18 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using BTTHUCHANH.DBContext;
+using WebBanDoCongNghe.DBContext;
 using Newtonsoft.Json;
-using BTTHUCHANH.Models;
+using WebBanDoCongNghe.Models;
 using Newtonsoft.Json.Linq;
 using Microsoft.AspNetCore.Http.HttpResults;
-namespace BTTHUCHANH.Controllers
+using Microsoft.AspNetCore.Authorization;
+using System.Net.WebSockets;
+using System.Security.Claims;
+namespace WebBanDoCongNghe.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize]
     public class CartController : Controller
     {
         private readonly ProductDbContext _context;
@@ -23,6 +27,7 @@ namespace BTTHUCHANH.Controllers
         public ActionResult Create([FromBody] JObject json)
         {
             var model = JsonConvert.DeserializeObject<Cart>(json.GetValue("data").ToString());
+            model.id = Guid.NewGuid().ToString().Substring(0, 10);
             _context.Carts.Add(model);
             _context.SaveChanges();
             return Json(model);
@@ -35,6 +40,14 @@ namespace BTTHUCHANH.Controllers
         {
             var model = JsonConvert.DeserializeObject<Cart>(json.GetValue("data").ToString());
             _context.Carts.Update(model);
+            _context.SaveChanges();
+            return Json(model);
+        }
+        [HttpPost("editCartDetail")]
+        public ActionResult EditCartDetail([FromBody] JObject json)
+        {
+            var model = JsonConvert.DeserializeObject<CartDetail>(json.GetValue("data").ToString());
+            _context.CartDetails.Update(model);
             _context.SaveChanges();
             return Json(model);
         }
@@ -53,12 +66,45 @@ namespace BTTHUCHANH.Controllers
         [HttpGet("getListUse")]
         public IActionResult getListUse()
         {
-            var result = _context.Carts.AsQueryable().
-                 Select(d => new
-                 {
-                     id = d.id,
-                 }).ToList();
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var result = _context.Carts
+                .Where(x => x.userId == userId)
+                .Select(cart => new
+                {
+                    cart.id,
+                    cart.userId,
+                    CartDetails = _context.CartDetails
+                        .Where(rd => rd.idCart == cart.id)
+                        .Select(rd => new
+                        {
+                            rd.id,
+                            rd.idProduct,
+                            rd.quantity,
+                            Product = _context.Products.Where(p => p.id == rd.idProduct)
+                            .Select(p => new
+                            {
+                                p.id,
+                                p.productName,
+                                p.unitPrice,
+                                p.idShop,
+                                Shop=_context.Shops.Where(s => s.id == p.idShop)
+                                 .Select(p => new
+                                 {
+                                     p.name,
+                                     p.image
+                                 }).FirstOrDefault()
+                            }).FirstOrDefault()
+                        }).ToList()
+                }).ToList();
             return Json(result);
+        }
+        [HttpPost("addCartProduct")]
+        public IActionResult addCartProduct([FromBody] JObject json)
+        {
+            var model = JsonConvert.DeserializeObject<CartDetail>(json.GetValue("data").ToString());
+            _context.CartDetails.Add(model);
+            _context.SaveChanges();
+            return Json(model);
         }
     }
 }

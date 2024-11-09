@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-namespace BTTHUCHANH.Models
+namespace WebBanDoCongNghe.Models
 {
     [Table("ReceiptDetail")]
     public class ReceiptDetail

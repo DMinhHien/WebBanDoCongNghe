@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using BTTHUCHANH.DBContext;
+using WebBanDoCongNghe.DBContext;
 using Newtonsoft.Json;
-using BTTHUCHANH.Models;
+using WebBanDoCongNghe.Models;
 using Newtonsoft.Json.Linq;
 using Microsoft.AspNetCore.Http.HttpResults;
 using System.Net.WebSockets;
-namespace BTTHUCHANH.Controllers
+namespace WebBanDoCongNghe.Controllers
 {
     [ApiController]
     [Route("[controller]")]
@@ -64,6 +64,43 @@ namespace BTTHUCHANH.Controllers
                  }).ToList();
             return Json(result);
         }
+        [HttpGet("getListUseCategory/{categoryId}")]
+        public IActionResult getListUseCategory([FromRoute] string categoryId)
+        {
+            var result = _context.Products.AsQueryable().Where(x=>x.categoryId== categoryId).
+                 Select(d => new
+                 {
+                     d.id,
+                     d.productName,
+                     d.unitPrice,
+                 }).ToList();
+            return Json(result);
+        }
+        [HttpGet("getListUseShop/{shopId}")]
+        public IActionResult getListUseShop([FromRoute] string shopId)
+        {
+            var result = _context.Products.AsQueryable().Where(x => x.idShop == shopId).
+                 Select(d => new
+                 {
+                     d.id,
+                     d.productName,
+                     d.unitPrice,
+                 }).ToList();
+            return Json(result);
+        }
+        [HttpGet("getListUseSearch")]
+        public IActionResult getListUseSearch([FromBody] JObject json)
+        {
+            var searchString = json.GetValue("data").ToString();
+            var result = _context.Products.AsQueryable().Where(x=>x.productName.Contains(searchString)).
+                 Select(d => new
+                 {
+                     d.id,
+                     d.productName,
+                     d.unitPrice,
+                 }).ToList();
+            return Json(result);
+        }
         [HttpGet("getCount")]
         public IActionResult getCount() {
             int total=_context.Products.Count();
@@ -85,7 +122,24 @@ namespace BTTHUCHANH.Controllers
         [HttpGet("getElementById/{id}")]
         public IActionResult getElementById([FromRoute] string id)
         {
-            var model = _context.Products.AsQueryable().FirstOrDefault(m => m.id == id); ;
+            var model = _context.Products
+                .Where(m => m.id == id)
+                .Select(d => new
+                {
+                    d.productName,
+                    d.unitPrice,
+                    d.description,
+                    d.status,
+                    d.image,
+                    d.quantity,
+                    // Chỉ lấy giá trị chuỗi của categoryName
+                    categoryName = _context.Categories
+                        .Where(x => x.id == d.categoryId)
+                        .Select(s => s.name) // Lấy chuỗi s.name
+                        .FirstOrDefault()
+                })
+                .FirstOrDefault(); // Thêm FirstOrDefault để lấy kết quả đầu tiên hoặc null
+
             if (model == null)
             {
                 return NotFound();
