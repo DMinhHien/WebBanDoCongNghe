@@ -15,11 +15,14 @@ import {
 import { Search, ShoppingCart, Person, Menu } from "@mui/icons-material";
 import logo from "../../assets/logo.jpg";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [drawerOpen, setDrawerOpen] = React.useState<boolean>(false);
+
+  const navigate = useNavigate();
 
   const toggleDrawer =
     (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
@@ -40,15 +43,21 @@ const Navbar = () => {
         gap: isMobile ? "0" : "20px",
       }}
     >
+      <ListItemButton component = {Link} to ="/">
+        <ListItemText
+          primary="Trang chủ"
+          primaryTypographyProps={{ noWrap: true }}
+        />
+      </ListItemButton>
       <ListItemButton component = {Link} to ="/categories">
         <ListItemText
           primary="Danh mục sản phẩm"
           primaryTypographyProps={{ noWrap: true }}
         />
       </ListItemButton>
-      <ListItemButton>
+      <ListItemButton component = {Link} to ="/shops">
         <ListItemText
-          primary="Offers"
+          primary="Shops"
           primaryTypographyProps={{ noWrap: true }}
         />
       </ListItemButton>
@@ -72,7 +81,7 @@ const Navbar = () => {
       </ListItemButton>
     </List>
   );
-
+ 
   return (
     <AppBar
       position="sticky"
@@ -103,11 +112,14 @@ const Navbar = () => {
                 style={{ width: 250 }}
               >
                 <List>
+                <ListItemButton component = {Link} to ="/">
+                    <ListItemText primary="Trang chủ" />
+                  </ListItemButton>
                   <ListItemButton component = {Link} to ="/categories">
                     <ListItemText primary="Danh mục sản phẩm" />
                   </ListItemButton>
-                  <ListItemButton>
-                    <ListItemText primary="Offers" />
+                  <ListItemButton component = {Link} to ="/shops">
+                    <ListItemText primary="Shops" />
                   </ListItemButton>
                   <ListItemButton>
                     <ListItemText primary="Best Sellers" />

@@ -15,3 +15,8 @@ export const fetchProductsByCategory = async (categoryId: string): Promise<Produ
       throw error;
     }
   };
+
+  export const fetchProductsByShopId = async (shopId: string): Promise<Product[]> => {
+    const response = await axios.get(`https://localhost:7183/Product/getListUseShop/${shopId}`);
+    return response.data;
+  };

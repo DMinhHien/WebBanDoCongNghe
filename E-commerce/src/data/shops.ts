@@ -1,5 +1,4 @@
 export interface Shop {
-    id: number;
-    productName: string;
-    unitPrice: string;
+    id: string;
+    name: string;
   }

@@ -5,6 +5,8 @@ import Layout from "./pages/Layout";
 import ProductDetail from "./components/ProductDetail/ProductDetail";
 import CategoriesPage from "./pages/CategoriesPage";
 import ProductsPage from "./pages/ProductsByCategoryPage";
+import ShopPage from "./pages/ShopPage";
+import ShopDetailPage from "./pages/ShopDetailPage";
 const router = createBrowserRouter([
     {
       path: "/",
@@ -29,6 +31,18 @@ const router = createBrowserRouter([
       element: <Layout />,
       errorElement: <ErrorPage />,
       children: [{ index: true, element: <ProductsPage /> }],
+    },
+    {
+      path: "/shops",
+      element: <Layout />,
+      errorElement: <ErrorPage />,
+      children: [{ index: true, element: <ShopPage /> }],
+    },
+    {
+      path: "/shop/:shopId",
+      element: <Layout />,
+      errorElement: <ErrorPage />,
+      children: [{ index: true, element: <ShopDetailPage /> }],
     },
   ]);
   
