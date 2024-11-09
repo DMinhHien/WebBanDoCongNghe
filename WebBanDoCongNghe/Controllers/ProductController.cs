@@ -64,7 +64,7 @@ namespace WebBanDoCongNghe.Controllers
                  }).ToList();
             return Json(result);
         }
-        [HttpGet("getListUseCategory/{id}")]
+        [HttpGet("getListUseCategory/{categoryId}")]
         public IActionResult getListUseCategory([FromRoute] string categoryId)
         {
             var result = _context.Products.AsQueryable().Where(x=>x.categoryId== categoryId).
@@ -76,7 +76,7 @@ namespace WebBanDoCongNghe.Controllers
                  }).ToList();
             return Json(result);
         }
-        [HttpGet("getListUseShop/{id}")]
+        [HttpGet("getListUseShop/{shopId}")]
         public IActionResult getListUseShop([FromRoute] string shopId)
         {
             var result = _context.Products.AsQueryable().Where(x => x.idShop == shopId).
