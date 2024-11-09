@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { fetchProductsByCategory, Product } from '../services/productService';
 import { List, ListItem, ListItemText, Typography } from '@mui/material';
 import ProductCard from '../components/ProductCard/ProductCard';
@@ -7,7 +7,8 @@ import styles from '../components/ProductList/ProductList.module.css';
 const ProductsPage: React.FC = () => {
   const { categoryId } = useParams<{ categoryId: string }>();
   const [products, setProducts] = useState<Product[]>([]);
-
+  const location = useLocation();
+  const categoryName = location.state?.categoryName || '';
   useEffect(() => {
     const getProducts = async () => {
       try {
@@ -25,7 +26,7 @@ const ProductsPage: React.FC = () => {
   return (
     <div style={{ padding: '20px' }}>
       <Typography variant="h4" gutterBottom>
-        Danh sách sản phẩm
+        Danh sách sản phẩm theo {categoryName}
       </Typography>
       <div className={styles.productList}>
         {products.map((product) => (

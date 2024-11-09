@@ -18,8 +18,8 @@ const CategoriesPage: React.FC = () => {
       getCategories();
     }, []);
 
-    const handleCategoryClick = (categoryId: string) => {
-        navigate(`/products/${categoryId}`);
+    const handleCategoryClick = (categoryId: string, categoryName: string) => {
+        navigate(`/productscategory/${categoryId}`,{state:{categoryName}});
     };
   
     return (
@@ -27,7 +27,7 @@ const CategoriesPage: React.FC = () => {
         <h1>Danh mục sản phẩm</h1>
         <List>
           {categories.map((category) => (
-            <ListItem key={category.id} onClick={() => handleCategoryClick(category.id)} >
+            <ListItem key={category.id} onClick={() => handleCategoryClick(category.id,category.name)} >
               <ListItemText primary={category.name} />
             </ListItem>
           ))}
