@@ -48,6 +48,22 @@ namespace WebBanDoCongNghe.Controllers
             var id = (json.GetValue("id").ToString());
             var result = _context.Products.SingleOrDefault(p => p.id == id);
             _context.Products.Remove(result);
+            var receiptDetail=_context.ReceiptDetails.AsQueryable().Where(p => p.idProduct == id);
+            foreach( var item in receiptDetail)
+            {
+                int count = _context.ReceiptDetails.AsQueryable().Where(p => p.idReceipt == item.idReceipt).Count();
+                if (count == 1)
+                {
+                    var receipt = _context.Receipts.FirstOrDefault(x => x.id == item.idReceipt);
+                    _context.Receipts.Remove(receipt);
+                }
+                _context.ReceiptDetails.Remove(item);
+            }
+            var cartDetail = _context.CartDetails.AsQueryable().Where(p => p.idProduct == id);
+            foreach (var item in cartDetail)
+            {
+                _context.CartDetails.Remove(item);
+            }
             _context.SaveChanges();
             return Json(result);
 
