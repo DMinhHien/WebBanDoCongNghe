@@ -49,20 +49,26 @@ namespace WebBanDoCongNghe.Controllers
             var result = _context.Products.SingleOrDefault(p => p.id == id);
             _context.Products.Remove(result);
             var receiptDetail=_context.ReceiptDetails.AsQueryable().Where(p => p.idProduct == id);
-            foreach( var item in receiptDetail)
+            if (receiptDetail != null)
             {
-                int count = _context.ReceiptDetails.AsQueryable().Where(p => p.idReceipt == item.idReceipt).Count();
-                if (count == 1)
+                foreach (var item in receiptDetail)
                 {
-                    var receipt = _context.Receipts.FirstOrDefault(x => x.id == item.idReceipt);
-                    _context.Receipts.Remove(receipt);
+                    int count = _context.ReceiptDetails.AsQueryable().Where(p => p.idReceipt == item.idReceipt).Count();
+                    if (count == 1)
+                    {
+                        var receipt = _context.Receipts.FirstOrDefault(x => x.id == item.idReceipt);
+                        _context.Receipts.Remove(receipt);
+                    }
+                    _context.ReceiptDetails.Remove(item);
                 }
-                _context.ReceiptDetails.Remove(item);
             }
             var cartDetail = _context.CartDetails.AsQueryable().Where(p => p.idProduct == id);
-            foreach (var item in cartDetail)
+            if (cartDetail != null)
             {
-                _context.CartDetails.Remove(item);
+                foreach (var item in cartDetail)
+                {
+                    _context.CartDetails.Remove(item);
+                }
             }
             _context.SaveChanges();
             return Json(result);

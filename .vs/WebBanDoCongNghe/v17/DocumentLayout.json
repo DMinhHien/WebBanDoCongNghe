@@ -3,12 +3,92 @@
   "WorkspaceRootPath": "D:\\UDC\\WebBanDoCongNghe\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{131DE91F-785D-41CE-9167-F9ADE64CFA95}|WebBanDoCongNghe\\WebBanDoCongNghe.csproj|d:\\udc\\webbandocongnghe\\webbandocongnghe\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{131DE91F-785D-41CE-9167-F9ADE64CFA95}|WebBanDoCongNghe\\WebBanDoCongNghe.csproj|d:\\udc\\webbandocongnghe\\webbandocongnghe\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{131DE91F-785D-41CE-9167-F9ADE64CFA95}|WebBanDoCongNghe\\WebBanDoCongNghe.csproj|solutionrelative:webbandocongnghe\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{131DE91F-785D-41CE-9167-F9ADE64CFA95}|WebBanDoCongNghe\\WebBanDoCongNghe.csproj|D:\\UDC\\WebBanDoCongNghe\\webbandocongnghe\\controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{131DE91F-785D-41CE-9167-F9ADE64CFA95}|WebBanDoCongNghe\\WebBanDoCongNghe.csproj|solutionrelative:webbandocongnghe\\controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{131DE91F-785D-41CE-9167-F9ADE64CFA95}|WebBanDoCongNghe\\WebBanDoCongNghe.csproj|D:\\UDC\\WebBanDoCongNghe\\webbandocongnghe\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{131DE91F-785D-41CE-9167-F9ADE64CFA95}|WebBanDoCongNghe\\WebBanDoCongNghe.csproj|solutionrelative:webbandocongnghe\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{131DE91F-785D-41CE-9167-F9ADE64CFA95}|WebBanDoCongNghe\\WebBanDoCongNghe.csproj|d:\\udc\\webbandocongnghe\\webbandocongnghe\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{131DE91F-785D-41CE-9167-F9ADE64CFA95}|WebBanDoCongNghe\\WebBanDoCongNghe.csproj|D:\\UDC\\WebBanDoCongNghe\\webbandocongnghe\\controllers\\shopcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{131DE91F-785D-41CE-9167-F9ADE64CFA95}|WebBanDoCongNghe\\WebBanDoCongNghe.csproj|solutionrelative:webbandocongnghe\\controllers\\shopcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{131DE91F-785D-41CE-9167-F9ADE64CFA95}|WebBanDoCongNghe\\WebBanDoCongNghe.csproj|D:\\UDC\\WebBanDoCongNghe\\webbandocongnghe\\controllers\\commentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{131DE91F-785D-41CE-9167-F9ADE64CFA95}|WebBanDoCongNghe\\WebBanDoCongNghe.csproj|solutionrelative:webbandocongnghe\\controllers\\commentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{131DE91F-785D-41CE-9167-F9ADE64CFA95}|WebBanDoCongNghe\\WebBanDoCongNghe.csproj|D:\\UDC\\WebBanDoCongNghe\\webbandocongnghe\\controllers\\searchcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{131DE91F-785D-41CE-9167-F9ADE64CFA95}|WebBanDoCongNghe\\WebBanDoCongNghe.csproj|solutionrelative:webbandocongnghe\\controllers\\searchcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{131DE91F-785D-41CE-9167-F9ADE64CFA95}|WebBanDoCongNghe\\WebBanDoCongNghe.csproj|D:\\UDC\\WebBanDoCongNghe\\webbandocongnghe\\controllers\\receiptcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{131DE91F-785D-41CE-9167-F9ADE64CFA95}|WebBanDoCongNghe\\WebBanDoCongNghe.csproj|solutionrelative:webbandocongnghe\\controllers\\receiptcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{131DE91F-785D-41CE-9167-F9ADE64CFA95}|WebBanDoCongNghe\\WebBanDoCongNghe.csproj|D:\\UDC\\WebBanDoCongNghe\\webbandocongnghe\\dbcontext\\productdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{131DE91F-785D-41CE-9167-F9ADE64CFA95}|WebBanDoCongNghe\\WebBanDoCongNghe.csproj|solutionrelative:webbandocongnghe\\dbcontext\\productdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{131DE91F-785D-41CE-9167-F9ADE64CFA95}|WebBanDoCongNghe\\WebBanDoCongNghe.csproj|D:\\UDC\\WebBanDoCongNghe\\webbandocongnghe\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{131DE91F-785D-41CE-9167-F9ADE64CFA95}|WebBanDoCongNghe\\WebBanDoCongNghe.csproj|solutionrelative:webbandocongnghe\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{131DE91F-785D-41CE-9167-F9ADE64CFA95}|WebBanDoCongNghe\\WebBanDoCongNghe.csproj|D:\\UDC\\WebBanDoCongNghe\\webbandocongnghe\\controllers\\cartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{131DE91F-785D-41CE-9167-F9ADE64CFA95}|WebBanDoCongNghe\\WebBanDoCongNghe.csproj|solutionrelative:webbandocongnghe\\controllers\\cartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{131DE91F-785D-41CE-9167-F9ADE64CFA95}|WebBanDoCongNghe\\WebBanDoCongNghe.csproj|D:\\UDC\\WebBanDoCongNghe\\webbandocongnghe\\models\\search.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{131DE91F-785D-41CE-9167-F9ADE64CFA95}|WebBanDoCongNghe\\WebBanDoCongNghe.csproj|solutionrelative:webbandocongnghe\\models\\search.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{131DE91F-785D-41CE-9167-F9ADE64CFA95}|WebBanDoCongNghe\\WebBanDoCongNghe.csproj|D:\\UDC\\WebBanDoCongNghe\\webbandocongnghe\\models\\shop.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{131DE91F-785D-41CE-9167-F9ADE64CFA95}|WebBanDoCongNghe\\WebBanDoCongNghe.csproj|solutionrelative:webbandocongnghe\\models\\shop.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{131DE91F-785D-41CE-9167-F9ADE64CFA95}|WebBanDoCongNghe\\WebBanDoCongNghe.csproj|D:\\UDC\\WebBanDoCongNghe\\webbandocongnghe\\models\\cartdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{131DE91F-785D-41CE-9167-F9ADE64CFA95}|WebBanDoCongNghe\\WebBanDoCongNghe.csproj|solutionrelative:webbandocongnghe\\models\\cartdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{131DE91F-785D-41CE-9167-F9ADE64CFA95}|WebBanDoCongNghe\\WebBanDoCongNghe.csproj|D:\\UDC\\WebBanDoCongNghe\\webbandocongnghe\\models\\receipt.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{131DE91F-785D-41CE-9167-F9ADE64CFA95}|WebBanDoCongNghe\\WebBanDoCongNghe.csproj|solutionrelative:webbandocongnghe\\models\\receipt.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{131DE91F-785D-41CE-9167-F9ADE64CFA95}|WebBanDoCongNghe\\WebBanDoCongNghe.csproj|D:\\UDC\\WebBanDoCongNghe\\webbandocongnghe\\models\\cart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{131DE91F-785D-41CE-9167-F9ADE64CFA95}|WebBanDoCongNghe\\WebBanDoCongNghe.csproj|solutionrelative:webbandocongnghe\\models\\cart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{131DE91F-785D-41CE-9167-F9ADE64CFA95}|WebBanDoCongNghe\\WebBanDoCongNghe.csproj|D:\\UDC\\WebBanDoCongNghe\\webbandocongnghe\\models\\comment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{131DE91F-785D-41CE-9167-F9ADE64CFA95}|WebBanDoCongNghe\\WebBanDoCongNghe.csproj|solutionrelative:webbandocongnghe\\models\\comment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{131DE91F-785D-41CE-9167-F9ADE64CFA95}|WebBanDoCongNghe\\WebBanDoCongNghe.csproj|D:\\UDC\\WebBanDoCongNghe\\webbandocongnghe\\models\\commentlike.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{131DE91F-785D-41CE-9167-F9ADE64CFA95}|WebBanDoCongNghe\\WebBanDoCongNghe.csproj|solutionrelative:webbandocongnghe\\models\\commentlike.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{131DE91F-785D-41CE-9167-F9ADE64CFA95}|WebBanDoCongNghe\\WebBanDoCongNghe.csproj|D:\\UDC\\WebBanDoCongNghe\\webbandocongnghe\\migrations\\20241103141431_init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{131DE91F-785D-41CE-9167-F9ADE64CFA95}|WebBanDoCongNghe\\WebBanDoCongNghe.csproj|solutionrelative:webbandocongnghe\\migrations\\20241103141431_init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{131DE91F-785D-41CE-9167-F9ADE64CFA95}|WebBanDoCongNghe\\WebBanDoCongNghe.csproj|D:\\UDC\\WebBanDoCongNghe\\webbandocongnghe\\migrations\\productdbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{131DE91F-785D-41CE-9167-F9ADE64CFA95}|WebBanDoCongNghe\\WebBanDoCongNghe.csproj|solutionrelative:webbandocongnghe\\migrations\\productdbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{131DE91F-785D-41CE-9167-F9ADE64CFA95}|WebBanDoCongNghe\\WebBanDoCongNghe.csproj|D:\\UDC\\WebBanDoCongNghe\\webbandocongnghe\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{131DE91F-785D-41CE-9167-F9ADE64CFA95}|WebBanDoCongNghe\\WebBanDoCongNghe.csproj|solutionrelative:webbandocongnghe\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{131DE91F-785D-41CE-9167-F9ADE64CFA95}|WebBanDoCongNghe\\WebBanDoCongNghe.csproj|D:\\UDC\\WebBanDoCongNghe\\webbandocongnghe\\models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{131DE91F-785D-41CE-9167-F9ADE64CFA95}|WebBanDoCongNghe\\WebBanDoCongNghe.csproj|solutionrelative:webbandocongnghe\\models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{131DE91F-785D-41CE-9167-F9ADE64CFA95}|WebBanDoCongNghe\\WebBanDoCongNghe.csproj|D:\\UDC\\WebBanDoCongNghe\\webbandocongnghe\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{131DE91F-785D-41CE-9167-F9ADE64CFA95}|WebBanDoCongNghe\\WebBanDoCongNghe.csproj|solutionrelative:webbandocongnghe\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,7 +98,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Bookmark",
@@ -38,29 +118,268 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "UserController.cs",
-              "DocumentMoniker": "D:\\UDC\\WebBanDoCongNghe\\WebBanDoCongNghe\\Controllers\\UserController.cs",
-              "RelativeDocumentMoniker": "WebBanDoCongNghe\\Controllers\\UserController.cs",
-              "ToolTip": "D:\\UDC\\WebBanDoCongNghe\\WebBanDoCongNghe\\Controllers\\UserController.cs",
-              "RelativeToolTip": "WebBanDoCongNghe\\Controllers\\UserController.cs",
-              "ViewState": "AQIAABgAAAAAAAAAAAAYwAAAAAAAAAAA",
+              "DocumentIndex": 3,
+              "Title": "ShopController.cs",
+              "DocumentMoniker": "D:\\UDC\\WebBanDoCongNghe\\WebBanDoCongNghe\\Controllers\\ShopController.cs",
+              "RelativeDocumentMoniker": "WebBanDoCongNghe\\Controllers\\ShopController.cs",
+              "ToolTip": "D:\\UDC\\WebBanDoCongNghe\\WebBanDoCongNghe\\Controllers\\ShopController.cs",
+              "RelativeToolTip": "WebBanDoCongNghe\\Controllers\\ShopController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABcAAAA7AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-29T14:32:08.237Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-05T14:31:14.873Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
+              "Title": "CommentController.cs",
+              "DocumentMoniker": "D:\\UDC\\WebBanDoCongNghe\\WebBanDoCongNghe\\Controllers\\CommentController.cs",
+              "RelativeDocumentMoniker": "WebBanDoCongNghe\\Controllers\\CommentController.cs",
+              "ToolTip": "D:\\UDC\\WebBanDoCongNghe\\WebBanDoCongNghe\\Controllers\\CommentController.cs",
+              "RelativeToolTip": "WebBanDoCongNghe\\Controllers\\CommentController.cs",
+              "ViewState": "AQIAACwAAAAAAAAAAAAgwEEAAAAdAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T15:04:36.523Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ProductDbContext.cs",
+              "DocumentMoniker": "D:\\UDC\\WebBanDoCongNghe\\WebBanDoCongNghe\\DbContext\\ProductDbContext.cs",
+              "RelativeDocumentMoniker": "WebBanDoCongNghe\\DbContext\\ProductDbContext.cs",
+              "ToolTip": "D:\\UDC\\WebBanDoCongNghe\\WebBanDoCongNghe\\DbContext\\ProductDbContext.cs",
+              "RelativeToolTip": "WebBanDoCongNghe\\DbContext\\ProductDbContext.cs",
+              "ViewState": "AQIAAAUAAAAAAAAAAAAkwCEAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T14:56:26.742Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\UDC\\WebBanDoCongNghe\\WebBanDoCongNghe\\Program.cs",
               "RelativeDocumentMoniker": "WebBanDoCongNghe\\Program.cs",
               "ToolTip": "D:\\UDC\\WebBanDoCongNghe\\WebBanDoCongNghe\\Program.cs",
               "RelativeToolTip": "WebBanDoCongNghe\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAADAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T15:00:32.593Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "UserController.cs",
+              "DocumentMoniker": "D:\\UDC\\WebBanDoCongNghe\\WebBanDoCongNghe\\Controllers\\UserController.cs",
+              "RelativeDocumentMoniker": "WebBanDoCongNghe\\Controllers\\UserController.cs",
+              "ToolTip": "D:\\UDC\\WebBanDoCongNghe\\WebBanDoCongNghe\\Controllers\\UserController.cs",
+              "RelativeToolTip": "WebBanDoCongNghe\\Controllers\\UserController.cs",
+              "ViewState": "AQIAACQAAAAAAAAAAAAYwCsAAAATAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T14:54:17.639Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ProductController.cs",
+              "DocumentMoniker": "D:\\UDC\\WebBanDoCongNghe\\WebBanDoCongNghe\\Controllers\\ProductController.cs",
+              "RelativeDocumentMoniker": "WebBanDoCongNghe\\Controllers\\ProductController.cs",
+              "ToolTip": "D:\\UDC\\WebBanDoCongNghe\\WebBanDoCongNghe\\Controllers\\ProductController.cs",
+              "RelativeToolTip": "WebBanDoCongNghe\\Controllers\\ProductController.cs",
+              "ViewState": "AQIAACQAAAAAAAAAAAAAADYAAAAfAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T14:54:46.093Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CategoryController.cs",
+              "DocumentMoniker": "D:\\UDC\\WebBanDoCongNghe\\WebBanDoCongNghe\\Controllers\\CategoryController.cs",
+              "RelativeDocumentMoniker": "WebBanDoCongNghe\\Controllers\\CategoryController.cs",
+              "ToolTip": "D:\\UDC\\WebBanDoCongNghe\\WebBanDoCongNghe\\Controllers\\CategoryController.cs",
+              "RelativeToolTip": "WebBanDoCongNghe\\Controllers\\CategoryController.cs",
+              "ViewState": "AQIAABYAAAAAAAAAAAA8wEEAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-05T03:12:17.258Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "SearchController.cs",
+              "DocumentMoniker": "D:\\UDC\\WebBanDoCongNghe\\WebBanDoCongNghe\\Controllers\\SearchController.cs",
+              "RelativeDocumentMoniker": "WebBanDoCongNghe\\Controllers\\SearchController.cs",
+              "ToolTip": "D:\\UDC\\WebBanDoCongNghe\\WebBanDoCongNghe\\Controllers\\SearchController.cs",
+              "RelativeToolTip": "WebBanDoCongNghe\\Controllers\\SearchController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAD4AAAAgAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-05T14:09:33.15Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ReceiptController.cs",
+              "DocumentMoniker": "D:\\UDC\\WebBanDoCongNghe\\WebBanDoCongNghe\\Controllers\\ReceiptController.cs",
+              "RelativeDocumentMoniker": "WebBanDoCongNghe\\Controllers\\ReceiptController.cs",
+              "ToolTip": "D:\\UDC\\WebBanDoCongNghe\\WebBanDoCongNghe\\Controllers\\ReceiptController.cs",
+              "RelativeToolTip": "WebBanDoCongNghe\\Controllers\\ReceiptController.cs",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAcwGwAAAAsAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T14:59:39.28Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Search.cs",
+              "DocumentMoniker": "D:\\UDC\\WebBanDoCongNghe\\WebBanDoCongNghe\\Models\\Search.cs",
+              "RelativeDocumentMoniker": "WebBanDoCongNghe\\Models\\Search.cs",
+              "ToolTip": "D:\\UDC\\WebBanDoCongNghe\\WebBanDoCongNghe\\Models\\Search.cs",
+              "RelativeToolTip": "WebBanDoCongNghe\\Models\\Search.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-29T14:32:01.089Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-05T14:09:51.936Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "CartController.cs",
+              "DocumentMoniker": "D:\\UDC\\WebBanDoCongNghe\\WebBanDoCongNghe\\Controllers\\CartController.cs",
+              "RelativeDocumentMoniker": "WebBanDoCongNghe\\Controllers\\CartController.cs",
+              "ToolTip": "D:\\UDC\\WebBanDoCongNghe\\WebBanDoCongNghe\\Controllers\\CartController.cs",
+              "RelativeToolTip": "WebBanDoCongNghe\\Controllers\\CartController.cs",
+              "ViewState": "AQIAAE4AAAAAAAAAAAAYwGQAAAATAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-05T01:57:06.89Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Cart.cs",
+              "DocumentMoniker": "D:\\UDC\\WebBanDoCongNghe\\WebBanDoCongNghe\\Models\\Cart.cs",
+              "RelativeDocumentMoniker": "WebBanDoCongNghe\\Models\\Cart.cs",
+              "ToolTip": "D:\\UDC\\WebBanDoCongNghe\\WebBanDoCongNghe\\Models\\Cart.cs",
+              "RelativeToolTip": "WebBanDoCongNghe\\Models\\Cart.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-05T03:06:31.014Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Receipt.cs",
+              "DocumentMoniker": "D:\\UDC\\WebBanDoCongNghe\\WebBanDoCongNghe\\Models\\Receipt.cs",
+              "RelativeDocumentMoniker": "WebBanDoCongNghe\\Models\\Receipt.cs",
+              "ToolTip": "D:\\UDC\\WebBanDoCongNghe\\WebBanDoCongNghe\\Models\\Receipt.cs",
+              "RelativeToolTip": "WebBanDoCongNghe\\Models\\Receipt.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAqAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T15:02:51.203Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Shop.cs",
+              "DocumentMoniker": "D:\\UDC\\WebBanDoCongNghe\\WebBanDoCongNghe\\Models\\Shop.cs",
+              "RelativeDocumentMoniker": "WebBanDoCongNghe\\Models\\Shop.cs",
+              "ToolTip": "D:\\UDC\\WebBanDoCongNghe\\WebBanDoCongNghe\\Models\\Shop.cs",
+              "RelativeToolTip": "WebBanDoCongNghe\\Models\\Shop.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T15:02:56.529Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "CartDetail.cs",
+              "DocumentMoniker": "D:\\UDC\\WebBanDoCongNghe\\WebBanDoCongNghe\\Models\\CartDetail.cs",
+              "RelativeDocumentMoniker": "WebBanDoCongNghe\\Models\\CartDetail.cs",
+              "ToolTip": "D:\\UDC\\WebBanDoCongNghe\\WebBanDoCongNghe\\Models\\CartDetail.cs",
+              "RelativeToolTip": "WebBanDoCongNghe\\Models\\CartDetail.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T15:02:41.454Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Comment.cs",
+              "DocumentMoniker": "D:\\UDC\\WebBanDoCongNghe\\WebBanDoCongNghe\\Models\\Comment.cs",
+              "RelativeDocumentMoniker": "WebBanDoCongNghe\\Models\\Comment.cs",
+              "ToolTip": "D:\\UDC\\WebBanDoCongNghe\\WebBanDoCongNghe\\Models\\Comment.cs",
+              "RelativeToolTip": "WebBanDoCongNghe\\Models\\Comment.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-05T01:49:01.521Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "CommentLike.cs",
+              "DocumentMoniker": "D:\\UDC\\WebBanDoCongNghe\\WebBanDoCongNghe\\Models\\CommentLike.cs",
+              "RelativeDocumentMoniker": "WebBanDoCongNghe\\Models\\CommentLike.cs",
+              "ToolTip": "D:\\UDC\\WebBanDoCongNghe\\WebBanDoCongNghe\\Models\\CommentLike.cs",
+              "RelativeToolTip": "WebBanDoCongNghe\\Models\\CommentLike.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-05T01:49:00.664Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "20241103141431_Init.cs",
+              "DocumentMoniker": "D:\\UDC\\WebBanDoCongNghe\\WebBanDoCongNghe\\Migrations\\20241103141431_Init.cs",
+              "RelativeDocumentMoniker": "WebBanDoCongNghe\\Migrations\\20241103141431_Init.cs",
+              "ToolTip": "D:\\UDC\\WebBanDoCongNghe\\WebBanDoCongNghe\\Migrations\\20241103141431_Init.cs",
+              "RelativeToolTip": "WebBanDoCongNghe\\Migrations\\20241103141431_Init.cs",
+              "ViewState": "AQIAAFgAAAAAAAAAAAAQwHgAAAATAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T15:01:34.227Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "ProductDbContextModelSnapshot.cs",
+              "DocumentMoniker": "D:\\UDC\\WebBanDoCongNghe\\WebBanDoCongNghe\\Migrations\\ProductDbContextModelSnapshot.cs",
+              "RelativeDocumentMoniker": "WebBanDoCongNghe\\Migrations\\ProductDbContextModelSnapshot.cs",
+              "ToolTip": "D:\\UDC\\WebBanDoCongNghe\\WebBanDoCongNghe\\Migrations\\ProductDbContextModelSnapshot.cs",
+              "RelativeToolTip": "WebBanDoCongNghe\\Migrations\\ProductDbContextModelSnapshot.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T15:01:35.032Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "Product.cs",
+              "DocumentMoniker": "D:\\UDC\\WebBanDoCongNghe\\WebBanDoCongNghe\\Models\\Product.cs",
+              "RelativeDocumentMoniker": "WebBanDoCongNghe\\Models\\Product.cs",
+              "ToolTip": "D:\\UDC\\WebBanDoCongNghe\\WebBanDoCongNghe\\Models\\Product.cs",
+              "RelativeToolTip": "WebBanDoCongNghe\\Models\\Product.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAZAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T14:54:42.869Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "Category.cs",
+              "DocumentMoniker": "D:\\UDC\\WebBanDoCongNghe\\WebBanDoCongNghe\\Models\\Category.cs",
+              "RelativeDocumentMoniker": "WebBanDoCongNghe\\Models\\Category.cs",
+              "ToolTip": "D:\\UDC\\WebBanDoCongNghe\\WebBanDoCongNghe\\Models\\Category.cs",
+              "RelativeToolTip": "WebBanDoCongNghe\\Models\\Category.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-04T15:02:40.518Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\UDC\\WebBanDoCongNghe\\WebBanDoCongNghe\\appsettings.json",
+              "RelativeDocumentMoniker": "WebBanDoCongNghe\\appsettings.json",
+              "ToolTip": "D:\\UDC\\WebBanDoCongNghe\\WebBanDoCongNghe\\appsettings.json",
+              "RelativeToolTip": "WebBanDoCongNghe\\appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAABRAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-11-04T15:02:25.739Z"
             }
           ]
         }

@@ -48,6 +48,14 @@ namespace WebBanDoCongNghe.Controllers
         {
             var id = (json.GetValue("id").ToString());
             var result = _context.Comments.SingleOrDefault(p => p.id == id);
+            var like = _context.CommentLikes.AsQueryable().Where(p => p.idComment == id).ToList();
+            if (like != null)
+            {
+                foreach(var item in like)
+                {
+                    _context.CommentLikes.Remove(item);
+                }
+            }
             _context.Comments.Remove(result);
             _context.SaveChanges();
             return Json(result);
