@@ -9,6 +9,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using WebBanDoCongNghe.DTO;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Text;
+using WebBanDoCongNghe.Interface;
 
 namespace WebBanDoCongNghe.Controllers
 {
@@ -20,13 +25,15 @@ namespace WebBanDoCongNghe.Controllers
         private readonly ProductDbContext _context;
         private readonly UserManager<UserManage> _userManager;
         private readonly SignInManager<UserManage> _signInManager;
+        private readonly ITokenService _tokenService;
         // GET: ProductController
         public UserController(ProductDbContext context, UserManager<UserManage> userManager,
-            SignInManager<UserManage> signInManager)
+            SignInManager<UserManage> signInManager, ITokenService tokenService)
         {
             _userManager = userManager;
             _context = context;
             _signInManager = signInManager;
+            _tokenService = tokenService;
         }
 
         // POST: ProductController/Create
@@ -101,13 +108,56 @@ namespace WebBanDoCongNghe.Controllers
                 if (result.Succeeded)
                 {
                     // Thêm các logic bổ sung nếu cần thiết (ví dụ: gửi email xác thực, v.v.)
-                    return Ok("Đăng ký thành công!");
+                    return Json(user);
                 }
 
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
+            }
+
+            return BadRequest(ModelState);
+        }
+        [HttpPost("Login")]
+        public async Task<IActionResult> Login(LoginDTO model)
+        {
+            if (ModelState.IsValid)
+            {
+                // Tìm người dùng qua AccountName hoặc Email
+                var user = await _userManager.FindByEmailAsync(model.Email);
+                if (user == null)
+                {
+                    user = await _userManager.Users
+                        .FirstOrDefaultAsync(u => u.AccountName == model.Email);
+                }
+
+                if (user != null)
+                {
+                    var result = await _signInManager.PasswordSignInAsync(user.UserName, model.Password, isPersistent: false, lockoutOnFailure: false);
+                    if (result.Succeeded)
+                    {
+                       
+                        var response = new
+                        {
+                            Token = _tokenService.CreateToken(user),
+                            User = new
+                            {
+                                user.UserName,
+                                user.Email,
+                                user.Id
+                            }
+                        };
+
+                        return Ok(response);
+                    }
+                    else
+                    {
+                        return Unauthorized("Mật khẩu không đúng.");
+                    }
+                }
+
+                return NotFound("Người dùng không tồn tại.");
             }
 
             return BadRequest(ModelState);
