@@ -22,7 +22,7 @@ const LoginPage: React.FC = () => {
 
     if (response.ok) {
         const data = await response.json();
-        login({ id: data.id, name: data.username, email: data.email }); // Cập nhật trạng thái đăng nhập
+        login(data.user, data.token); // Cập nhật trạng thái đăng nhập
         localStorage.setItem("token", data.token); // Lưu token vào localStorage
         navigate('/'); // Điều hướng về trang chủ
       } else {

@@ -32,7 +32,6 @@ const Navbar = () => {
   };
   const handleLogout = () => {
     logout();
-    localStorage.removeItem("token");
     navigate('/login');
   };
   const toggleDrawer =
@@ -165,12 +164,12 @@ const Navbar = () => {
               <ShoppingCart />
             </IconButton>
           </Link>
-          <Link to="/auth">
+          
             {/* icon button */}
             {user ? (
           <>
             <IconButton color="inherit" onClick={handleProfileClick}>
-              <Avatar>{user.name.charAt(0)}</Avatar>
+              <Avatar>N</Avatar>
             </IconButton>
             <Button color="inherit" onClick={handleLogout}>Đăng Xuất</Button>
           </>
@@ -180,7 +179,7 @@ const Navbar = () => {
           </Button>
         )}
              {/* icon button */}
-          </Link>
+          
         </Box>
       </Toolbar>
     </AppBar>

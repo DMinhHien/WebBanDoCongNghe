@@ -6,14 +6,16 @@ import { useAuth } from './AuthContext';
 const ProfilePage: React.FC = () => {
   const { user } = useAuth();
 
+  if (!user) {
+    return <Typography variant="h6">Bạn chưa đăng nhập</Typography>;
+  }
   return (
     <Container>
       <Typography variant="h4" component="h2" gutterBottom>
         Thông tin cá nhân
       </Typography>
-      <Typography variant="body1">Tên: {user?.name}</Typography>
-      
-      <Typography variant="body1">Email: {user?.email}</Typography>
+      <Typography variant="body1">Tên: {user.userName}</Typography>
+      <Typography variant="body1">Email: {user.email}</Typography>
       <Button > Tạo Shop </Button>
     </Container>
 

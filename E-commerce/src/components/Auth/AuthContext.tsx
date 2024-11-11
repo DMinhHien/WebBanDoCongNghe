@@ -2,13 +2,14 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 
 interface User {
     id: string;
-    name: string;
+    userName: string;
     email: string;
   }
  
 interface AuthContextType {
     user: User | null;
-    login: (userData: User) => void;
+    setUser: (user: User | null) => void; //h1 them dong nay
+    login: (user: User, token: string) => void; //h1 token
     logout: () => void;
   }
 
@@ -17,32 +18,28 @@ interface AuthContextType {
   export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [user, setUser] = useState<User | null>(null);
   
-    // useEffect(() => {
-    //   const token = localStorage.getItem("token");
-    //   if (token) {
-    //     // Gọi API kiểm tra token hoặc lấy thông tin người dùng
-    //     const fetchUser = async () => {
-    //       try {
-    //         const response = await fetch('https://localhost:7183/api/auth/me', {
-    //           headers: { 'Authorization': `Bearer ${token}` },
-    //         });
-    //         if (response.ok) {
-    //           const data = await response.json();
-    //           setUser({ id: data.id, name: data.name, email: data.email });
-    //         }
-    //       } catch (error) {
-    //         console.error("Lỗi khi lấy thông tin người dùng:", error);
-    //       }
-    //     };
-    //     fetchUser();
-    //   }
-    // }, []);
+    useEffect(() => {
+      const storedUser = localStorage.getItem('user');
+      const token = localStorage.getItem("token");
+      if (storedUser && token) {
+        setUser(JSON.parse(storedUser)); // Cập nhật user từ localStorage
+      }
+    }, []);
 
-    const login = (userData: User) => setUser(userData);
-    const logout = () => setUser(null);
-  
+   // const login = (userData: User) => setUser(userData);
+   const login = (userData: User, token: string) => {
+    setUser(userData);
+    localStorage.setItem('user', JSON.stringify(userData));
+    localStorage.setItem('token', token);
+  };
+    // const logout = () => setUser(null);
+    const logout = () => {
+      setUser(null);
+      localStorage.removeItem('user');
+      localStorage.removeItem('token');
+    };
     return (
-      <AuthContext.Provider value={{ user, login, logout }}>
+      <AuthContext.Provider value={{ user, setUser, login, logout }}>
         {children}
       </AuthContext.Provider>
     );
