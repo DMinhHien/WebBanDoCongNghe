@@ -19,6 +19,17 @@ const LoginPage: React.FC = () => {
         },
         body: JSON.stringify({email,password}),
     });
+
+    if (response.ok) {
+        const data = await response.json();
+        login({ id: data.id, name: data.name, email: data.email }); // Cập nhật trạng thái đăng nhập
+        navigate('/'); // Điều hướng về trang chủ
+      } else {
+        alert('Đăng nhập không thành công!');
+      }
+    } catch (error) {
+      console.error('Đã xảy ra lỗi:', error);
+    }
   };
   
   return (

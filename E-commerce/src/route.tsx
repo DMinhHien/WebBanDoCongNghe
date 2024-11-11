@@ -8,6 +8,7 @@ import ProductsPage from "./pages/ProductsByCategoryPage";
 import ShopPage from "./pages/ShopPage";
 import ShopDetailPage from "./pages/ShopDetailPage";
 import LoginPage from "./components/Auth/LoginPage";
+import ProfilePage from "./components/Auth/ProfilePage";
 const router = createBrowserRouter([
     {
       path: "/",
@@ -48,6 +49,12 @@ const router = createBrowserRouter([
     {
       path: "/login",
       element: <LoginPage />,
+    },
+    {
+      path: "/profile",
+      element: <Layout />,
+      errorElement: <ErrorPage />,
+      children: [{ index: true, element: <ProfilePage /> }],
     },
   ]);
   

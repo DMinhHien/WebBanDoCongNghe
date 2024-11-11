@@ -11,19 +11,29 @@ import {
   ListItemText,
   useMediaQuery,
   useTheme,
+  Avatar,
+  Button,
 } from "@mui/material";
 import { Search, ShoppingCart, Person, Menu } from "@mui/icons-material";
 import logo from "../../assets/logo.jpg";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../Auth/AuthContext";
 
 const Navbar = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [drawerOpen, setDrawerOpen] = React.useState<boolean>(false);
 
+  const {user, logout} = useAuth();
   const navigate = useNavigate();
-
+  const handleProfileClick = () => {
+    navigate('/profile'); // Điều hướng đến trang chỉnh sửa thông tin cá nhân
+  };
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
   const toggleDrawer =
     (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
       if (
@@ -155,9 +165,20 @@ const Navbar = () => {
             </IconButton>
           </Link>
           <Link to="/auth">
-            <IconButton>
-              <Person />
+            {/* icon button */}
+            {user ? (
+          <>
+            <IconButton color="inherit" onClick={handleProfileClick}>
+              <Avatar>{user.name.charAt(0)}</Avatar>
             </IconButton>
+            <Button color="inherit" onClick={handleLogout}>Đăng Xuất</Button>
+          </>
+        ) : (
+          <Button color="inherit" onClick={() => navigate('/login')}>
+            Đăng Nhập
+          </Button>
+        )}
+             {/* icon button */}
           </Link>
         </Box>
       </Toolbar>
