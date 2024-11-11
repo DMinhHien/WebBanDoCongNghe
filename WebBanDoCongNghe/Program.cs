@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using WebBanDoCongNghe.Interface;
 using WebBanDoCongNghe.Service;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,8 +27,16 @@ builder.Services.AddIdentityCore<UserManage>()
     .AddEntityFrameworkStores<ProductDbContext>()
     .AddApiEndpoints()
     .AddDefaultTokenProviders();
-builder.Services.AddAuthentication().AddCookie(IdentityConstants.ApplicationScheme)
-    .AddJwtBearer(options =>
+builder.Services.AddAuthentication(options => {
+    options.DefaultAuthenticateScheme=
+    options.DefaultChallengeScheme=
+    options.DefaultForbidScheme=
+    options.DefaultScheme=
+    options.DefaultSignInScheme=
+    options.DefaultSignOutScheme = JwtBearerDefaults.AuthenticationScheme;
+
+    }
+    ).AddJwtBearer(options =>
     {
         options.TokenValidationParameters = new TokenValidationParameters
         {

@@ -974,7 +974,7 @@
     "Parameters": [
       {
         "Name": "model",
-        "Type": "WebBanDoCongNghe.DTO.UserDTO",
+        "Type": "WebBanDoCongNghe.DTO.LoginDTO",
         "IsRequired": true
       }
     ],

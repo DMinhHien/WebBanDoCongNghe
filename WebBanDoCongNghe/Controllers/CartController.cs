@@ -12,7 +12,6 @@ namespace WebBanDoCongNghe.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    [Authorize]
     public class CartController : Controller
     {
         private readonly ProductDbContext _context;
