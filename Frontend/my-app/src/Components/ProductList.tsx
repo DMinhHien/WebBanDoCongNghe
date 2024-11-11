@@ -83,7 +83,7 @@ export default function ProductList({ products, editProduct,onSelectedProductsCh
                 <td className="border border-gray-300 p-2">{product.unitPrice} VNĐ</td>
                 <td className="border border-gray-300 p-2">{product.quantity}</td>
                 <td className="border border-gray-300 p-2">
-                  <img src={product.image} alt={product.productName} className="w-20 h-20 object-cover" />
+                  <img src={product.image} alt={product.productName} className="w-20 h-20 object-contain" />
                 </td>
                 <td className="border border-gray-300 p-2">{product.description}</td>
                 <td className="border border-gray-300 p-2">
