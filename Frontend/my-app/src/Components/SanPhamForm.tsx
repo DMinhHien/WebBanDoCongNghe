@@ -1,38 +1,99 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
+import { storage } from '../FirebaseConfig';
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { getListCategories } from '../Service';
+import { Product } from './ProductList';
 
-export default function SanPhamForm() {
-  const [categories, setCategories] = useState([
-    "option1", "option2", "option3"
-  ]);
+export const uploadToFirebase = async (file: File): Promise<string> => {
+  const storageRef = ref(storage, `images/${file.name}`);
+  await uploadBytes(storageRef, file);
+  const url = await getDownloadURL(storageRef);
+  return url;
+};
+export interface Category{
+  id: string;
+  name: string;
+}
+
+export default function SanPhamForm({ onProductChange }: { onProductChange: (data: any) => void }) {
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [productData, setProductData] = useState({
+    name: '',
+    price: '',
+    category: '',
+    tinhtrang: '',
+    quantity: '',
+    description: '',
+  });
+
+  // Gửi dữ liệu lên component cha mỗi khi `productData` thay đổi
+  useEffect(() => {
+    onProductChange(productData);
+  }, [productData, onProductChange]);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setProductData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  useEffect(()=>{
+    getListCategories().then((data)=>{
+      setCategories(data);
+    })
+  },[])
+
   const [tinhtrangs, setTinhtrangs] = useState([
     "mới (100%)", "đã sử dụng (99%)", "đã sử dụng (90%)", "đã sử dụng(80%)"
   ]);
 
+  const [imageURL, setImageURL] = useState<string | null>(null);
+
+  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const url = await uploadToFirebase(file);
+      setImageURL(url); // Lưu URL ảnh sau khi tải lên Firebase
+    }
+  };
   return (
     <form className="space-y-4 w-full md:w-1/2 max-w-lg border border-gray-300 p-4 md:p-8 rounded-lg shadow-md bg-white bg-opacity-40">
       <div className="mb-4">
-        <label className="block mb-2 text-gray-800 font-medium">Profile picture</label>
-        <input type="file" />
+        <label className="block mb-2 text-gray-800 font-medium">Ảnh minh họa</label>
+        <input type="file" onChange={handleFileChange} />
       </div>
       <div>
         <label className="block mb-2 text-gray-800 font-medium">Tên sản phẩm</label>
-        <input type="text" className="px-4 py-2 border border-gray-300 w-full rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-700" />
+        <input 
+        type="text" 
+        value={productData.name}
+        onChange={handleChange}
+        className="px-4 py-2 border border-gray-300 w-full rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-700" />
       </div>
       <div>
         <label className="block mb-2 text-gray-800 font-medium">Đơn giá</label>
-        <input type="text" className="px-4 py-2 border border-gray-300 w-full rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-700" />
+        <input 
+        type="text" 
+        value={productData.price}
+        onChange={handleChange}
+        className="px-4 py-2 border border-gray-300 w-full rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-700" />
       </div>
       <div>
         <label className="block mb-2 text-gray-800 font-medium">Phân loại</label>
-        <select className="px-4 py-2 border border-gray-300 w-full rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-700">
-          {categories.map((category, index) => (
-            <option key={index} value={category}>{category}</option>
+        <select 
+        value={productData.category}
+        onChange={handleChange}
+        className="px-4 py-2 border border-gray-300 w-full rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-700">
+          {categories.map((category) => (
+            <option key={category.id} value={category.name}>{category.name}</option>
           ))}
         </select>
       </div>
       <div>
         <label className="block mb-2 text-gray-800 font-medium">Tình trạng</label>
-        <select className="px-4 py-2 border border-gray-300 w-full rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-700">
+        <select 
+        value={productData.tinhtrang}
+        onChange={handleChange}
+        className="px-4 py-2 border border-gray-300 w-full rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-700">
           {tinhtrangs.map((tinhtrang, index) => (
             <option key={index} value={tinhtrang}>{tinhtrang}</option>
           ))}
@@ -40,11 +101,17 @@ export default function SanPhamForm() {
       </div>
       <div>
         <label className="block mb-2 text-gray-800 font-medium">Số lượng</label>
-        <input type="text" className="px-4 py-2 border border-gray-300 w-full rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-700" />
+        <input 
+        type="text" 
+        value={productData.quantity}
+        onChange={handleChange}
+        className="px-4 py-2 border border-gray-300 w-full rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-700" />
       </div>
       <div>
         <label className="block mb-2 text-gray-800 font-medium">Mô tả</label>
         <textarea
+          value={productData.description}
+          onChange={handleChange}
           className="px-4 py-2 border border-gray-300 w-full rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-700 h-24 resize-none"
           rows={4}
         ></textarea>

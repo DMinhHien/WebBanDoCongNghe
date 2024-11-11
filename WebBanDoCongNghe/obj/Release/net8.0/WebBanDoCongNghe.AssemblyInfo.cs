@@ -12,9 +12,9 @@ using System;
 using System.Reflection;
 
 [assembly: System.Reflection.AssemblyCompanyAttribute("WebBanDoCongNghe")]
-[assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
+[assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+08e80023d22dc9a68cb6008e121fdfa34a01dea6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
 [assembly: System.Reflection.AssemblyProductAttribute("WebBanDoCongNghe")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WebBanDoCongNghe")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
