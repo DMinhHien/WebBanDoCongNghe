@@ -1,6 +1,0 @@
-@WebBanDoCongNghe_HostAddress = http://localhost:5250
-
-GET {{WebBanDoCongNghe_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
