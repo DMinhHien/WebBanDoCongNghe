@@ -12,7 +12,7 @@ namespace WebBanDoCongNghe.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    [Authorize]
+    
     public class UserController : Controller
     {
         private readonly ProductDbContext _context;
@@ -41,6 +41,7 @@ namespace WebBanDoCongNghe.Controllers
             return Json(result);
         }
         [HttpGet("checkLogin")]
+        [Authorize]
         public IActionResult checkLogin()
         {
             var result = User.Identity.IsAuthenticated;

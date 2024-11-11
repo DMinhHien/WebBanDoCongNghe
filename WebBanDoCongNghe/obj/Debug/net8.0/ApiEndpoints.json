@@ -558,7 +558,7 @@
   {
     "ContainingType": "WebBanDoCongNghe.Controllers.ProductController",
     "Method": "getListUseShop",
-    "RelativePath": "Product/getListUseShop/{id}",
+    "RelativePath": "Product/getListUseShop/{shopId}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -566,11 +566,6 @@
       {
         "Name": "shopId",
         "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "id",
-        "Type": "",
         "IsRequired": true
       }
     ],

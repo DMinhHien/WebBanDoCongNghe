@@ -1,6 +1,10 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "yjpuUqhrzb1s3vajbZPu9Bvh6CndokVkPQ0pE2FmmkRwZQWmcItvf40NmSjtbxDz4UH6n9RQqOkMiz72aGeD1Q==",
+=======
+  "dgSpecHash": "bb01IHpiEXk=",
+>>>>>>> 5a16011696597a462e13765958e4fa0a6524d670
   "success": true,
   "projectFilePath": "D:\\.Net\\WebBanDoCongNghe\\WebBanDoCongNghe\\WebBanDoCongNghe.csproj",
   "expectedPackageFiles": [

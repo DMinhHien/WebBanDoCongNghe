@@ -69,5 +69,20 @@ namespace WebBanDoCongNghe.Controllers
             var model = _context.Shops.SingleOrDefault(x=>x.id == id);
             return Json(model);
         }
+        [HttpGet("getListUseSearch")]
+        public IActionResult getListUseSearch([FromBody] JObject json)
+        {
+            var searchString = json.GetValue("data").ToString();
+            var result = _context.Shops.AsQueryable().Where(x => x.name.Contains(searchString)).
+                 Select(d => new
+                 {
+                     d.id,
+                     d.name,
+                     d.address,
+                     d.image,
+                     d.rating
+                 }).ToList();
+            return Json(result);
+        }
     }
 }
