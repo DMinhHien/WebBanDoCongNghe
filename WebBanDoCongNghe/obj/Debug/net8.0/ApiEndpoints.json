@@ -966,6 +966,22 @@
   },
   {
     "ContainingType": "WebBanDoCongNghe.Controllers.UserController",
+    "Method": "Login",
+    "RelativePath": "User/Login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "WebBanDoCongNghe.DTO.UserDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBanDoCongNghe.Controllers.UserController",
     "Method": "logout",
     "RelativePath": "User/logout",
     "HttpMethod": "POST",
