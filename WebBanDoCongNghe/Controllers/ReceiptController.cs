@@ -11,7 +11,10 @@ namespace WebBanDoCongNghe.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+<<<<<<< HEAD
  
+=======
+>>>>>>> origin/MHien
     public class ReceiptController : Controller
     {
         private readonly ProductDbContext _context;

@@ -6,6 +6,7 @@ using WebBanDoCongNghe.Models;
 using Newtonsoft.Json.Linq;
 using Microsoft.AspNetCore.Http.HttpResults;
 using System.Net.WebSockets;
+using Microsoft.AspNetCore.Authorization;
 namespace WebBanDoCongNghe.Controllers
 {
     [ApiController]
@@ -86,9 +87,10 @@ namespace WebBanDoCongNghe.Controllers
                      d.description,
                      d.quantity,
                      d.status,
+                     d.image,
                      categoryName = _context.Categories
                         .Where(x => x.id == d.categoryId)
-                        .Select(s => s.name) // Lấy chuỗi s.name
+                        .Select(s => s.name) 
                         .FirstOrDefault()
                  }).ToList();
             return Json(result);
@@ -105,9 +107,11 @@ namespace WebBanDoCongNghe.Controllers
                      d.description,
                      d.quantity,
                      d.status,
+                     d.image,
                      categoryName = _context.Categories
                         .Where(x => x.id == d.categoryId)
                         .Select(s => s.name)
+                         .FirstOrDefault()
                  }).ToList();
             return Json(result);
         }
@@ -123,9 +127,11 @@ namespace WebBanDoCongNghe.Controllers
                      d.description,
                      d.quantity,
                      d.status,
+                     d.image,
                      categoryName = _context.Categories
                         .Where(x => x.id == d.categoryId)
                         .Select(s => s.name)
+                         .FirstOrDefault()
                  }).ToList();
             return Json(result);
         }
@@ -142,6 +148,7 @@ namespace WebBanDoCongNghe.Controllers
                      d.description,
                      d.quantity,
                      d.status,
+                     d.image,
                      categoryName = _context.Categories
                         .Where(x => x.id == d.categoryId)
                         .Select(s => s.name)
@@ -166,6 +173,7 @@ namespace WebBanDoCongNghe.Controllers
                      d.description,
                      d.quantity,
                      d.status,
+                     d.image,
                      categoryName = _context.Categories
                         .Where(x => x.id == d.categoryId)
                         .Select(s => s.name)
