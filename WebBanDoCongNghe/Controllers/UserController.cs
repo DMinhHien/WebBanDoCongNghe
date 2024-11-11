@@ -106,8 +106,16 @@ namespace WebBanDoCongNghe.Controllers
 
                 if (result.Succeeded)
                 {
-                    // Thêm các logic bổ sung nếu cần thiết (ví dụ: gửi email xác thực, v.v.)
-                    return Json(user);
+                    var response = new
+                    {
+                        Token = _tokenService.CreateToken(user),
+                        User = new
+                        {
+                            user.UserName,
+                            user.Email,
+                            user.Id
+                        }
+                    };
                 }
 
                 foreach (var error in result.Errors)
