@@ -36,7 +36,7 @@ export default function OrderList({orders}:OrderListProps) {
                 <ul className="list-disc pl-5">
                   {order.ListSP.map((product) => (
                     <li key={product.id}>
-                      {product.name}
+                      {product.productName}
                       <label className='w-full ml-10'>x7</label>
                     </li>
                   ))}

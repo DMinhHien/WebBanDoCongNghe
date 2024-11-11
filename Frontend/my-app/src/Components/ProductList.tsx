@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 
 // Định nghĩa kiểu cho sản phẩm
 export interface Product {
   id: string;
-  name: string;
+  productName: string;
   image: string;
-  price: number;
+  unitPrice: number;
   quantity: number;
-  describe: string;
+  description: string;
+  categoryId: string;
+  status: string;
+  idShop: string
 }
 
 // Định nghĩa props cho ProductList
@@ -18,7 +20,7 @@ interface ProductListProps {
   editProduct: (productId: string) => void;
   onSelectedProductsChange: (selected: string[]) => void;
 }
- 
+
 export default function ProductList({ products, editProduct,onSelectedProductsChange }: ProductListProps) {
   const [selectedProducts, setSelectedProducts] = useState<string[]>([]);
   // Hàm xử lý khi thay đổi checkbox của một sản phẩm
@@ -44,8 +46,6 @@ export default function ProductList({ products, editProduct,onSelectedProductsCh
     }
   };
 
-  const nav=useNavigate();
-  
   
   return (
     <div>
@@ -79,13 +79,13 @@ export default function ProductList({ products, editProduct,onSelectedProductsCh
                     onChange={() => handleCheckboxChange(product.id)}
                   />
                 </td>
-                <td className="border border-gray-300 p-2">{product.name}</td>
-                <td className="border border-gray-300 p-2">{product.price} VNĐ</td>
+                <td className="border border-gray-300 p-2">{product.productName}</td>
+                <td className="border border-gray-300 p-2">{product.unitPrice} VNĐ</td>
                 <td className="border border-gray-300 p-2">{product.quantity}</td>
                 <td className="border border-gray-300 p-2">
-                  <img src={product.image} alt={product.name} className="w-20 h-20 object-cover" />
+                  <img src={product.image} alt={product.productName} className="w-20 h-20 object-cover" />
                 </td>
-                <td className="border border-gray-300 p-2">{product.describe}</td>
+                <td className="border border-gray-300 p-2">{product.description}</td>
                 <td className="border border-gray-300 p-2">
                   <button
                     onClick={()=>editProduct(product.id)}

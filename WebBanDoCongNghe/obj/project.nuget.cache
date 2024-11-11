@@ -1,10 +1,6 @@
 {
   "version": 2,
-<<<<<<< HEAD
   "dgSpecHash": "yjpuUqhrzb1s3vajbZPu9Bvh6CndokVkPQ0pE2FmmkRwZQWmcItvf40NmSjtbxDz4UH6n9RQqOkMiz72aGeD1Q==",
-=======
-  "dgSpecHash": "bb01IHpiEXk=",
->>>>>>> 5a16011696597a462e13765958e4fa0a6524d670
   "success": true,
   "projectFilePath": "D:\\.Net\\WebBanDoCongNghe\\WebBanDoCongNghe\\WebBanDoCongNghe.csproj",
   "expectedPackageFiles": [
@@ -99,5 +95,12 @@
     "C:\\Users\\Admin\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file D:\\.Net\\WebBanDoCongNghe\\WebBanDoCongNghe\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }

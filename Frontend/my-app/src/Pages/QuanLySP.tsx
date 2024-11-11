@@ -13,9 +13,8 @@ export default function QuanLySP() {
   const handleSelectedProductsChange = (selected: string[]) => {
     setSelectedProducts(selected);
   };
-  const idShop="123";
   useEffect(()=>{
-    getListProduct(idShop).then((data)=>{
+    getListProduct().then((data)=>{
       setProducts(data);
     })
   },[])
@@ -25,6 +24,7 @@ export default function QuanLySP() {
   };
 
   const navigation=useNavigate();
+  
 
   const newHandle=()=>{
     navigation("/new")
@@ -36,8 +36,10 @@ export default function QuanLySP() {
 
   const handleDelete=(selectedProducts: string[])=>()=>{
     selectedProducts.forEach(selectedProduct => {
-      deleteProduct(selectedProduct,idShop).then((data)=>{
-        setProducts(data);
+      deleteProduct(selectedProduct).then(()=>{
+        setProducts((prevProducts) =>
+          prevProducts.filter((product) => product.id !== selectedProduct)
+        );
       })
     });
   }
