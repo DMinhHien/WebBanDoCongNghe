@@ -88,7 +88,7 @@ namespace WebBanDoCongNghe.Controllers
                      d.status,
                      categoryName = _context.Categories
                         .Where(x => x.id == d.categoryId)
-                        .Select(s => s.name) // Lấy chuỗi s.name
+                        .Select(s => s.name) 
                         .FirstOrDefault()
                  }).ToList();
             return Json(result);
@@ -108,6 +108,7 @@ namespace WebBanDoCongNghe.Controllers
                      categoryName = _context.Categories
                         .Where(x => x.id == d.categoryId)
                         .Select(s => s.name)
+                         .FirstOrDefault()
                  }).ToList();
             return Json(result);
         }
@@ -126,6 +127,7 @@ namespace WebBanDoCongNghe.Controllers
                      categoryName = _context.Categories
                         .Where(x => x.id == d.categoryId)
                         .Select(s => s.name)
+                         .FirstOrDefault()
                  }).ToList();
             return Json(result);
         }
