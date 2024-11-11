@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using WebBanDoCongNghe.DTO;
 
 namespace WebBanDoCongNghe.Controllers
 {
@@ -82,6 +83,34 @@ namespace WebBanDoCongNghe.Controllers
                 return NotFound();
             }
             return Json(model);
+        }
+        [HttpPost("Register")]
+        public async Task<IActionResult> Register(RegisterDTO model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new UserManage
+                {
+                    UserName = model.Email,   // Hoặc có thể để là một giá trị khác nếu không muốn dùng Email làm UserName
+                    Email = model.Email,
+                    AccountName = model.AccountName
+                };
+
+                var result = await _userManager.CreateAsync(user, model.Password);
+
+                if (result.Succeeded)
+                {
+                    // Thêm các logic bổ sung nếu cần thiết (ví dụ: gửi email xác thực, v.v.)
+                    return Ok("Đăng ký thành công!");
+                }
+
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+            }
+
+            return BadRequest(ModelState);
         }
     }
 }
