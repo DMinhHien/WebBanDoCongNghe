@@ -12,7 +12,7 @@ const LoginPage: React.FC = () => {
   const handleLogin = async() => {
     try{
     // Thêm logic xử lý đăng nhập ở đây
-    const response = await fetch('https://localhost:7183/login',{
+    const response = await fetch('https://localhost:7183/User/Login',{
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -22,7 +22,8 @@ const LoginPage: React.FC = () => {
 
     if (response.ok) {
         const data = await response.json();
-        login({ id: data.id, name: data.name, email: data.email }); // Cập nhật trạng thái đăng nhập
+        login({ id: data.id, name: data.username, email: data.email }); // Cập nhật trạng thái đăng nhập
+        localStorage.setItem("token", data.token); // Lưu token vào localStorage
         navigate('/'); // Điều hướng về trang chủ
       } else {
         alert('Đăng nhập không thành công!');

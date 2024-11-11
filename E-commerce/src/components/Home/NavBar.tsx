@@ -32,6 +32,7 @@ const Navbar = () => {
   };
   const handleLogout = () => {
     logout();
+    localStorage.removeItem("token");
     navigate('/login');
   };
   const toggleDrawer =
