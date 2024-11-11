@@ -7,6 +7,7 @@ using System.Text;
 using WebBanDoCongNghe.Interface;
 using WebBanDoCongNghe.Service;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,16 +18,41 @@ builder.Services.AddControllers().AddNewtonsoftJson();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddAuthentication();
-builder.Services.AddAuthorization();
+builder.Services.AddSwaggerGen(option =>
+{
+    option.SwaggerDoc("v1", new OpenApiInfo { Title = "Demo API", Version = "v1" });
+    option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        In = ParameterLocation.Header,
+        Description = "Please enter a valid token",
+        Name = "Authorization",
+        Type = SecuritySchemeType.Http,
+        BearerFormat = "JWT",
+        Scheme = "Bearer"
+    });
+    option.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type=ReferenceType.SecurityScheme,
+                    Id="Bearer"
+                }
+            },
+            new string[]{}
+        }
+    });
+});
+
 builder.Services.AddDbContext<ProductDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 builder.Services.AddIdentityCore<UserManage>()
     .AddEntityFrameworkStores<ProductDbContext>()
-    .AddApiEndpoints()
-    .AddDefaultTokenProviders();
+    .AddApiEndpoints();
 builder.Services.AddAuthentication(options => {
     options.DefaultAuthenticateScheme=
     options.DefaultChallengeScheme=
@@ -51,7 +77,7 @@ builder.Services.AddAuthentication(options => {
     }); ;
 
 var app = builder.Build();
-app.UseCors(ops => ops.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod());
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -59,11 +85,14 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-
-
-app.UseAuthorization();
+app.UseHttpsRedirection();
+app.UseCors(x => x
+     .AllowAnyMethod()
+     .AllowAnyHeader()
+     .AllowCredentials()
+      .SetIsOriginAllowed(origin => true));
 app.UseAuthentication();
-app.MapIdentityApi<UserManage>();
+app.UseAuthorization();
 app.MapControllers();
 
 app.Run();

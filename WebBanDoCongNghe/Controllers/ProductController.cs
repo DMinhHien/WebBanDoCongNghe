@@ -76,6 +76,7 @@ namespace WebBanDoCongNghe.Controllers
 
         }
         [HttpGet("getListUse")]
+        [Authorize]
         public IActionResult getListUse()
         {
             var result = _context.Products.AsQueryable().
