@@ -48,6 +48,28 @@ namespace WebBanDoCongNghe.Controllers
             var id = (json.GetValue("id").ToString());
             var result = _context.Products.SingleOrDefault(p => p.id == id);
             _context.Products.Remove(result);
+            var receiptDetail=_context.ReceiptDetails.AsQueryable().Where(p => p.idProduct == id);
+            if (receiptDetail != null)
+            {
+                foreach (var item in receiptDetail)
+                {
+                    int count = _context.ReceiptDetails.AsQueryable().Where(p => p.idReceipt == item.idReceipt).Count();
+                    if (count == 1)
+                    {
+                        var receipt = _context.Receipts.FirstOrDefault(x => x.id == item.idReceipt);
+                        _context.Receipts.Remove(receipt);
+                    }
+                    _context.ReceiptDetails.Remove(item);
+                }
+            }
+            var cartDetail = _context.CartDetails.AsQueryable().Where(p => p.idProduct == id);
+            if (cartDetail != null)
+            {
+                foreach (var item in cartDetail)
+                {
+                    _context.CartDetails.Remove(item);
+                }
+            }
             _context.SaveChanges();
             return Json(result);
 
@@ -61,6 +83,13 @@ namespace WebBanDoCongNghe.Controllers
                      d.id,
                      d.productName,
                      d.unitPrice,
+                     d.description,
+                     d.quantity,
+                     d.status,
+                     categoryName = _context.Categories
+                        .Where(x => x.id == d.categoryId)
+                        .Select(s => s.name) // Lấy chuỗi s.name
+                        .FirstOrDefault()
                  }).ToList();
             return Json(result);
         }
@@ -73,6 +102,12 @@ namespace WebBanDoCongNghe.Controllers
                      d.id,
                      d.productName,
                      d.unitPrice,
+                     d.description,
+                     d.quantity,
+                     d.status,
+                     categoryName = _context.Categories
+                        .Where(x => x.id == d.categoryId)
+                        .Select(s => s.name)
                  }).ToList();
             return Json(result);
         }
@@ -85,6 +120,12 @@ namespace WebBanDoCongNghe.Controllers
                      d.id,
                      d.productName,
                      d.unitPrice,
+                     d.description,
+                     d.quantity,
+                     d.status,
+                     categoryName = _context.Categories
+                        .Where(x => x.id == d.categoryId)
+                        .Select(s => s.name)
                  }).ToList();
             return Json(result);
         }
@@ -98,6 +139,12 @@ namespace WebBanDoCongNghe.Controllers
                      d.id,
                      d.productName,
                      d.unitPrice,
+                     d.description,
+                     d.quantity,
+                     d.status,
+                     categoryName = _context.Categories
+                        .Where(x => x.id == d.categoryId)
+                        .Select(s => s.name)
                  }).ToList();
             return Json(result);
         }
@@ -116,6 +163,12 @@ namespace WebBanDoCongNghe.Controllers
                      d.id,
                      d.productName,
                      d.unitPrice,
+                     d.description,
+                     d.quantity,
+                     d.status,
+                     categoryName = _context.Categories
+                        .Where(x => x.id == d.categoryId)
+                        .Select(s => s.name)
                  }).ToList();
             return Json(result);
         }

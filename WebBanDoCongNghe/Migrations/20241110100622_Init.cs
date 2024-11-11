@@ -32,6 +32,7 @@ namespace WebBanDoCongNghe.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     birthDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AccountName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -99,7 +100,7 @@ namespace WebBanDoCongNghe.Migrations
                     content = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     productId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     rating = table.Column<double>(type: "float", nullable: false),
-                    date = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    date = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -145,7 +146,7 @@ namespace WebBanDoCongNghe.Migrations
                 {
                     id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     userId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    date = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    date = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
