@@ -11,7 +11,6 @@ namespace WebBanDoCongNghe.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    [Authorize]
     public class ReceiptController : Controller
     {
         private readonly ProductDbContext _context;
