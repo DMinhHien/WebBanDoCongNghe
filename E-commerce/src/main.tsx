@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import { RouterProvider } from "react-router-dom";
 import router from "./route.tsx";
+import { AuthProvider } from './components/Auth/AuthContext.tsx';
 
 const theme = createTheme({
   palette: {
@@ -31,7 +32,9 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ThemeProvider theme={theme}>
       <CssBaseline />
+      <AuthProvider>
       <RouterProvider router={router} />
+      </AuthProvider>
     </ThemeProvider>
   </StrictMode>,
 )
