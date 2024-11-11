@@ -36,7 +36,7 @@ builder.Services.AddAuthentication(options => {
     options.DefaultSignOutScheme = JwtBearerDefaults.AuthenticationScheme;
 
     }
-    ).AddJwtBearer(options =>
+    ).AddCookie(IdentityConstants.ApplicationScheme).AddJwtBearer(options =>
     {
         options.TokenValidationParameters = new TokenValidationParameters
         {

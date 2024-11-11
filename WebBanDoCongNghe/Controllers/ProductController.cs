@@ -6,6 +6,7 @@ using WebBanDoCongNghe.Models;
 using Newtonsoft.Json.Linq;
 using Microsoft.AspNetCore.Http.HttpResults;
 using System.Net.WebSockets;
+using Microsoft.AspNetCore.Authorization;
 namespace WebBanDoCongNghe.Controllers
 {
     [ApiController]
@@ -75,6 +76,7 @@ namespace WebBanDoCongNghe.Controllers
 
         }
         [HttpGet("getListUse")]
+        [Authorize]
         public IActionResult getListUse()
         {
             var result = _context.Products.AsQueryable().
