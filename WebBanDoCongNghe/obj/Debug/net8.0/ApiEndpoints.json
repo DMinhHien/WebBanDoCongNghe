@@ -903,9 +903,35 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "WebBanDoCongNghe.Controllers.ShopController",
+    "Method": "getListUseSearch",
+    "RelativePath": "Shop/getListUseSearch",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "json",
+        "Type": "Newtonsoft.Json.Linq.JObject",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "WebBanDoCongNghe.Controllers.UserController",
     "Method": "checkLogin",
     "RelativePath": "User/checkLogin",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBanDoCongNghe.Controllers.UserController",
+    "Method": "getElement",
+    "RelativePath": "User/getElement",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,

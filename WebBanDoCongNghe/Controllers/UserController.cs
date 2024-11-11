@@ -7,6 +7,7 @@ using Newtonsoft.Json.Linq;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace WebBanDoCongNghe.Controllers
 {
@@ -57,6 +58,25 @@ namespace WebBanDoCongNghe.Controllers
         public IActionResult getElementById([FromRoute] string id)
         {
             var model = _context.Users.AsQueryable().FirstOrDefault(m => m.Id == id); ;
+            if (model == null)
+            {
+                return NotFound();
+            }
+            return Json(model);
+        }
+        [HttpGet("getElement")]
+        public IActionResult getElement()
+        {
+            string userId = _userManager.GetUserId(HttpContext.User);
+            var model = _context.Users.AsQueryable().Where(m => m.Id == userId)
+                .Select(d => new
+                {
+                    d.Id,
+                    d.AccountName,
+                    d.Email,
+                    d.birthDate,
+                    d.Address,
+                }) ; 
             if (model == null)
             {
                 return NotFound();
