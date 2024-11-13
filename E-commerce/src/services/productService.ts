@@ -20,3 +20,5 @@ export const fetchProductsByCategory = async (categoryId: string): Promise<Produ
     const response = await axios.get(`https://localhost:7183/Product/getListUseShop/${shopId}`);
     return response.data;
   };
+
+  

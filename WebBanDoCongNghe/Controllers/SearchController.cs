@@ -51,13 +51,12 @@ namespace WebBanDoCongNghe.Controllers
             return Json(result);
 
         }
-        [HttpGet("getListUse")]
-        public IActionResult getListUse()
+        [HttpGet("getListUse/{userId}")]
+        public IActionResult getListUse([FromRoute] string userId)
         {
-            var result = _context.Searchs.AsQueryable().
+            var result = _context.Searchs.AsQueryable().Where(x=>x.userId == userId).
                  Select(d => new
                  {
-                     id = d.id,
                      content = d.content
                  }).ToList();
             return Json(result);
