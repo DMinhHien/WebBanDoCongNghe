@@ -114,8 +114,9 @@ namespace WebBanDoCongNghe.Controllers
                             user.UserName,
                             user.Email,
                             user.Id
-                        }
-                    };
+                        }  
+                };
+                    return Ok(response);
                 }
 
                 foreach (var error in result.Errors)
