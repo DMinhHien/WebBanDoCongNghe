@@ -174,9 +174,14 @@ const Navbar = () => {
             <Button color="inherit" onClick={handleLogout}>Đăng Xuất</Button>
           </>
         ) : (
+          <>
           <Button color="inherit" onClick={() => navigate('/login')}>
             Đăng Nhập
           </Button>
+          <Button color="inherit" onClick={() => navigate('/signup')}>
+          Đăng ký
+        </Button>
+        </>
         )}
              {/* icon button */}
           
