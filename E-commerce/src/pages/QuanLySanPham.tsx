@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import DashboardNav from '../components/DashboardNav';
 import ProductList from '../components/Another/ProductList';
 import { Product } from '../data/productdetail';
