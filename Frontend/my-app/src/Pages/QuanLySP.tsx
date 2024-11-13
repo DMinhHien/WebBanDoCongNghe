@@ -1,28 +1,49 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import DashboardNav from '../Components/DashboardNav';
 import ProductList from '../Components/ProductList';
 import { Product } from '../Components/ProductList';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useNavigate } from 'react-router-dom';
+import { deleteProduct, getListProduct } from '../Service';
 
 export default function QuanLySP() {
-  const [products, setProducts] = useState<Product[]>([
-    { id: 1, name: 'Product 1', image: "/img/iphone16.webp", price: 100, quantity: 2 },
-    { id: 2, name: 'Product 2', image: "/img/iphone16.webp", price: 200, quantity: 2 },
-  ]);
+  const [products, setProducts] = useState<Product[]>([])
+  const [selectedProducts, setSelectedProducts] = useState<string[]>([]);
+  const handleSelectedProductsChange = (selected: string[]) => {
+    setSelectedProducts(selected);
+  };
+  useEffect(()=>{
+    getListProduct().then((data)=>{
+      setProducts(data);
+    })
+  },[])
 
   const editProduct = (product: Product) => {
     console.log('Editing product:', product);
   };
 
   const navigation=useNavigate();
+  
 
   const newHandle=()=>{
     navigation("/new")
   }
 
+  const editHandle=(id:string)=>{
+    navigation(`/edit/${id}`)
+  }
 
+  const handleDelete=(selectedProducts: string[])=>()=>{
+    selectedProducts.forEach(selectedProduct => {
+      deleteProduct(selectedProduct).then(()=>{
+        setProducts((prevProducts) =>
+          prevProducts.filter((product) => product.id !== selectedProduct)
+        );
+      })
+    });
+  }
+  
   return (
     <div className='flex w-screen space-x-6'>
       <DashboardNav />
@@ -40,12 +61,13 @@ export default function QuanLySP() {
           </div>
           <div className='space-x-4 mt-2'>
             <button onClick={newHandle} className='bg-black text-white p-4 rounded-md'>Thêm sản phẩm</button>
-            <button className='bg-black text-white p-4 rounded-md'>Xóa sản phẩm</button>
+            <button onClick={handleDelete(selectedProducts)} className='bg-black text-white p-4 rounded-md'>Xóa sản phẩm</button>
           </div>
         </div>
         <ProductList
           products={products}
-          editProduct={editProduct}
+          editProduct={editHandle}
+          onSelectedProductsChange={handleSelectedProductsChange}
         />
       </div>
     </div>

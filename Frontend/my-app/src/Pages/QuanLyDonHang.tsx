@@ -1,30 +1,18 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import DashboardNav from '../Components/DashboardNav'
 import OrderList from '../Components/OrderList'
 import { Order } from '../Components/OrderList';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { getListOrder } from '../Service';
 export default function QuanLyDonHang() {
-  const orders: Order[] = [
-    {
-      id: 1,
-      userName: 'Nguyen Van A',
-      total: 500000,
-      ListSP: [
-        { id: 1, name: 'Product 1', image: "/img/iphone16.webp", price: 100, quantity: 2 },
-        { id: 2, name: 'Product 2', image: "/img/iphone16.webp", price: 200, quantity: 2 },
-      ],
-    },
-    {
-      id: 2,
-      userName: 'Tran Thi B',
-      total: 300000,
-      ListSP: [
-        { id: 1, name: 'Product 1', image: "/img/iphone16.webp", price: 100, quantity: 2 },
-        { id: 2, name: 'Product 2', image: "/img/iphone16.webp", price: 200, quantity: 2 },
-      ],
-    },
-  ];
+  const [orders, setOrders] = useState<Order[]>([])
+  const idShop="123"
+  useEffect(()=>{
+    getListOrder(idShop).then((data)=>{
+      setOrders(data);
+    })
+  },[])
   return (
     <div className='flex w-screen'>
     <DashboardNav/>
