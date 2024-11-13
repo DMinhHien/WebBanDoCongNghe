@@ -1,10 +1,10 @@
-
+import React, { useState } from 'react'
 import DashboardNav from '../components/DashboardNav';
 import SanPhamForm from '../components/SanPhamForm';
 import { useNavigate, useParams } from 'react-router-dom';
-import { editProduct} from '../services/productDetailService'
+import { editProduct, getListProduct } from '../services/productDetailService'
 import { Product } from '../data/productdetail';
-import { useState } from 'react';
+
 export default function ChinhSuaSP() {
   const {id} = useParams<{ id: string }>();
   const [productData, setProductData] = useState<Product>({
