@@ -87,6 +87,7 @@ namespace WebBanDoCongNghe.Controllers
                      d.description,
                      d.quantity,
                      d.status,
+                     d.image,
                      categoryName = _context.Categories
                         .Where(x => x.id == d.categoryId)
                         .Select(s => s.name) 
@@ -106,6 +107,7 @@ namespace WebBanDoCongNghe.Controllers
                      d.description,
                      d.quantity,
                      d.status,
+                     d.image,
                      categoryName = _context.Categories
                         .Where(x => x.id == d.categoryId)
                         .Select(s => s.name)
@@ -125,6 +127,7 @@ namespace WebBanDoCongNghe.Controllers
                      d.description,
                      d.quantity,
                      d.status,
+                     d.image,
                      categoryName = _context.Categories
                         .Where(x => x.id == d.categoryId)
                         .Select(s => s.name)
@@ -145,6 +148,7 @@ namespace WebBanDoCongNghe.Controllers
                      d.description,
                      d.quantity,
                      d.status,
+                     d.image,
                      categoryName = _context.Categories
                         .Where(x => x.id == d.categoryId)
                         .Select(s => s.name)
@@ -169,6 +173,7 @@ namespace WebBanDoCongNghe.Controllers
                      d.description,
                      d.quantity,
                      d.status,
+                     d.image,
                      categoryName = _context.Categories
                         .Where(x => x.id == d.categoryId)
                         .Select(s => s.name)
