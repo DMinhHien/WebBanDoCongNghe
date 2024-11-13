@@ -10,6 +10,11 @@ import ShopDetailPage from "./pages/ShopDetailPage";
 import LoginPage from "./components/Auth/LoginPage";
 import ProfilePage from "./components/Auth/ProfilePage";
 import SignUpPage from "./components/Auth/SignUpPage";
+import QuanLySP from "./pages/QuanLySanPham";
+import ProductCreate from "./pages/ProductCreate";
+import ChinhSuaSP from "./pages/ChinhSuaSanPham";
+import QuanLyDonHang from "./pages/QuanLyDonHang";
+import QuanLyThongTin from "./pages/QuanLyThongTin";
 const router = createBrowserRouter([
     {
       path: "/",
@@ -60,6 +65,36 @@ const router = createBrowserRouter([
       element: <Layout />,
       errorElement: <ErrorPage />,
       children: [{ index: true, element: <ProfilePage /> }],
+    },
+    {
+      path: "/quanlyshop",
+      element: <Layout />,
+      errorElement: <ErrorPage />,
+      children: [{ index: true, element: <QuanLySP /> }],
+    },
+    {
+      path: "/quanlyshop/new",
+      element: <Layout />,
+      errorElement: <ErrorPage />,
+      children: [{ index: true, element: <ProductCreate /> }],
+    },
+    {
+      path: "/quanlyshop/edit/:id",
+      element: <Layout />,
+      errorElement: <ErrorPage />,
+      children: [{ index: true, element: <ChinhSuaSP /> }],
+    },
+    {
+      path: "/quanlyshop/QuanLyDonHang",
+      element: <Layout />,
+      errorElement: <ErrorPage />,
+      children: [{ index: true, element: <QuanLyDonHang /> }],
+    },
+    {
+      path: "/quanlyshop/QuanLyThongTin",
+      element: <Layout />,
+      errorElement: <ErrorPage />,
+      children: [{ index: true, element: <QuanLyThongTin /> }],
     },
   ]);
   
