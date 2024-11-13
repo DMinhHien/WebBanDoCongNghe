@@ -9,6 +9,7 @@ import ShopPage from "./pages/ShopPage";
 import ShopDetailPage from "./pages/ShopDetailPage";
 import LoginPage from "./components/Auth/LoginPage";
 import ProfilePage from "./components/Auth/ProfilePage";
+import SignUpPage from "./components/Auth/SignUpPage";
 const router = createBrowserRouter([
     {
       path: "/",
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
     {
       path: "/login",
       element: <LoginPage />,
+    },
+    {
+      path: "/signup",
+      element: < SignUpPage/>,
     },
     {
       path: "/profile",
