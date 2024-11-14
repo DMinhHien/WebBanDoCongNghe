@@ -15,6 +15,7 @@ import ProductCreate from "./pages/ProductCreate";
 import ChinhSuaSP from "./pages/ChinhSuaSanPham";
 import QuanLyDonHang from "./pages/QuanLyDonHang";
 import QuanLyThongTin from "./pages/QuanLyThongTin";
+import CartPage from "./pages/CartPage";
 const router = createBrowserRouter([
     {
       path: "/",
@@ -95,6 +96,12 @@ const router = createBrowserRouter([
       element: <Layout />,
       errorElement: <ErrorPage />,
       children: [{ index: true, element: <QuanLyThongTin /> }],
+    },
+    {
+      path: "/cart",
+      element: <Layout />,
+      errorElement: <ErrorPage />,
+      children: [{ index: true, element: <CartPage /> }],
     },
   ]);
   

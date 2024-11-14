@@ -34,6 +34,9 @@ const Navbar = () => {
     logout();
     navigate('/login');
   };
+  const handleCart = () => {
+    navigate('/cart');
+  };
   const toggleDrawer =
     (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
       if (
@@ -159,17 +162,15 @@ const Navbar = () => {
               borderRadius: "20px",
             }}
           />
-          <Link to="/admin">
-            <IconButton>
-              <ShoppingCart />
-            </IconButton>
-          </Link>
           
             {/* icon button */}
             {user ? (
           <>
             <IconButton color="inherit" onClick={handleProfileClick}>
               <Avatar>N</Avatar>
+            </IconButton>
+            <IconButton color="inherit" onClick={handleCart}>
+              <ShoppingCart></ShoppingCart>
             </IconButton>
             <Button color="inherit" onClick={handleLogout}>Đăng Xuất</Button>
           </>
