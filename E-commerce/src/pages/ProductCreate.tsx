@@ -21,9 +21,11 @@ export default function ProductCreate() {
     setProductData(updatedData); // Cập nhật dữ liệu khi nhận được từ component con
   };
   const navigation=useNavigate();
+
   const cancelHandle=()=>{
     navigation("/quanlyshop")
   }
+  
   const addHandle=async()=>{
     const productWithNumbers = {
       ...productData,

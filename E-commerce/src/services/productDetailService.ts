@@ -4,7 +4,9 @@ import { Product } from "../data/productdetail";
 export const addProduct =async(Product:Product)=>{
     try {
         const { id, ...productWithoutId } = Product;    
-        const res =await axios.post(`https://localhost:7183/Product/create`,{data:productWithoutId },{ headers: { 'Content-Type': 'application/json' } })
+        const res =await axios.post(`https://localhost:7183/Product/create`,
+            {data:productWithoutId },
+            { headers: { 'Content-Type': 'application/json' } })
     } catch (error) {
         console.error("không thể thêm sản phẩm",error);
         throw error
