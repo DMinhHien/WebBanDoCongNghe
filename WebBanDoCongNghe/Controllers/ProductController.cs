@@ -130,6 +130,7 @@ namespace WebBanDoCongNghe.Controllers
                      d.quantity,
                      d.status,
                      d.image,
+                     d.categoryId,
                      categoryName = _context.Categories
                         .Where(x => x.id == d.categoryId)
                         .Select(s => s.name)
@@ -151,6 +152,7 @@ namespace WebBanDoCongNghe.Controllers
                      d.quantity,
                      d.status,
                      d.image,
+                     d.categoryId,
                      categoryName = _context.Categories
                         .Where(x => x.id == d.categoryId)
                         .Select(s => s.name)
@@ -176,6 +178,7 @@ namespace WebBanDoCongNghe.Controllers
                      d.quantity,
                      d.status,
                      d.image,
+                     d.categoryId,
                      categoryName = _context.Categories
                         .Where(x => x.id == d.categoryId)
                         .Select(s => s.name)
@@ -195,6 +198,7 @@ namespace WebBanDoCongNghe.Controllers
                     d.status,
                     d.image,
                     d.quantity,
+                    d.categoryId,
                     // Chỉ lấy giá trị chuỗi của categoryName
                     categoryName = _context.Categories
                         .Where(x => x.id == d.categoryId)
