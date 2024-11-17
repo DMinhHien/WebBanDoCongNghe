@@ -230,11 +230,22 @@
   {
     "ContainingType": "WebBanDoCongNghe.Controllers.CommentController",
     "Method": "getListUse",
-    "RelativePath": "Comment/getListUse",
+    "RelativePath": "Comment/getListUse/{productId}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "productId",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "productId",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   },
   {
