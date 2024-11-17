@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import{ useState } from 'react';
 
 
 // Định nghĩa kiểu cho sản phẩm
@@ -11,7 +11,8 @@ export interface Product {
   description: string;
   categoryId: string;
   status: string;
-  idShop: string
+  idShop: string;
+  categoryName: string
 }
 
 // Định nghĩa props cho ProductList
@@ -53,7 +54,7 @@ export default function ProductList({ products, editProduct,onSelectedProductsCh
       <div className="overflow-x-auto w-[75vw]">
         <table className="min-w-full border border-gray-300">
           <thead>
-            <tr className="bg-gray-100">
+            <tr style={{backgroundColor:"#FBFAF1"}}>
               <th className="border border-gray-300 p-2">
                 <input
                   type="checkbox"
@@ -63,6 +64,7 @@ export default function ProductList({ products, editProduct,onSelectedProductsCh
               </th>
               <th className="border border-gray-300 p-2 text-left">Tên sản phẩm</th>
               <th className="border border-gray-300 p-2 text-left">Đơn giá</th>
+              <th className="border border-gray-300 p-2 text-left">phân loại</th>
               <th className="border border-gray-300 p-2 text-left">Số lượng</th>
               <th className="border border-gray-300 p-2 text-left">Hình ảnh</th>
               <th className="border border-gray-300 p-2 text-left">Mô tả</th>
@@ -81,6 +83,7 @@ export default function ProductList({ products, editProduct,onSelectedProductsCh
                 </td>
                 <td className="border border-gray-300 p-2">{product.productName}</td>
                 <td className="border border-gray-300 p-2">{product.unitPrice} VNĐ</td>
+                <td className="border border-gray-300 p-2">{product.categoryName}</td>
                 <td className="border border-gray-300 p-2">{product.quantity}</td>
                 <td className="border border-gray-300 p-2">
                   <img src={product.image} alt={product.productName} className="w-20 h-20 object-contain" />

@@ -5,6 +5,8 @@ import { Order } from '../components/OrderList/OrderList';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { getListOrder } from '../services/OrderService';
+import { InputBase } from '@mui/material';
+import { Search } from '@mui/icons-material';
 export default function QuanLyDonHang() {
   const [orders, setOrders] = useState<Order[]>([])
   const idShop="123"
@@ -18,14 +20,16 @@ export default function QuanLyDonHang() {
     <DashboardNav/>
     <div className='mt-10 ml-10 w-[75vw]'>
       <div className='flex items-center space-x-3 w-3/4'>
-        <input
-          type="text"
-          placeholder="Tìm kiếm sản phẩm"
-          className="p-2 border border-black rounded-md w-1/3 mr-2"
-        />
-        <button>
-          <FontAwesomeIcon icon={faSearch} />
-        </button>
+      <InputBase
+            placeholder="Search"
+            startAdornment={<Search style={{ color: "#999" }} />}
+            style={{
+              backgroundColor: "#F0ECE1",
+              padding: "5px 10px",
+              borderRadius: "20px",
+              width: "500px"
+            }}
+          />
       </div>
         <div className='mt-10'>
         <OrderList

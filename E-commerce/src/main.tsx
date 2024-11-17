@@ -4,6 +4,7 @@ import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import { RouterProvider } from "react-router-dom";
 import router from "./route.tsx";
 import { AuthProvider } from './components/Auth/AuthContext.tsx';
+import './main.css'
 
 const theme = createTheme({
   palette: {

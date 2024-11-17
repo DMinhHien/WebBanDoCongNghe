@@ -1,4 +1,3 @@
-import React from 'react';
 import { Product } from '../../data/productdetail';
 
 export interface Order {
@@ -19,7 +18,7 @@ export default function OrderList({orders}:OrderListProps) {
       <h2 className="text-xl font-bold mb-2 ">Danh sách Đơn hàng</h2>
       <table className="min-w-full border-gray-300 bg-white ">
         <thead>
-          <tr className="text-left bg-gray-200 text-gray-800">
+          <tr style={{backgroundColor:"#FBFAF1"}} className="text-left ">
             <th className="border border-gray-300 py-2 px-4 border-b">Mã đơn hàng</th>
             <th className="border border-gray-300 py-2 px-4 border-b">Tên người mua</th>
             <th className="border border-gray-300 py-2 px-4 border-b">Tổng tiền</th>

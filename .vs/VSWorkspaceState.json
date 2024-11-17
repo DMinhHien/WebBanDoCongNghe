@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\WebBanDoCongNghe"
+    "\\WebBanDoCongNghe",
+    "\\WebBanDoCongNghe\\Controllers"
   ],
-  "SelectedNode": "\\WebBanDoCongNghe\\appsettings.json",
+  "SelectedNode": "\\WebBanDoCongNghe\\Controllers\\ProductController.cs",
   "PreviewInSolutionExplorer": false
 }

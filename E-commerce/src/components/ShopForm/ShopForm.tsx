@@ -25,7 +25,7 @@ export default function ShopForm() {
             />
           </div>
           <div>
-            <button className="bg-black text-white px-6 py-2 rounded-md mt-6 hover:bg-gray-800 transition-colors duration-200 w-full md:w-auto">
+            <button style={{backgroundColor:"#FBFAF1"}} className="border px-6 py-2 rounded-md mt-6 hover:bg-gray-800 transition-colors duration-200 w-full md:w-auto">
               Cập nhật
             </button>
           </div>

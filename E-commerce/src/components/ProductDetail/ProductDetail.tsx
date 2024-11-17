@@ -10,7 +10,7 @@ interface Product {
     quantity: number;
     status: string;
     description: string;  
-   // imageUrl: string;
+    imageUrl: string;
 }
 const ProductDetail: React.FC =() => {
   const { id } = useParams<{ id: string }>(); // Lấy id từ URL
@@ -44,6 +44,7 @@ return (
         <p className={styles.quantity}>{product.quantity}</p>
         <p className={styles.status}>{product.status}</p>
         <p className={styles.description}>{product.description}</p>
+        <img src={product.imageUrl} alt={product.productName}/>
       </>
     )}
   </div>
