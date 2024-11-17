@@ -69,6 +69,12 @@ namespace WebBanDoCongNghe.Controllers
             var model = _context.Shops.SingleOrDefault(x=>x.id == id);
             return Json(model);
         }
+        [HttpGet("getElementByUserId/{id}")]
+        public IActionResult getElementByUserId([FromRoute] string id)
+        {
+            var model = _context.Shops.SingleOrDefault(x => x.userId == id);
+            return Json(model);
+        }
         [HttpGet("getListUseSearch")]
         public IActionResult getListUseSearch([FromBody] JObject json)
         {

@@ -62,10 +62,9 @@ namespace WebBanDoCongNghe.Controllers
             return Json(result);
 
         }
-        [HttpGet("getListUse")]
-        public IActionResult getListUse()
+        [HttpGet("getListUse/{userId}")]
+        public IActionResult getListUse([FromBody] string userId)
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var result = _context.Carts
                 .Where(x => x.userId == userId)
                 .Select(cart => new
