@@ -25,6 +25,7 @@ namespace WebBanDoCongNghe.Controllers
         {
             var model = JsonConvert.DeserializeObject<Shop>(json.GetValue("data").ToString());
             model.id = Guid.NewGuid().ToString().Substring(0, 10);
+            model.rating = 0;
             _context.Shops.Add(model);
             _context.SaveChanges();
             return Json(model);
