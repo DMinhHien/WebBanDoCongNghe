@@ -9,8 +9,16 @@ import {
   deleteProduct,
   getListProduct,
 } from "../services/productDetailService";
+import { Category } from "./ChinhSuaSanPham";
+import { getListCategories } from "../services/categoryService";
 
 export default function QuanLySP() {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [categories, setCategories] = useState<Category[]>([
+    {id:"1",name:"so 1"},
+    {id:"2",name:"so 2"},
+    {id:"3",name:"so 3"}
+  ])
   const [products, setProducts] = useState<Product[]>([]);
   const [selectedProducts, setSelectedProducts] = useState<string[]>([]);
   const handleSelectedProductsChange = (selected: string[]) => {
@@ -20,6 +28,9 @@ export default function QuanLySP() {
     getListProduct().then((data) => {
       setProducts(data);
     });
+    // getListCategories().then((data)=>{
+    //   setCategories(data);
+    // })
   }, []);
 
   const navigation = useNavigate();
@@ -42,6 +53,10 @@ export default function QuanLySP() {
     });
   };
 
+  const filteredProducts = products.filter((product) =>
+    product.productName.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className="flex w-screen space-x-6">
       <DashboardNav />
@@ -49,6 +64,9 @@ export default function QuanLySP() {
         <div className="flex items-center justify-between mt-5 mb-7 w-[75vw] ">
           <div className="flex items-center space-x-3 w-3/4">
             <InputBase
+              onChange={(e)=>{
+                setSearchTerm(e.target.value)
+              }}
               placeholder="Search"
               startAdornment={<Search style={{ color: "#999" }} />}
               style={{
@@ -77,9 +95,10 @@ export default function QuanLySP() {
           </div>
         </div>
         <ProductList
-          products={products}
+          products={filteredProducts}
           editProduct={editHandle}
           onSelectedProductsChange={handleSelectedProductsChange}
+          categories={categories}  
         />
       </div>
     </div>

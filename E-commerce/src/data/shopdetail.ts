@@ -4,4 +4,5 @@ export interface ShopDetails {
     name: string;
     address: string;
     rating: number;
+    image: string
   }

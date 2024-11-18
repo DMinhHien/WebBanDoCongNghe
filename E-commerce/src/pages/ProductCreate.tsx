@@ -13,7 +13,11 @@ export default function ProductCreate() {
     "đã sử dụng (90%)",
     "đã sử dụng(80%)",
   ];
-  const [categories, setCategories] = useState<any[]>([]);
+  const [categories, setCategories] = useState<any[]>([
+    {id:"1",name:"so 1"},
+    {id:"2",name:"so 2"},
+    {id:"3",name:"so 3"}  
+  ]);
   const [productData, setProductData] = useState<Product>({
     id: '',
     productName: '',
@@ -23,13 +27,14 @@ export default function ProductCreate() {
     description: '',
     categoryId: '',
     status: '',
-    idShop:''
+    idShop:'',
+    categoryName:""
   });
-  useEffect(() => {
-    getListCategories().then((data) => {
-      setCategories(data);
-    });
-  }, []);
+  // useEffect(() => {
+  //   getListCategories().then((data) => {
+  //     setCategories(data);
+  //   });
+  // }, []);
   const navigation=useNavigate();
   const cancelHandle=()=>{
     navigation("/quanlyshop")
@@ -104,6 +109,7 @@ export default function ProductCreate() {
               onChange={handleChange}
               className="px-4 py-2 border border-gray-300 w-full rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-700"
             >
+              <option value="" disabled>---Chọn phân loại---</option>
               {categories.map((category) => (
                 <option key={category.id} value={category.id}>
                   {category.name}

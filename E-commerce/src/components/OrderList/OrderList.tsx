@@ -1,7 +1,7 @@
 import { Product } from '../../data/productdetail';
 
 export interface Order {
-  id: number;
+  id: string;
   userName: string;
   total: number;
   ListSP: Product[];

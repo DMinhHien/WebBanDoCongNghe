@@ -19,9 +19,9 @@ export interface Category {
   name: string;
 }
 
-export const getCategoryIdByName = (name: string, categories: Category[]): string | null => {
-  const category = categories.find((cat) => cat.name === name);
-  return category ? category.id : null; // Trả về id nếu tìm thấy, null nếu không
+export const getCategoryNamebyId = (id: string, categories: Category[]): string | null => {
+  const category = categories.find((cat) => cat.id === id);
+  return category ? category.name : null;
 };
 export default function ChinhSuaSP() {
   const { id } = useParams<{ id: string }>();
@@ -40,6 +40,7 @@ export default function ChinhSuaSP() {
     categoryId: "",
     status: "",
     idShop: "",
+    categoryName:""
   });
   const navigation = useNavigate();
 
@@ -149,6 +150,7 @@ export default function ChinhSuaSP() {
               onChange={handleChange}
               className="px-4 py-2 border border-gray-300 w-full rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-700"
             >
+              <option value="" disabled>---Chọn phân loại---</option>
               {categories.map((category) => (
                 <option key={category.id} value={category.id}>
                   {category.name}

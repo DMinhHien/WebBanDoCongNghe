@@ -12,7 +12,7 @@ export default function DashboardNav() {
         Quản lý đơn hàng
       </Link>
       <Link to="/quanlyshop/QuanLyThongTin" className="py-3 px-6 rounded-lg  hover:bg-black hover:bg-opacity-5 text-lg transition-colors duration-200">
-        Thay đổi thông tin
+        Thông tin cửa hàng
       </Link>
     </nav>
   )
