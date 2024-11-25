@@ -61,10 +61,10 @@ namespace WebBanDoCongNghe.Controllers
             return Json(result);
 
         }
-        [HttpGet("getListUse")]
-        public IActionResult getListUse()
+        [HttpGet("getListUse/{productId}")]
+        public IActionResult getListUse([FromBody] string productId)
         {
-            var result = _context.Comments.AsQueryable().
+            var result = _context.Comments.AsQueryable().Where(x=>x.productId == productId).
                  Select(d => new
                  {
                      id = d.id,

@@ -62,39 +62,47 @@ namespace WebBanDoCongNghe.Controllers
             return Json(result);
 
         }
-        [HttpGet("getListUse")]
-        public IActionResult getListUse()
+        [HttpGet("getListUse/{userId}")]
+        public IActionResult getListUse([FromBody] string userId)
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var result = _context.Carts
                 .Where(x => x.userId == userId)
                 .Select(cart => new
                 {
                     cart.id,
                     cart.userId,
-                    CartDetails = _context.CartDetails
+                    Shops = _context.CartDetails
                         .Where(rd => rd.idCart == cart.id)
-                        .Select(rd => new
+                        .GroupBy(rd => _context.Products
+                                            .Where(p => p.id == rd.idProduct)
+                                            .Select(p => p.idShop)
+                                            .FirstOrDefault())
+                        .Select(group => new
                         {
-                            rd.id,
-                            rd.idProduct,
-                            rd.quantity,
-                            Product = _context.Products.Where(p => p.id == rd.idProduct)
-                            .Select(p => new
+                            ShopId = group.Key,
+                            ShopInfo = _context.Shops
+                                .Where(s => s.id == group.Key)
+                                .Select(s => new
+                                {
+                                    s.name,
+                                    s.image
+                                }).FirstOrDefault(),
+                            Products = group.Select(rd => new
                             {
-                                p.id,
-                                p.productName,
-                                p.unitPrice,
-                                p.idShop,
-                                Shop=_context.Shops.Where(s => s.id == p.idShop)
-                                 .Select(p => new
-                                 {
-                                     p.name,
-                                     p.image
-                                 }).FirstOrDefault()
-                            }).FirstOrDefault()
+                                rd.id,
+                                rd.idProduct,
+                                rd.quantity,
+                                ProductInfo = _context.Products
+                                    .Where(p => p.id == rd.idProduct)
+                                    .Select(p => new
+                                    {
+                                        p.productName,
+                                        p.unitPrice
+                                    }).FirstOrDefault()
+                            }).ToList()
                         }).ToList()
                 }).ToList();
+
             return Json(result);
         }
         [HttpPost("addCartProduct")]

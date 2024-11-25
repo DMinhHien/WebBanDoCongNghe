@@ -25,6 +25,7 @@ namespace WebBanDoCongNghe.Controllers
         {
             var model = JsonConvert.DeserializeObject<Shop>(json.GetValue("data").ToString());
             model.id = Guid.NewGuid().ToString().Substring(0, 10);
+            model.rating = 0;
             _context.Shops.Add(model);
             _context.SaveChanges();
             return Json(model);
@@ -67,6 +68,12 @@ namespace WebBanDoCongNghe.Controllers
         public IActionResult getElementById([FromRoute] string id)
         {
             var model = _context.Shops.SingleOrDefault(x=>x.id == id);
+            return Json(model);
+        }
+        [HttpGet("getElementByUserId/{id}")]
+        public IActionResult getElementByUserId([FromRoute] string id)
+        {
+            var model = _context.Shops.SingleOrDefault(x => x.userId == id);
             return Json(model);
         }
         [HttpGet("getListUseSearch")]
