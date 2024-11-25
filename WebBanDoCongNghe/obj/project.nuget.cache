@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "lMmxvgc6AXjlWCQjzFj1odg6/jT8SJGRv6f9XkjQVkYzPwUlyjxE/jgsldmjMXhVQhWbFPMDBS5I+z/byAqGow==",
+  "dgSpecHash": "53gXop6X8Z8E6z1W+wLMIqNSPfouklTxv8sKqSBUP/twubDKOW0O7rzZxLjQa5E2gX3J3cPlN+rGL6oktuGR9Q==",
   "success": true,
-  "projectFilePath": "D:\\.Net\\WebBanDoCongNghe\\WebBanDoCongNghe\\WebBanDoCongNghe.csproj",
+  "projectFilePath": "D:\\Code\\Đồ án\\WebBanDoCongNghe\\WebBanDoCongNghe\\WebBanDoCongNghe.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",
