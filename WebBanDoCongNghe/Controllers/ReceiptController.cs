@@ -58,6 +58,14 @@ namespace WebBanDoCongNghe.Controllers
         {
             var id = (json.GetValue("id").ToString());
             var result = _context.Receipts.SingleOrDefault(p => p.id == id);
+            var detailList=_context.ReceiptDetails.Where(x=>x.idReceipt==id).ToList();
+            if (detailList != null)
+            {
+                foreach (var detail in detailList)
+                {
+                    _context.ReceiptDetails.Remove(detail);
+                }
+            }
             _context.Receipts.Remove(result);
             _context.SaveChanges();
             return Json(result);

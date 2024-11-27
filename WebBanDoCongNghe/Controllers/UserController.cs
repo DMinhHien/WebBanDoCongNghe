@@ -62,6 +62,7 @@ namespace WebBanDoCongNghe.Controllers
 
             return Json(user);
         }
+        [Authorize(Roles="Admin")]
         [HttpGet("getListUse")]
         public async Task<IActionResult> getListUseAsync()
         {
@@ -177,10 +178,10 @@ namespace WebBanDoCongNghe.Controllers
                     var result = await _signInManager.PasswordSignInAsync(user.UserName, model.Password, isPersistent: false, lockoutOnFailure: false);
                     if (result.Succeeded)
                     {
-                       
+                        var userRole = await _userManager.GetRolesAsync(user);
                         var response = new
                         {
-                            Token = _tokenService.CreateToken(user),
+                            Token = _tokenService.CreateToken(user,userRole),
                             User = new
                             {
                                 user.UserName,
