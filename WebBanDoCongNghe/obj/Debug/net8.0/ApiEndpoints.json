@@ -726,7 +726,7 @@
   },
   {
     "ContainingType": "WebBanDoCongNghe.Controllers.UserController",
-    "Method": "getListUseAsync",
+    "Method": "getListUse",
     "RelativePath": "User/getListUse",
     "HttpMethod": "GET",
     "IsController": true,
