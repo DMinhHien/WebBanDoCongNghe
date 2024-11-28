@@ -487,6 +487,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "WebBanDoCongNghe.Controllers.ReceiptController",
+    "Method": "getSumProduct",
+    "RelativePath": "Receipt/getSumProduct",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "json",
+        "Type": "Newtonsoft.Json.Linq.JObject",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "WebBanDoCongNghe.Controllers.SearchController",
     "Method": "Create",
     "RelativePath": "Search/create",
