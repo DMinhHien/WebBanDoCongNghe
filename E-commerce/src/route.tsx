@@ -16,6 +16,9 @@ import ChinhSuaSP from "./pages/ChinhSuaSanPham";
 import QuanLyDonHang from "./pages/QuanLyDonHang";
 import QuanLyThongTin from "./pages/QuanLyThongTin";
 import ChinhSuaShop from "./pages/ChinhSuaShop"
+import QuanLyCategories from "./pages/QuanLyCategories";
+import QuanLyUser from "./pages/QuanLyUser";
+import QuanLyShop from "./pages/QuanLyShop";
 const router = createBrowserRouter([
     {
       path: "/",
@@ -102,6 +105,24 @@ const router = createBrowserRouter([
       element: <Layout />,
       errorElement: <ErrorPage />,
       children: [{ index: true, element: <ChinhSuaShop /> }],
+    },
+    {
+      path: "/admin",
+      element: <Layout />,
+      errorElement: <ErrorPage />,
+      children: [{ index: true, element: <QuanLyCategories /> }],
+    },
+    {
+      path: "/admin/QuanLyUser",
+      element: <Layout />,
+      errorElement: <ErrorPage />,
+      children: [{ index: true, element: <QuanLyUser /> }],
+    },
+    {
+      path: "/admin/QuanLyShop",
+      element: <Layout />,
+      errorElement: <ErrorPage />,
+      children: [{ index: true, element: <QuanLyShop /> }],
     },
   ]);
   
