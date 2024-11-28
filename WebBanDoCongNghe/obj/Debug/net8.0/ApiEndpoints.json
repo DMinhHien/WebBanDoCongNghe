@@ -91,11 +91,6 @@
         "Name": "userId",
         "Type": "System.String",
         "IsRequired": true
-      },
-      {
-        "Name": "userId",
-        "Type": "",
-        "IsRequired": true
       }
     ],
     "ReturnTypes": []

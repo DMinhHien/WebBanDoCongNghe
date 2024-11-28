@@ -62,8 +62,8 @@ namespace WebBanDoCongNghe.Controllers
 
             return Json(user);
         }
-        [Authorize(Roles="Admin")]
-        [HttpGet("getListUse")]
+        //[Authorize(Roles="Admin")]
+        //[HttpGet("getListUse")]
         public async Task<IActionResult> getListUseAsync()
         {
             var users = _context.Users.ToList(); // Lấy tất cả người dùng
@@ -76,6 +76,8 @@ namespace WebBanDoCongNghe.Controllers
                 {
                     id = user.Id,
                     name = user.UserName,
+                    birthdate=user.birthDate,
+                    address=user.Address,
                     role = roles.Any() ? roles : new List<string>() // Trả về danh sách rỗng nếu không có vai trò
                 });
             }

@@ -63,7 +63,7 @@ namespace WebBanDoCongNghe.Controllers
 
         }
         [HttpGet("getListUse/{userId}")]
-        public IActionResult getListUse([FromBody] string userId)
+        public IActionResult getListUse([FromRoute] string userId)
         {
             var result = _context.Carts
                 .Where(x => x.userId == userId)

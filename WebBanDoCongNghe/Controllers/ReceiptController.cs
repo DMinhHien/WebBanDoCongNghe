@@ -71,6 +71,18 @@ namespace WebBanDoCongNghe.Controllers
             return Json(result);
 
         }
+        [HttpGet("getSumProduct")]
+        public IActionResult getSumProduct([FromBody] JObject json) 
+        {
+            var shopId = json.GetValue("id").ToString();
+            var result = _context.ReceiptDetails.AsQueryable().Where(x => x.id == shopId);
+            int sum = 0;
+            foreach(var item in result)
+            {
+                sum += item.quantity;
+            }
+            return Json(sum);
+        }
         [HttpGet("getListUse")]
         public IActionResult getListUse()
         {
