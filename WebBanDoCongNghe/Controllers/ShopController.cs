@@ -59,11 +59,11 @@ namespace WebBanDoCongNghe.Controllers
             var result = _context.Shops.AsQueryable().
                  Select(d => new
                  {
-                     id = d.id,
-                     name = d.name,
-                     UserName=_context.Users.AsQueryable().Where(x=>x.Id==d.userId).Select(x=>x.UserName),
-                     address= _context.Users.AsQueryable().Where(x => x.Id == d.userId).Select(x => x.Address),
-                     rating =d.rating,
+                     d.id,
+                     d.name,
+                     UserName=_context.Users.Where(x=>x.Id==d.userId).Select(x=>x.UserName).FirstOrDefault(),
+                     address= _context.Users.Where(x => x.Id == d.userId).Select(x => x.Address).FirstOrDefault(),
+                     d.rating,
                  }).ToList();
             return Json(result);
         }
