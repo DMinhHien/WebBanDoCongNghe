@@ -75,7 +75,7 @@ namespace WebBanDoCongNghe.Controllers
         public IActionResult getSumProduct([FromBody] JObject json) 
         {
             var shopId = json.GetValue("id").ToString();
-            var result = _context.ReceiptDetails.AsQueryable().Where(x => x.id == shopId);
+            var result = _context.ReceiptDetails.AsQueryable().Where(x => x.id == shopId).ToList();
             int sum = 0;
             foreach(var item in result)
             {
