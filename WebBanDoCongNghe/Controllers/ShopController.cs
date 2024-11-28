@@ -60,7 +60,9 @@ namespace WebBanDoCongNghe.Controllers
                  Select(d => new
                  {
                      id = d.id,
-                     name = d.name
+                     name = d.name,
+                     UserName=_context.Users.AsQueryable().Where(x=>x.Id==d.userId).FirstOrDefault(),
+                     rating=d.rating,
                  }).ToList();
             return Json(result);
         }

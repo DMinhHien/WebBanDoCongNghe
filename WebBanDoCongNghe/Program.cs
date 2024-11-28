@@ -50,7 +50,7 @@ builder.Services.AddDbContext<ProductDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
-builder.Services.AddIdentityCore<UserManage>()
+builder.Services.AddIdentityCore<UserManage>().AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ProductDbContext>()
     .AddApiEndpoints();
 builder.Services.AddAuthentication(options => {
@@ -77,7 +77,16 @@ builder.Services.AddAuthentication(options => {
     }); ;
 
 var app = builder.Build();
-
+using (var scope = app.Services.CreateScope())
+{
+    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+    var roles = new[] { "Admin", "User" };
+    foreach (var role in roles)
+    {
+        if (!await roleManager.RoleExistsAsync(role))
+            await roleManager.CreateAsync(new IdentityRole(role));
+    }
+}
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

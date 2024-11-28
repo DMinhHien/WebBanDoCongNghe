@@ -91,11 +91,6 @@
         "Name": "userId",
         "Type": "System.String",
         "IsRequired": true
-      },
-      {
-        "Name": "userId",
-        "Type": "",
-        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -230,11 +225,22 @@
   {
     "ContainingType": "WebBanDoCongNghe.Controllers.CommentController",
     "Method": "getListUse",
-    "RelativePath": "Comment/getListUse",
+    "RelativePath": "Comment/getListUse/{productId}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "productId",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "productId",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   },
   {
@@ -652,6 +658,22 @@
   },
   {
     "ContainingType": "WebBanDoCongNghe.Controllers.UserController",
+    "Method": "AddRole",
+    "RelativePath": "User/addRole",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "json",
+        "Type": "Newtonsoft.Json.Linq.JObject",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBanDoCongNghe.Controllers.UserController",
     "Method": "checkLogin",
     "RelativePath": "User/checkLogin",
     "HttpMethod": "GET",
@@ -688,7 +710,7 @@
   },
   {
     "ContainingType": "WebBanDoCongNghe.Controllers.UserController",
-    "Method": "getListUse",
+    "Method": "getListUseAsync",
     "RelativePath": "User/getListUse",
     "HttpMethod": "GET",
     "IsController": true,

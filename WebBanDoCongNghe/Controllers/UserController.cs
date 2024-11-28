@@ -25,28 +25,63 @@ namespace WebBanDoCongNghe.Controllers
         private readonly ProductDbContext _context;
         private readonly UserManager<UserManage> _userManager;
         private readonly SignInManager<UserManage> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly ITokenService _tokenService;
         // GET: ProductController
         public UserController(ProductDbContext context, UserManager<UserManage> userManager,
-            SignInManager<UserManage> signInManager, ITokenService tokenService)
+            SignInManager<UserManage> signInManager, ITokenService tokenService, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _context = context;
+            _roleManager = roleManager;
             _signInManager = signInManager;
             _tokenService = tokenService;
+            _roleManager = roleManager;
         }
 
         // POST: ProductController/Create
-
-        [HttpGet("getListUse")]
-        public IActionResult getListUse()
+        [HttpPost("addRole")]
+        public async Task<IActionResult> AddRole([FromBody] JObject json)
         {
-            var result = _context.Users.AsQueryable().
-                 Select(d => new
-                 {
-                     id = d.Id,
-                     name = d.UserName
-                 }).ToList();
+            var userId = json.GetValue("userId")?.ToString();
+            var roleName = json.GetValue("roleName")?.ToString();
+
+            if (userId == null || roleName == null)
+                return BadRequest("User ID or role name is missing.");
+
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+                return NotFound("User not found.");
+
+            if (!await _roleManager.RoleExistsAsync(roleName))
+                return NotFound("Role not found.");
+
+            var result = await _userManager.AddToRoleAsync(user, roleName);
+            if (!result.Succeeded)
+                return BadRequest(result.Errors);
+
+            return Json(user);
+        }
+        //[Authorize(Roles="Admin")]
+        //[HttpGet("getListUse")]
+        public async Task<IActionResult> getListUseAsync()
+        {
+            var users = _context.Users.ToList(); // Lấy tất cả người dùng
+            var result = new List<object>();
+
+            foreach (var user in users)
+            {
+                var roles = await _userManager.GetRolesAsync(user); // Lấy vai trò
+                result.Add(new
+                {
+                    id = user.Id,
+                    name = user.UserName,
+                    birthdate=user.birthDate,
+                    address=user.Address,
+                    role = roles.Any() ? roles : new List<string>() // Trả về danh sách rỗng nếu không có vai trò
+                });
+            }
+
             return Json(result);
         }
         [HttpGet("checkLogin")]
@@ -145,10 +180,10 @@ namespace WebBanDoCongNghe.Controllers
                     var result = await _signInManager.PasswordSignInAsync(user.UserName, model.Password, isPersistent: false, lockoutOnFailure: false);
                     if (result.Succeeded)
                     {
-                       
+                        var userRole = await _userManager.GetRolesAsync(user);
                         var response = new
                         {
-                            Token = _tokenService.CreateToken(user),
+                            Token = _tokenService.CreateToken(user,userRole),
                             User = new
                             {
                                 user.UserName,
