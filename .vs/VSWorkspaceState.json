@@ -2,8 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\WebBanDoCongNghe",
-    "\\WebBanDoCongNghe\\Controllers"
+    "\\WebBanDoCongNghe\\Controllers",
+    "\\WebBanDoCongNghe\\Models"
   ],
-  "SelectedNode": "\\WebBanDoCongNghe\\appsettings.json",
+  "SelectedNode": "\\WebBanDoCongNghe\\Models\\Receipt.cs",
   "PreviewInSolutionExplorer": false
 }
