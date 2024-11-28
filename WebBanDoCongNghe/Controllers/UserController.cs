@@ -63,7 +63,7 @@ namespace WebBanDoCongNghe.Controllers
             return Json(user);
         }
         //[Authorize(Roles="Admin")]
-        //[HttpGet("getListUse")]
+        [HttpGet("getListUse")]
         public async Task<IActionResult> getListUseAsync()
         {
             var users = _context.Users.ToList(); // Lấy tất cả người dùng
