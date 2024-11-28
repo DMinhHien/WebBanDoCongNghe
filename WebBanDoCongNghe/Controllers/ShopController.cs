@@ -61,8 +61,9 @@ namespace WebBanDoCongNghe.Controllers
                  {
                      id = d.id,
                      name = d.name,
-                     UserName=_context.Users.AsQueryable().Where(x=>x.Id==d.userId).FirstOrDefault(),
-                     rating=d.rating,
+                     UserName=_context.Users.AsQueryable().Where(x=>x.Id==d.userId).Select(x=>x.UserName),
+                     address= _context.Users.AsQueryable().Where(x => x.Id == d.userId).Select(x => x.Address),
+                     rating =d.rating,
                  }).ToList();
             return Json(result);
         }
