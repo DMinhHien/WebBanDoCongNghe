@@ -194,7 +194,9 @@ namespace WebBanDoCongNghe.Controllers
                             {
                                 user.UserName,
                                 user.Email,
-                                user.Id
+                                user.Id,
+                                user.birthDate,
+                                user.Address,
                             }
                         };
 
