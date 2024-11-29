@@ -14,5 +14,9 @@ namespace WebBanDoCongNghe.DTO
 
         [Required]
         public string AccountName { get; set; }
+        [Required]
+        public DateTime BirthDate { get; set; }
+        [Required]
+        public string Address { get; set; }
     }
 }

@@ -135,7 +135,10 @@ namespace WebBanDoCongNghe.Controllers
                 {
                     UserName = model.Email,   // Hoặc có thể để là một giá trị khác nếu không muốn dùng Email làm UserName
                     Email = model.Email,
-                    AccountName = model.AccountName
+                    AccountName = model.AccountName,
+                    birthDate=model.BirthDate,
+                    Address = model.Address,
+
                 };
 
                 var result = await _userManager.CreateAsync(user, model.Password);
@@ -149,7 +152,9 @@ namespace WebBanDoCongNghe.Controllers
                         {
                             user.UserName,
                             user.Email,
-                            user.Id
+                            user.Id,
+                            model.BirthDate,
+                            model.Address,
                         }  
                 };
                     return Ok(response);
@@ -205,6 +210,52 @@ namespace WebBanDoCongNghe.Controllers
             }
 
             return BadRequest(ModelState);
+        }
+        [HttpDelete("Delete/{id}")]
+        public async Task<IActionResult> Delete([FromRoute] string id)
+        {
+            // Tìm user theo ID
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound(new { message = "User not found" });
+            }
+
+            // Xóa user
+            var result = await _userManager.DeleteAsync(user);
+            if (!result.Succeeded)
+            {
+                return BadRequest(new { message = "Failed to delete user", errors = result.Errors });
+            }
+
+            return Ok(new { message = "User deleted successfully" });
+        }
+        [HttpPut("Edit/{id}")]
+        public async Task<IActionResult> EditUser([FromBody] JObject json)
+        {
+            // Tìm user theo ID
+            var model = JsonConvert.DeserializeObject<UserManage>(json.GetValue("data").ToString());
+            var id = model.Id;
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound(new { message = "User not found" });
+            }
+
+            // Cập nhật thông tin
+            user.UserName = model.UserName ?? user.UserName;
+            user.Email = model.Email ?? user.Email;
+            user.Address = model.Address ?? user.Address;
+            user.birthDate = model.birthDate ?? user.birthDate;
+
+            // Lưu thay đổi
+            var result = await _userManager.UpdateAsync(user);
+            if (!result.Succeeded)
+            {
+                return BadRequest(new { message = "Failed to update user", errors = result.Errors });
+            }
+
+            return Ok(new { message = "User updated successfully", user });
         }
     }
 }

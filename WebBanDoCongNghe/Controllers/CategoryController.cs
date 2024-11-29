@@ -23,6 +23,7 @@ namespace WebBanDoCongNghe.Controllers
         public ActionResult Create([FromBody] JObject json)
         {
             var model = JsonConvert.DeserializeObject<Category>(json.GetValue("data").ToString());
+            model.id = Guid.NewGuid().ToString().Substring(0, 10);
             _context.Categories.Add(model);
             _context.SaveChanges();
             return Json(model);
