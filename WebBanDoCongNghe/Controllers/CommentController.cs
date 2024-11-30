@@ -21,6 +21,7 @@ namespace WebBanDoCongNghe.Controllers
         }
 
         // POST: ProductController/Create
+        [Authorize]
         [HttpPost("create")]
         public ActionResult Create([FromBody] JObject json)
         {
@@ -33,6 +34,7 @@ namespace WebBanDoCongNghe.Controllers
 
 
         // POST: CommentController/Edit/5
+        [Authorize]
         [HttpPost("edit")]
         public ActionResult Edit([FromBody] JObject json)
         {
@@ -43,6 +45,7 @@ namespace WebBanDoCongNghe.Controllers
         }
 
         // POST: CommentController/Delete/5
+        [Authorize]
         [HttpPost("delete")]
         public ActionResult Delete([FromBody] JObject json)
         {
@@ -74,6 +77,7 @@ namespace WebBanDoCongNghe.Controllers
                  }).ToList();
             return Json(result);
         }
+        [Authorize]
         [HttpPost("likeComment")]
         public IActionResult likeComment([FromBody] JObject json)
         {
@@ -82,6 +86,7 @@ namespace WebBanDoCongNghe.Controllers
             _context.SaveChanges();
             return Json(model);
         }
+        [Authorize]
         [HttpPost("deleteLike/{id}")]
         public ActionResult deleteLike([FromBody] JObject json)
         {

@@ -62,7 +62,7 @@ namespace WebBanDoCongNghe.Controllers
 
             return Json(user);
         }
-        //[Authorize(Roles="Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpGet("getListUse")]
         public async Task<IActionResult> getListUse()
         {
@@ -85,12 +85,14 @@ namespace WebBanDoCongNghe.Controllers
 
             return Json(result);
         }
+        [Authorize]
         [HttpGet("checkLogin")]
         public IActionResult checkLogin()
         {
             var result = User.Identity.IsAuthenticated;
             return Json(result);
         }
+        [Authorize]
         [HttpPost("logout")]
         public async Task<IActionResult> logout()
         {
@@ -100,7 +102,15 @@ namespace WebBanDoCongNghe.Controllers
         [HttpGet("getElementById/{id}")]
         public IActionResult getElementById([FromRoute] string id)
         {
-            var model = _context.Users.AsQueryable().FirstOrDefault(m => m.Id == id); ;
+            var model = _context.Users.AsQueryable().Where(m => m.Id == id).
+                Select(d=>new
+                {
+                    d.Id,
+                    d.AccountName,
+                    d.Email,
+                    d.birthDate,
+                    d.Address,
+                });
             if (model == null)
             {
                 return NotFound();
@@ -213,6 +223,7 @@ namespace WebBanDoCongNghe.Controllers
 
             return BadRequest(ModelState);
         }
+        [Authorize]
         [HttpDelete("Delete/{id}")]
         public async Task<IActionResult> Delete([FromRoute] string id)
         {
@@ -232,6 +243,7 @@ namespace WebBanDoCongNghe.Controllers
 
             return Ok(new { message = "User deleted successfully" });
         }
+        [Authorize]
         [HttpPut("Edit/{id}")]
         public async Task<IActionResult> EditUser([FromBody] JObject json)
         {

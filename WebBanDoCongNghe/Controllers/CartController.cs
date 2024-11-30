@@ -21,7 +21,7 @@ namespace WebBanDoCongNghe.Controllers
             _context = context;
         }
 
-     
+        [Authorize]
         [HttpPost("create")]
         public ActionResult Create([FromBody] JObject json)
         {
@@ -32,8 +32,7 @@ namespace WebBanDoCongNghe.Controllers
             return Json(model);
         }
 
-
-
+        [Authorize]
         [HttpPost("edit")]
         public ActionResult Edit([FromBody] JObject json)
         {
@@ -42,6 +41,7 @@ namespace WebBanDoCongNghe.Controllers
             _context.SaveChanges();
             return Json(model);
         }
+        [Authorize]
         [HttpPost("editCartDetail")]
         public ActionResult EditCartDetail([FromBody] JObject json)
         {
@@ -51,7 +51,7 @@ namespace WebBanDoCongNghe.Controllers
             return Json(model);
         }
 
-
+        [Authorize]
         [HttpPost("delete")]
         public ActionResult Delete([FromBody] JObject json)
         {
@@ -62,6 +62,7 @@ namespace WebBanDoCongNghe.Controllers
             return Json(result);
 
         }
+        [Authorize]
         [HttpGet("getListUse/{userId}")]
         public IActionResult getListUse([FromRoute] string userId)
         {
@@ -105,6 +106,7 @@ namespace WebBanDoCongNghe.Controllers
 
             return Json(result);
         }
+        [Authorize]
         [HttpPost("addCartProduct")]
         public IActionResult addCartProduct([FromBody] JObject json)
         {

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebBanDoCongNghe.Controllers
 {
@@ -19,6 +20,7 @@ namespace WebBanDoCongNghe.Controllers
         }
 
         // POST: ProductController/Create
+        [Authorize(Roles = "Admin")]
         [HttpPost("create")]
         public ActionResult Create([FromBody] JObject json)
         {
@@ -31,6 +33,7 @@ namespace WebBanDoCongNghe.Controllers
 
 
         // POST: CategoryController/Edit/5
+        [Authorize(Roles = "Admin")]
         [HttpPost("edit")]
         public ActionResult Edit([FromBody] JObject json)
         {
@@ -41,6 +44,7 @@ namespace WebBanDoCongNghe.Controllers
         }
 
         // POST: CategoryController/Delete/5
+        [Authorize(Roles = "Admin")]
         [HttpPost("delete")]
         public ActionResult Delete([FromBody] JObject json)
         {

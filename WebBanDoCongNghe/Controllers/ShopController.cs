@@ -20,6 +20,7 @@ namespace WebBanDoCongNghe.Controllers
         }
 
         // POST: ProductController/Create
+        [Authorize]
         [HttpPost("create")]
         public ActionResult Create([FromBody] JObject json)
         {
@@ -33,6 +34,7 @@ namespace WebBanDoCongNghe.Controllers
 
 
         // POST: ShopController/Edit/5
+        [Authorize]
         [HttpPost("edit")]
         public ActionResult Edit([FromBody] JObject json)
         {
@@ -43,6 +45,7 @@ namespace WebBanDoCongNghe.Controllers
         }
 
         // POST: ShopController/Delete/5
+        [Authorize]
         [HttpPost("delete")]
         public ActionResult Delete([FromBody] JObject json)
         {
