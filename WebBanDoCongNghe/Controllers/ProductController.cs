@@ -20,7 +20,7 @@ namespace WebBanDoCongNghe.Controllers
             _context = context;
         }
 
-     
+        [Authorize]
         [HttpPost("create")]
         public ActionResult Create([FromBody] JObject json)
         {
@@ -32,7 +32,7 @@ namespace WebBanDoCongNghe.Controllers
         }
 
 
-
+        [Authorize]
         [HttpPost("edit")]
         public ActionResult Edit([FromBody] JObject json)
         {
@@ -42,7 +42,7 @@ namespace WebBanDoCongNghe.Controllers
             return Json(model);
         }
 
-
+        [Authorize]
         [HttpPost("delete")]
         public ActionResult Delete([FromBody] JObject json)
         {
