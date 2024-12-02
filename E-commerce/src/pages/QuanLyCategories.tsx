@@ -1,39 +1,71 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AdminNav from "../components/AdminNav";
 import { InputBase } from "@mui/material";
 import { Search } from "@mui/icons-material";
 import { Category } from "./ChinhSuaSanPham";
+import { getListCategories } from "../services/categoryService";
 
 export default function QuanLyCategories() {
-    const [categories,setCategories]=useState<Category[]>([])
-    const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-  // Hàm xử lý khi thay đổi checkbox của một sản phẩm
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+
   const handleCheckboxChange = (id: string) => {
-    if (!id) return; // Nếu không có id, bỏ qua
-  
+    if (!id) return;
+
     setSelectedCategories((prevSelected) => {
       const isSelected = prevSelected.includes(id);
-      const newSelected = isSelected
-        ? prevSelected.filter((categoryId) => categoryId !== id) // Bỏ chọn
-        : [...prevSelected, id]; // Thêm vào danh sách
-      return newSelected;
+      return isSelected
+        ? prevSelected.filter((categoryId) => categoryId !== id)
+        : [...prevSelected, id];
     });
   };
-
-  // Hàm xử lý khi chọn tất cả hoặc bỏ chọn tất cả
+  useEffect(() => {
+    getListCategories().then((data)=>{
+      setCategories(data);
+    })
+  }, []);
   const handleSelectAll = () => {
-    const newSelected = selectedCategories.length === categories.length
-      ? [] // Nếu đã chọn hết -> bỏ chọn tất cả
-      : categories.map((category) => category.id); // Nếu chưa chọn hết -> chọn tất cả
-  
-      setSelectedCategories(newSelected);
+    const newSelected =
+      selectedCategories.length === categories.length
+        ? []
+        : categories.map((category) => category.id);
+
+    setSelectedCategories(newSelected);
   };
+
   return (
-    <div className="flex w-screen space-x-6">
+    <div className="flex w-screen">
       <AdminNav />
-      <div className="w-[75vw] px-6">
-        <div className="flex items-center justify-between mt-5 mb-7 w-[50vw] ">
-          <div className="flex items-center space-x-3 w-2/4">
+      <div className="w-[50vw] px-6">
+        {/* Header Section */}
+        <div className="mt-8 mb-7 flex justify-between items-center">
+          {/* Input & Search */}
+          <div className="flex flex-col space-y-4 w-full">
+            <div className="flex w-full mb-12">
+              <InputBase
+                placeholder="Category name"
+                style={{
+                  backgroundColor: "#F0ECE1",
+                  padding: "5px 10px",
+                  borderRadius: "20px",
+                  width: "40%",
+                }}
+              />
+              <div className="flex  space-x-4 ml-auto">
+                <button
+                  style={{ backgroundColor: "#FBFAF1" }}
+                  className="border p-2 rounded-md w-[150px] text-center"
+                >
+                  Thêm Category
+                </button>
+                <button
+                  style={{ backgroundColor: "#FBFAF1" }}
+                  className="border p-2 rounded-md w-[150px] text-center"
+                >
+                  Xóa Category
+                </button>
+              </div>
+            </div>
             <InputBase
               placeholder="Search"
               startAdornment={<Search style={{ color: "#999" }} />}
@@ -41,44 +73,29 @@ export default function QuanLyCategories() {
                 backgroundColor: "#F0ECE1",
                 padding: "5px 10px",
                 borderRadius: "20px",
-                width: "500px",
+                width: "60%",
               }}
             />
           </div>
-          <div className="space-x-4 mt-2">
-            <button
-              style={{ backgroundColor: "#FBFAF1" }}
-              className="border  p-4 rounded-md"
-            >
-              Thêm Category
-            </button>
-            <button
-              style={{ backgroundColor: "#FBFAF1" }}
-              className="border  p-4 rounded-md"
-            >
-              Xóa Category
-            </button>
-          </div>
+
+          {/* Action Buttons */}
         </div>
-        <div>
-          <h2 className="text-xl font-bold mb-2 ">Danh sách Category</h2>
-          <div className="overflow-x-auto w-[30vw]">
-            <table className="min-w-full border border-gray-300">
+
+        {/* Category List */}
+        <div className="mt-8">
+          <h2 className="text-xl font-bold mb-4">Danh sách Category</h2>
+          <div className="overflow-x-auto">
+            <table className="min-w-[40%] border border-gray-300">
               <thead>
                 <tr style={{ backgroundColor: "#FBFAF1" }}>
-                  <th className="border border-gray-300 p-2">
+                  <th className="border border-gray-300 p-2 w-[15%] text-center">
                     <input
                       type="checkbox"
-                        checked={selectedCategories.length === categories.length}
-                        onChange={handleSelectAll}
+                      checked={selectedCategories.length === categories.length}
+                      onChange={handleSelectAll}
                     />
                   </th>
-                  <th className="border border-gray-300 p-2 text-left">
-                    ID
-                  </th>
-                  <th className="border border-gray-300 p-2 text-left">
-                    Tên
-                  </th>
+                  <th className="border border-gray-300 p-2 text-left">Tên</th>
                 </tr>
               </thead>
               <tbody>
@@ -92,10 +109,7 @@ export default function QuanLyCategories() {
                       />
                     </td>
                     <td className="border border-gray-300 p-2">
-                      {category.id}
-                    </td>
-                    <td className="border border-gray-300 p-2">
-                      {category.name} 
+                      {category.name}
                     </td>
                   </tr>
                 ))}

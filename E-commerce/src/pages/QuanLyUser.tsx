@@ -1,12 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AdminNav from "../components/AdminNav";
 import { InputBase } from "@mui/material";
 import { Search } from "@mui/icons-material";
 import { Category } from "./ChinhSuaSanPham";
 import { User } from "../data/User";
+import { getListUsers } from "../services/UserService";
 
 export default function QuanLyUser() {
     const [users,setUsers]=useState<User[]>([])
+    useEffect(()=>{
+      getListUsers().then((data)=>{
+        setUsers(data);
+      })
+    },[])
     const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
   // Hàm xử lý khi thay đổi checkbox của một sản phẩm
   const handleCheckboxChange = (id: string) => {
@@ -75,12 +81,6 @@ export default function QuanLyUser() {
                     />
                   </th>
                   <th className="border border-gray-300 p-2 text-left">
-                    ID
-                  </th>
-                  <th className="border border-gray-300 p-2 text-left">
-                    Tên người dùng
-                  </th>
-                  <th className="border border-gray-300 p-2 text-left">
                     Tên Tài khoản 
                   </th>
                   <th className="border border-gray-300 p-2 text-left">
@@ -88,6 +88,9 @@ export default function QuanLyUser() {
                   </th>
                   <th className="border border-gray-300 p-2 text-left">
                     Địa chỉ
+                  </th>
+                  <th className="border border-gray-300 p-2 text-left">
+                    Chức năng
                   </th>
                 </tr>
               </thead>
@@ -102,20 +105,21 @@ export default function QuanLyUser() {
                       />
                     </td>
                     <td className="border border-gray-300 p-2">
-                      {user.id}
-                    </td>
-                    <td className="border border-gray-300 p-2">
                       {user.name} 
                     </td>
                     <td className="border border-gray-300 p-2">
-                      {user.accountName} 
-                    </td>
-                    <td className="border border-gray-300 p-2">
-                      {user.dob} 
+                      {new Date(user.birthdate).toLocaleDateString()} 
                     </td>
                     <td className="border border-gray-300 p-2">
                       {user.address} 
                     </td>
+                    <td className="border border-gray-300 p-2">
+                  <button
+                    className="bg-black text-white px-2 py-1 rounded"
+                  >
+                    Edit
+                  </button>
+                </td>
                   </tr>
                 ))}
               </tbody>
