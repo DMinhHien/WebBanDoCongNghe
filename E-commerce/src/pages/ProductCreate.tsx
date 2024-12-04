@@ -13,11 +13,7 @@ export default function ProductCreate() {
     "đã sử dụng (90%)",
     "đã sử dụng(80%)",
   ];
-  const [categories, setCategories] = useState<any[]>([
-    {id:"1",name:"so 1"},
-    {id:"2",name:"so 2"},
-    {id:"3",name:"so 3"}  
-  ]);
+  const [categories, setCategories] = useState<any[]>([]);
   const [productData, setProductData] = useState<Product>({
     id: '',
     productName: '',
@@ -30,11 +26,11 @@ export default function ProductCreate() {
     idShop:'',
     categoryName:""
   });
-  // useEffect(() => {
-  //   getListCategories().then((data) => {
-  //     setCategories(data);
-  //   });
-  // }, []);
+  useEffect(() => {
+    getListCategories().then((data) => {
+      setCategories(data);
+    });
+  }, []);
   const navigation=useNavigate();
   const cancelHandle=()=>{
     navigation("/quanlyshop")

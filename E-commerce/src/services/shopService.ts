@@ -6,7 +6,7 @@ export interface Shop {
     name: string;
 }
 
-export const fetchShops = async (): Promise<Shop[]> => {
+export const fetchShops = async (): Promise<ShopDetails[]> => {
     const response = await axios.get('https://localhost:7183/Shop/getListUse');
     return response.data;
   };

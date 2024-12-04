@@ -91,11 +91,6 @@
         "Name": "userId",
         "Type": "System.String",
         "IsRequired": true
-      },
-      {
-        "Name": "userId",
-        "Type": "",
-        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -230,11 +225,22 @@
   {
     "ContainingType": "WebBanDoCongNghe.Controllers.CommentController",
     "Method": "getListUse",
-    "RelativePath": "Comment/getListUse",
+    "RelativePath": "Comment/getListUse/{productId}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "productId",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "productId",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   },
   {
@@ -481,6 +487,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "WebBanDoCongNghe.Controllers.ReceiptController",
+    "Method": "getSumProduct",
+    "RelativePath": "Receipt/getSumProduct",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "json",
+        "Type": "Newtonsoft.Json.Linq.JObject",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "WebBanDoCongNghe.Controllers.SearchController",
     "Method": "Create",
     "RelativePath": "Search/create",
@@ -639,6 +661,22 @@
     "Method": "getListUseSearch",
     "RelativePath": "Shop/getListUseSearch",
     "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "json",
+        "Type": "Newtonsoft.Json.Linq.JObject",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBanDoCongNghe.Controllers.UserController",
+    "Method": "AddRole",
+    "RelativePath": "User/addRole",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [

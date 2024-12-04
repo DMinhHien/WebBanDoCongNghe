@@ -14,11 +14,7 @@ import { getListCategories } from "../services/categoryService";
 
 export default function QuanLySP() {
   const [searchTerm, setSearchTerm] = useState('');
-  const [categories, setCategories] = useState<Category[]>([
-    {id:"1",name:"so 1"},
-    {id:"2",name:"so 2"},
-    {id:"3",name:"so 3"}
-  ])
+  const [categories, setCategories] = useState<Category[]>([])
   const [products, setProducts] = useState<Product[]>([]);
   const [selectedProducts, setSelectedProducts] = useState<string[]>([]);
   const handleSelectedProductsChange = (selected: string[]) => {
@@ -28,9 +24,9 @@ export default function QuanLySP() {
     getListProduct().then((data) => {
       setProducts(data);
     });
-    // getListCategories().then((data)=>{
-    //   setCategories(data);
-    // })
+    getListCategories().then((data)=>{
+      setCategories(data);
+    })
   }, []);
 
   const navigation = useNavigate();

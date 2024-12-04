@@ -2,8 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\WebBanDoCongNghe",
-    "\\WebBanDoCongNghe\\Controllers"
+    "\\WebBanDoCongNghe\\Controllers",
+    "\\WebBanDoCongNghe\\Models"
   ],
-  "SelectedNode": "\\WebBanDoCongNghe\\appsettings.json",
+  "SelectedNode": "\\package.json",
   "PreviewInSolutionExplorer": false
 }
