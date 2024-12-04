@@ -3,11 +3,12 @@ import AdminNav from "../components/AdminNav";
 import { InputBase } from "@mui/material";
 import { Search } from "@mui/icons-material";
 import { Category } from "./ChinhSuaSanPham";
-import { getListCategories } from "../services/categoryService";
+import { createCategoty, deleteCategory, getListCategories } from "../services/categoryService";
 
 export default function QuanLyCategories() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [name, setName] = useState('');
 
   const handleCheckboxChange = (id: string) => {
     if (!id) return;
@@ -33,6 +34,20 @@ export default function QuanLyCategories() {
     setSelectedCategories(newSelected);
   };
 
+  const create=()=>{
+    createCategoty(name).then((data)=>{
+      setCategories(data);
+    })
+  }
+
+  const DeleteCategory=()=>{
+    selectedCategories.forEach((selectedCategorie)=>{
+      deleteCategory(selectedCategorie).then((data)=>{
+        setCategories(data);
+      })
+    })
+  }
+
   return (
     <div className="flex w-screen">
       <AdminNav />
@@ -44,6 +59,8 @@ export default function QuanLyCategories() {
             <div className="flex w-full mb-12">
               <InputBase
                 placeholder="Category name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 style={{
                   backgroundColor: "#F0ECE1",
                   padding: "5px 10px",
@@ -55,12 +72,14 @@ export default function QuanLyCategories() {
                 <button
                   style={{ backgroundColor: "#FBFAF1" }}
                   className="border p-2 rounded-md w-[150px] text-center"
+                  onClick={create}
                 >
                   Thêm Category
                 </button>
                 <button
                   style={{ backgroundColor: "#FBFAF1" }}
                   className="border p-2 rounded-md w-[150px] text-center"
+                  onClick={DeleteCategory}
                 >
                   Xóa Category
                 </button>

@@ -23,3 +23,25 @@ export const fetchCategories = async (): Promise<Category[]> => {
         throw error
     }
 }
+
+export const createCategoty=async(name: string)=>{
+  try {
+    const token=localStorage.getItem("token")
+    const res=await axios.post<Category>('https://localhost:7183/Categories/create',{data:{name}},{headers:{Authorization: `Bearer ${token}`}})
+    return getListCategories()
+  } catch (error) {
+    console.error("không thể tạo phân loại",error);
+        throw error
+  }
+}
+
+export const deleteCategory=async(id:string)=>{
+  try {
+    const token=localStorage.getItem("token")
+    const res= await axios.post('https://localhost:7183/Categories/delete',{id},{headers:{Authorization: `Bearer ${token}`}})
+    return getListCategories()
+  } catch (error) {
+    console.error("không thể xóa",error);
+        throw error
+  }
+}

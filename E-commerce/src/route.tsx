@@ -19,6 +19,9 @@ import ChinhSuaShop from "./pages/ChinhSuaShop"
 import QuanLyCategories from "./pages/QuanLyCategories";
 import QuanLyUser from "./pages/QuanLyUser";
 import QuanLyShop from "./pages/QuanLyShop";
+import { Create } from "@mui/icons-material";
+import CreateUser from "./pages/CreateUser";
+import EditUser from "./pages/EditUser";
 const router = createBrowserRouter([
     {
       path: "/",
@@ -123,6 +126,18 @@ const router = createBrowserRouter([
       element: <Layout />,
       errorElement: <ErrorPage />,
       children: [{ index: true, element: <QuanLyShop /> }],
+    },
+    {
+      path: "/admin/QuanLyUser/new",
+      element: <Layout />,
+      errorElement: <ErrorPage />,
+      children: [{ index: true, element: <CreateUser /> }],
+    },
+    {
+      path: "/admin/QuanLyUser/edit/:id",
+      element: <Layout />,
+      errorElement: <ErrorPage />,
+      children: [{ index: true, element: <EditUser /> }],
     },
   ]);
   

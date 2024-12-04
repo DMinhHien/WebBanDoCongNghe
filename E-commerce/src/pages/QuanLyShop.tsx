@@ -13,7 +13,7 @@ export default function QuanLyShop() {
       fetchShops().then((data)=>{
         setshops(data);
       })
-    })
+    },[])
     const [selectedshops, setSelectedshops] = useState<string[]>([]);
   // Hàm xử lý khi thay đổi checkbox của một sản phẩm
   const handleCheckboxChange = (id: string) => {
