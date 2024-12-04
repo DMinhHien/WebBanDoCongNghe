@@ -248,7 +248,7 @@ namespace WebBanDoCongNghe.Controllers
             return Ok(new { message = "User deleted successfully" });
         }
         [Authorize]
-        [HttpPut("Edit")]
+        [HttpPut("EditUser")]
         public async Task<IActionResult> EditUser([FromBody] JObject json)
         {
             // Tìm user theo ID
