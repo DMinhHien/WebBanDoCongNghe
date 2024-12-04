@@ -76,8 +76,10 @@ namespace WebBanDoCongNghe.Controllers
                 {
                     id = user.Id,
                     name = user.UserName,
+                    email= user.Email,
                     birthdate=user.birthDate,
                     address=user.Address,
+                    accountname=user.AccountName,
 
                    /* role = roles.Any() ? roles : new List<string>() */// Trả về danh sách rỗng nếu không có vai trò
                 });
@@ -143,7 +145,7 @@ namespace WebBanDoCongNghe.Controllers
             {
                 var user = new UserManage
                 {
-                    UserName = model.Email,   // Hoặc có thể để là một giá trị khác nếu không muốn dùng Email làm UserName
+                    UserName = model.Email,  
                     Email = model.Email,
                     AccountName = model.AccountName,
                     birthDate=model.BirthDate,
@@ -163,6 +165,7 @@ namespace WebBanDoCongNghe.Controllers
                             user.UserName,
                             user.Email,
                             user.Id,
+                            user.AccountName,
                             model.BirthDate,
                             model.Address,
                         }  
@@ -205,6 +208,7 @@ namespace WebBanDoCongNghe.Controllers
                                 user.UserName,
                                 user.Email,
                                 user.Id,
+                                user.AccountName,
                                 user.birthDate,
                                 user.Address,
                             }
@@ -243,8 +247,8 @@ namespace WebBanDoCongNghe.Controllers
 
             return Ok(new { message = "User deleted successfully" });
         }
- 
-        [HttpPut("Edit")]
+        [Authorize]
+        [HttpPut("EditUser")]
         public async Task<IActionResult> EditUser([FromBody] JObject json)
         {
             // Tìm user theo ID
@@ -259,6 +263,7 @@ namespace WebBanDoCongNghe.Controllers
             // Cập nhật thông tin
             user.UserName = model.UserName ?? user.UserName;
             user.Email = model.Email ?? user.Email;
+            user.AccountName = model.AccountName ?? user.AccountName;
             user.Address = model.Address ?? user.Address;
             user.birthDate = model.birthDate ?? user.birthDate;
 
