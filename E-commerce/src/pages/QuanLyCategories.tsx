@@ -1,14 +1,23 @@
-import React, { useEffect, useState } from "react";
-import AdminNav from "../components/AdminNav";
-import { InputBase } from "@mui/material";
 import { Search } from "@mui/icons-material";
+import { InputBase } from "@mui/material";
+import { useEffect, useState } from "react";
+import AdminNav from "../components/AdminNav";
+import {
+  createCategoty,
+  deleteCategory,
+  getListCategories,
+} from "../services/categoryService";
 import { Category } from "./ChinhSuaSanPham";
-import { createCategoty, deleteCategory, getListCategories } from "../services/categoryService";
 
 export default function QuanLyCategories() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-  const [name, setName] = useState('');
+  const [name, setName] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const filteredCategories = categories.filter((category) =>
+    category.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   const handleCheckboxChange = (id: string) => {
     if (!id) return;
@@ -21,9 +30,9 @@ export default function QuanLyCategories() {
     });
   };
   useEffect(() => {
-    getListCategories().then((data)=>{
+    getListCategories().then((data) => {
       setCategories(data);
-    })
+    });
   }, []);
   const handleSelectAll = () => {
     const newSelected =
@@ -34,19 +43,28 @@ export default function QuanLyCategories() {
     setSelectedCategories(newSelected);
   };
 
-  const create=()=>{
-    createCategoty(name).then((data)=>{
+  const create = () => {
+    if(name==="")
+    {
+      alert("vui lòng nhập tên của Category!!!")
+      return
+    }
+    createCategoty(name).then((data) => {
       setCategories(data);
-    })
-  }
+      setName("");
+    });
+  };
 
-  const DeleteCategory=()=>{
-    selectedCategories.forEach((selectedCategorie)=>{
-      deleteCategory(selectedCategorie).then((data)=>{
+  const DeleteCategory = () => {
+    selectedCategories.forEach((selectedCategorie) => {
+      deleteCategory(selectedCategorie).then((data) => {
         setCategories(data);
-      })
-    })
-  }
+        setSelectedCategories((prevSelected) =>
+          prevSelected.filter((id) => id !== selectedCategorie)
+        );
+      });
+    });
+  };
 
   return (
     <div className="flex w-screen">
@@ -68,7 +86,7 @@ export default function QuanLyCategories() {
                   width: "40%",
                 }}
               />
-              <div className="flex  space-x-4 ml-auto">
+              <div className="flex  space-x-4 ml-5">
                 <button
                   style={{ backgroundColor: "#FBFAF1" }}
                   className="border p-2 rounded-md w-[150px] text-center"
@@ -87,6 +105,9 @@ export default function QuanLyCategories() {
             </div>
             <InputBase
               placeholder="Search"
+              onChange={(e) => {
+                setSearchTerm(e.target.value);
+              }}
               startAdornment={<Search style={{ color: "#999" }} />}
               style={{
                 backgroundColor: "#F0ECE1",
@@ -118,7 +139,7 @@ export default function QuanLyCategories() {
                 </tr>
               </thead>
               <tbody>
-                {categories.map((category) => (
+                {filteredCategories.map((category) => (
                   <tr key={category.id}>
                     <td className="border border-gray-300 p-2 text-center">
                       <input

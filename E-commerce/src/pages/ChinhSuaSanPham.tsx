@@ -25,11 +25,7 @@ export const getCategoryNamebyId = (id: string, categories: Category[]): string 
 };
 export default function ChinhSuaSP() {
   const { id } = useParams<{ id: string }>();
-  const [categories, setCategories] = useState<Category[]>([
-    {id:"1",name:"so 1"},
-    {id:"2",name:"so 2"},
-    {id:"3",name:"so 3"}
-  ]);
+  const [categories, setCategories] = useState<Category[]>([]);
   const [productData, setProductData] = useState<Product>({
     id: "",
     productName: "",
@@ -44,20 +40,16 @@ export default function ChinhSuaSP() {
   });
   const navigation = useNavigate();
 
-  // Lấy danh sách các category
-  // useEffect(() => {
-  //   getListCategories().then((data) => {
-  //     setCategories(data);
-  //   });
-  // }, []);
-
   useEffect(() => {
     if (id) {
       getProduct(id).then((data) => {
         setProductData(data);
       });
     }
-  }, [id]);
+    getListCategories().then((data) => {
+      setCategories(data);
+    });
+  }, []);
 
   const cancelHandle = () => {
     navigation("/quanlyshop");

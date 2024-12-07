@@ -30,10 +30,10 @@ export const deleteProduct=async(id:string)=>{
     }
 }
 
-export const getListProduct= async() =>{
+export const getListProduct= async(id:string) =>{
     try 
     {
-        const res=await axios.get<Product[]>(`https://localhost:7183/Product/getListUse`)
+        const res=await axios.get<Product[]>(`https://localhost:7183/Product/getListUse/${id}`)
         return res.data;
     } catch (error) {
         console.error("không thể lấy danh sách sản phẩm",error);

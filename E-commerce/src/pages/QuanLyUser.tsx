@@ -1,24 +1,29 @@
-import React, { useEffect, useState } from "react";
-import AdminNav from "../components/AdminNav";
+import { Search } from "@mui/icons-material";
 import { InputBase } from "@mui/material";
-import { Password, Search } from "@mui/icons-material";
-import { Category } from "./ChinhSuaSanPham";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import AdminNav from "../components/AdminNav";
 import { User } from "../data/User";
 import { deleteUser, getListUsers } from "../services/UserService";
-import { useNavigate } from "react-router-dom";
 
 export default function QuanLyUser() {
   const [users, setUsers] = useState<User[]>([]);
+  const [searchTerm, setSearchTerm] = useState("");
   const nav = useNavigate();
+
+  const filteredUsers = users.filter((user) =>
+    user.AccountName.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   useEffect(() => {
     getListUsers().then((data) => {
       const transformedUsers = data.map((item: any) => ({
-        id: item.id, 
-        AccountName: item.name, 
-        BirthDate: new Date(item.birthdate), 
+        id: item.id,
+        AccountName: item.accountname,
+        BirthDate: new Date(item.birthdate),
         Address: item.address,
-        Email:"",
-        Password:"" 
+        Email: item.email,
+        Password: "",
       }));
       setUsers(transformedUsers);
     });
@@ -47,18 +52,21 @@ export default function QuanLyUser() {
     setSelectedUsers(newSelected);
   };
 
-  const DeleteUsers=()=>{
-    selectedUsers.forEach((selectedUser)=>{
-      deleteUser(selectedUser).then((data)=>{
+  const DeleteUsers = () => {
+    selectedUsers.forEach((selectedUser) => {
+      deleteUser(selectedUser).then(() => {
         setUsers((prevUsers) =>
           prevUsers.filter((User) => User.id !== selectedUser)
         );
-      })
-    })
-  }
-  const editUser=(id:string)=>()=>{
-    nav(`/admin/QuanLyUser/edit/${id}`)
-  }
+        setSelectedUsers((prevSelected) =>
+          prevSelected.filter((id) => id !== selectedUser)
+        );
+      });
+    });
+  };
+  const editUser = (id: string) => () => {
+    nav(`/admin/QuanLyUser/edit/${id}`);
+  };
 
   const newUser = () => {
     nav("/admin/QuanLyUser/new");
@@ -71,6 +79,7 @@ export default function QuanLyUser() {
           <div className="flex items-center space-x-3 w-3/4">
             <InputBase
               placeholder="Search"
+              onChange={(e) => setSearchTerm(e.target.value)}
               startAdornment={<Search style={{ color: "#999" }} />}
               style={{
                 backgroundColor: "#F0ECE1",
@@ -114,6 +123,9 @@ export default function QuanLyUser() {
                     Tên Tài khoản
                   </th>
                   <th className="border border-gray-300 p-2 text-left">
+                    Email
+                  </th>
+                  <th className="border border-gray-300 p-2 text-left">
                     Ngày sinh
                   </th>
                   <th className="border border-gray-300 p-2 text-left">
@@ -125,7 +137,7 @@ export default function QuanLyUser() {
                 </tr>
               </thead>
               <tbody>
-                {users.map((user) => (
+                {filteredUsers.map((user) => (
                   <tr key={user.id}>
                     <td className="border border-gray-300 p-2 text-center">
                       <input
@@ -134,7 +146,10 @@ export default function QuanLyUser() {
                         onChange={() => handleCheckboxChange(user.id)}
                       />
                     </td>
-                    <td className="border border-gray-300 p-2">{user.AccountName}</td>
+                    <td className="border border-gray-300 p-2">
+                      {user.AccountName}
+                    </td>
+                    <td className="border border-gray-300 p-2">{user.Email}</td>
                     <td className="border border-gray-300 p-2">
                       {user?.BirthDate
                         ? new Date(user.BirthDate).getTime()
@@ -150,7 +165,10 @@ export default function QuanLyUser() {
                       {user.Address}
                     </td>
                     <td className="border border-gray-300 p-2">
-                      <button className="bg-black text-white px-2 py-1 rounded" onClick={editUser(user.id)}>
+                      <button
+                        className="bg-black text-white px-2 py-1 rounded"
+                        onClick={editUser(user.id)}
+                      >
                         Edit
                       </button>
                     </td>

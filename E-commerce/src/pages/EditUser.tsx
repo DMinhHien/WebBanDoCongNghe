@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import AdminNav from "../components/AdminNav";
 import { User } from "../data/User";
-import { createUser, editUser, getUser } from "../services/UserService";
-import { useNavigate, useParams } from "react-router-dom";
+import { editUser, getUser } from "../services/UserService";
 
 export default function EditUser() {
   const [user, setUser] = useState<User>({
@@ -17,7 +17,7 @@ export default function EditUser() {
   const { id: userId } = useParams();
   useEffect(() => {
     getUser(userId as string).then((data) => {
-        console.log(data)
+      console.log(data);
       setUser({
         id: data[0].id,
         Email: data[0].email,
@@ -29,12 +29,25 @@ export default function EditUser() {
     });
   }, []);
 
-    const edit = () => {
-        console.log(user.id)
-      editUser(user).then(() => {
-        nav("/admin/QuanLyUser/");
-      });
-    };
+  const edit = () => {
+    const isEmptyField = Object.entries(user).some(([key, value]) => {
+      if (key === "BirthDate" || key === "id" || key === "Password")
+        return false;
+      return value === "";
+    });
+
+    if (isEmptyField) {
+      alert("Vui lòng điền đầy đủ thông tin!");
+      return;
+    }
+    editUser(user).then(() => {
+      nav("/admin/QuanLyUser/");
+    });
+  };
+
+  const cancel = () => {
+    nav("/admin/QuanLyUser");
+  };
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setUser((prev) => ({
@@ -108,7 +121,10 @@ export default function EditUser() {
           >
             Chỉnh sửa
           </button>
-          <button className="border bg-white text-black px-6 py-2 rounded-md mt-10 ml-12">
+          <button
+            className="border bg-white text-black px-6 py-2 rounded-md mt-10 ml-12"
+            onClick={cancel}
+          >
             Hủy bỏ
           </button>
         </div>

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import AdminNav from "../components/AdminNav";
 import { User } from "../data/User";
 import { createUser } from "../services/UserService";
-import { useNavigate } from "react-router-dom";
 
 export default function CreateUser() {
   const [user, setUser] = useState<User>({
@@ -16,6 +16,15 @@ export default function CreateUser() {
   const nav = useNavigate();
 
   const create = () => {
+    const isEmptyField = Object.entries(user).some(([key, value]) => {
+      if (key === "BirthDate" || key === "id") return false;
+      return value === "";
+    });
+
+    if (isEmptyField) {
+      alert("Vui lòng điền đầy đủ thông tin!");
+      return;
+    }
     createUser(user).then(() => {
       nav("/admin/QuanLyUser");
     });
@@ -26,6 +35,9 @@ export default function CreateUser() {
       ...prev,
       [name]: name === "BirthDate" ? new Date(value) : value,
     }));
+  };
+  const cancel = () => {
+    nav("/admin/QuanLyUser");
   };
   return (
     <div className="flex w-full">
@@ -78,7 +90,7 @@ export default function CreateUser() {
             </label>
             <input
               type="date"
-              value={user.BirthDate.toString()}
+              value={user.BirthDate.toISOString().split("T")[0]}
               name="BirthDate"
               onChange={handleChange}
               className="px-4 py-2 border border-gray-300 w-full rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-700"
@@ -106,7 +118,10 @@ export default function CreateUser() {
           >
             Thêm người dùng
           </button>
-          <button className="border bg-white text-black px-6 py-2 rounded-md mt-10 ml-12">
+          <button
+            className="border bg-white text-black px-6 py-2 rounded-md mt-10 ml-12"
+            onClick={cancel}
+          >
             Hủy bỏ
           </button>
         </div>

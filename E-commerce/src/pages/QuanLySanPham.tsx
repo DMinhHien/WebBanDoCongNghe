@@ -20,8 +20,9 @@ export default function QuanLySP() {
   const handleSelectedProductsChange = (selected: string[]) => {
     setSelectedProducts(selected);
   };
+  const id="1234"
   useEffect(() => {
-    getListProduct().then((data) => {
+    getListProduct(id).then((data) => {
       setProducts(data);
     });
     getListCategories().then((data)=>{
@@ -44,6 +45,9 @@ export default function QuanLySP() {
       deleteProduct(selectedProduct).then(() => {
         setProducts((prevProducts) =>
           prevProducts.filter((product) => product.id !== selectedProduct)
+        );
+        setSelectedProducts((prevSelected) =>
+          prevSelected.filter((id) => id !== selectedProduct)
         );
       });
     });
