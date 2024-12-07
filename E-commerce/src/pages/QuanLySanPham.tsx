@@ -20,7 +20,7 @@ export default function QuanLySP() {
   const handleSelectedProductsChange = (selected: string[]) => {
     setSelectedProducts(selected);
   };
-  const id="1234"
+  const id="ddcf2539-4"
   useEffect(() => {
     getListProduct(id).then((data) => {
       setProducts(data);

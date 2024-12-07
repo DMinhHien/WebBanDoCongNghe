@@ -7,7 +7,7 @@ import { getListOrder } from "../services/OrderService";
 export default function QuanLyDonHang() {
   const [searchTerm, setSearchTerm] = useState("");
   const [orders, setOrders] = useState<Order[]>([]);
-  const idShop = "123";
+  const idShop = "ddcf2539-4";
   useEffect(() => {
     getListOrder(idShop).then((data) => {
       setOrders(data);

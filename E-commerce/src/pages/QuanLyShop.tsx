@@ -120,6 +120,9 @@ export default function QuanLyShop() {
                     Tên Shop
                   </th>
                   <th className="border border-gray-300 p-2 text-left">
+                    Hình đại diện
+                  </th>
+                  <th className="border border-gray-300 p-2 text-left">
                     Tên người dùng
                   </th>
                   <th className="border border-gray-300 p-2 text-left">
