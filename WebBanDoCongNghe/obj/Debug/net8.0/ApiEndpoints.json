@@ -473,14 +473,14 @@
   {
     "ContainingType": "WebBanDoCongNghe.Controllers.ReceiptController",
     "Method": "getListUseShop",
-    "RelativePath": "Receipt/getListUseShop",
+    "RelativePath": "Receipt/getListUseShop/{shopId}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "json",
-        "Type": "Newtonsoft.Json.Linq.JObject",
+        "Name": "shopId",
+        "Type": "System.String",
         "IsRequired": true
       }
     ],
@@ -696,6 +696,38 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBanDoCongNghe.Controllers.UserController",
+    "Method": "Delete",
+    "RelativePath": "User/Delete/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBanDoCongNghe.Controllers.UserController",
+    "Method": "EditUser",
+    "RelativePath": "User/EditUser",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "json",
+        "Type": "Newtonsoft.Json.Linq.JObject",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   },
   {

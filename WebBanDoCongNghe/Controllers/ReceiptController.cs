@@ -115,10 +115,9 @@ namespace WebBanDoCongNghe.Controllers
                 }).ToList();
             return Json(result);
         }
-        [HttpGet("getListUseShop")]
-        public IActionResult getListUseShop([FromBody] JObject json)
+        [HttpGet("getListUseShop/{shopId}")]
+        public IActionResult getListUseShop([FromRoute] string shopId)
         {
-            var shopId = json.GetValue("id").ToString();
 
             // Truy vấn các ReceiptDetail cho các sản phẩm thuộc shopId
             var result = _context.ReceiptDetails
