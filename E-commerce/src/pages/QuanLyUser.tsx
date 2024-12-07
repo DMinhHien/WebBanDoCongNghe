@@ -14,7 +14,7 @@ export default function QuanLyUser() {
   const filteredUsers = users.filter((user) =>
     user.AccountName.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
+  //Call api getListUsers
   useEffect(() => {
     getListUsers().then((data) => {
       const transformedUsers = data.map((item: any) => ({
@@ -51,7 +51,7 @@ export default function QuanLyUser() {
 
     setSelectedUsers(newSelected);
   };
-
+  //Call api deleteUser
   const DeleteUsers = () => {
     selectedUsers.forEach((selectedUser) => {
       deleteUser(selectedUser).then(() => {

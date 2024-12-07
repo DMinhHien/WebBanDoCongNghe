@@ -15,8 +15,9 @@ export default function EditShop() {
     image: "",
     rating: 0,
   });
-
+  const nav = useNavigate();
   const { id: shopId } = useParams();
+  //call api getShop
   useEffect(() => {
     getShop(shopId as string).then((data) => {
       setShop({
@@ -47,7 +48,7 @@ export default function EditShop() {
     }
   };
 
-  const nav = useNavigate();
+  //call api editShop
   const edit = () => {
     const isEmptyField = Object.entries(shop).some(([key, value]) => {
       if (key === "rating" || key === "userName") return false;

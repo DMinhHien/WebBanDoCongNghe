@@ -7,6 +7,7 @@ import { getListOrder } from "../services/OrderService";
 export default function QuanLyDonHang() {
   const [searchTerm, setSearchTerm] = useState("");
   const [orders, setOrders] = useState<Order[]>([]);
+  //call api getListReceipt
   const idShop = "ddcf2539-4";
   useEffect(() => {
     getListOrder(idShop).then((data) => {

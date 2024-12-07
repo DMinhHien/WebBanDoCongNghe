@@ -42,7 +42,7 @@ export default function ChinhSuaSP() {
     categoryName: "",
   });
   const navigation = useNavigate();
-
+  //call api getProduct và getListCategories
   useEffect(() => {
     if (id) {
       getProduct(id).then((data) => {
@@ -57,7 +57,7 @@ export default function ChinhSuaSP() {
   const cancelHandle = () => {
     navigation("/quanlyshop");
   };
-
+  //call api editProduct
   const updateHandle = async () => {
     // Không thay đổi dữ liệu trong form ngay lập tức
     const productWithNumbers = {

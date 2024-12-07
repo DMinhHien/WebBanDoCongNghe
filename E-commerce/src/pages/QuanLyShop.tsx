@@ -14,7 +14,7 @@ export default function QuanLyShop() {
   const filteredShops = shops.filter((shop) =>
     shop.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
+  //call api getListShop
   useEffect(() => {
     fetchShops().then((data) => {
       setshops(data);
@@ -55,6 +55,7 @@ export default function QuanLyShop() {
   const xemSP = (id: string) => () => {
     nav(`/admin/QuanLyShop/xemSP/${id}`);
   };
+  //call api deleteShop
   const deleteShops = () => {
     selectedshops.forEach((selectedShop) => {
       deleteshop(selectedShop).then(() => {

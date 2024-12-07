@@ -1,14 +1,27 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DashboardNav from "../components/DashboardNav";
 import { ShopDetails } from "../data/shopdetail";
 import { useNavigate } from "react-router-dom";
+import { deleteshop, fetchShopDetails } from "../services/shopService";
 
 export default function QuanLyThongTin() {
   const [shopDetail, setShopDetail] = useState<ShopDetails>();
   const nav=useNavigate();
+  //Call api getShop
+  useEffect(()=>{
+    fetchShopDetails("ddcf2539-4").then((data)=>{
+      setShopDetail(data)
+    })
+  },[])
   const editHandle = () => {
     nav(`/quanlyshop/QuanLyThongTin/edit`);
   };
+  //Call api deleteShop
+  const DeleteShop=()=>{
+    deleteshop("ddcf2539-4").then(()=>{
+      nav("/quanlyshop")
+    })
+  }
   return (
     <div className="flex w-screen">
       <DashboardNav />
@@ -18,7 +31,7 @@ export default function QuanLyThongTin() {
             Thông tin cửa hàng
           </h1>
           <img
-            className="w-full h-40 object-cover rounded-t-lg"
+            className="w-full h-40 object-contain  rounded-t-lg"
             alt={shopDetail?.name}
             src={shopDetail?.image}
           />
@@ -31,7 +44,7 @@ export default function QuanLyThongTin() {
               <button onClick={editHandle} className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400">
                 Thay đổi
               </button>
-              <button className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-400">
+              <button onClick={DeleteShop} className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-400">
                 Xóa cửa hàng
               </button>
             </div>

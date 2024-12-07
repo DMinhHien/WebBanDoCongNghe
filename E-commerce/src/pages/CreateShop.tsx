@@ -18,6 +18,7 @@ export default function CreateShop() {
     rating: 0,
   });
   const [users, setUsers] = useState<User[]>([]);
+  //call api getListUsers
   useEffect(() => {
     getListUsers().then((data) => {
       const transformedUsers = data.map((item: any) => ({
@@ -62,6 +63,7 @@ export default function CreateShop() {
       setShop((prev) => ({ ...prev, image: url })); // Cập nhật URL ảnh vào productData
     }
   };
+  //call api createShop
   const create =()=>{
     const isEmptyField = Object.entries(shop).some(([key, value]) => {
       if ( key === "rating"|| key === "id") return false;

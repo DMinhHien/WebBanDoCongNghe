@@ -20,6 +20,7 @@ export default function QuanLySP() {
   const handleSelectedProductsChange = (selected: string[]) => {
     setSelectedProducts(selected);
   };
+  //call api getListProductShop
   const id="ddcf2539-4"
   useEffect(() => {
     getListProduct(id).then((data) => {
@@ -39,7 +40,7 @@ export default function QuanLySP() {
   const editHandle = (id: string) => {
     navigation(`/quanlyshop/edit/${id}`);
   };
-
+  //call api deleteProduct
   const handleDelete = (selectedProducts: string[]) => () => {
     selectedProducts.forEach((selectedProduct) => {
       deleteProduct(selectedProduct).then(() => {

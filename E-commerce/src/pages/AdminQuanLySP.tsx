@@ -1,7 +1,7 @@
 import { Search } from "@mui/icons-material";
 import { InputBase } from "@mui/material";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import AdminNav from "../components/AdminNav";
 import { Product } from "../data/productdetail";
 import { getListCategories } from "../services/categoryService";
@@ -41,9 +41,11 @@ export default function AdminQuanLySP() {
 
     setSelectedProducts(newSelected);
   };
-  const id = "1234";
+
+  //call api getListProduct và getListCategories
+  const { id: shopId } = useParams();
   useEffect(() => {
-    getListProduct(id).then((data) => {
+    getListProduct(shopId as string).then((data) => {
       setProducts(data);
     });
     getListCategories().then((data) => {

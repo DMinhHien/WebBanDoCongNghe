@@ -15,6 +15,7 @@ export default function EditUser() {
   });
   const nav = useNavigate();
   const { id: userId } = useParams();
+  //call api getUser
   useEffect(() => {
     getUser(userId as string).then((data) => {
       console.log(data);
@@ -29,6 +30,7 @@ export default function EditUser() {
     });
   }, []);
 
+  //call api editUser
   const edit = () => {
     const isEmptyField = Object.entries(user).some(([key, value]) => {
       if (key === "BirthDate" || key === "id" || key === "Password")

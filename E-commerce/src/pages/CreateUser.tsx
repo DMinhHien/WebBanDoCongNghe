@@ -14,7 +14,7 @@ export default function CreateUser() {
     Address: "",
   });
   const nav = useNavigate();
-
+  //call api createUser
   const create = () => {
     const isEmptyField = Object.entries(user).some(([key, value]) => {
       if (key === "BirthDate" || key === "id") return false;

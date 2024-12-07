@@ -29,6 +29,7 @@ export default function QuanLyCategories() {
         : [...prevSelected, id];
     });
   };
+  //call api getListCategories
   useEffect(() => {
     getListCategories().then((data) => {
       setCategories(data);
@@ -42,7 +43,7 @@ export default function QuanLyCategories() {
 
     setSelectedCategories(newSelected);
   };
-
+  //call api createCategory
   const create = () => {
     if(name==="")
     {
@@ -54,7 +55,7 @@ export default function QuanLyCategories() {
       setName("");
     });
   };
-
+//call api deleteCategory
   const DeleteCategory = () => {
     selectedCategories.forEach((selectedCategorie) => {
       deleteCategory(selectedCategorie).then((data) => {

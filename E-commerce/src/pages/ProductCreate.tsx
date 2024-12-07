@@ -26,6 +26,7 @@ export default function ProductCreate() {
     idShop: "",
     categoryName: "",
   });
+  //call api getListCategories
   useEffect(() => {
     getListCategories().then((data) => {
       setCategories(data);
@@ -35,6 +36,7 @@ export default function ProductCreate() {
   const cancelHandle = () => {
     navigation("/quanlyshop");
   };
+  //call api createProduct
   const addHandle = async () => {
     const productWithNumbers = {
       ...productData,
