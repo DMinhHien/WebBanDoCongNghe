@@ -91,11 +91,6 @@
         "Name": "userId",
         "Type": "System.String",
         "IsRequired": true
-      },
-      {
-        "Name": "userId",
-        "Type": "",
-        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -230,11 +225,22 @@
   {
     "ContainingType": "WebBanDoCongNghe.Controllers.CommentController",
     "Method": "getListUse",
-    "RelativePath": "Comment/getListUse",
+    "RelativePath": "Comment/getListUse/{productId}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "productId",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "productId",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   },
   {
@@ -467,7 +473,23 @@
   {
     "ContainingType": "WebBanDoCongNghe.Controllers.ReceiptController",
     "Method": "getListUseShop",
-    "RelativePath": "Receipt/getListUseShop",
+    "RelativePath": "Receipt/getListUseShop/{shopId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "shopId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBanDoCongNghe.Controllers.ReceiptController",
+    "Method": "getSumProduct",
+    "RelativePath": "Receipt/getSumProduct",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -652,12 +674,60 @@
   },
   {
     "ContainingType": "WebBanDoCongNghe.Controllers.UserController",
+    "Method": "AddRole",
+    "RelativePath": "User/addRole",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "json",
+        "Type": "Newtonsoft.Json.Linq.JObject",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBanDoCongNghe.Controllers.UserController",
     "Method": "checkLogin",
     "RelativePath": "User/checkLogin",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBanDoCongNghe.Controllers.UserController",
+    "Method": "Delete",
+    "RelativePath": "User/Delete/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBanDoCongNghe.Controllers.UserController",
+    "Method": "EditUser",
+    "RelativePath": "User/EditUser",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "json",
+        "Type": "Newtonsoft.Json.Linq.JObject",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   },
   {

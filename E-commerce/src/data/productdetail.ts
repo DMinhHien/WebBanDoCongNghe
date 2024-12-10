@@ -7,5 +7,6 @@ export interface Product {
     description: string;
     categoryId: string;
     status: string;
-    idShop: string
+    idShop: string;
+    categoryName: string
   }

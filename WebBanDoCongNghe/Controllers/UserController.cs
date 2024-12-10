@@ -25,36 +25,76 @@ namespace WebBanDoCongNghe.Controllers
         private readonly ProductDbContext _context;
         private readonly UserManager<UserManage> _userManager;
         private readonly SignInManager<UserManage> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly ITokenService _tokenService;
         // GET: ProductController
         public UserController(ProductDbContext context, UserManager<UserManage> userManager,
-            SignInManager<UserManage> signInManager, ITokenService tokenService)
+            SignInManager<UserManage> signInManager, ITokenService tokenService, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _context = context;
+            _roleManager = roleManager;
             _signInManager = signInManager;
             _tokenService = tokenService;
+            _roleManager = roleManager;
         }
 
         // POST: ProductController/Create
-
-        [HttpGet("getListUse")]
-        public IActionResult getListUse()
+        [HttpPost("addRole")]
+        public async Task<IActionResult> AddRole([FromBody] JObject json)
         {
-            var result = _context.Users.AsQueryable().
-                 Select(d => new
-                 {
-                     id = d.Id,
-                     name = d.UserName
-                 }).ToList();
+            var userId = json.GetValue("userId")?.ToString();
+            var roleName = json.GetValue("roleName")?.ToString();
+
+            if (userId == null || roleName == null)
+                return BadRequest("User ID or role name is missing.");
+
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+                return NotFound("User not found.");
+
+            if (!await _roleManager.RoleExistsAsync(roleName))
+                return NotFound("Role not found.");
+
+            var result = await _userManager.AddToRoleAsync(user, roleName);
+            if (!result.Succeeded)
+                return BadRequest(result.Errors);
+
+            return Json(user);
+        }
+        [Authorize(Roles = "Admin")]
+        [HttpGet("getListUse")]
+        public async Task<IActionResult> getListUse()
+        {
+            var users = _context.Users.ToList(); // Lấy tất cả người dùng
+            var result = new List<object>();
+
+            foreach (var user in users)
+            {
+                var roles = await _userManager.GetRolesAsync(user); // Lấy vai trò
+                result.Add(new
+                {
+                    id = user.Id,
+                    name = user.UserName,
+                    email= user.Email,
+                    birthdate=user.birthDate,
+                    address=user.Address,
+                    accountname=user.AccountName,
+
+                   /* role = roles.Any() ? roles : new List<string>() */// Trả về danh sách rỗng nếu không có vai trò
+                });
+            }
+
             return Json(result);
         }
+        [Authorize]
         [HttpGet("checkLogin")]
         public IActionResult checkLogin()
         {
             var result = User.Identity.IsAuthenticated;
             return Json(result);
         }
+        [Authorize]
         [HttpPost("logout")]
         public async Task<IActionResult> logout()
         {
@@ -64,7 +104,15 @@ namespace WebBanDoCongNghe.Controllers
         [HttpGet("getElementById/{id}")]
         public IActionResult getElementById([FromRoute] string id)
         {
-            var model = _context.Users.AsQueryable().FirstOrDefault(m => m.Id == id); ;
+            var model = _context.Users.AsQueryable().Where(m => m.Id == id).
+                Select(d=>new
+                {
+                    d.Id,
+                    d.AccountName,
+                    d.Email,
+                    d.birthDate,
+                    d.Address,
+                });
             if (model == null)
             {
                 return NotFound();
@@ -97,9 +145,12 @@ namespace WebBanDoCongNghe.Controllers
             {
                 var user = new UserManage
                 {
-                    UserName = model.Email,   // Hoặc có thể để là một giá trị khác nếu không muốn dùng Email làm UserName
+                    UserName = model.Email,  
                     Email = model.Email,
-                    AccountName = model.AccountName
+                    AccountName = model.AccountName,
+                    birthDate=model.BirthDate,
+                    Address = model.Address,
+
                 };
 
                 var result = await _userManager.CreateAsync(user, model.Password);
@@ -113,7 +164,10 @@ namespace WebBanDoCongNghe.Controllers
                         {
                             user.UserName,
                             user.Email,
-                            user.Id
+                            user.Id,
+                            user.AccountName,
+                            model.BirthDate,
+                            model.Address,
                         }  
                 };
                     return Ok(response);
@@ -145,15 +199,18 @@ namespace WebBanDoCongNghe.Controllers
                     var result = await _signInManager.PasswordSignInAsync(user.UserName, model.Password, isPersistent: false, lockoutOnFailure: false);
                     if (result.Succeeded)
                     {
-                       
+                        var userRole = await _userManager.GetRolesAsync(user);
                         var response = new
                         {
-                            Token = _tokenService.CreateToken(user),
+                            Token = _tokenService.CreateToken(user,userRole),
                             User = new
                             {
                                 user.UserName,
                                 user.Email,
-                                user.Id
+                                user.Id,
+                                user.AccountName,
+                                user.birthDate,
+                                user.Address,
                             }
                         };
 
@@ -169,6 +226,55 @@ namespace WebBanDoCongNghe.Controllers
             }
 
             return BadRequest(ModelState);
+        }
+        [Authorize]
+        [HttpDelete("Delete/{id}")]
+        public async Task<IActionResult> Delete([FromRoute] string id)
+        {
+            // Tìm user theo ID
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound(new { message = "User not found" });
+            }
+
+            // Xóa user
+            var result = await _userManager.DeleteAsync(user);
+            if (!result.Succeeded)
+            {
+                return BadRequest(new { message = "Failed to delete user", errors = result.Errors });
+            }
+
+            return Ok(new { message = "User deleted successfully" });
+        }
+        [Authorize]
+        [HttpPut("EditUser")]
+        public async Task<IActionResult> EditUser([FromBody] JObject json)
+        {
+            // Tìm user theo ID
+            var model = JsonConvert.DeserializeObject<UserManage>(json.GetValue("data").ToString());
+            var id = model.Id;
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound(new { message = "User not found" });
+            }
+
+            // Cập nhật thông tin
+            user.UserName = model.UserName ?? user.UserName;
+            user.Email = model.Email ?? user.Email;
+            user.AccountName = model.AccountName ?? user.AccountName;
+            user.Address = model.Address ?? user.Address;
+            user.birthDate = model.birthDate ?? user.birthDate;
+
+            // Lưu thay đổi
+            var result = await _userManager.UpdateAsync(user);
+            if (!result.Succeeded)
+            {
+                return BadRequest(new { message = "Failed to update user", errors = result.Errors });
+            }
+
+            return Ok(new { message = "User updated successfully", user });
         }
     }
 }

@@ -21,6 +21,7 @@ namespace WebBanDoCongNghe.Controllers
         }
 
         // POST: ProductController/Create
+        [Authorize]
         [HttpPost("create")]
         public ActionResult Create([FromBody] JObject json)
         {
@@ -43,6 +44,7 @@ namespace WebBanDoCongNghe.Controllers
 
 
         // POST: ReceiptController/Edit/5
+        [Authorize]
         [HttpPost("edit")]
         public ActionResult Edit([FromBody] JObject json)
         {
@@ -53,15 +55,36 @@ namespace WebBanDoCongNghe.Controllers
         }
 
         // POST: ReceiptController/Delete/5
+        [Authorize]
         [HttpPost("delete")]
         public ActionResult Delete([FromBody] JObject json)
         {
             var id = (json.GetValue("id").ToString());
             var result = _context.Receipts.SingleOrDefault(p => p.id == id);
+            var detailList=_context.ReceiptDetails.Where(x=>x.idReceipt==id).ToList();
+            if (detailList != null)
+            {
+                foreach (var detail in detailList)
+                {
+                    _context.ReceiptDetails.Remove(detail);
+                }
+            }
             _context.Receipts.Remove(result);
             _context.SaveChanges();
             return Json(result);
 
+        }
+        [HttpGet("getSumProduct")]
+        public IActionResult getSumProduct([FromBody] JObject json) 
+        {
+            var shopId = json.GetValue("id").ToString();
+            var result = _context.ReceiptDetails.AsQueryable().Where(x => x.id == shopId).ToList();
+            int sum = 0;
+            foreach(var item in result)
+            {
+                sum += item.quantity;
+            }
+            return Json(sum);
         }
         [HttpGet("getListUse")]
         public IActionResult getListUse()
@@ -92,10 +115,9 @@ namespace WebBanDoCongNghe.Controllers
                 }).ToList();
             return Json(result);
         }
-        [HttpGet("getListUseShop")]
-        public IActionResult getListUseShop([FromBody] JObject json)
+        [HttpGet("getListUseShop/{shopId}")]
+        public IActionResult getListUseShop([FromRoute] string shopId)
         {
-            var shopId = json.GetValue("id").ToString();
 
             // Truy vấn các ReceiptDetail cho các sản phẩm thuộc shopId
             var result = _context.ReceiptDetails

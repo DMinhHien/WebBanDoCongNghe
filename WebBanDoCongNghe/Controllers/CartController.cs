@@ -21,7 +21,7 @@ namespace WebBanDoCongNghe.Controllers
             _context = context;
         }
 
-     
+        [Authorize]
         [HttpPost("create")]
         public ActionResult Create([FromBody] JObject json)
         {
@@ -32,8 +32,7 @@ namespace WebBanDoCongNghe.Controllers
             return Json(model);
         }
 
-
-
+        [Authorize]
         [HttpPost("edit")]
         public ActionResult Edit([FromBody] JObject json)
         {
@@ -42,6 +41,7 @@ namespace WebBanDoCongNghe.Controllers
             _context.SaveChanges();
             return Json(model);
         }
+        [Authorize]
         [HttpPost("editCartDetail")]
         public ActionResult EditCartDetail([FromBody] JObject json)
         {
@@ -51,7 +51,7 @@ namespace WebBanDoCongNghe.Controllers
             return Json(model);
         }
 
-
+        [Authorize]
         [HttpPost("delete")]
         public ActionResult Delete([FromBody] JObject json)
         {
@@ -62,8 +62,9 @@ namespace WebBanDoCongNghe.Controllers
             return Json(result);
 
         }
+        [Authorize]
         [HttpGet("getListUse/{userId}")]
-        public IActionResult getListUse([FromBody] string userId)
+        public IActionResult getListUse([FromRoute] string userId)
         {
             var result = _context.Carts
                 .Where(x => x.userId == userId)
@@ -71,31 +72,41 @@ namespace WebBanDoCongNghe.Controllers
                 {
                     cart.id,
                     cart.userId,
-                    CartDetails = _context.CartDetails
+                    Shops = _context.CartDetails
                         .Where(rd => rd.idCart == cart.id)
-                        .Select(rd => new
+                        .GroupBy(rd => _context.Products
+                                            .Where(p => p.id == rd.idProduct)
+                                            .Select(p => p.idShop)
+                                            .FirstOrDefault())
+                        .Select(group => new
                         {
-                            rd.id,
-                            rd.idProduct,
-                            rd.quantity,
-                            Product = _context.Products.Where(p => p.id == rd.idProduct)
-                            .Select(p => new
+                            ShopId = group.Key,
+                            ShopInfo = _context.Shops
+                                .Where(s => s.id == group.Key)
+                                .Select(s => new
+                                {
+                                    s.name,
+                                    s.image
+                                }).FirstOrDefault(),
+                            Products = group.Select(rd => new
                             {
-                                p.id,
-                                p.productName,
-                                p.unitPrice,
-                                p.idShop,
-                                Shop=_context.Shops.Where(s => s.id == p.idShop)
-                                 .Select(p => new
-                                 {
-                                     p.name,
-                                     p.image
-                                 }).FirstOrDefault()
-                            }).FirstOrDefault()
+                                rd.id,
+                                rd.idProduct,
+                                rd.quantity,
+                                ProductInfo = _context.Products
+                                    .Where(p => p.id == rd.idProduct)
+                                    .Select(p => new
+                                    {
+                                        p.productName,
+                                        p.unitPrice
+                                    }).FirstOrDefault()
+                            }).ToList()
                         }).ToList()
                 }).ToList();
+
             return Json(result);
         }
+        [Authorize]
         [HttpPost("addCartProduct")]
         public IActionResult addCartProduct([FromBody] JObject json)
         {

@@ -20,6 +20,7 @@ namespace WebBanDoCongNghe.Controllers
         }
 
         // POST: ProductController/Create
+        [Authorize]
         [HttpPost("create")]
         public ActionResult Create([FromBody] JObject json)
         {
@@ -33,6 +34,7 @@ namespace WebBanDoCongNghe.Controllers
 
 
         // POST: ShopController/Edit/5
+        [Authorize]
         [HttpPost("edit")]
         public ActionResult Edit([FromBody] JObject json)
         {
@@ -43,6 +45,7 @@ namespace WebBanDoCongNghe.Controllers
         }
 
         // POST: ShopController/Delete/5
+        [Authorize]
         [HttpPost("delete")]
         public ActionResult Delete([FromBody] JObject json)
         {
@@ -59,8 +62,12 @@ namespace WebBanDoCongNghe.Controllers
             var result = _context.Shops.AsQueryable().
                  Select(d => new
                  {
-                     id = d.id,
-                     name = d.name
+                     d.id,
+                     d.name,
+                     UserName=_context.Users.Where(x=>x.Id==d.userId).Select(x=>x.UserName).FirstOrDefault(),
+                     d.address,
+                     d.image,
+                     d.rating,
                  }).ToList();
             return Json(result);
         }
