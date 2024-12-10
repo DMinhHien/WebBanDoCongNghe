@@ -66,6 +66,7 @@ namespace WebBanDoCongNghe.Controllers
                      d.name,
                      UserName=_context.Users.Where(x=>x.Id==d.userId).Select(x=>x.UserName).FirstOrDefault(),
                      d.address,
+                     d.image,
                      d.rating,
                  }).ToList();
             return Json(result);

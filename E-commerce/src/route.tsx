@@ -19,6 +19,12 @@ import ChinhSuaShop from "./pages/ChinhSuaShop"
 import QuanLyCategories from "./pages/QuanLyCategories";
 import QuanLyUser from "./pages/QuanLyUser";
 import QuanLyShop from "./pages/QuanLyShop";
+import { Create } from "@mui/icons-material";
+import CreateUser from "./pages/CreateUser";
+import EditUser from "./pages/EditUser";
+import CreateShop from "./pages/CreateShop";
+import EditShop from "./pages/EditShop";
+import AdminQuanLySP from "./pages/AdminQuanLySP";
 const router = createBrowserRouter([
     {
       path: "/",
@@ -123,6 +129,36 @@ const router = createBrowserRouter([
       element: <Layout />,
       errorElement: <ErrorPage />,
       children: [{ index: true, element: <QuanLyShop /> }],
+    },
+    {
+      path: "/admin/QuanLyUser/new",
+      element: <Layout />,
+      errorElement: <ErrorPage />,
+      children: [{ index: true, element: <CreateUser /> }],
+    },
+    {
+      path: "/admin/QuanLyUser/edit/:id",
+      element: <Layout />,
+      errorElement: <ErrorPage />,
+      children: [{ index: true, element: <EditUser /> }],
+    },
+    {
+      path: "/admin/QuanLyShop/new",
+      element: <Layout />,
+      errorElement: <ErrorPage />,
+      children: [{ index: true, element: <CreateShop /> }],
+    },
+    {
+      path: "/admin/QuanLyShop/edit/:id",
+      element: <Layout />,
+      errorElement: <ErrorPage />,
+      children: [{ index: true, element: <EditShop /> }],
+    },
+    {
+      path: "/admin/QuanLyShop/xemSP/:id",
+      element: <Layout />,
+      errorElement: <ErrorPage />,
+      children: [{ index: true, element: <AdminQuanLySP /> }],
     },
   ]);
   

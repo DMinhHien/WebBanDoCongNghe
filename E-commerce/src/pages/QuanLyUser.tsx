@@ -1,23 +1,38 @@
-import React, { useEffect, useState } from "react";
-import AdminNav from "../components/AdminNav";
-import { InputBase } from "@mui/material";
 import { Search } from "@mui/icons-material";
-import { Category } from "./ChinhSuaSanPham";
+import { InputBase } from "@mui/material";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import AdminNav from "../components/AdminNav";
 import { User } from "../data/User";
-import { getListUsers } from "../services/UserService";
+import { deleteUser, getListUsers } from "../services/UserService";
 
 export default function QuanLyUser() {
-    const [users,setUsers]=useState<User[]>([])
-    useEffect(()=>{
-      getListUsers().then((data)=>{
-        setUsers(data);
-      })
-    },[])
-    const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
+  const [users, setUsers] = useState<User[]>([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const nav = useNavigate();
+
+  const filteredUsers = users.filter((user) =>
+    user.AccountName.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+  //Call api getListUsers
+  useEffect(() => {
+    getListUsers().then((data) => {
+      const transformedUsers = data.map((item: any) => ({
+        id: item.id,
+        AccountName: item.accountname,
+        BirthDate: new Date(item.birthdate),
+        Address: item.address,
+        Email: item.email,
+        Password: "",
+      }));
+      setUsers(transformedUsers);
+    });
+  }, []);
+  const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
   // Hàm xử lý khi thay đổi checkbox của một sản phẩm
   const handleCheckboxChange = (id: string) => {
     if (!id) return; // Nếu không có id, bỏ qua
-  
+
     setSelectedUsers((prevSelected) => {
       const isSelected = prevSelected.includes(id);
       const newSelected = isSelected
@@ -29,11 +44,32 @@ export default function QuanLyUser() {
 
   // Hàm xử lý khi chọn tất cả hoặc bỏ chọn tất cả
   const handleSelectAll = () => {
-    const newSelected = selectedUsers.length === users.length
-      ? [] // Nếu đã chọn hết -> bỏ chọn tất cả
-      : users.map((user) => user.id); // Nếu chưa chọn hết -> chọn tất cả
-  
-      setSelectedUsers(newSelected);
+    const newSelected =
+      selectedUsers.length === users.length
+        ? [] // Nếu đã chọn hết -> bỏ chọn tất cả
+        : users.map((user) => user.id); // Nếu chưa chọn hết -> chọn tất cả
+
+    setSelectedUsers(newSelected);
+  };
+  //Call api deleteUser
+  const DeleteUsers = () => {
+    selectedUsers.forEach((selectedUser) => {
+      deleteUser(selectedUser).then(() => {
+        setUsers((prevUsers) =>
+          prevUsers.filter((User) => User.id !== selectedUser)
+        );
+        setSelectedUsers((prevSelected) =>
+          prevSelected.filter((id) => id !== selectedUser)
+        );
+      });
+    });
+  };
+  const editUser = (id: string) => () => {
+    nav(`/admin/QuanLyUser/edit/${id}`);
+  };
+
+  const newUser = () => {
+    nav("/admin/QuanLyUser/new");
   };
   return (
     <div className="flex w-screen space-x-6">
@@ -43,6 +79,7 @@ export default function QuanLyUser() {
           <div className="flex items-center space-x-3 w-3/4">
             <InputBase
               placeholder="Search"
+              onChange={(e) => setSearchTerm(e.target.value)}
               startAdornment={<Search style={{ color: "#999" }} />}
               style={{
                 backgroundColor: "#F0ECE1",
@@ -56,12 +93,14 @@ export default function QuanLyUser() {
             <button
               style={{ backgroundColor: "#FBFAF1" }}
               className="border  p-4 rounded-md"
+              onClick={newUser}
             >
               Thêm User
             </button>
             <button
               style={{ backgroundColor: "#FBFAF1" }}
               className="border  p-4 rounded-md"
+              onClick={DeleteUsers}
             >
               Xóa User
             </button>
@@ -76,12 +115,15 @@ export default function QuanLyUser() {
                   <th className="border border-gray-300 p-2">
                     <input
                       type="checkbox"
-                        checked={selectedUsers.length === users.length}
-                        onChange={handleSelectAll}
+                      checked={selectedUsers.length === users.length}
+                      onChange={handleSelectAll}
                     />
                   </th>
                   <th className="border border-gray-300 p-2 text-left">
-                    Tên Tài khoản 
+                    Tên Tài khoản
+                  </th>
+                  <th className="border border-gray-300 p-2 text-left">
+                    Email
                   </th>
                   <th className="border border-gray-300 p-2 text-left">
                     Ngày sinh
@@ -95,7 +137,7 @@ export default function QuanLyUser() {
                 </tr>
               </thead>
               <tbody>
-                {users.map((user) => (
+                {filteredUsers.map((user) => (
                   <tr key={user.id}>
                     <td className="border border-gray-300 p-2 text-center">
                       <input
@@ -105,21 +147,31 @@ export default function QuanLyUser() {
                       />
                     </td>
                     <td className="border border-gray-300 p-2">
-                      {user.name} 
+                      {user.AccountName}
+                    </td>
+                    <td className="border border-gray-300 p-2">{user.Email}</td>
+                    <td className="border border-gray-300 p-2">
+                      {user?.BirthDate
+                        ? new Date(user.BirthDate).getTime()
+                          ? new Intl.DateTimeFormat("vi-VN", {
+                              year: "2-digit",
+                              month: "2-digit",
+                              day: "2-digit",
+                            }).format(new Date(user.BirthDate))
+                          : "Ngày không hợp lệ"
+                        : "Chưa có dữ liệu"}
                     </td>
                     <td className="border border-gray-300 p-2">
-                      {new Date(user.birthdate).toLocaleDateString()} 
+                      {user.Address}
                     </td>
                     <td className="border border-gray-300 p-2">
-                      {user.address} 
+                      <button
+                        className="bg-black text-white px-2 py-1 rounded"
+                        onClick={editUser(user.id)}
+                      >
+                        Edit
+                      </button>
                     </td>
-                    <td className="border border-gray-300 p-2">
-                  <button
-                    className="bg-black text-white px-2 py-1 rounded"
-                  >
-                    Edit
-                  </button>
-                </td>
                   </tr>
                 ))}
               </tbody>

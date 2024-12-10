@@ -1,9 +1,6 @@
-import{ useState } from 'react';
+import{ useEffect, useState } from 'react';
 import { Category, getCategoryNamebyId } from '../../pages/ChinhSuaSanPham';
 import { Product } from '../../data/productdetail';
-
-// Định nghĩa kiểu cho sản phẩm
-
 
 // Định nghĩa props cho ProductList
 interface ProductListProps {
@@ -15,6 +12,10 @@ interface ProductListProps {
 
 export default function ProductList({ products, editProduct,onSelectedProductsChange,categories }: ProductListProps) {
   const [selectedProducts, setSelectedProducts] = useState<string[]>([]);
+
+  useEffect(() => {
+    onSelectedProductsChange(selectedProducts);
+  }, [selectedProducts, onSelectedProductsChange]);
   // Hàm xử lý khi thay đổi checkbox của một sản phẩm
   const handleCheckboxChange = (id: string) => {
     if (!id) return; // Nếu không có id, bỏ qua
@@ -25,7 +26,6 @@ export default function ProductList({ products, editProduct,onSelectedProductsCh
         ? prevSelected.filter((productId) => productId !== id) // Bỏ chọn
         : [...prevSelected, id]; // Thêm vào danh sách
   
-      onSelectedProductsChange(newSelected); // Truyền giá trị mới lên component cha
       return newSelected;
     });
   };
@@ -37,7 +37,6 @@ export default function ProductList({ products, editProduct,onSelectedProductsCh
       : products.map((product) => product.id); // Nếu chưa chọn hết -> chọn tất cả
   
     setSelectedProducts(newSelected);
-    onSelectedProductsChange(newSelected); // Truyền giá trị mới lên component cha
   };
   
   return (

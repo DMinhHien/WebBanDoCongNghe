@@ -19,17 +19,16 @@ export interface Category {
   name: string;
 }
 
-export const getCategoryNamebyId = (id: string, categories: Category[]): string | null => {
+export const getCategoryNamebyId = (
+  id: string,
+  categories: Category[]
+): string | null => {
   const category = categories.find((cat) => cat.id === id);
   return category ? category.name : null;
 };
 export default function ChinhSuaSP() {
   const { id } = useParams<{ id: string }>();
-  const [categories, setCategories] = useState<Category[]>([
-    {id:"1",name:"so 1"},
-    {id:"2",name:"so 2"},
-    {id:"3",name:"so 3"}
-  ]);
+  const [categories, setCategories] = useState<Category[]>([]);
   const [productData, setProductData] = useState<Product>({
     id: "",
     productName: "",
@@ -40,29 +39,25 @@ export default function ChinhSuaSP() {
     categoryId: "",
     status: "",
     idShop: "",
-    categoryName:""
+    categoryName: "",
   });
   const navigation = useNavigate();
-
-  // Lấy danh sách các category
-  // useEffect(() => {
-  //   getListCategories().then((data) => {
-  //     setCategories(data);
-  //   });
-  // }, []);
-
+  //call api getProduct và getListCategories
   useEffect(() => {
     if (id) {
       getProduct(id).then((data) => {
         setProductData(data);
       });
     }
-  }, [id]);
+    getListCategories().then((data) => {
+      setCategories(data);
+    });
+  }, []);
 
   const cancelHandle = () => {
     navigation("/quanlyshop");
   };
-
+  //call api editProduct
   const updateHandle = async () => {
     // Không thay đổi dữ liệu trong form ngay lập tức
     const productWithNumbers = {
@@ -70,10 +65,18 @@ export default function ChinhSuaSP() {
       unitPrice: parseFloat(productData.unitPrice.toString()),
       quantity: parseInt(productData.quantity.toString(), 10),
       id: id as string,
-      idShop: "",
-      // categoryId: ""
+      idShop: "ddcf2539-4",
     };
-    console.log(productWithNumbers)
+    const isEmptyField = Object.entries(productWithNumbers).some(
+      ([key, value]) => {
+        return value === "";
+      }
+    );
+
+    if (isEmptyField) {
+      alert("Vui lòng điền đầy đủ thông tin!");
+      return;
+    }
     // Thực hiện cập nhật dữ liệu
     await editProduct(productWithNumbers);
     navigation("/quanlyshop");
@@ -88,18 +91,22 @@ export default function ChinhSuaSP() {
 
   // Xử lý thay đổi dữ liệu trong form
   const handleChange = async (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
   ) => {
     const { name, value } = e.target;
-      await setProductData((prev) => ({
-        ...prev,
-        [name]: value,
-      }));
-      console.log(productData)
+    await setProductData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+    console.log(productData);
   };
 
   // Xử lý thay đổi file ảnh
-  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const file = event.target.files?.[0];
     if (file) {
       const url = await uploadToFirebase(file);
@@ -121,7 +128,9 @@ export default function ChinhSuaSP() {
           </div>
 
           <div>
-            <label className="block mb-2 text-gray-800 font-medium">Tên sản phẩm</label>
+            <label className="block mb-2 text-gray-800 font-medium">
+              Tên sản phẩm
+            </label>
             <input
               type="text"
               name="productName"
@@ -132,7 +141,9 @@ export default function ChinhSuaSP() {
           </div>
 
           <div>
-            <label className="block mb-2 text-gray-800 font-medium">Đơn giá</label>
+            <label className="block mb-2 text-gray-800 font-medium">
+              Đơn giá
+            </label>
             <input
               type="number"
               name="unitPrice"
@@ -143,14 +154,18 @@ export default function ChinhSuaSP() {
           </div>
 
           <div>
-            <label className="block mb-2 text-gray-800 font-medium">Phân loại</label>
+            <label className="block mb-2 text-gray-800 font-medium">
+              Phân loại
+            </label>
             <select
               name="categoryId"
               value={productData.categoryId}
               onChange={handleChange}
               className="px-4 py-2 border border-gray-300 w-full rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-700"
             >
-              <option value="" disabled>---Chọn phân loại---</option>
+              <option value="" disabled>
+                ---Chọn phân loại---
+              </option>
               {categories.map((category) => (
                 <option key={category.id} value={category.id}>
                   {category.name}
@@ -160,13 +175,18 @@ export default function ChinhSuaSP() {
           </div>
 
           <div>
-            <label className="block mb-2 text-gray-800 font-medium">Tình trạng</label>
+            <label className="block mb-2 text-gray-800 font-medium">
+              Tình trạng
+            </label>
             <select
               name="status"
               value={productData.status}
               onChange={handleChange}
               className="px-4 py-2 border border-gray-300 w-full rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-700"
             >
+              <option value="" disabled>
+                ---Chọn tình trạng---
+              </option>
               {tinhtrangs.map((tinhtrang, index) => (
                 <option key={index} value={tinhtrang}>
                   {tinhtrang}
@@ -176,7 +196,9 @@ export default function ChinhSuaSP() {
           </div>
 
           <div>
-            <label className="block mb-2 text-gray-800 font-medium">Số lượng</label>
+            <label className="block mb-2 text-gray-800 font-medium">
+              Số lượng
+            </label>
             <input
               type="number"
               name="quantity"
@@ -187,7 +209,9 @@ export default function ChinhSuaSP() {
           </div>
 
           <div>
-            <label className="block mb-2 text-gray-800 font-medium">Mô tả</label>
+            <label className="block mb-2 text-gray-800 font-medium">
+              Mô tả
+            </label>
             <textarea
               name="description"
               value={productData.description}
