@@ -2,12 +2,8 @@ import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import styles from './ProductList.module.css';
 import ProductCard from '../ProductCard/ProductCard';
-
-interface Product {
-    id: number;
-    productName: string;
-    unitPrice: string;
-}
+import { Product } from '../../data/products';
+import { sampleProducts } from '../../data/products';
 
 const ProductList: React.FC = () => {
     const [products, setProducts] = useState<Product[]>([]);
@@ -28,6 +24,7 @@ const ProductList: React.FC = () => {
       };
   
       fetchProducts();
+      
     }, []);
   
     if (loading) return <p>Đang tải dữ liệu...</p>;
