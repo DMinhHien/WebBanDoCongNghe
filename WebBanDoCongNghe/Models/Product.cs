@@ -15,5 +15,6 @@ namespace WebBanDoCongNghe.Models
         public string idShop { get; set; }
         public string status { get; set; }
         public string description { get; set; }
+        public double rating { get; set; }
     }
 }

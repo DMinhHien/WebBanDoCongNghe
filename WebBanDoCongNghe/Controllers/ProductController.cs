@@ -89,6 +89,7 @@ namespace WebBanDoCongNghe.Controllers
                      d.status,
                      d.image,
                      d.categoryId,
+                     d.rating,
                      categoryName = _context.Categories
                         .Where(x => x.id == d.categoryId)
                         .Select(s => s.name) 
@@ -110,6 +111,7 @@ namespace WebBanDoCongNghe.Controllers
                      d.status,
                      d.image,
                      d.categoryId,
+                     d.rating,
                      categoryName = _context.Categories
                         .Where(x => x.id == d.categoryId)
                         .Select(s => s.name)
@@ -131,6 +133,7 @@ namespace WebBanDoCongNghe.Controllers
                      d.status,
                      d.image,
                      d.categoryId,
+                     d.rating,
                      categoryName = _context.Categories
                         .Where(x => x.id == d.categoryId)
                         .Select(s => s.name)
@@ -153,6 +156,7 @@ namespace WebBanDoCongNghe.Controllers
                      d.status,
                      d.image,
                      d.categoryId,
+                     d.rating,
                      categoryName = _context.Categories
                         .Where(x => x.id == d.categoryId)
                         .Select(s => s.name)
@@ -179,6 +183,7 @@ namespace WebBanDoCongNghe.Controllers
                      d.status,
                      d.image,
                      d.categoryId,
+                     d.rating,
                      categoryName = _context.Categories
                         .Where(x => x.id == d.categoryId)
                         .Select(s => s.name)
@@ -199,6 +204,7 @@ namespace WebBanDoCongNghe.Controllers
                     d.image,
                     d.quantity,
                     d.categoryId,
+                    d.rating,
                     // Chỉ lấy giá trị chuỗi của categoryName
                     categoryName = _context.Categories
                         .Where(x => x.id == d.categoryId)
