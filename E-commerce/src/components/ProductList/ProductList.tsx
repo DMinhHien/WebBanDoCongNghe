@@ -12,7 +12,7 @@ import ProductCard from '../ProductCard/ProductCard';
 import { Product } from '../../data/products';
 import SearchFilter from '../Filter/SearchFilter';
 import FilterProduct from '../Filter/FilterProduct';
-import { sampleProducts } from '../../data/products';
+// import { sampleProducts } from '../../data/products';
 import useProductStore from '../../zustand/useProductStore';
 import ProductGrid from '../ShowProduct/ProductGrid';
 
@@ -24,23 +24,20 @@ const ProductList: React.FC = () => {
     const [error, setError] = useState<string | null>(null);
     const {products, filteredProducts, setProducts, resetFilters, filters} = useProductStore();
     useEffect(() => {
-      // Hàm fetch data từ API
-      // const fetchProducts = async () => {
-      //   try {
-      //     const response = await axios.get<Product[]>('https://localhost:7183/Product/getListUse');
-      //     setProducts(response.data);
-      //     setLoading(false);
-      //   } catch (error) {
-      //     setError('Không thể lấy dữ liệu sản phẩm');
-      //     setLoading(false);
-      //   }
-      // };
-  
-      // fetchProducts();
       resetFilters();
-      setProducts(sampleProducts);
+      fetchProducts();
     }, [resetFilters, setProducts]);
-
+     // Hàm fetch data từ API
+     const fetchProducts = async () => {
+      try {
+        const response = await axios.get<Product[]>('https://localhost:7183/Product/getListUse');
+        setProducts(response.data);
+        setLoading(false);
+      } catch (error) {
+        setError('Không thể lấy dữ liệu sản phẩm');
+        setLoading(false);
+      }
+    };
     useEffect(() => {
       setCurrentPage(1);
     },[filteredProducts]);
@@ -49,8 +46,8 @@ const ProductList: React.FC = () => {
     ? filteredProducts
     : products;
 
-    // if (loading) return <p>Đang tải dữ liệu...</p>;
-    // if (error) return <p>{error}</p>;
+    if (loading) return <p>Đang tải dữ liệu...</p>;
+    if (error) return <p>{error}</p>;
     const totalPages = Math.ceil(displayedProducts.length / itemsPerPage);
     const paginatedProducts = displayedProducts.slice(
       (currentPage - 1) * itemsPerPage,

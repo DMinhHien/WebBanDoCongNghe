@@ -23,7 +23,7 @@ const applyFilters = (products: Product[], filters: Filters): Product[] => {
         ? product.productName.toLowerCase().includes(searchQuery.toLowerCase())
         : true;
   
-      const matchesCategory = category ? product.category === category : true;
+      const matchesCategory = category ? product.categoryName === category : true;
       
   
       return (

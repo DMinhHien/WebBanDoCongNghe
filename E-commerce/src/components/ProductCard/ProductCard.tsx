@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 // import styles from './ProductCard.module.css'
 import { Product } from '../../data/products';
 import { createTheme, ThemeProvider, Box, Card, CardMedia, CardContent, Typography, Rating } from '@mui/material';
-
+import Iphone from "../../assets/iphone.jpeg"
 interface ProductCardProps {
     product: Product;
 }
@@ -41,7 +41,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => (
       >
         <CardMedia
               component="img"
-              image={product.image}
+              image={Iphone}
               sx={{
                 width: "100%",
                 height: "auto",
