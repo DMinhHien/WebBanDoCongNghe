@@ -25,3 +25,4 @@ const ProductGrid = ({products}: Props) => {
         </Box>
     )
 }
+export default ProductGrid;
