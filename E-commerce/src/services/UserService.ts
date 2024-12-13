@@ -56,3 +56,12 @@ export const editUser = async (user: User) => {
         throw error
     }
 }
+
+export const addrole =async (id:string)=>{
+    try {
+        await axios.post(`https://localhost:7183/User/addRole`,{userId: id,roleName:"Admin"})
+    } catch (error) {
+        console.error("không thể thêm role admin cho user", error);
+        throw error
+    }
+}

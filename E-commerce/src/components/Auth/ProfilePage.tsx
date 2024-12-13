@@ -17,7 +17,7 @@ const ProfilePage: React.FC = () => {
       <Typography variant="body1">Tên: {user.userName}</Typography>
       <Typography variant="body1">Email: {user.email}</Typography>
       <Button > Tạo Shop </Button>
-      <Button color="inherit" onClick={() => navigate('/quanlyshop')} > Quan ly Shop </Button>
+      <Button color="inherit" onClick={() => navigate('/admin')} > Quan ly Shop </Button>
     </Container>
 
   );
