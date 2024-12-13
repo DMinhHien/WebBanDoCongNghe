@@ -12,6 +12,7 @@ export default function EditUser() {
     Password: "",
     BirthDate: new Date(),
     Address: "",
+    Role: ""
   });
   const nav = useNavigate();
   const { id: userId } = useParams();
@@ -26,6 +27,7 @@ export default function EditUser() {
         Password: "",
         BirthDate: new Date(data[0].birthDate),
         Address: data[0].address,
+        Role:data[0].role[0]
       });
     });
   }, []);

@@ -40,6 +40,7 @@ namespace WebBanDoCongNghe.Controllers
         }
 
         // POST: ProductController/Create
+        [Authorize(Roles = "Admin")]
         [HttpPost("addRole")]
         public async Task<IActionResult> AddRole([FromBody] JObject json)
         {
@@ -63,6 +64,38 @@ namespace WebBanDoCongNghe.Controllers
             return Json(user);
         }
         [Authorize(Roles = "Admin")]
+        [HttpPost("updateRole")]
+        public async Task<IActionResult> UpdateRole([FromBody] JObject json)
+        {
+            // Tìm user dựa trên ID
+            var userId = json.GetValue("userId")?.ToString();
+            var newRole = json.GetValue("roleName")?.ToString();
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return NotFound("User not found");
+            }
+
+            // Lấy tất cả các role hiện tại của user
+            var currentRoles = await _userManager.GetRolesAsync(user);
+
+            // Xóa tất cả role hiện tại của user
+            var removeResult = await _userManager.RemoveFromRolesAsync(user, currentRoles);
+            if (!removeResult.Succeeded)
+            {
+                return BadRequest("Failed to remove existing roles");
+            }
+
+            // Thêm role mới
+            var addResult = await _userManager.AddToRoleAsync(user, newRole);
+            if (!addResult.Succeeded)
+            {
+                return BadRequest(addResult.Errors);
+            }
+
+            return Json(user);
+        }
+        
         [HttpGet("getListUse")]
         public async Task<IActionResult> getListUse()
         {
@@ -81,7 +114,7 @@ namespace WebBanDoCongNghe.Controllers
                     address=user.Address,
                     accountname=user.AccountName,
 
-                   /* role = roles.Any() ? roles : new List<string>() */// Trả về danh sách rỗng nếu không có vai trò
+                    role = roles.Any() ? roles : new List<string>() // Trả về danh sách rỗng nếu không có vai trò
                 });
             }
 
@@ -112,6 +145,7 @@ namespace WebBanDoCongNghe.Controllers
                     d.Email,
                     d.birthDate,
                     d.Address,
+
                 });
             if (model == null)
             {

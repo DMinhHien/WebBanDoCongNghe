@@ -139,9 +139,6 @@ export default function AdminQuanLySP() {
                   <th className="border border-gray-300 p-2 text-left">
                     Mô tả
                   </th>
-                  <th className="border border-gray-300 p-2 text-left">
-                    Thao tác
-                  </th>
                 </tr>
               </thead>
               <tbody>
