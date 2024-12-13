@@ -809,6 +809,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "WebBanDoCongNghe.Controllers.UserController",
+    "Method": "UpdateRole",
+    "RelativePath": "User/updateRole",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "json",
+        "Type": "Newtonsoft.Json.Linq.JObject",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "WebBanDoCongNghe.Controllers.WeatherForecastController",
     "Method": "Get",
     "RelativePath": "WeatherForecast",

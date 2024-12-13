@@ -12,6 +12,7 @@ export default function CreateUser() {
     Password: "",
     BirthDate: new Date(),
     Address: "",
+    Role: ""
   });
   const nav = useNavigate();
   //call api createUser
