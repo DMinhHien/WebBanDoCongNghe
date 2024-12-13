@@ -114,7 +114,7 @@ namespace WebBanDoCongNghe.Controllers
                     address=user.Address,
                     accountname=user.AccountName,
 
-                   /* role = roles.Any() ? roles : new List<string>() */// Trả về danh sách rỗng nếu không có vai trò
+                    role = roles.Any() ? roles : new List<string>() // Trả về danh sách rỗng nếu không có vai trò
                 });
             }
 
@@ -145,6 +145,7 @@ namespace WebBanDoCongNghe.Controllers
                     d.Email,
                     d.birthDate,
                     d.Address,
+
                 });
             if (model == null)
             {
