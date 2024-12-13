@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AdminNav from "../components/AdminNav";
 import { User } from "../data/User";
-import { deleteUser, getListUsers } from "../services/UserService";
+import { deleteUser, editRole, getListUsers } from "../services/UserService";
 
 export default function QuanLyUser() {
   const [users, setUsers] = useState<User[]>([]);
@@ -12,7 +12,7 @@ export default function QuanLyUser() {
   const nav = useNavigate();
 
   const filteredUsers = users.filter((user) =>
-    user.AccountName.toLowerCase().includes(searchTerm.toLowerCase())
+    user.AccountName?.toLowerCase().includes(searchTerm.toLowerCase())
   );
   //Call api getListUsers
   useEffect(() => {
@@ -24,6 +24,7 @@ export default function QuanLyUser() {
         Address: item.address,
         Email: item.email,
         Password: "",
+        Role: item.role.length === 0 ? "User" : item.role,
       }));
       setUsers(transformedUsers);
     });
@@ -64,6 +65,17 @@ export default function QuanLyUser() {
       });
     });
   };
+
+  const changeRole=(userId:string,role:string)=>()=>{
+    editRole(userId, role).then(() => {
+      setUsers((prevUsers) =>
+        prevUsers.map((user) =>
+          user.id === userId ? { ...user, Role: role } : user
+        )
+      );
+    });
+  }
+
   const editUser = (id: string) => () => {
     nav(`/admin/QuanLyUser/edit/${id}`);
   };
@@ -109,7 +121,7 @@ export default function QuanLyUser() {
         <div>
           <h2 className="text-xl font-bold mb-2 ">Danh sách User</h2>
           <div className="overflow-x-auto w-[75vw]">
-            <table className="min-w-full border border-gray-300">
+            <table className="min-w-full border border-gray-300 table-auto border-collapse">
               <thead>
                 <tr style={{ backgroundColor: "#FBFAF1" }}>
                   <th className="border border-gray-300 p-2">
@@ -130,6 +142,9 @@ export default function QuanLyUser() {
                   </th>
                   <th className="border border-gray-300 p-2 text-left">
                     Địa chỉ
+                  </th>
+                  <th className="border border-gray-300 p-2 text-left">
+                    Vai trò
                   </th>
                   <th className="border border-gray-300 p-2 text-left">
                     Chức năng
@@ -163,6 +178,18 @@ export default function QuanLyUser() {
                     </td>
                     <td className="border border-gray-300 p-2">
                       {user.Address}
+                    </td>
+                    <td className="border border-gray-300 p-2">
+                      <select
+                      value={user.Role}
+                      onChange={(e)=>{
+                        changeRole(user.id,e.target.value)()
+                      }}
+                      className="border border-gray-300 p-1 rounded m-1 w-3/4"
+                    >
+                      <option value="User">User</option>
+                      <option value="Admin">Admin</option>
+                    </select>
                     </td>
                     <td className="border border-gray-300 p-2">
                       <button

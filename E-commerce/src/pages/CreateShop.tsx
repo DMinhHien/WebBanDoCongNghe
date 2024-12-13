@@ -28,6 +28,7 @@ export default function CreateShop() {
         Address: item.address,
         Email: item.email,
         Password: "",
+        Role: item.role[0]
       }));
       setUsers(transformedUsers);
     });
