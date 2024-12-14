@@ -6,9 +6,7 @@ import { Product } from '../../data/products';
 import { Box, createTheme, Divider, ThemeProvider } from "@mui/material";
 import MainProduct from "./MainProduct/MainProduct";
 import Reviews from './Review/Review';
-interface Props {
-  product: Product;
-}
+
 
 const DividerSection = () => (
   <Divider
@@ -22,9 +20,20 @@ const theme = createTheme({
   },
 });
 
-const ProductDetail: React.FC() => {
+const ProductDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>(); // Lấy id từ URL
-  const {product}
+  const [product, setProduct] = useState<Product>({
+    id: 0,
+    productName: "",
+    unitPrice: "",
+    description: "",
+    quantity: "",
+    status: "",
+    image: "",
+    rating: 0,
+    categoryName: ""
+    
+ });
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -32,7 +41,7 @@ const ProductDetail: React.FC() => {
     const fetchProduct = async () => {
       try {
         const response = await axios.get<Product>(`https://localhost:7183/Product/getElementById/${id}`);
-        product = response.data;
+        setProduct( response.data);
         setLoading(false);
       } catch (error) {
         setError('Không thể tải thông tin chi tiết sản phẩm');
