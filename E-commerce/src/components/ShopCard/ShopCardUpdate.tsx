@@ -27,7 +27,7 @@ const ShopCard: React.FC<ShopCardProps> = ({ shop }) => (
     >
       <Link
        key={shop.id}
-       to={`/shops/${shop.id}`}
+       to={`/shop/${shop.id}`}
        style={{ textDecoration: "none", color: "inherit", display: "block" }}>
 
       <Card
