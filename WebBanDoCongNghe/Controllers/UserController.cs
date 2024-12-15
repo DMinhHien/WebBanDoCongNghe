@@ -95,7 +95,7 @@ namespace WebBanDoCongNghe.Controllers
 
             return Json(user);
         }
-        [Authorize(Roles = "Admin")]
+        
         [HttpGet("getListUse")]
         public async Task<IActionResult> getListUse()
         {
