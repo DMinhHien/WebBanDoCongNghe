@@ -1,12 +1,13 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using BTTHUCHANH.DBContext;
+using WebBanDoCongNghe.DBContext;
 using Newtonsoft.Json;
-using BTTHUCHANH.Models;
+using WebBanDoCongNghe.Models;
 using Newtonsoft.Json.Linq;
 using Microsoft.AspNetCore.Http.HttpResults;
 using System.Net.WebSockets;
-namespace BTTHUCHANH.Controllers
+using Microsoft.AspNetCore.Authorization;
+namespace WebBanDoCongNghe.Controllers
 {
     [ApiController]
     [Route("[controller]")]
@@ -19,7 +20,7 @@ namespace BTTHUCHANH.Controllers
             _context = context;
         }
 
-     
+        [Authorize]
         [HttpPost("create")]
         public ActionResult Create([FromBody] JObject json)
         {
@@ -31,7 +32,7 @@ namespace BTTHUCHANH.Controllers
         }
 
 
-
+        [Authorize]
         [HttpPost("edit")]
         public ActionResult Edit([FromBody] JObject json)
         {
@@ -41,13 +42,35 @@ namespace BTTHUCHANH.Controllers
             return Json(model);
         }
 
-
+        [Authorize]
         [HttpPost("delete")]
         public ActionResult Delete([FromBody] JObject json)
         {
             var id = (json.GetValue("id").ToString());
             var result = _context.Products.SingleOrDefault(p => p.id == id);
             _context.Products.Remove(result);
+            var receiptDetail=_context.ReceiptDetails.AsQueryable().Where(p => p.idProduct == id);
+            if (receiptDetail != null)
+            {
+                foreach (var item in receiptDetail)
+                {
+                    int count = _context.ReceiptDetails.AsQueryable().Where(p => p.idReceipt == item.idReceipt).Count();
+                    if (count == 1)
+                    {
+                        var receipt = _context.Receipts.FirstOrDefault(x => x.id == item.idReceipt);
+                        _context.Receipts.Remove(receipt);
+                    }
+                    _context.ReceiptDetails.Remove(item);
+                }
+            }
+            var cartDetail = _context.CartDetails.AsQueryable().Where(p => p.idProduct == id);
+            if (cartDetail != null)
+            {
+                foreach (var item in cartDetail)
+                {
+                    _context.CartDetails.Remove(item);
+                }
+            }
             _context.SaveChanges();
             return Json(result);
 
@@ -61,6 +84,82 @@ namespace BTTHUCHANH.Controllers
                      d.id,
                      d.productName,
                      d.unitPrice,
+                     d.description,
+                     d.quantity,
+                     d.status,
+                     d.image,
+                     d.categoryId,
+                     d.rating,
+                     categoryName = _context.Categories
+                        .Where(x => x.id == d.categoryId)
+                        .Select(s => s.name) 
+                        .FirstOrDefault()
+                 }).ToList();
+            return Json(result);
+        }
+        [HttpGet("getListUseCategory/{categoryId}")]
+        public IActionResult getListUseCategory([FromRoute] string categoryId)
+        {
+            var result = _context.Products.AsQueryable().Where(x=>x.categoryId== categoryId).
+                 Select(d => new
+                 {
+                     d.id,
+                     d.productName,
+                     d.unitPrice,
+                     d.description,
+                     d.quantity,
+                     d.status,
+                     d.image,
+                     d.categoryId,
+                     d.rating,
+                     categoryName = _context.Categories
+                        .Where(x => x.id == d.categoryId)
+                        .Select(s => s.name)
+                         .FirstOrDefault()
+                 }).ToList();
+            return Json(result);
+        }
+        [HttpGet("getListUseShop/{shopId}")]
+        public IActionResult getListUseShop([FromRoute] string shopId)
+        {
+            var result = _context.Products.AsQueryable().Where(x => x.idShop == shopId).
+                 Select(d => new
+                 {
+                     d.id,
+                     d.productName,
+                     d.unitPrice,
+                     d.description,
+                     d.quantity,
+                     d.status,
+                     d.image,
+                     d.categoryId,
+                     d.rating,
+                     categoryName = _context.Categories
+                        .Where(x => x.id == d.categoryId)
+                        .Select(s => s.name)
+                         .FirstOrDefault()
+                 }).ToList();
+            return Json(result);
+        }
+        [HttpGet("getListUseSearch")]
+        public IActionResult getListUseSearch([FromBody] JObject json)
+        {
+            var searchString = json.GetValue("data").ToString();
+            var result = _context.Products.AsQueryable().Where(x=>x.productName.Contains(searchString)).
+                 Select(d => new
+                 {
+                     d.id,
+                     d.productName,
+                     d.unitPrice,
+                     d.description,
+                     d.quantity,
+                     d.status,
+                     d.image,
+                     d.categoryId,
+                     d.rating,
+                     categoryName = _context.Categories
+                        .Where(x => x.id == d.categoryId)
+                        .Select(s => s.name)
                  }).ToList();
             return Json(result);
         }
@@ -79,13 +178,41 @@ namespace BTTHUCHANH.Controllers
                      d.id,
                      d.productName,
                      d.unitPrice,
+                     d.description,
+                     d.quantity,
+                     d.status,
+                     d.image,
+                     d.categoryId,
+                     d.rating,
+                     categoryName = _context.Categories
+                        .Where(x => x.id == d.categoryId)
+                        .Select(s => s.name)
                  }).ToList();
             return Json(result);
         }
         [HttpGet("getElementById/{id}")]
         public IActionResult getElementById([FromRoute] string id)
         {
-            var model = _context.Products.AsQueryable().FirstOrDefault(m => m.id == id); ;
+            var model = _context.Products
+                .Where(m => m.id == id)
+                .Select(d => new
+                {
+                    d.productName,
+                    d.unitPrice,
+                    d.description,
+                    d.status,
+                    d.image,
+                    d.quantity,
+                    d.categoryId,
+                    d.rating,
+                    // Chỉ lấy giá trị chuỗi của categoryName
+                    categoryName = _context.Categories
+                        .Where(x => x.id == d.categoryId)
+                        .Select(s => s.name) // Lấy chuỗi s.name
+                        .FirstOrDefault()
+                })
+                .FirstOrDefault(); // Thêm FirstOrDefault để lấy kết quả đầu tiên hoặc null
+
             if (model == null)
             {
                 return NotFound();

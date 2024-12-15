@@ -1,4 +1,4 @@
-namespace BTTHUCHANH
+namespace WebBanDoCongNghe
 {
     public class WeatherForecast
     {
