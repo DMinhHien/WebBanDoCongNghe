@@ -10,11 +10,6 @@ import {Shop} from '../../data/shop'
 const ProfilePage: React.FC = () => {
   const { user } = useAuth();
   const [shop, setShop] = useState<Shop|null>(null);
-  const handleShopAdded = (newShop: Shop) => {
-    setShop(newShop);
-    setIsAddingShop(false);
-  };
-  const [isAddingShop, setIsAddingShop] = useState(false); 
   const navigate = useNavigate();
   if (!user) {
     return <Typography variant="h6">Bạn chưa đăng nhập</Typography>;
@@ -32,8 +27,8 @@ const ProfilePage: React.FC = () => {
       <Typography variant="body1">Tên: {user.userName}</Typography>
       <Typography variant="body1">Email: {user.email}</Typography>
       {shop ? (
-        <Button color="inherit" onClick={() => navigate('/quanlyshop')} > Quan ly Shop </Button>
-      ) : ( <Button  onClick={() => navigate('/newShop')}> Tạo Shop </Button>)}
+        <Button  onClick={() => navigate('/newShop')}> Tạo Shop </Button>
+      ) : ( <Button color="inherit" onClick={() => navigate('/quanlyshop')} > Quan ly Shop </Button>)}
 
     </Container>
 

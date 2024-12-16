@@ -3,11 +3,25 @@ import DashboardNav from "../components/DashboardNav";
 import { ShopDetails } from "../data/shopdetail";
 import { useNavigate } from "react-router-dom";
 import { deleteshop, fetchShopDetails } from "../services/shopService";
-
+import { useAuth } from "../components/Auth/AuthContext";
+import { Shop } from "../data/shop";
+import { getShopByUserId } from "../services/shopService";
 export default function QuanLyThongTin() {
   const [shopDetail, setShopDetail] = useState<ShopDetails>();
   const nav=useNavigate();
+  const { user } = useAuth();
+  const [shop, setShop] = useState<Shop|null>(null);
+  const [idShop, setIdShop] = useState<string>("");
   //Call api getShop
+  useEffect(
+    () => {
+        if (user) {
+          getShopByUserId(user.id).then((fetchedShop) => setShop(fetchedShop));
+          setIdShop(shop.id);
+        }
+      }, [user]
+  );
+
   useEffect(()=>{
     
     fetchShopDetails("ddcf2539-4").then((data)=>{
