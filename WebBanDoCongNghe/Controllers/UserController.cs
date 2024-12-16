@@ -14,6 +14,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using WebBanDoCongNghe.Interface;
+using System.Data;
 
 namespace WebBanDoCongNghe.Controllers
 {
@@ -40,7 +41,7 @@ namespace WebBanDoCongNghe.Controllers
         }
 
         // POST: ProductController/Create
-        [Authorize(Roles = "Admin")]
+        [Authorize]
         [HttpPost("addRole")]
         public async Task<IActionResult> AddRole([FromBody] JObject json)
         {
@@ -113,6 +114,7 @@ namespace WebBanDoCongNghe.Controllers
                     birthdate=user.birthDate,
                     address=user.Address,
                     accountname=user.AccountName,
+                    phone=user.PhoneNumber,
 
                     role = roles.Any() ? roles : new List<string>() // Trả về danh sách rỗng nếu không có vai trò
                 });
@@ -145,6 +147,7 @@ namespace WebBanDoCongNghe.Controllers
                     d.Email,
                     d.birthDate,
                     d.Address,
+                    d.PhoneNumber
 
                 });
             if (model == null)
@@ -165,6 +168,7 @@ namespace WebBanDoCongNghe.Controllers
                     d.Email,
                     d.birthDate,
                     d.Address,
+                    d.PhoneNumber
                 }) ; 
             if (model == null)
             {
@@ -184,6 +188,7 @@ namespace WebBanDoCongNghe.Controllers
                     AccountName = model.AccountName,
                     birthDate=model.BirthDate,
                     Address = model.Address,
+                    PhoneNumber=model.Phone
 
                 };
 
@@ -200,6 +205,7 @@ namespace WebBanDoCongNghe.Controllers
                             user.Email,
                             user.Id,
                             user.AccountName,
+                            model.Phone,
                             model.BirthDate,
                             model.Address,
                         }  
@@ -245,6 +251,8 @@ namespace WebBanDoCongNghe.Controllers
                                 user.AccountName,
                                 user.birthDate,
                                 user.Address,
+                                user.PhoneNumber,
+                                role = userRole.FirstOrDefault()
                             }
                         };
 
@@ -300,7 +308,7 @@ namespace WebBanDoCongNghe.Controllers
             user.AccountName = model.AccountName ?? user.AccountName;
             user.Address = model.Address ?? user.Address;
             user.birthDate = model.birthDate ?? user.birthDate;
-
+            user.PhoneNumber = model.PhoneNumber ?? user.PhoneNumber;
             // Lưu thay đổi
             var result = await _userManager.UpdateAsync(user);
             if (!result.Succeeded)
