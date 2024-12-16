@@ -1,4 +1,4 @@
-import ShopList from "../components/ShopList/ShopList";
+import ShopList from "../components/ShopList/ShopListUpdate";
 function ShopPage() {
     return(
        <ShopList>

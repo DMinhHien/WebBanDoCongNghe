@@ -9,6 +9,7 @@ export default function QuanLyThongTin() {
   const nav=useNavigate();
   //Call api getShop
   useEffect(()=>{
+    
     fetchShopDetails("ddcf2539-4").then((data)=>{
       setShopDetail(data)
     })
