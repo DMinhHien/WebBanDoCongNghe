@@ -41,12 +41,12 @@ const ProfilePage: React.FC = () => {
       <Typography variant="body1">Email: {user.email}</Typography>
       {shop ? (
         <Button color="inherit" onClick={() => navigate('/quanlyshop')} > Quan ly Shop </Button>
-      ) : ( <Button variant="contained" color="primary" onClick={() => setIsAddingShop(true)}>
-      Tạo Shop
-    </Button>)}
+      ) : ( <Button  onClick={() => navigate('/newShop')}> Tạo Shop </Button>)}
        {isAddingShop && (
         <AddShopForm onClose={() => setIsAddingShop(false)} onShopAdded={handleShopAdded} />
       )}
+      
+   
     </Container>
 
   );

@@ -2,11 +2,15 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, TextField, Button, Typography } from '@mui/material';
 import { useAuth } from './AuthContext';
-
+import{addRole}  from "../../services/UserService";
+import{createCart}  from "../../services/cartService";
 const SignUpPage: React.FC = () => {
     const [accountName, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [birthDate, setBirthDate] = useState('');
+    const [address, setAddress] = useState('');
+    const [phone, setPhone] = useState('');
     const [error, setError] = useState<string | null>(null);
     const { login } = useAuth(); // Để tự động đăng nhập khi đăng ký thành công
     const navigate = useNavigate();
@@ -20,15 +24,18 @@ const SignUpPage: React.FC = () => {
         const response = await fetch('https://localhost:7183/User/Register', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, password, accountName }),
+          body: JSON.stringify({ email, password, accountName,birthDate,address,phone }),
         });
   
         if (response.ok) {
           const data = await response.json();
-          
           // Đăng nhập tự động sau khi đăng ký thành công
           login(data.user, data.token);
-          
+          var id=data.user.id
+          var role="User"
+          addRole(id,role)
+          data.user.role=role
+          createCart(id)
           // Chuyển hướng về trang chủ
           navigate('/');
         } else {
@@ -65,6 +72,28 @@ const SignUpPage: React.FC = () => {
             fullWidth
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            margin="normal"
+          />
+          <TextField
+            label="Điện thoại"
+            fullWidth
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            margin="normal"
+          />
+          <p>Sinh nhật</p>
+          <TextField
+            type="date"
+            fullWidth
+            value={birthDate}
+            onChange={(e) => setBirthDate(e.target.value)}
+            margin="normal"
+          />
+          <TextField
+            label="Địa chỉ"
+            fullWidth
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
             margin="normal"
           />
           <Button type="submit" variant="contained" fullWidth color="primary">
