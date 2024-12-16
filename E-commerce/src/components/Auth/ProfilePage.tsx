@@ -9,15 +9,7 @@ import AddShopForm from '../ShopForm/AddShopForm';
 import {Shop} from '../../data/shop'
 const ProfilePage: React.FC = () => {
   const { user } = useAuth();
-  const [shop, setShop] = useState<Shop|null>({
-    id: "",
-    userId: "",
-    userName: "",
-    name: "",
-    address: "",
-    rating: 0,
-    image: ""
-  });
+  const [shop, setShop] = useState<Shop|null>(null);
   const handleShopAdded = (newShop: Shop) => {
     setShop(newShop);
     setIsAddingShop(false);
@@ -42,11 +34,7 @@ const ProfilePage: React.FC = () => {
       {shop ? (
         <Button color="inherit" onClick={() => navigate('/quanlyshop')} > Quan ly Shop </Button>
       ) : ( <Button  onClick={() => navigate('/newShop')}> Tạo Shop </Button>)}
-       {isAddingShop && (
-        <AddShopForm onClose={() => setIsAddingShop(false)} onShopAdded={handleShopAdded} />
-      )}
-      
-   
+
     </Container>
 
   );
