@@ -54,9 +54,6 @@ const MainInfo = ({ shop }: Props) => {
                 mr: 1,
               }}
             />
-            <Typography variant="body1" color="textSecondary">
-              {5 > 0 ? `${5} items available` : "Out of stock"}
-            </Typography>
           </Box>
         </Box>
         <Box display="flex" gap={1} alignItems="center">
@@ -70,11 +67,11 @@ const MainInfo = ({ shop }: Props) => {
             ({shop.rating})
           </Typography>
           <Typography fontWeight="500" fontSize="16px" color="#C45C00">
-            Product.Sold
+            Rating
           </Typography>
         </Box>
         <Typography variant="h4" color="textPrimary" fontWeight="600" my={3}>
-          {shop.address}{" "}
+          Địa chỉ: {shop.address}{" "}
         </Typography>
 
         {/* Description */}
