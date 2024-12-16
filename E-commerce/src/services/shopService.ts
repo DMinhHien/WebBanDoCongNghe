@@ -1,10 +1,6 @@
 import axios from 'axios';
 import { ShopDetails } from '../data/shopdetail';
-
-export interface Shop {
-  id: string;
-  name: string;
-}
+import {Shop} from '../data/shop'
 
 export const fetchShops = async (): Promise<ShopDetails[]> => {
   const response = await axios.get('https://localhost:7183/Shop/getListUse');
@@ -54,4 +50,12 @@ export const editShop = async (shop: ShopDetails) => {
     console.error("không thể chỉnh sửa shop", error);
     throw error
   }
+}
+
+export async function getShopByUserId(userId: string): Promise<Shop | null> {
+  const response = await fetch(`https://localhost:7183/api/shop/getElementByUserId/${userId}`);
+  if (response.ok) {
+    return response.json();
+  }
+  return null;
 }
