@@ -9,7 +9,7 @@ import AddShopForm from '../ShopForm/AddShopForm';
 import {Shop} from '../../data/shop'
 const ProfilePage: React.FC = () => {
   const { user } = useAuth();
-  const [shop, setShop] = useState<Shop>({
+  const [shop, setShop] = useState<Shop|null>({
     id: "",
     userId: "",
     userName: "",
