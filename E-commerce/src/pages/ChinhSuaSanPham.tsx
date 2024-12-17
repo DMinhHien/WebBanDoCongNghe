@@ -6,7 +6,8 @@ import { editProduct, getProduct } from "../services/productDetailService";
 import { getListCategories } from "../services/categoryService";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { storage } from "../FireBaseConfig";
-
+import {getShopId} from "../services/shopService"
+import { useAuth } from '../components/Auth/AuthContext';
 export const uploadToFirebase = async (file: File): Promise<string> => {
   const storageRef = ref(storage, `images2/${file.name}`);
   await uploadBytes(storageRef, file);
@@ -27,6 +28,7 @@ export const getCategoryNamebyId = (
   return category ? category.name : null;
 };
 export default function ChinhSuaSP() {
+  const { user } = useAuth();
   const { id } = useParams<{ id: string }>();
   const [categories, setCategories] = useState<Category[]>([]);
   const [productData, setProductData] = useState<Product>({
@@ -58,14 +60,18 @@ export default function ChinhSuaSP() {
     navigation("/quanlyshop");
   };
   //call api editProduct
+  var idshop:any
   const updateHandle = async () => {
+    if (user?.id) {
+      idshop = await getShopId(user.id); // Chờ Promise resolve và gán kết quả
+    }
     // Không thay đổi dữ liệu trong form ngay lập tức
     const productWithNumbers = {
       ...productData,
       unitPrice: parseFloat(productData.unitPrice.toString()),
       quantity: parseInt(productData.quantity.toString(), 10),
       id: id as string,
-      idShop: "ddcf2539-4",
+      idShop: idshop,
     };
     const isEmptyField = Object.entries(productWithNumbers).some(
       ([key, value]) => {

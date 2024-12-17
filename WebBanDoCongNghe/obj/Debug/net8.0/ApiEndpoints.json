@@ -673,6 +673,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "WebBanDoCongNghe.Controllers.ShopController",
+    "Method": "getShopId",
+    "RelativePath": "Shop/getShopId/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "WebBanDoCongNghe.Controllers.UserController",
     "Method": "AddRole",
     "RelativePath": "User/addRole",

@@ -59,3 +59,11 @@ export async function getShopByUserId(userId: string): Promise<Shop | null> {
   }
   return null;
 }
+export async function getShopId(userId: string): Promise<string> {
+  const response = await fetch(`https://localhost:7183/Shop/getShopId/${userId}`);
+  if (response.ok) {
+    const result = await response.json();
+    return result as string; // Ép kiểu rõ ràng
+  }
+  return "";
+}

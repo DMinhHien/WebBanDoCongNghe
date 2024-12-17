@@ -11,8 +11,10 @@ import {
 } from "../services/productDetailService";
 import { Category } from "./ChinhSuaSanPham";
 import { getListCategories } from "../services/categoryService";
-
+import {getShopId} from "../services/shopService"
+import { useAuth } from '../components/Auth/AuthContext';
 export default function QuanLySP() {
+   const { user } = useAuth();
   const [searchTerm, setSearchTerm] = useState('');
   const [categories, setCategories] = useState<Category[]>([])
   const [products, setProducts] = useState<Product[]>([]);
@@ -21,10 +23,12 @@ export default function QuanLySP() {
     setSelectedProducts(selected);
   };
   //call api getListProductShop
-  const id="ddcf2539-4"
+  const shopIdPromise = user?.id ? getShopId(user.id) : null; 
   useEffect(() => {
-    getListProduct(id).then((data) => {
-      setProducts(data);
+    shopIdPromise?.then((shopId: string) => {
+      getListProduct(shopId).then((data) => {
+        setProducts(data);
+      }); // Chuỗi đã được giải quyết
     });
     getListCategories().then((data)=>{
       setCategories(data);
