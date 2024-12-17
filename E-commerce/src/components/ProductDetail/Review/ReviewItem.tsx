@@ -1,43 +1,42 @@
 import { Box, Typography, Rating } from "@mui/material";
 
 interface Props {
-  name: string;
+  id: string;
+  content: string;
+  username: string;
+  productId: string;
   rating: number;
-  date: string;
-  comment: string;
-  reply?: string;
+  date: Date | string; // Allowing both Date and string types
 }
 
-const ReviewItem = ({ name, rating, date, comment, reply }: Props) => {
-    return (
-      <Box mb={3}>
-        <Box display="flex" justifyContent="space-between">
-          <Typography fontWeight="bold">{name}</Typography>
-          <Typography color="textSecondary">{date}</Typography>
-        </Box>
-        <Rating
-          value={rating}
-          readOnly
-          size="small"
-          sx={{
-            "& .MuiRating-iconFilled": {
-              color: "black",
-            },
-            "& .MuiRating-iconEmpty": {
-              color: "black",
-            },
-          }}
-        />
-        <Typography sx={{ mt: 1 }}>{comment}</Typography>
-        {reply && (
-          <Typography
-            sx={{ mt: 1, pl: 5, color: "secondary.main", fontStyle: "italic" }}
-          >
-            {reply}
-          </Typography>
-        )}
+const ReviewItem = ({ username, rating, date, content }: Props) => {
+  // Ensure date is a valid Date object
+  const validDate = date instanceof Date ? date : new Date(date);
+
+  return (
+    <Box mb={3}>
+      <Box display="flex" justifyContent="space-between">
+        <Typography fontWeight="bold">{username}</Typography>
+        <Typography color="textSecondary">
+          {isNaN(validDate.getTime()) ? "No date available" : validDate.toLocaleDateString()}
+        </Typography>
       </Box>
-    );
-  };
-  
-  export default ReviewItem;
+      <Rating
+        value={rating}
+        readOnly
+        size="small"
+        sx={{
+          "& .MuiRating-iconFilled": {
+            color: "black",
+          },
+          "& .MuiRating-iconEmpty": {
+            color: "black",
+          },
+        }}
+      />
+      <Typography sx={{ mt: 1 }}>{content}</Typography>
+    </Box>
+  );
+};
+
+export default ReviewItem;

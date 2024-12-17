@@ -234,11 +234,6 @@
         "Name": "productId",
         "Type": "System.String",
         "IsRequired": true
-      },
-      {
-        "Name": "productId",
-        "Type": "",
-        "IsRequired": true
       }
     ],
     "ReturnTypes": []

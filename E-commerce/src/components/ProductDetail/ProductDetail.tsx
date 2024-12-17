@@ -22,8 +22,9 @@ const theme = createTheme({
 
 const ProductDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>(); // Lấy id từ URL
+  let proId=id??""
   const [product, setProduct] = useState<Product>({
-    id: 0,
+    id: "",
     productName: "",
     unitPrice: "",
     description: "",
@@ -42,6 +43,7 @@ const ProductDetail: React.FC = () => {
       try {
         const response = await axios.get<Product>(`https://localhost:7183/Product/getElementById/${id}`);
         setProduct( response.data);
+        console.log(id)
         setLoading(false);
       } catch (error) {
         setError('Không thể tải thông tin chi tiết sản phẩm');
@@ -59,7 +61,7 @@ return (
   <Box px={3} pt={5} justifyContent="center" alignItems="center">
     <MainProduct product={product} />
     <DividerSection />
-    <Reviews />
+    <Reviews productId={proId} />
     <DividerSection />
   </Box>
 </ThemeProvider>
