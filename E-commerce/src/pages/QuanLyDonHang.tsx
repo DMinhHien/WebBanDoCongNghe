@@ -6,8 +6,8 @@ import OrderList, { Order } from "../components/OrderList/OrderList";
 import { getListOrder } from "../services/OrderService";
 import { useAuth } from '../components/Auth/AuthContext';
 import {getShopId} from "../services/shopService"
+import { Shop } from "../data/shop";
 export default function QuanLyDonHang() {
-    const { user } = useAuth();
   const [searchTerm, setSearchTerm] = useState("");
   const [orders, setOrders] = useState<Order[]>([]);
   const { user } = useAuth();
