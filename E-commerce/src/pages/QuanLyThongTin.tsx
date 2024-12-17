@@ -6,11 +6,11 @@ import { deleteshop, fetchShopDetails } from "../services/shopService";
 import {getShopId} from "../services/shopService"
 import { useAuth } from '../components/Auth/AuthContext';
 export default function QuanLyThongTin() {
-  const { user } = useAuth();
+  const { user: authUser  } = useAuth();
   const [shopDetail, setShopDetail] = useState<ShopDetails>();
   const nav=useNavigate();
   //Call api getShop
-  const shopIdPromise = user?.id ? getShopId(user.id) : null; 
+  const shopIdPromise = authUser?.id ? getShopId(authUser.id) : null; 
   useEffect(()=>{
     shopIdPromise?.then((shopId: string) => {
     fetchShopDetails(shopId).then((data)=>{
