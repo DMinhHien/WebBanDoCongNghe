@@ -21,15 +21,15 @@ namespace WebBanDoCongNghe.Controllers
         }
 
         // POST: ProductController/Create
-        [Authorize]
-        [HttpPost("create")]
-        public ActionResult Create([FromBody] JObject json)
+        //[Authorize]
+        [HttpPost("create/{userId}")]
+        public ActionResult Create([FromBody] JObject json, [FromRoute] string userId)
         {
             var receipt = new Receipt();
             var receiptDetailsJson = json.GetValue("data");
             var receiptDetails = JsonConvert.DeserializeObject<List<ReceiptDetail>>(receiptDetailsJson.ToString());
             receipt.id = Guid.NewGuid().ToString().Substring(0, 10);
-            receipt.userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            receipt.userId = userId;
             receipt.date = DateTime.Now;
             _context.Receipts.Add(receipt);
             foreach (var detail in receiptDetails)
@@ -86,10 +86,9 @@ namespace WebBanDoCongNghe.Controllers
             }
             return Json(sum);
         }
-        [HttpGet("getListUse")]
-        public IActionResult getListUse()
+        [HttpGet("getListUse/{userId}")]
+        public IActionResult getListUse([FromRoute]string userId)
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var result = _context.Receipts
                 .Where(x => x.userId == userId)
                 .Select(receipt => new
@@ -115,6 +114,31 @@ namespace WebBanDoCongNghe.Controllers
                 }).ToList();
             return Json(result);
         }
+        [HttpGet("getListUseUser/{userId}")]
+        public IActionResult getListUseUser([FromRoute] string userId)
+        {
+            var result = _context.ReceiptDetails
+                .Where(rd => _context.Receipts
+                    .Any(r => r.userId == userId && r.id == rd.idReceipt)) // Lọc ReceiptDetail theo idReceipt
+                .Select(rd => new
+                {
+                    rd.id,
+                    rd.idReceipt,
+                    rd.idProduct,
+                    rd.quantity,
+                    Product = _context.Products
+                        .Where(p => p.id == rd.idProduct)
+                        .Select(p => new
+                        {
+                            p.id,
+                            p.productName,
+                            p.unitPrice
+                        }).FirstOrDefault()
+                }).ToList();
+
+            return Json(result);
+        }
+
         [HttpGet("getListUseShop/{shopId}")]
         public IActionResult getListUseShop([FromRoute] string shopId)
         {
@@ -134,7 +158,8 @@ namespace WebBanDoCongNghe.Controllers
                         .Select(r => new
                         {
                             r.userId,
-                            r.date
+                            r.date,
+                            AccountName=_context.Users.Where(x=>x.Id==r.userId).Select(x=>x.AccountName).FirstOrDefault(),
                         }).FirstOrDefault(),
                     // Lấy thông tin Product
                     Product = _context.Products
@@ -143,7 +168,8 @@ namespace WebBanDoCongNghe.Controllers
                         {
                             p.id,
                             p.productName,
-                            p.unitPrice
+                            p.unitPrice,
+                            TotalPrice = receiptDetail.quantity*p.unitPrice
                         }).FirstOrDefault()
                 }).ToList();
 
