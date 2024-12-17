@@ -4,8 +4,10 @@ import { ShopDetails } from "../data/shopdetail";
 import { editShop, fetchShopDetails } from "../services/shopService";
 import { uploadToFirebase } from "./ChinhSuaSanPham";
 import { useNavigate } from "react-router-dom";
-
+import {getShopId} from "../services/shopService"
+import { useAuth } from '../components/Auth/AuthContext';
 export default function ChinhSuaShop() {
+  const { user } = useAuth();
   const [shopDetail, setShopDetail] = useState<ShopDetails>({
     id: "",
     userId: "",
@@ -15,11 +17,14 @@ export default function ChinhSuaShop() {
     image: "",
     rating: 0,
   });
+  const shopIdPromise = user?.id ? getShopId(user.id) : null; 
   //call api getShop
   useEffect(()=>{
-    fetchShopDetails("ddcf2539-4").then((data)=>{
+    shopIdPromise?.then((shopId: string) => {
+    fetchShopDetails(shopId).then((data)=>{
       setShopDetail(data)
     })
+  });
   },[])
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;

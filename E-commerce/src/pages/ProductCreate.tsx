@@ -5,7 +5,8 @@ import { Product } from "../data/productdetail";
 import { addProduct } from "../services/productDetailService";
 import { uploadToFirebase } from "./ChinhSuaSanPham";
 import { getListCategories } from "../services/categoryService";
-
+import {getShopId} from "../services/shopService"
+import { useAuth } from '../components/Auth/AuthContext';
 export default function ProductCreate() {
   const tinhtrangs = [
     "mới (100%)",
@@ -13,6 +14,7 @@ export default function ProductCreate() {
     "đã sử dụng (90%)",
     "đã sử dụng(80%)",
   ];
+  const { user } = useAuth();
   const [categories, setCategories] = useState<any[]>([]);
   const [productData, setProductData] = useState<Product>({
     id: "",
@@ -37,10 +39,14 @@ export default function ProductCreate() {
     navigation("/quanlyshop");
   };
   //call api createProduct
+  var idshop:any
   const addHandle = async () => {
+    if (user?.id) {
+      idshop = await getShopId(user.id); // Chờ Promise resolve và gán kết quả
+    }
     const productWithNumbers = {
       ...productData,
-      idShop: "ddcf2539-4",
+      idShop: idshop,
       unitPrice: parseFloat(productData.unitPrice.toString()),
       quantity: parseInt(productData.quantity.toString(), 10),
     };
