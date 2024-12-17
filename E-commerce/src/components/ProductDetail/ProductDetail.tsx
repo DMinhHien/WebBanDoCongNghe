@@ -2,19 +2,39 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import styles from './ProductDetail.module.css';
+import { Product } from '../../data/products';
+import { Box, createTheme, Divider, ThemeProvider } from "@mui/material";
+import MainProduct from "./MainProduct/MainProduct";
+import Reviews from './Review/Review';
 
-interface Product {
-    id: number;
-    productName: string;
-    unitPrice: string;
-    quantity: number;
-    status: string;
-    description: string;  
-    imageUrl: string;
-}
-const ProductDetail: React.FC =() => {
+
+const DividerSection = () => (
+  <Divider
+    sx={{ width: "90%", margin: "0 auto", borderBottomWidth: 2, marginY: 6 }}
+  />
+);
+
+const theme = createTheme({
+  typography: {
+    fontFamily: "Nunito",
+  },
+});
+
+const ProductDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>(); // Lấy id từ URL
-  const [product, setProduct] = useState<Product | null>(null);
+  let proId=id??""
+  const [product, setProduct] = useState<Product>({
+    id: "",
+    productName: "",
+    unitPrice: "",
+    description: "",
+    quantity: "",
+    status: "",
+    image: "",
+    rating: 0,
+    categoryName: ""
+    
+ });
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -22,7 +42,8 @@ const ProductDetail: React.FC =() => {
     const fetchProduct = async () => {
       try {
         const response = await axios.get<Product>(`https://localhost:7183/Product/getElementById/${id}`);
-        setProduct(response.data);
+        setProduct( response.data);
+        console.log(id)
         setLoading(false);
       } catch (error) {
         setError('Không thể tải thông tin chi tiết sản phẩm');
@@ -36,18 +57,14 @@ const ProductDetail: React.FC =() => {
   if (loading) return <p>Đang tải dữ liệu...</p>;
   if (error) return <p>{error}</p>;
 return (
-    <div className={styles.productInfo}>
-    {product && (
-      <>
-        <h1 className={styles.productTitle}>{product.productName}</h1>
-        <p className={styles.productPrice}>{product.unitPrice}</p>
-        <p className={styles.quantity}>{product.quantity}</p>
-        <p className={styles.status}>{product.status}</p>
-        <p className={styles.description}>{product.description}</p>
-        <img src={product.imageUrl} alt={product.productName}/>
-      </>
-    )}
-  </div>
+  <ThemeProvider theme={theme}>
+  <Box px={3} pt={5} justifyContent="center" alignItems="center">
+    <MainProduct product={product} />
+    <DividerSection />
+    <Reviews productId={proId} />
+    <DividerSection />
+  </Box>
+</ThemeProvider>
 );
 };
 export default ProductDetail;

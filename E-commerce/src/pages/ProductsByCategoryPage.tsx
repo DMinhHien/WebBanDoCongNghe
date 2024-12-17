@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
-import { fetchProductsByCategory, Product } from '../services/productService';
+import { fetchProductsByCategory } from '../services/productService';
+import { Product } from '../data/products';
 import { List, ListItem, ListItemText, Typography } from '@mui/material';
 import ProductCard from '../components/ProductCard/ProductCard';
 import styles from '../components/ProductList/ProductList.module.css';

@@ -18,5 +18,7 @@ namespace WebBanDoCongNghe.DTO
         public DateTime BirthDate { get; set; }
         [Required]
         public string Address { get; set; }
+        [Required]
+        public string? Phone { get; set; }
     }
 }

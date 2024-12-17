@@ -1,9 +1,5 @@
 import axios from "axios";
-export interface Product {
-    id: number;
-    productName: string;
-    unitPrice: string;
-  }
+import { Product } from "../data/products";
 
 
 export const fetchProductsByCategory = async (categoryId: string): Promise<Product[]> => {

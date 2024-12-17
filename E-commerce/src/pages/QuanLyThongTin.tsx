@@ -3,24 +3,31 @@ import DashboardNav from "../components/DashboardNav";
 import { ShopDetails } from "../data/shopdetail";
 import { useNavigate } from "react-router-dom";
 import { deleteshop, fetchShopDetails } from "../services/shopService";
-
+import {getShopId} from "../services/shopService"
+import { useAuth } from '../components/Auth/AuthContext';
 export default function QuanLyThongTin() {
+  const { user: authUser  } = useAuth();
   const [shopDetail, setShopDetail] = useState<ShopDetails>();
   const nav=useNavigate();
   //Call api getShop
+  const shopIdPromise = authUser?.id ? getShopId(authUser.id) : null; 
   useEffect(()=>{
-    fetchShopDetails("ddcf2539-4").then((data)=>{
+    shopIdPromise?.then((shopId: string) => {
+    fetchShopDetails(shopId).then((data)=>{
       setShopDetail(data)
     })
+  });
   },[])
   const editHandle = () => {
     nav(`/quanlyshop/QuanLyThongTin/edit`);
   };
   //Call api deleteShop
   const DeleteShop=()=>{
-    deleteshop("ddcf2539-4").then(()=>{
+    shopIdPromise?.then((shopId: string) => {
+    deleteshop(shopId).then(()=>{
       nav("/quanlyshop")
     })
+  });
   }
   return (
     <div className="flex w-screen">

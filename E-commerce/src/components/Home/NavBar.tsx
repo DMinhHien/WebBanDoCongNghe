@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect }  from "react";
 import {
   AppBar,
   Toolbar,
@@ -14,7 +14,7 @@ import {
   Avatar,
   Button,
 } from "@mui/material";
-import { Search, ShoppingCart, Person, Menu } from "@mui/icons-material";
+import { Search, ShoppingCart,  Menu } from "@mui/icons-material";
 import logo from "../../assets/logo.jpg";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -27,12 +27,20 @@ const Navbar = () => {
 
   const {user, logout} = useAuth();
   const navigate = useNavigate();
+  useEffect(() => {
+    if (user && user.role === "Admin") {
+      navigate("/admin"); // Điều hướng đến trang admin nếu là admin
+    }
+  }, [user, navigate]);
   const handleProfileClick = () => {
     navigate('/profile'); // Điều hướng đến trang chỉnh sửa thông tin cá nhân
   };
   const handleLogout = () => {
     logout();
     navigate('/login');
+  };
+  const handleCart = () => {
+    navigate('/cart');
   };
   const toggleDrawer =
     (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
@@ -159,17 +167,15 @@ const Navbar = () => {
               borderRadius: "20px",
             }}
           />
-          <Link to="/admin">
-            <IconButton>
-              <ShoppingCart />
-            </IconButton>
-          </Link>
           
             {/* icon button */}
             {user ? (
           <>
             <IconButton color="inherit" onClick={handleProfileClick}>
               <Avatar>N</Avatar>
+            </IconButton>
+            <IconButton color="inherit" onClick={handleCart}>
+              <ShoppingCart></ShoppingCart>
             </IconButton>
             <Button color="inherit" onClick={handleLogout}>Đăng Xuất</Button>
           </>
@@ -178,7 +184,7 @@ const Navbar = () => {
           <Button color="inherit" onClick={() => navigate('/login')}>
             Đăng Nhập
           </Button>
-          <Button color="inherit" onClick={() => navigate('/signup')}>
+          <Button color="inherit" onClick={() => navigate('/register')}>
           Đăng ký
         </Button>
         </>

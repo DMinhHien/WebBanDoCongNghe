@@ -19,12 +19,16 @@ import ChinhSuaShop from "./pages/ChinhSuaShop"
 import QuanLyCategories from "./pages/QuanLyCategories";
 import QuanLyUser from "./pages/QuanLyUser";
 import QuanLyShop from "./pages/QuanLyShop";
-import { Create } from "@mui/icons-material";
 import CreateUser from "./pages/CreateUser";
 import EditUser from "./pages/EditUser";
 import CreateShop from "./pages/CreateShop";
 import EditShop from "./pages/EditShop";
 import AdminQuanLySP from "./pages/AdminQuanLySP";
+import CreateShopAdmin from "./pages/CreateShopAdmin";
+import Layout_admin from "./pages/Layout_admin";
+import CartPage from "./pages/CartPage";
+import QuanLyMuaHang from "./pages/QuanLyMuaHang";
+import ChiTietDonHang from "./components/QuanLyMuaHang/OrderDetail";
 const router = createBrowserRouter([
     {
       path: "/",
@@ -40,6 +44,12 @@ const router = createBrowserRouter([
     },
     {
       path: "/categories",
+      element: <Layout />,
+      errorElement: <ErrorPage />,
+      children: [{ index: true, element: <CartPage /> }],
+    },
+    {
+      path: "/cart",
       element: <Layout />,
       errorElement: <ErrorPage />,
       children: [{ index: true, element: <CategoriesPage /> }],
@@ -67,7 +77,7 @@ const router = createBrowserRouter([
       element: <LoginPage />,
     },
     {
-      path: "/signup",
+      path: "/register",
       element: < SignUpPage/>,
     },
     {
@@ -101,6 +111,18 @@ const router = createBrowserRouter([
       children: [{ index: true, element: <QuanLyDonHang /> }],
     },
     {
+      path: "/quanlyshop/QuanLyMuaHang",
+      element: <Layout />,
+      errorElement: <ErrorPage />,
+      children: [{ index: true, element: <QuanLyMuaHang /> }],
+    },
+    {
+      path: "/chitiet/:id",
+      element: <Layout />,
+      errorElement: <ErrorPage />,
+      children: [{ index: true, element: <ChiTietDonHang /> }],
+    },
+    {
       path: "/quanlyshop/QuanLyThongTin",
       element: <Layout />,
       errorElement: <ErrorPage />,
@@ -114,19 +136,19 @@ const router = createBrowserRouter([
     },
     {
       path: "/admin",
-      element: <Layout />,
+      element: <Layout_admin />,
       errorElement: <ErrorPage />,
       children: [{ index: true, element: <QuanLyCategories /> }],
     },
     {
       path: "/admin/QuanLyUser",
-      element: <Layout />,
+      element: <Layout_admin />,
       errorElement: <ErrorPage />,
       children: [{ index: true, element: <QuanLyUser /> }],
     },
     {
       path: "/admin/QuanLyShop",
-      element: <Layout />,
+      element: <Layout_admin />,
       errorElement: <ErrorPage />,
       children: [{ index: true, element: <QuanLyShop /> }],
     },
@@ -144,6 +166,12 @@ const router = createBrowserRouter([
     },
     {
       path: "/admin/QuanLyShop/new",
+      element: <Layout />,
+      errorElement: <ErrorPage />,
+      children: [{ index: true, element: <CreateShopAdmin /> }],
+    },
+    {
+      path: "/newShop",
       element: <Layout />,
       errorElement: <ErrorPage />,
       children: [{ index: true, element: <CreateShop /> }],

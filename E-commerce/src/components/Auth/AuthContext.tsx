@@ -4,6 +4,10 @@ interface User {
     id: string;
     userName: string;
     email: string;
+    birthDate: Date;
+    address: string;
+    role:string;
+    phone:string;
   }
  
 interface AuthContextType {

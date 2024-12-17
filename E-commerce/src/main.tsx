@@ -28,7 +28,12 @@ const theme = createTheme({
     fontWeightRegular: "500",
   },
 });
-
+export const defaultTheme = createTheme({
+  typography: {
+    fontFamily: "",
+    fontWeightRegular: 550,
+  },
+});
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ThemeProvider theme={theme}>

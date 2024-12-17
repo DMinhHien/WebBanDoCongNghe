@@ -11,6 +11,9 @@ export default function DashboardNav() {
       <Link to="/quanlyshop/QuanLyDonHang" className="py-3 px-6 rounded-lg  hover:bg-black hover:bg-opacity-5 text-lg transition-colors duration-200">
         Quản lý đơn hàng
       </Link>
+      <Link to="/quanlyshop/QuanLyMuaHang" className="py-3 px-6 rounded-lg  hover:bg-black hover:bg-opacity-5 text-lg transition-colors duration-200">
+        Quản lý mua hàng
+      </Link>
       <Link to="/quanlyshop/QuanLyThongTin" className="py-3 px-6 rounded-lg  hover:bg-black hover:bg-opacity-5 text-lg transition-colors duration-200">
         Thông tin cửa hàng
       </Link>
