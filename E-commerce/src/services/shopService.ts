@@ -53,7 +53,7 @@ export const editShop = async (shop: ShopDetails) => {
 }
 
 export async function getShopByUserId(userId: string): Promise<Shop | null> {
-  const response = await fetch(`https://localhost:7183/api/shop/getElementByUserId/${userId}`);
+  const response = await fetch(`https://localhost:7183/Shop/getElementByUserId/${userId}`);
   if (response.ok) {
     return response.json();
   }

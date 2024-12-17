@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 import { Shop } from '../../data/shop';
 import { createTheme, ThemeProvider, Box, Card, CardMedia, CardContent, Typography, Rating } from '@mui/material';
-import dienmayxanh from "../../assets/dienmayxanh.jpg"
 interface ShopCardProps {
     shop: Shop;
 }
@@ -41,7 +40,7 @@ const ShopCard: React.FC<ShopCardProps> = ({ shop }) => (
       >
         <CardMedia
               component="img"
-              image={dienmayxanh}
+              image={shop.image}
               sx={{
                 width: "100%",
                 height: "auto",
