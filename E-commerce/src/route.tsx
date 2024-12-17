@@ -27,6 +27,8 @@ import AdminQuanLySP from "./pages/AdminQuanLySP";
 import CreateShopAdmin from "./pages/CreateShopAdmin";
 import Layout_admin from "./pages/Layout_admin";
 import CartPage from "./pages/CartPage";
+import QuanLyMuaHang from "./pages/QuanLyMuaHang";
+import ChiTietDonHang from "./components/QuanLyMuaHang/OrderDetail";
 const router = createBrowserRouter([
     {
       path: "/",
@@ -107,6 +109,18 @@ const router = createBrowserRouter([
       element: <Layout />,
       errorElement: <ErrorPage />,
       children: [{ index: true, element: <QuanLyDonHang /> }],
+    },
+    {
+      path: "/quanlyshop/QuanLyMuaHang",
+      element: <Layout />,
+      errorElement: <ErrorPage />,
+      children: [{ index: true, element: <QuanLyMuaHang /> }],
+    },
+    {
+      path: "/chitiet/:id",
+      element: <Layout />,
+      errorElement: <ErrorPage />,
+      children: [{ index: true, element: <ChiTietDonHang /> }],
     },
     {
       path: "/quanlyshop/QuanLyThongTin",
