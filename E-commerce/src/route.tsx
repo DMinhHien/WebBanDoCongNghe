@@ -26,6 +26,7 @@ import EditShop from "./pages/EditShop";
 import AdminQuanLySP from "./pages/AdminQuanLySP";
 import CreateShopAdmin from "./pages/CreateShopAdmin";
 import Layout_admin from "./pages/Layout_admin";
+import CartPage from "./pages/CartPage";
 const router = createBrowserRouter([
     {
       path: "/",
@@ -41,6 +42,12 @@ const router = createBrowserRouter([
     },
     {
       path: "/categories",
+      element: <Layout />,
+      errorElement: <ErrorPage />,
+      children: [{ index: true, element: <CartPage /> }],
+    },
+    {
+      path: "/cart",
       element: <Layout />,
       errorElement: <ErrorPage />,
       children: [{ index: true, element: <CategoriesPage /> }],
