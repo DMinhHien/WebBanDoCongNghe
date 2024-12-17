@@ -4,6 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { OrderDetail } from './OrderListbyUser';
 import { useAuth } from '../Auth/AuthContext';
 import Rating from '@mui/material/Rating';
+import DashboardNav from '../DashboardNav';
 const orderDetails: OrderDetail[] = [
     { id: 'd001', idReceipt: '001', product: { id: 'p1', productName: 'Sản phẩm A' }, quantity: 2 },
     { id: 'd002', idReceipt: '001', product: { id: 'p2', productName: 'Sản phẩm B' }, quantity: 1 },
@@ -41,6 +42,8 @@ export default function ChiTietDonHang() {
         closeDialog();
     };
     return (
+        <div className="flex w-screen">
+            <DashboardNav />
         <div className="p-4">
             <h2 className="text-2xl font-bold mb-4">Chi tiết Đơn hàng: {id}</h2>
             <table className="min-w-full border border-gray-300 bg-white">
@@ -113,6 +116,7 @@ export default function ChiTietDonHang() {
                     </div>
                 </div>
             )}
+        </div>
         </div>
     );
 }
