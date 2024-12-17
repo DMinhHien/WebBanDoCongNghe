@@ -21,15 +21,15 @@ namespace WebBanDoCongNghe.Controllers
         }
 
         // POST: ProductController/Create
-        [Authorize]
-        [HttpPost("create")]
-        public ActionResult Create([FromBody] JObject json)
+
+        [HttpPost("create/{userId}")]
+        public ActionResult Create([FromBody] JObject json, [FromRoute] string userId)
         {
             var receipt = new Receipt();
             var receiptDetailsJson = json.GetValue("data");
             var receiptDetails = JsonConvert.DeserializeObject<List<ReceiptDetail>>(receiptDetailsJson.ToString());
             receipt.id = Guid.NewGuid().ToString().Substring(0, 10);
-            receipt.userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            receipt.userId = userId;
             receipt.date = DateTime.Now;
             _context.Receipts.Add(receipt);
             foreach (var detail in receiptDetails)

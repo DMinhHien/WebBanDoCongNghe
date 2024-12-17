@@ -15,7 +15,7 @@ export default function QuanLyDonHang() {
     });
   }, []);
   const filteredOrders = orders.filter((order) =>
-    order.id.toLowerCase().includes(searchTerm.toLowerCase())
+    order.id?.toLowerCase().includes(searchTerm.toLowerCase())
   );
   return (
     <div className="flex w-screen">
