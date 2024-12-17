@@ -38,7 +38,7 @@ const MainLayout = ({ product }: Props) => {
                 padding: 2,
               }}
             >
-              <MainImage />
+              <MainImage product={product} />
             </Box>
           </Grid>
         </Grid>

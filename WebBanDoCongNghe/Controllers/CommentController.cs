@@ -29,6 +29,7 @@ namespace WebBanDoCongNghe.Controllers
             model.id = Guid.NewGuid().ToString().Substring(0, 10);
             model.date= DateTime.Now;
             _context.Comments.Add(model);
+            //var product=_context.Products.;
             _context.SaveChanges();
             return Json(model);
         }

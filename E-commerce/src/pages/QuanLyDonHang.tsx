@@ -4,20 +4,22 @@ import { useEffect, useState } from "react";
 import DashboardNav from "../components/DashboardNav";
 import OrderList, { Order } from "../components/OrderList/OrderList";
 import { getListOrder } from "../services/OrderService";
-import { useAuth } from "../components/Auth/AuthContext";
-import {getShopByUserId} from "../services/shopService"
-import { Shop } from "../data/shop";
+import { useAuth } from '../components/Auth/AuthContext';
+import {getShopId} from "../services/shopService"
 export default function QuanLyDonHang() {
+    const { user } = useAuth();
   const [searchTerm, setSearchTerm] = useState("");
   const [orders, setOrders] = useState<Order[]>([]);
   const { user } = useAuth();
   const [shop, setShop] = useState<Shop|null>(null);
   //call api getListReceipt
-  const idShop = "ddcf2539-4";
+ const shopIdPromise = user?.id ? getShopId(user.id) : null; 
   useEffect(() => {
-    getListOrder(idShop).then((data) => {
+    shopIdPromise?.then((shopId: string) => {
+    getListOrder(shopId).then((data) => {
       setOrders(data);
     });
+  });
   }, []);
   const filteredOrders = orders.filter((order) =>
     order.id.toLowerCase().includes(searchTerm.toLowerCase())
