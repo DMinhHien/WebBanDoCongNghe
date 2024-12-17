@@ -13,18 +13,20 @@ export default function QuanLyThongTin() {
   const [shop, setShop] = useState<Shop|null>(null);
   const [idShop, setIdShop] = useState<string>("");
   //Call api getShop
-  useEffect(
-    () => {
-        if (user) {
-          getShopByUserId(user.id).then((fetchedShop) => setShop(fetchedShop));
-          setIdShop(shop.id);
+  useEffect(() => {
+    if (user) {
+      getShopByUserId(user.id).then((fetchedShop) => {
+        setShop(fetchedShop);
+        if (fetchedShop) {
+          setIdShop(fetchedShop.id); // Only set idShop if shop is not null
         }
-      }, [user]
-  );
+      });
+    }
+  }, [user]);
 
   useEffect(()=>{
     
-    fetchShopDetails("ddcf2539-4").then((data)=>{
+    fetchShopDetails(idShop).then((data)=>{
       setShopDetail(data)
     })
   },[])
@@ -33,7 +35,7 @@ export default function QuanLyThongTin() {
   };
   //Call api deleteShop
   const DeleteShop=()=>{
-    deleteshop("ddcf2539-4").then(()=>{
+    deleteshop(idShop).then(()=>{
       nav("/quanlyshop")
     })
   }

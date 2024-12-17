@@ -41,7 +41,7 @@ const ShopCard: React.FC<ShopCardProps> = ({ shop }) => (
       >
         <CardMedia
               component="img"
-              image={dienmayxanh}
+              image={shop.image}
               sx={{
                 width: "100%",
                 height: "auto",
