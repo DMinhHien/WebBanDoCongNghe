@@ -1,32 +1,37 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import {editUser} from '../../services/UserService'
 import {
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
   Button,
-  TextField,
 } from '@mui/material';
 
 interface ProfileEditDialogProps {
   open: boolean;
   onClose: () => void;
   userInfo: {
-    userName: string;
-    email: string;
-    dob: string;
-    address: string;
-    phone: string;
+    id:string;
+    AccountName: string;
+    Password:string,
+    Role:string,
+    Email: string;
+    BirthDate: Date;
+    Address: string;
+    PhoneNumber: string;
   };
   onSave: (updatedInfo: {
-    userName: string;
-    email: string;
-    dob: string;
-    address: string;
-    phone: string;
+    id:string;
+    AccountName: string;
+    Password:string,
+    Role:string,
+    Email: string;
+    BirthDate: Date;
+    Address: string;
+    PhoneNumber: string;
   }) => void;
 }
-
 const ProfileEditDialog: React.FC<ProfileEditDialogProps> = ({
   open,
   onClose,
@@ -39,59 +44,60 @@ const ProfileEditDialog: React.FC<ProfileEditDialogProps> = ({
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-
   const handleSave = () => {
     onSave(formData);
+    editUser(formData)
   };
-
+  
   return (
     <Dialog open={open} onClose={onClose}>
       <DialogTitle>Chỉnh sửa thông tin cá nhân</DialogTitle>
       <DialogContent>
-        <TextField
-          label="Tên"
-          fullWidth
-          margin="normal"
-          name="userName"
-          value={formData.userName}
-          onChange={handleInputChange}
-        />
-        <TextField
-          label="Email"
-          fullWidth
-          margin="normal"
-          name="email"
-          value={formData.email}
-          onChange={handleInputChange}
-        />
-        <TextField
-          label="Ngày sinh"
-          fullWidth
-          margin="normal"
-          type="date"
-          name="dob"
-          value={formData.dob}
-          onChange={handleInputChange}
-          InputLabelProps={{
-            shrink: true,
-          }}
-        />
-        <TextField
-          label="Địa chỉ"
-          fullWidth
-          margin="normal"
-          name="address"
-          value={formData.address}
-          onChange={handleInputChange}
-        />
-        <TextField
-          label="Số điện thoại"
-          fullWidth
-          margin="normal"
-          name="phone"
-          value={formData.phone}
-          onChange={handleInputChange}
-        />
+        <div>
+          <label>Tên</label>
+          <input
+            type="text"
+            name="AccountName"
+            value={formData.AccountName} // Controlled component
+            onChange={handleInputChange}
+          />
+        </div>
+        <div>
+          <label>Email</label>
+          <input
+            type="email"
+            name="Email"
+            value={formData.Email} // Controlled component
+            onChange={handleInputChange}
+          />
+        </div>
+        <div>
+          <label>Ngày sinh</label>
+          <input
+            type="date"
+            name="BirthDate"
+            value={formData.BirthDate.toISOString().split("T")[0]} // Format date for input
+            onChange={handleInputChange}
+          />
+        </div>
+        <div>
+          <label>Địa chỉ</label>
+          <input
+            type="text"
+            name="Address"
+            value={formData.Address} // Controlled component
+            onChange={handleInputChange}
+          />
+        </div>
+        <div>
+          <label>Số điện thoại</label>
+          <input
+            type="text"
+            name="PhoneNumber"
+            value={formData.PhoneNumber} // Controlled component
+            onChange={handleInputChange}
+          />
+        </div>
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose} color="secondary">
@@ -104,5 +110,6 @@ const ProfileEditDialog: React.FC<ProfileEditDialogProps> = ({
     </Dialog>
   );
 };
+
 
 export default ProfileEditDialog;
