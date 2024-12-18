@@ -1,15 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { OrderDetail } from './OrderListbyUser';
 import { useAuth } from '../Auth/AuthContext';
 import Rating from '@mui/material/Rating';
 import DashboardNav from '../DashboardNav';
-const orderDetails: OrderDetail[] = [
-    { id: 'd001', idReceipt: '001', product: { id: 'p1', productName: 'Sản phẩm A' }, quantity: 2 },
-    { id: 'd002', idReceipt: '001', product: { id: 'p2', productName: 'Sản phẩm B' }, quantity: 1 },
-    { id: 'd003', idReceipt: '002', product: { id: 'p3', productName: 'Sản phẩm C' }, quantity: 4 },
-];
+import {CommentDTO} from '../../data/comment'
+import {addComment} from'../../services/reviewService'
+import {OrderDetail} from '../../data/order'
+import { getListOrderDetail } from '../../services/OrderService';
+   
 
 export default function ChiTietDonHang() {
     const { id } = useParams<{ id: string }>();
@@ -17,12 +16,24 @@ export default function ChiTietDonHang() {
     const { user } = useAuth();
     const [isDialogOpen, setDialogOpen] = useState(false);
     // Lọc ra chi tiết đơn hàng tương ứng
-    const details = orderDetails.filter((detail) => detail.idReceipt === id);
     const [selectedProduct, setSelectedProduct] = useState<{ id: string; name: string } | null>(null);
     const [content, setContent] = useState('');
     const [rating, setRating] = useState<number | null>(0);
+    const [orderDetails, setOrderDetails] = useState<OrderDetail[]>([]);
+    const [Comment, setComment] = useState<CommentDTO>({
+        id: "",
+        content:"",
+        userId:"",
+        productId:"",
+        rating: 0,
+        date: new Date,
+      });
     const openDialog = (productId: string, productName: string) => {
-        setSelectedProduct({ id: productId, name: productName });
+        setSelectedProduct({ id: productId, name: productName, });
+        setComment(prevComment => ({
+            ...prevComment,
+            productId: productId, // Cập nhật lại productId khi chọn sản phẩm
+        }));
         setDialogOpen(true);
     };
     const closeDialog = () => {
@@ -30,17 +41,48 @@ export default function ChiTietDonHang() {
         setContent('');
         setRating(0);
     };
+    useEffect(() => {
+        if (user) {
+          setComment((prevComment) => ({
+            ...prevComment,
+            userId: user.id || "", // Gán id của user vào userId
+          }));
+        }
+      }, [user]);
+     useEffect(() => {
+        getListOrderDetail(id??"").then((data) => {
+              setOrderDetails(data);
+            }); // Chuỗi đã được giải quyết
+            console.log(orderDetails)
+        
+        }, []);
     const handleSubmit = () => {
-        const review = {
-            id: `review_${Date.now()}`, // Tự tạo id duy nhất
-            productId: selectedProduct?.id,
-            content,
-            rating,
-        };
-        console.log('Review Submitted:', review);
-        alert('Review đã được gửi thành công!');
-        closeDialog();
+        const isEmptyField = Object.entries(Comment).some(([key, value]) => {
+            if (key === "username" || key === "id"|| key==="date") return false;
+            return value === "";
+          });
+      
+          if (isEmptyField) {
+            alert("Vui lòng điền đầy đủ thông tin!");
+            return;
+          }
+        addComment(Comment).then(()=>{
+            closeDialog();
+        })
     };
+    const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        setComment(prevComment => ({
+            ...prevComment,
+            content: e.target.value
+        }));
+    };
+    const handleRatingChange = (event: React.ChangeEvent<{}>, newValue: number | null) => {
+        setComment(prevComment => ({
+            ...prevComment,
+            rating: newValue ?? 0
+        }));
+    };
+    
     return (
         <div className="flex w-screen">
             <DashboardNav />
@@ -56,14 +98,14 @@ export default function ChiTietDonHang() {
                     </tr>
                 </thead>
                 <tbody>
-                    {details.map((detail) => (
+                {orderDetails.map((detail) => (
                         <tr key={detail.id}>
-                            <td className="border border-gray-300 py-2 px-4">{detail.product.id}</td>
-                            <td className="border border-gray-300 py-2 px-4">{detail.product.productName}</td>
+                             <td className="border border-gray-300 py-2 px-4">{detail.idProduct}</td>
+                            <td className="border border-gray-300 py-2 px-4">{detail.productName}</td>
                             <td className="border border-gray-300 py-2 px-4">{detail.quantity}</td>
                             <td className="border border-gray-300 py-2 px-4">
                                 <button
-                                     onClick={() => openDialog(detail.product.id, detail.product.productName)}
+                                     onClick={() => openDialog(detail.idProduct, detail.productName)}
                                     className="bg-green-500 hover:bg-green-600 text-white py-1 px-3 rounded"
                                 >
                                     Thêm review
@@ -72,6 +114,7 @@ export default function ChiTietDonHang() {
                         </tr>
                     ))}
                 </tbody>
+
             </table>
             {/* Dialog */}
             {isDialogOpen && (
@@ -81,8 +124,8 @@ export default function ChiTietDonHang() {
                         <label className="block mb-2">
                             Nội dung:
                             <textarea
-                                value={content}
-                                onChange={(e) => setContent(e.target.value)}
+                                value={Comment.content}
+                                onChange={handleContentChange}
                                 className="w-full border rounded p-2 mt-1"
                                 rows={4}
                             ></textarea>
@@ -92,10 +135,8 @@ export default function ChiTietDonHang() {
                             <div className="mt-1">
                                 <Rating
                                     name="simple-controlled"
-                                    value={rating}
-                                    onChange={(event, newValue) => {
-                                        setRating(newValue);
-                                    }}
+                                    value={Comment.rating}
+                                    onChange={handleRatingChange}
                                 />
                             </div>
                         </label>

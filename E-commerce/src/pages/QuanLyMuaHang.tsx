@@ -2,26 +2,28 @@ import { Search } from "@mui/icons-material";
 import { InputBase } from "@mui/material";
 import { useEffect, useState } from "react";
 import DashboardNav from "../components/DashboardNav";
-import OrderList, { Order, OrderDetail } from "../components/QuanLyMuaHang/OrderListbyUser";
-import { getListOrder } from "../services/OrderService";
+import OrderList from "../components/QuanLyMuaHang/OrderListbyUser";
+import { getListOrderUser } from "../services/OrderService";
 import { useAuth } from '../components/Auth/AuthContext';
-import {getShopId} from "../services/shopService"
-import { Shop } from "../data/shop";
+import { OrderUser } from "../data/order";
 export default function QuanLyMuaHang() {
-  const [selectedOrderDetails, setSelectedOrderDetails] = useState<OrderDetail[]>([]);
-  const [showDetails, setShowDetails] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const { user } = useAuth();
-  
-  const [shop, setShop] = useState<Shop|null>(null);
+   const [orders, setOrders] = useState<OrderUser[]>([]);
   //call api getListReceipt
-  const orders: Order[] = [
-    { id: '001', userId: 'user1', total: 200000, datetime: new Date() },
-    { id: '002', userId: 'user2', total: 150000, datetime: new Date() },
-];
+//   const orders: Order[] = [
+//     { id: '001', userId: 'user1', total: 200000, datetime: new Date() },
+//     { id: '002', userId: 'user2', total: 150000, datetime: new Date() },
+// ];
   const filteredOrders = orders.filter((order) =>
     order.id.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  ); 
+   useEffect(() => {
+      getListOrderUser(user?.id??"").then((data) => {
+          setOrders(data);
+        }); // Chuỗi đã được giải quyết
+        console.log(orders);
+    }, []);
   return (
     <div className="flex w-screen">
       <DashboardNav />

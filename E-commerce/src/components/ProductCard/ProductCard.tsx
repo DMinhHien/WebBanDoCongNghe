@@ -41,7 +41,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => (
       >
         <CardMedia
               component="img"
-              image={product.image? Iphone : product.image}
+              image={product.image}
               sx={{
                 width: "100%",
                 height: "auto",

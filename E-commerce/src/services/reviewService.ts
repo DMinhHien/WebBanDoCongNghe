@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Comment } from "../data/comment";
+import { CommentDTO } from "../data/comment";
 
 
 export const fetchComments = async (productId: string): Promise<Comment[]> => {
@@ -11,7 +11,16 @@ export const fetchComments = async (productId: string): Promise<Comment[]> => {
       throw error;
     }
   };
-
+  export const addComment =async(Comment:CommentDTO)=>{
+    try {
+      const { id, ...commentWithoutId } = Comment;     
+        const token = localStorage.getItem("token")
+        await axios.post(`https://localhost:7183/Comment/create`,{data:commentWithoutId },{ headers: { Authorization: `Bearer ${token}` } })
+    } catch (error) {
+        console.error("không thể thêm sản phẩm",error);
+        throw error
+    }
+}
  
 
   

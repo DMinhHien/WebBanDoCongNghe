@@ -510,6 +510,22 @@
   },
   {
     "ContainingType": "WebBanDoCongNghe.Controllers.ReceiptController",
+    "Method": "getReceiptDetail",
+    "RelativePath": "Receipt/getReceiptDetail/{receiptId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "receiptId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBanDoCongNghe.Controllers.ReceiptController",
     "Method": "getSumProduct",
     "RelativePath": "Receipt/getSumProduct",
     "HttpMethod": "GET",
