@@ -12,7 +12,8 @@ export default function CreateUser() {
     Password: "",
     BirthDate: new Date(),
     Address: "",
-    Role: ""
+    Role: "",
+    PhoneNumber:""
   });
   const nav = useNavigate();
   //call api createUser
@@ -106,6 +107,18 @@ export default function CreateUser() {
               type="text"
               value={user?.Address}
               name="Address"
+              onChange={handleChange}
+              className="px-4 py-2 border border-gray-300 w-full rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-700"
+            />
+          </div>
+          <div>
+            <label className="block mb-2 text-gray-800 font-medium">
+              Số điện thoại
+            </label>
+            <input
+              type="text"
+              value={user?.PhoneNumber}
+              name="PhoneNumber"
               onChange={handleChange}
               className="px-4 py-2 border border-gray-300 w-full rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-700"
             />

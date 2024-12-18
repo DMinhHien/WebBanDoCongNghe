@@ -23,11 +23,14 @@ const ProfilePage: React.FC = () => {
   const navigate = useNavigate();
   const [openEditDialog, setOpenEditDialog] = useState<boolean>(false);
   const [userInfo, setUserInfo] = useState({
-    userName: user?.userName || '',
-    email: user?.email || '',
-    dob: '', // You can set this to user.dob if available
-    address: '', // Same as above
-    phone: '', // Same as above
+    id:user?.id||'',
+    AccountName: user?.accountName || '',
+    Password:"",
+    Role:"",
+    Email: user?.email || '',
+    BirthDate: user?.birthDate||new Date, // You can set this to user.birthDate if available
+    Address: user?.address||'', // Same as above
+    PhoneNumber:  user?.phoneNumber||'', // Same as above
   });
   // Fetch Shop Data
   useEffect(() => {
@@ -45,11 +48,14 @@ const ProfilePage: React.FC = () => {
   };
   const handleDialogOpen = () => {
     setUserInfo({
-      userName: user?.userName || '',
-      email: user?.email || '',
-      dob: '', // You can set this to user.dob if available
-      address: '', // Same as above
-      phone: '', // Same as above
+      id:user?.id||'',
+      AccountName: user?.accountName || '',
+      Password:"",
+      Role:"",
+      Email: user?.email || '',
+      BirthDate: user?.birthDate||new Date, // You can set this to user.birthDate if available
+      Address: user?.address||'', 
+      PhoneNumber: user?.phoneNumber||'', 
     });
     setOpenEditDialog(true);
   };
@@ -59,11 +65,14 @@ const ProfilePage: React.FC = () => {
   };
 
   const handleSave = (updatedInfo: {
-    userName: string;
-    email: string;
-    dob: string;
-    address: string;
-    phone: string;
+    id:string;
+    AccountName: string;
+    Password:string,
+    Role:string,
+    Email: string;
+    BirthDate: Date;
+    Address: string;
+    PhoneNumber: string;
   }) => {
     // Add logic to save the updated user information
     console.log('Saving user info:', updatedInfo);
@@ -117,19 +126,19 @@ const ProfilePage: React.FC = () => {
                       Thông tin cá nhân
                     </Typography>
                     <Typography variant="body1">
-                      <strong>Tên:</strong> {user.userName}
+                      <strong>Tên:</strong> {user.accountName}
                     </Typography>
                     <Typography variant="body1">
                       <strong>Email:</strong> {user.email}
                     </Typography>
                     <Typography variant="body1">
-                      <strong>Ngày sinh:</strong> {user.userName}
+                      <strong>Ngày sinh:</strong>{user.birthDate ? new Date(user.birthDate).toLocaleDateString("vi-VN") : "Chưa cập nhật"}
                     </Typography>
                     <Typography variant="body1">
                       <strong>Địa chỉ:</strong> {user.address}
                     </Typography>
                     <Typography variant="body1">
-                      <strong>Số điện thoại:</strong> {user.phone}
+                      <strong>Số điện thoại:</strong> {user.phoneNumber}
                     </Typography>
                   </Box>
                 )}
