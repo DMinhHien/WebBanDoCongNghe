@@ -14,10 +14,13 @@ const Reviews = ({ productId }: Props) => {
   useEffect(() => {
     // Fetch comments when productId changes
     fetchComments(productId).then((data) => {
-      setReviews(data);
+      const updatedComments = data.map((comment) => ({
+        ...comment,
+        productId, // Gắn productId vào mỗi comment
+      }));
+      setReviews(updatedComments);
     });
-  }, [productId]); // Add productId as a dependency
-
+  }, [productId]); 
 
   return (
     <Box width="90%" margin="0 auto">

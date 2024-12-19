@@ -41,7 +41,10 @@ const ReviewItem = ({ id, username,productId, rating, date, content }: Props) =>
       rating: editedRating,
       date: new Date(), // Lấy ngày hiện tại hoặc từ input nếu có
     };
-    editComment(comment);
+    setComment(updatedComment); // Cập nhật state (nếu cần)
+    editComment(updatedComment).then(() => {
+      window.location.reload(); // Tải lại toàn bộ trang
+    });; // Gọi hàm service để lưu thay đổi
     setIsEditing(false);
   };
 
@@ -153,7 +156,9 @@ const ReviewItem = ({ id, username,productId, rating, date, content }: Props) =>
         <MenuItem
           onClick={() => {
             handleMenuClose();
-            deleteComment(id);
+            deleteComment(id).then(() => {
+              window.location.reload(); // Tải lại toàn bộ trang
+            });;
           }}
         >
           Delete
