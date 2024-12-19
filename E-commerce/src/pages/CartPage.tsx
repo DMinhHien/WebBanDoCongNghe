@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { Cart } from "../data/Cart";
-import { editQuantity, getCarts } from "../services/cartService";
+import { deleteCartItem, editQuantity, getCarts } from "../services/cartService";
 import { useAuth } from "../components/Auth/AuthContext";
 import CartItem from "../components/CartItem";
+import { createReceipt } from "../services/OrderService";
 
 export default function CartPage() {
   const [carts, setCarts] = useState<Cart>({
@@ -25,10 +26,25 @@ export default function CartPage() {
     if (user) {
       getCarts(user?.id as string).then((data) => {
         setCarts(data[0]);
+        updateTotal()
       });
     }
-    updateTotal()
   }, [user]);
+  useEffect(() => {
+    if (carts) {
+      updateTotal();
+    }
+  }, [carts]);
+  const DeleteCartItem=(id:string)=>{
+    deleteCartItem(id)
+    setCarts((prevCarts) => {
+      const updatedShops = prevCarts.shops.map((shop) => ({
+        ...shop,
+        products: shop.products.filter((product) => product.id !== id),
+      }));
+      return { ...prevCarts, shops: updatedShops };
+    });
+  }
   const updateQuantity = (idCart:string,shopId: string, productId: string, newQuantity: number)=>{
      setCarts((prevCart) => ({
       ...prevCart,
@@ -45,9 +61,14 @@ export default function CartPage() {
           : shop
       ),
     }));
-    updateTotal()
     editQuantity(carts.id,idCart,productId,newQuantity)
   };
+  const CreateReceipt=()=>{
+    carts.shops.map((shop)=>{
+      createReceipt(carts.userId,shop.products)
+    })
+  }
+  
   return (
     <section className="bg-white py-8 antialiased  md:py-16">
       <div className="mx-auto max-w-screen-xl px-4 2xl:px-0">
@@ -75,7 +96,8 @@ export default function CartPage() {
                     <div>
                       <CartItem ProductCart={product}
                       onQuantityChange={(productId, newQuantity) => 
-                        updateQuantity(product.id, shop.shopId, productId, newQuantity)}/>
+                        updateQuantity(product.id, shop.shopId, productId, newQuantity)}
+                        DeleteCartItem={() => DeleteCartItem(product.id)}/>
                     </div>
                   ))}
                 </div>
@@ -121,7 +143,8 @@ export default function CartPage() {
                 </dl>
               </div>
 
-              <button className=" p-1 w-full border bg-white text-black rounded-md">
+              <button className=" p-1 w-full border bg-white text-black rounded-md"
+              onClick={CreateReceipt}>
                 Xác nhận
               </button>
             </div>

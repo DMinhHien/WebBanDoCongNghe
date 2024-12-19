@@ -21,7 +21,7 @@ namespace WebBanDoCongNghe.Controllers
         }
 
         // POST: ProductController/Create
-        //[Authorize]
+        [Authorize]
         [HttpPost("create/{userId}")]
         public ActionResult Create([FromBody] JObject json, [FromRoute] string userId)
         {

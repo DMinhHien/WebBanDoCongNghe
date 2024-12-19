@@ -4,9 +4,10 @@ import { useState } from "react";
 interface CartItemProps {
   ProductCart: ProductCart;
   onQuantityChange: (productId: string, newQuantity: number) => void; // Callback để thông báo thay đổi
+  DeleteCartItem:(id:string)=>void
 }
 
-export default function CartItem({ ProductCart, onQuantityChange }: CartItemProps) {
+export default function CartItem({ ProductCart, onQuantityChange,DeleteCartItem }: CartItemProps) {
   const [quantity, setQuantity] = useState(ProductCart.quantity);
 
   const handleIncrease = () => {
@@ -20,6 +21,8 @@ export default function CartItem({ ProductCart, onQuantityChange }: CartItemProp
     setQuantity(newQuantity);
     onQuantityChange(ProductCart.idProduct, newQuantity);
   };
+
+
 
   return (
     <div
@@ -42,6 +45,7 @@ export default function CartItem({ ProductCart, onQuantityChange }: CartItemProp
           <button
             type="button"
             className="mt-2 text-sm font-medium text-red-600 hover:underline dark:text-red-500"
+            onClick={()=>DeleteCartItem(ProductCart.id)}
           >
             Remove
           </button>
