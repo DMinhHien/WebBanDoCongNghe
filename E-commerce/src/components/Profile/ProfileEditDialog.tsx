@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import {editUser} from '../../services/UserService'
 import {
   Dialog,
   DialogActions,
@@ -12,21 +13,26 @@ interface ProfileEditDialogProps {
   open: boolean;
   onClose: () => void;
   userInfo: {
-    userName: string;
-    email: string;
-    dob: string;
-    address: string;
-    phone: string;
+    id:string;
+    AccountName: string;
+    Password:string,
+    Role:string,
+    Email: string;
+    BirthDate: Date;
+    Address: string;
+    PhoneNumber: string;
   };
   onSave: (updatedInfo: {
-    userName: string;
-    email: string;
-    dob: string;
-    address: string;
-    phone: string;
+    id:string;
+    AccountName: string;
+    Password:string,
+    Role:string,
+    Email: string;
+    BirthDate: Date;
+    Address: string;
+    PhoneNumber: string;
   }) => void;
 }
-
 const ProfileEditDialog: React.FC<ProfileEditDialogProps> = ({
   open,
   onClose,
@@ -37,13 +43,19 @@ const ProfileEditDialog: React.FC<ProfileEditDialogProps> = ({
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData({ ...formData,  [name]: name === "BirthDate" ? new Date(value) : value, });
   };
-
   const handleSave = () => {
-    onSave(formData);
+    const updatedData = { ...formData }; // Lấy bản cập nhật mới nhất
+    editUser(updatedData); 
+    onSave(updatedData);
   };
-
+  useEffect(() => {
+    setFormData({
+      ...userInfo,
+      BirthDate: new Date(userInfo.BirthDate), // Ensure it's a Date object
+    });
+  }, [userInfo]);
   return (
     <Dialog open={open} onClose={onClose}>
       <DialogTitle>Chỉnh sửa thông tin cá nhân</DialogTitle>
@@ -53,7 +65,7 @@ const ProfileEditDialog: React.FC<ProfileEditDialogProps> = ({
           fullWidth
           margin="normal"
           name="userName"
-          value={formData.userName}
+          defaultValue={formData.AccountName}
           onChange={handleInputChange}
         />
         <TextField
@@ -61,7 +73,7 @@ const ProfileEditDialog: React.FC<ProfileEditDialogProps> = ({
           fullWidth
           margin="normal"
           name="email"
-          value={formData.email}
+          value={formData.Email}
           onChange={handleInputChange}
         />
         <TextField
@@ -69,8 +81,8 @@ const ProfileEditDialog: React.FC<ProfileEditDialogProps> = ({
           fullWidth
           margin="normal"
           type="date"
-          name="dob"
-          value={formData.dob}
+          name="birthDate"
+          value="2017-05-24"
           onChange={handleInputChange}
           InputLabelProps={{
             shrink: true,
@@ -81,7 +93,7 @@ const ProfileEditDialog: React.FC<ProfileEditDialogProps> = ({
           fullWidth
           margin="normal"
           name="address"
-          value={formData.address}
+          value={formData.Address}
           onChange={handleInputChange}
         />
         <TextField
@@ -89,7 +101,7 @@ const ProfileEditDialog: React.FC<ProfileEditDialogProps> = ({
           fullWidth
           margin="normal"
           name="phone"
-          value={formData.phone}
+          value={formData.PhoneNumber}
           onChange={handleInputChange}
         />
       </DialogContent>

@@ -104,6 +104,7 @@ export default function EditShop() {
               className="px-4 py-2 border border-gray-300 w-full rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-700"
             />
           </div>
+          
         </form>
         <div className="w-full">
           <button

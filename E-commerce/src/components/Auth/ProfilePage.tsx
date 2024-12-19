@@ -14,21 +14,14 @@ import {
 import { useAuth } from './AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { Shop } from '../../data/shop';
-import ProfileEditDialog from '../Profile/ProfileEditDialog';
+
 const ProfilePage: React.FC = () => {
   const { user } = useAuth();
   const [shop, setShop] = useState<Shop | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [tabIndex, setTabIndex] = useState<number>(0);
   const navigate = useNavigate();
-  const [openEditDialog, setOpenEditDialog] = useState<boolean>(false);
-  const [userInfo, setUserInfo] = useState({
-    userName: user?.userName || '',
-    email: user?.email || '',
-    dob: '', // You can set this to user.dob if available
-    address: '', // Same as above
-    phone: '', // Same as above
-  });
+
   // Fetch Shop Data
   useEffect(() => {
     if (user) {
@@ -43,33 +36,9 @@ const ProfilePage: React.FC = () => {
   const handleTabChange = (_: React.SyntheticEvent, newIndex: number) => {
     setTabIndex(newIndex);
   };
-  const handleDialogOpen = () => {
-    setUserInfo({
-      userName: user?.userName || '',
-      email: user?.email || '',
-      dob: '', // You can set this to user.dob if available
-      address: '', // Same as above
-      phone: '', // Same as above
-    });
-    setOpenEditDialog(true);
-  };
+ 
 
-  const handleDialogClose = () => {
-    setOpenEditDialog(false);
-  };
 
-  const handleSave = (updatedInfo: {
-    userName: string;
-    email: string;
-    dob: string;
-    address: string;
-    phone: string;
-  }) => {
-    // Add logic to save the updated user information
-    console.log('Saving user info:', updatedInfo);
-    setUserInfo(updatedInfo);
-    setOpenEditDialog(false);
-  };
   if (!user) {
     return (
       <Container>
@@ -99,7 +68,8 @@ const ProfilePage: React.FC = () => {
               ) : (
                 <Tab label="Tạo Shop" onClick={() => navigate('/newShop')} />
               )}
-              <Tab label="Chỉnh sửa thông tin cá nhân" onClick={handleDialogOpen} />
+              <Tab label="Chỉnh sửa thông tin cá nhân" onClick={() => navigate(`/profile/edit/${user.id}`)} />
+              <Tab label="Quản lý đơn mua hàng" onClick={() => navigate(`/QuanLyMuaHang`)} />
             </Tabs>
           </Grid>
 
@@ -117,19 +87,19 @@ const ProfilePage: React.FC = () => {
                       Thông tin cá nhân
                     </Typography>
                     <Typography variant="body1">
-                      <strong>Tên:</strong> {user.userName}
+                      <strong>Tên:</strong> {user.accountName}
                     </Typography>
                     <Typography variant="body1">
                       <strong>Email:</strong> {user.email}
                     </Typography>
                     <Typography variant="body1">
-                      <strong>Ngày sinh:</strong> {user.userName}
+                      <strong>Ngày sinh:</strong>{user.birthDate ? new Date(user.birthDate).toLocaleDateString("vi-VN") : "Chưa cập nhật"}
                     </Typography>
                     <Typography variant="body1">
                       <strong>Địa chỉ:</strong> {user.address}
                     </Typography>
                     <Typography variant="body1">
-                      <strong>Số điện thoại:</strong> {user.phone}
+                      <strong>Số điện thoại:</strong> {user.phoneNumber}
                     </Typography>
                   </Box>
                 )}
@@ -148,13 +118,6 @@ const ProfilePage: React.FC = () => {
         </Grid>
       </Paper>
 
-      {/* Profile Edit Dialog */}
-      <ProfileEditDialog
-        open={openEditDialog}
-        onClose={handleDialogClose}
-        userInfo={userInfo}
-        onSave={handleSave}
-      />
     </Container>
   );
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Shop } from '../../services/shopService'; 
+import { Shop } from '../../data/shop'; 
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';

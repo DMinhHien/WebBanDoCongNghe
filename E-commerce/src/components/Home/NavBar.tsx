@@ -1,5 +1,6 @@
 import React, { useEffect }  from "react";
 import {
+  Typography,
   AppBar,
   Toolbar,
   IconButton,
@@ -14,11 +15,13 @@ import {
   Avatar,
   Button,
 } from "@mui/material";
-import { Search, ShoppingCart,  Menu } from "@mui/icons-material";
+import { Search, ShoppingCart,  Menu, } from "@mui/icons-material";
 import logo from "../../assets/logo.jpg";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../Auth/AuthContext";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+
 
 const Navbar = () => {
   const theme = useTheme();
@@ -69,25 +72,13 @@ const Navbar = () => {
       </ListItemButton>
       <ListItemButton component = {Link} to ="/categories">
         <ListItemText
-          primary="Danh mục sản phẩm"
+          primary="Sản phẩm"
           primaryTypographyProps={{ noWrap: true }}
         />
       </ListItemButton>
       <ListItemButton component = {Link} to ="/shops">
         <ListItemText
           primary="Shops"
-          primaryTypographyProps={{ noWrap: true }}
-        />
-      </ListItemButton>
-      <ListItemButton>
-        <ListItemText
-          primary="Best Sellers"
-          primaryTypographyProps={{ noWrap: true }}
-        />
-      </ListItemButton>
-      <ListItemButton>
-        <ListItemText
-          primary="Reviews"
           primaryTypographyProps={{ noWrap: true }}
         />
       </ListItemButton>
@@ -109,7 +100,12 @@ const Navbar = () => {
       <Toolbar style={{ justifyContent: "space-between" }}>
         {/* Left section - Logo */}
         {!isMobile && (
+          <Box display="flex" alignItems="center" gap={1}>
           <img src={logo} alt="Brand Logo" style={{ height: "60px" }} />
+          <Typography variant="h6" sx={{ color: "blue" }}>
+            SecondHand
+          </Typography>
+        </Box>
         )}
 
         {/* Middle Section - Menu */}
@@ -135,16 +131,10 @@ const Navbar = () => {
                     <ListItemText primary="Trang chủ" />
                   </ListItemButton>
                   <ListItemButton component = {Link} to ="/categories">
-                    <ListItemText primary="Danh mục sản phẩm" />
+                    <ListItemText primary="Sản phẩm" />
                   </ListItemButton>
                   <ListItemButton component = {Link} to ="/shops">
                     <ListItemText primary="Shops" />
-                  </ListItemButton>
-                  <ListItemButton>
-                    <ListItemText primary="Best Sellers" />
-                  </ListItemButton>
-                  <ListItemButton>
-                    <ListItemText primary="Reviews" />
                   </ListItemButton>
                   <ListItemButton>
                     <ListItemText primary="About" />
@@ -158,21 +148,11 @@ const Navbar = () => {
         )}
         {/* Right Section - Search and Cart */}
         <Box style={{ display: "flex", alignItems: "center", gap: "15px" }}>
-          <InputBase
-            placeholder="Search"
-            startAdornment={<Search style={{ color: "#999" }} />}
-            style={{
-              backgroundColor: "#F0ECE1",
-              padding: "5px 10px",
-              borderRadius: "20px",
-            }}
-          />
-          
             {/* icon button */}
             {user ? (
           <>
             <IconButton color="inherit" onClick={handleProfileClick}>
-              <Avatar>N</Avatar>
+              <AccountCircleIcon/>
             </IconButton>
             <IconButton color="inherit" onClick={handleCart}>
               <ShoppingCart></ShoppingCart>

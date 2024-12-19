@@ -86,8 +86,22 @@ namespace WebBanDoCongNghe.Controllers
             }
             return Json(sum);
         }
+        [HttpGet("getReceiptDetail/{receiptId}")]
+        public IActionResult getReceiptDetail([FromRoute] string receiptId)
+        {
+            var result=_context.ReceiptDetails.Where(x=>x.idReceipt==receiptId)
+                .Select(rd=>new
+                {
+                    rd.id,
+                    rd.idProduct,
+                    rd.quantity,
+                    ProductName = _context.Products.Where(p => p.id == rd.idProduct)
+                            .Select(p => p.productName).FirstOrDefault()
+                }).ToList();
+            return Json(result);
+        }
         [HttpGet("getListUse/{userId}")]
-        public IActionResult getListUse([FromRoute]string userId)
+        public IActionResult getListUse([FromRoute] string userId)
         {
             var result = _context.Receipts
                 .Where(x => x.userId == userId)
@@ -95,25 +109,32 @@ namespace WebBanDoCongNghe.Controllers
                 {
                     receipt.id,
                     receipt.date,
-                    receipt.userId,
-                    ReceiptDetails = _context.ReceiptDetails
+                    TotalAmount = _context.ReceiptDetails
+                .Where(rd => rd.idReceipt == receipt.id)
+                .Join(
+                    _context.Products,
+                    rd => rd.idProduct,
+                    p => p.id,
+                    (rd, p) => new { rd.quantity, p.unitPrice } // Gộp quantity và unitPrice
+                )
+                .Sum(item => item.quantity * item.unitPrice),
+                    ShopName = _context.ReceiptDetails
                         .Where(rd => rd.idReceipt == receipt.id)
-                        .Select(rd => new
-                        {
-                            rd.id,
-                            rd.idProduct,
-                            rd.quantity,
-                            Product = _context.Products.Where(p => p.id == rd.idProduct)
-                            .Select(p => new
-                            {
-                                p.id,
-                                p.productName,
-                                p.unitPrice
-                            }).FirstOrDefault()
-                }).ToList()
-                }).ToList();
+                        .OrderBy(rd => rd.id) // Lấy ReceiptDetail đầu tiên
+                        .Select(rd => _context.Products
+                            .Where(p => p.id == rd.idProduct)
+                            .Select(p => _context.Shops
+                                .Where(s => s.id == p.idShop) // Truy vấn Shop dựa trên idShop
+                                .Select(s => s.name)
+                                .FirstOrDefault())
+                            .FirstOrDefault())
+                        .FirstOrDefault() // ShopName của ReceiptDetail đầu tiên
+                })
+                .ToList();
+
             return Json(result);
         }
+
         [HttpGet("getListUseUser/{userId}")]
         public IActionResult getListUseUser([FromRoute] string userId)
         {

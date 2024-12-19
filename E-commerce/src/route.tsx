@@ -29,6 +29,7 @@ import Layout_admin from "./pages/Layout_admin";
 import CartPage from "./pages/CartPage";
 import QuanLyMuaHang from "./pages/QuanLyMuaHang";
 import ChiTietDonHang from "./components/QuanLyMuaHang/OrderDetail";
+import EditProfilePage from "./components/Profile/ProfileEditPage";
 const router = createBrowserRouter([
     {
       path: "/",
@@ -46,7 +47,7 @@ const router = createBrowserRouter([
       path: "/categories",
       element: <Layout />,
       errorElement: <ErrorPage />,
-      children: [{ index: true, element: <CartPage /> }],
+      children: [{ index: true, element: <CategoriesPage /> }],
     },
     {
       path: "/cart",
@@ -111,7 +112,7 @@ const router = createBrowserRouter([
       children: [{ index: true, element: <QuanLyDonHang /> }],
     },
     {
-      path: "/quanlyshop/QuanLyMuaHang",
+      path: "/QuanLyMuaHang",
       element: <Layout />,
       errorElement: <ErrorPage />,
       children: [{ index: true, element: <QuanLyMuaHang /> }],
@@ -154,39 +155,44 @@ const router = createBrowserRouter([
     },
     {
       path: "/admin/QuanLyUser/new",
-      element: <Layout />,
+      element: <Layout_admin />,
       errorElement: <ErrorPage />,
       children: [{ index: true, element: <CreateUser /> }],
     },
     {
       path: "/admin/QuanLyUser/edit/:id",
-      element: <Layout />,
+      element: <Layout_admin />,
       errorElement: <ErrorPage />,
       children: [{ index: true, element: <EditUser /> }],
     },
     {
       path: "/admin/QuanLyShop/new",
-      element: <Layout />,
+      element: <Layout_admin />,
       errorElement: <ErrorPage />,
       children: [{ index: true, element: <CreateShopAdmin /> }],
     },
     {
       path: "/newShop",
-      element: <Layout />,
       errorElement: <ErrorPage />,
       children: [{ index: true, element: <CreateShop /> }],
     },
     {
       path: "/admin/QuanLyShop/edit/:id",
-      element: <Layout />,
+      element: <Layout_admin />,
       errorElement: <ErrorPage />,
       children: [{ index: true, element: <EditShop /> }],
     },
     {
       path: "/admin/QuanLyShop/xemSP/:id",
-      element: <Layout />,
+      element: <Layout_admin />,
       errorElement: <ErrorPage />,
       children: [{ index: true, element: <AdminQuanLySP /> }],
+    },
+    {
+      path: "/profile/edit/:id",
+      element: <Layout_admin />,
+      errorElement: <ErrorPage />,
+      children: [{ index: true, element: <EditProfilePage /> }],
     },
   ]);
   

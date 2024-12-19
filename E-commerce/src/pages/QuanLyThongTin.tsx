@@ -33,7 +33,7 @@ export default function QuanLyThongTin() {
     <div className="flex w-screen">
       <DashboardNav />
       <div className="mt-10 ml-10 w-[75vw] flex">
-        <div className="w-80 h-[50vh] p-4 bg-white rounded-lg shadow-md transform hover:scale-105 transition-transform duration-300 ease-in-out">
+        <div className="w-80 h-[65vh] p-4 bg-white rounded-lg shadow-md transform hover:scale-105 transition-transform duration-300 ease-in-out">
           <h1 className="text-2xl font-bold mb-6 text-gray-800">
             Thông tin cửa hàng
           </h1>

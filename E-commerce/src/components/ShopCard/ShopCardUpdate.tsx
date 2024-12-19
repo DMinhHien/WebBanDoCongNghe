@@ -43,7 +43,7 @@ const ShopCard: React.FC<ShopCardProps> = ({ shop }) => (
               image={shop.image}
               sx={{
                 width: "100%",
-                height: "auto",
+                aspectRatio: 1,
                 borderRadius: 3,
               }}
             />

@@ -29,3 +29,16 @@ export interface RawOrderItem {
       totalPrice: number;
     };
   }
+  export interface OrderUser {
+    id:string;
+    idReceipt: string;
+    shopName: string | null;
+    totalAmount: number;
+    date: Date;
+}
+export interface OrderDetail{
+    id:string;
+    idProduct:string;
+    productName: string;
+    quantity: number;
+}

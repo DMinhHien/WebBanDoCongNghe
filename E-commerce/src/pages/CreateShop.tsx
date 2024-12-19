@@ -11,7 +11,7 @@ export default function CreateShop() {
   const [shop, setShop] = useState<ShopDetails>({
     id: "",
     userId: user?.id || "", // Gán userId bằng id của user hiện tại
-    userName: user?.userName || "", // Gán userName bằng userName của user hiện tại
+    userName: user?.accountName || "", // Gán userName bằng userName của user hiện tại
     name: "",
     address: "",
     image: "",

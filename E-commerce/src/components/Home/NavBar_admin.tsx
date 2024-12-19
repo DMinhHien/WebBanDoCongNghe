@@ -15,7 +15,7 @@ import {   Menu } from "@mui/icons-material";
 import logo from "../../assets/logo.jpg";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../Auth/AuthContext";
-
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 const Navbar_admin = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
@@ -92,7 +92,7 @@ const Navbar_admin = () => {
           {user ? (
             <>
               <IconButton color="inherit" onClick={handleProfileClick}>
-                <Avatar>N</Avatar>
+                <AccountCircleIcon/>
               </IconButton>
           
               <Button color="inherit" onClick={handleLogout}>Đăng Xuất</Button>
