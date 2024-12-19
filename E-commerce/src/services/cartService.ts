@@ -22,3 +22,14 @@ export async function fetchCartDetails(userId: string): Promise<CartDetail[]> {
       throw error
     }
   }
+
+export const getCarts=async(id:string)=>{
+  try {
+    const token = localStorage.getItem("token")
+    const res=await axios.get(`https://localhost:7183/Cart/getListUse/${id}`,{ headers: { Authorization: `Bearer ${token}` } })
+    return res.data
+  } catch (error) {
+    console.error("Không thể lấy danh sách sản phẩm trong giỏ hàng", error);
+      throw error
+  }
+}

@@ -27,7 +27,7 @@ export default function EditUser() {
         Password: "",
         BirthDate: new Date(data[0].birthDate),
         Address: data[0].address,
-        Role:data[0].role[0]
+        Role:data[0].role
       });
     });
   }, []);

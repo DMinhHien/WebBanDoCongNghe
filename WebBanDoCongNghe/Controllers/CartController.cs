@@ -21,7 +21,7 @@ namespace WebBanDoCongNghe.Controllers
             _context = context;
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpPost("create")]
         public ActionResult Create([FromBody] JObject json)
         {
@@ -106,11 +106,12 @@ namespace WebBanDoCongNghe.Controllers
 
             return Json(result);
         }
-        [Authorize]
+        //[Authorize]
         [HttpPost("addCartProduct")]
         public IActionResult addCartProduct([FromBody] JObject json)
         {
             var model = JsonConvert.DeserializeObject<CartDetail>(json.GetValue("data").ToString());
+            model.id = Guid.NewGuid().ToString().Substring(0, 10);
             _context.CartDetails.Add(model);
             _context.SaveChanges();
             return Json(model);
