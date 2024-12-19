@@ -25,6 +25,7 @@ export default function QuanLyUser() {
         Email: item.email,
         Password: "",
         Role: item.role.length === 0 ? "User" : item.role,
+        PhoneNumber:""
       }));
       setUsers(transformedUsers);
     });
