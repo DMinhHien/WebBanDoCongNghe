@@ -7,13 +7,13 @@ import { createUser } from "../services/UserService";
 export default function CreateUser() {
   const [user, setUser] = useState<User>({
     id: "",
-    Email: "",
-    AccountName: "",
-    Password: "",
-    BirthDate: new Date(),
-    Address: "",
-    Role: "",
-    PhoneNumber:""
+    email: "",
+    accountName: "",
+    password: "",
+    birthDate: new Date(),
+    address: "",
+    role: "",
+    phoneNumber:""
   });
   const nav = useNavigate();
   //call api createUser
@@ -53,7 +53,7 @@ export default function CreateUser() {
             </label>
             <input
               type="text"
-              value={user?.Email}
+              value={user?.email}
               name="Email"
               onChange={handleChange}
               className="px-4 py-2 border border-gray-300 w-full rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-700"
@@ -66,7 +66,7 @@ export default function CreateUser() {
             </label>
             <input
               type="text"
-              value={user?.AccountName}
+              value={user?.accountName}
               name="AccountName"
               onChange={handleChange}
               className="px-4 py-2 border border-gray-300 w-full rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-700"
@@ -79,7 +79,7 @@ export default function CreateUser() {
             </label>
             <input
               type="text"
-              value={user?.Password}
+              value={user?.password}
               name="Password"
               onChange={handleChange}
               className="px-4 py-2 border border-gray-300 w-full rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-700"
@@ -92,7 +92,7 @@ export default function CreateUser() {
             </label>
             <input
               type="date"
-              value={user.BirthDate.toISOString().split("T")[0]}
+              value={user.birthDate.toISOString().split("T")[0]}
               name="BirthDate"
               onChange={handleChange}
               className="px-4 py-2 border border-gray-300 w-full rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-700"
@@ -105,7 +105,7 @@ export default function CreateUser() {
             </label>
             <input
               type="text"
-              value={user?.Address}
+              value={user?.address}
               name="Address"
               onChange={handleChange}
               className="px-4 py-2 border border-gray-300 w-full rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-700"
@@ -117,7 +117,7 @@ export default function CreateUser() {
             </label>
             <input
               type="text"
-              value={user?.PhoneNumber}
+              value={user?.phoneNumber}
               name="PhoneNumber"
               onChange={handleChange}
               className="px-4 py-2 border border-gray-300 w-full rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-700"

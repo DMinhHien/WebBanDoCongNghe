@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Code\\Đồ án\\WebBanDoCongNghe\\WebBanDoCongNghe\\WebBanDoCongNghe.csproj": {}
+    "D:\\UDC\\WebBanDoCongNghe\\WebBanDoCongNghe\\WebBanDoCongNghe.csproj": {}
   },
   "projects": {
-    "D:\\Code\\Đồ án\\WebBanDoCongNghe\\WebBanDoCongNghe\\WebBanDoCongNghe.csproj": {
+    "D:\\UDC\\WebBanDoCongNghe\\WebBanDoCongNghe\\WebBanDoCongNghe.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Code\\Đồ án\\WebBanDoCongNghe\\WebBanDoCongNghe\\WebBanDoCongNghe.csproj",
+        "projectUniqueName": "D:\\UDC\\WebBanDoCongNghe\\WebBanDoCongNghe\\WebBanDoCongNghe.csproj",
         "projectName": "WebBanDoCongNghe",
-        "projectPath": "D:\\Code\\Đồ án\\WebBanDoCongNghe\\WebBanDoCongNghe\\WebBanDoCongNghe.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "D:\\Code\\Đồ án\\WebBanDoCongNghe\\WebBanDoCongNghe\\obj\\",
+        "projectPath": "D:\\UDC\\WebBanDoCongNghe\\WebBanDoCongNghe\\WebBanDoCongNghe.csproj",
+        "packagesPath": "C:\\Users\\duong\\.nuget\\packages\\",
+        "outputPath": "D:\\UDC\\WebBanDoCongNghe\\WebBanDoCongNghe\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\duong\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -34,6 +34,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -90,7 +95,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files (x86)\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

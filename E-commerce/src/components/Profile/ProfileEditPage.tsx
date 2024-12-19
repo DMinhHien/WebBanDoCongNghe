@@ -2,18 +2,19 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { User } from "../../data/User";
 import { editUser, getUser } from "../../services/UserService";
-
+import {useAuth} from "../../components/Auth/AuthContext"
 export default function EditProfilePage() {
   const [user, setUser] = useState<User>({
     id: "",
-    Email: "",
-    AccountName: "",
-    Password: "",
-    BirthDate: new Date(),
-    Address: "",
-    Role: "",
-    PhoneNumber:""
+    email: "",
+    accountName: "",
+    password: "",
+    birthDate: new Date(),
+    address: "",
+    role: "",
+    phoneNumber:""
   });
+  const {updateUser}=useAuth()
   const nav = useNavigate();
   const { id: userId } = useParams();
   //call api getUser
@@ -22,13 +23,13 @@ export default function EditProfilePage() {
       console.log(data);
       setUser({
         id: data[0].id,
-        Email: data[0].email,
-        AccountName: data[0].accountName,
-        Password: "",
-        BirthDate: new Date(data[0].birthDate),
-        Address: data[0].address,
-        Role:data[0].role,
-        PhoneNumber:data[0].phoneNumber
+        email: data[0].email,
+        accountName: data[0].accountName,
+        password: "",
+        birthDate: new Date(data[0].birthDate),
+        address: data[0].address,
+        role:data[0].role,
+        phoneNumber:data[0].phoneNumber
       });
     });
   }, []);
@@ -46,6 +47,7 @@ export default function EditProfilePage() {
       return;
     }
     editUser(user).then(() => {
+      updateUser(user)
       nav("/profile/");
     });
   };
@@ -71,7 +73,7 @@ export default function EditProfilePage() {
             </label>
             <input
               type="text"
-              value={user?.Email}
+              value={user?.email}
               name="Email"
               onChange={handleChange}
               className="px-4 py-2 border border-gray-300 w-full rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-700"
@@ -84,7 +86,7 @@ export default function EditProfilePage() {
             </label>
             <input
               type="text"
-              value={user?.AccountName}
+              value={user?.accountName}
               name="AccountName"
               onChange={handleChange}
               className="px-4 py-2 border border-gray-300 w-full rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-700"
@@ -97,7 +99,7 @@ export default function EditProfilePage() {
             </label>
             <input
               type="date"
-              value={user.BirthDate.toISOString().split("T")[0]}
+              value={user.birthDate.toISOString().split("T")[0]}
               name="BirthDate"
               onChange={handleChange}
               className="px-4 py-2 border border-gray-300 w-full rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-700"
@@ -110,7 +112,7 @@ export default function EditProfilePage() {
             </label>
             <input
               type="text"
-              value={user?.Address}
+              value={user?.address}
               name="Address"
               onChange={handleChange}
               className="px-4 py-2 border border-gray-300 w-full rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-700"
@@ -122,7 +124,7 @@ export default function EditProfilePage() {
             </label>
             <input
               type="text"
-              value={user?.PhoneNumber}
+              value={user?.phoneNumber}
               name="PhoneNumber"
               onChange={handleChange}
               className="px-4 py-2 border border-gray-300 w-full rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-700"
