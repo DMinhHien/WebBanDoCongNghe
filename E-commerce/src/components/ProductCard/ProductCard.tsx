@@ -44,7 +44,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => (
               image={product.image}
               sx={{
                 width: "100%",
-                height: "auto",
+                aspectRatio:1,
                 borderRadius: 3,
               }}
             />
