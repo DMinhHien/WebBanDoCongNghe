@@ -6,6 +6,7 @@ import {
   DialogContent,
   DialogTitle,
   Button,
+  TextField,
 } from '@mui/material';
 
 interface ProfileEditDialogProps {
@@ -42,62 +43,67 @@ const ProfileEditDialog: React.FC<ProfileEditDialogProps> = ({
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData({ ...formData,  [name]: name === "BirthDate" ? new Date(value) : value, });
   };
   const handleSave = () => {
-    onSave(formData);
-    editUser(formData)
+    const updatedData = { ...formData }; // Lấy bản cập nhật mới nhất
+    editUser(updatedData); 
+    onSave(updatedData);
   };
-  
+  useEffect(() => {
+    setFormData({
+      ...userInfo,
+      BirthDate: new Date(userInfo.BirthDate), // Ensure it's a Date object
+    });
+  }, [userInfo]);
   return (
     <Dialog open={open} onClose={onClose}>
       <DialogTitle>Chỉnh sửa thông tin cá nhân</DialogTitle>
       <DialogContent>
-        <div>
-          <label>Tên</label>
-          <input
-            type="text"
-            name="AccountName"
-            value={formData.AccountName} // Controlled component
-            onChange={handleInputChange}
-          />
-        </div>
-        <div>
-          <label>Email</label>
-          <input
-            type="email"
-            name="Email"
-            value={formData.Email} // Controlled component
-            onChange={handleInputChange}
-          />
-        </div>
-        <div>
-          <label>Ngày sinh</label>
-          <input
-            type="date"
-            name="BirthDate"
-            value={formData.BirthDate.toISOString().split("T")[0]} // Format date for input
-            onChange={handleInputChange}
-          />
-        </div>
-        <div>
-          <label>Địa chỉ</label>
-          <input
-            type="text"
-            name="Address"
-            value={formData.Address} // Controlled component
-            onChange={handleInputChange}
-          />
-        </div>
-        <div>
-          <label>Số điện thoại</label>
-          <input
-            type="text"
-            name="PhoneNumber"
-            value={formData.PhoneNumber} // Controlled component
-            onChange={handleInputChange}
-          />
-        </div>
+        <TextField
+          label="Tên"
+          fullWidth
+          margin="normal"
+          name="userName"
+          defaultValue={formData.AccountName}
+          onChange={handleInputChange}
+        />
+        <TextField
+          label="Email"
+          fullWidth
+          margin="normal"
+          name="email"
+          value={formData.Email}
+          onChange={handleInputChange}
+        />
+        <TextField
+          label="Ngày sinh"
+          fullWidth
+          margin="normal"
+          type="date"
+          name="birthDate"
+          value="2017-05-24"
+          onChange={handleInputChange}
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
+        <TextField
+          label="Địa chỉ"
+          fullWidth
+          margin="normal"
+          name="address"
+          value={formData.Address}
+          onChange={handleInputChange}
+        />
+        <TextField
+          label="Số điện thoại"
+          fullWidth
+          margin="normal"
+          name="phone"
+          value={formData.PhoneNumber}
+          onChange={handleInputChange}
+        />
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose} color="secondary">
@@ -110,6 +116,5 @@ const ProfileEditDialog: React.FC<ProfileEditDialogProps> = ({
     </Dialog>
   );
 };
-
 
 export default ProfileEditDialog;
