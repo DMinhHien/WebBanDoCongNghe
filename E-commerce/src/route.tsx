@@ -112,7 +112,7 @@ const router = createBrowserRouter([
       children: [{ index: true, element: <QuanLyDonHang /> }],
     },
     {
-      path: "/quanlyshop/QuanLyMuaHang",
+      path: "/QuanLyMuaHang",
       element: <Layout />,
       errorElement: <ErrorPage />,
       children: [{ index: true, element: <QuanLyMuaHang /> }],

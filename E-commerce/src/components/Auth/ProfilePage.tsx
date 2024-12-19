@@ -72,6 +72,7 @@ const ProfilePage: React.FC = () => {
                 <Tab label="Tạo Shop" onClick={() => navigate('/newShop')} />
               )}
               <Tab label="Chỉnh sửa thông tin cá nhân" onClick={() => navigate(`/profile/edit/${user.id}`)} />
+              <Tab label="Quản lý đơn mua hàng" onClick={() => navigate(`/QuanLyMuaHang`)} />
             </Tabs>
           </Grid>
 

@@ -85,7 +85,6 @@ export default function ChiTietDonHang() {
     
     return (
         <div className="flex w-screen">
-            <DashboardNav />
         <div className="p-4">
             <h2 className="text-2xl font-bold mb-4">Chi tiết Đơn hàng: {id}</h2>
             <table className="min-w-full border border-gray-300 bg-white">

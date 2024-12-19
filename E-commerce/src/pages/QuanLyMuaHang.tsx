@@ -26,7 +26,6 @@ export default function QuanLyMuaHang() {
     }, []);
   return (
     <div className="flex w-screen">
-      <DashboardNav />
       <div className="mt-10 ml-10 w-[75vw]">
         <div className="flex items-center space-x-3 w-3/4">
           <InputBase
