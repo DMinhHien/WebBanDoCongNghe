@@ -1,5 +1,6 @@
 import React, { useEffect }  from "react";
 import {
+  Typography,
   AppBar,
   Toolbar,
   IconButton,
@@ -81,8 +82,6 @@ const Navbar = () => {
           primaryTypographyProps={{ noWrap: true }}
         />
       </ListItemButton>
-     
-      
       <ListItemButton>
         <ListItemText
           primary="About"
@@ -101,7 +100,12 @@ const Navbar = () => {
       <Toolbar style={{ justifyContent: "space-between" }}>
         {/* Left section - Logo */}
         {!isMobile && (
+          <Box display="flex" alignItems="center" gap={1}>
           <img src={logo} alt="Brand Logo" style={{ height: "60px" }} />
+          <Typography variant="h6" sx={{ color: "blue" }}>
+            SecondHand
+          </Typography>
+        </Box>
         )}
 
         {/* Middle Section - Menu */}
@@ -144,16 +148,6 @@ const Navbar = () => {
         )}
         {/* Right Section - Search and Cart */}
         <Box style={{ display: "flex", alignItems: "center", gap: "15px" }}>
-          <InputBase
-            placeholder="Search"
-            startAdornment={<Search style={{ color: "#999" }} />}
-            style={{
-              backgroundColor: "#F0ECE1",
-              padding: "5px 10px",
-              borderRadius: "20px",
-            }}
-          />
-          
             {/* icon button */}
             {user ? (
           <>
