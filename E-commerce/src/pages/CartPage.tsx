@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Cart } from "../data/Cart";
-import { getCarts } from "../services/cartService";
+import { editQuantity, getCarts } from "../services/cartService";
 import { useAuth } from "../components/Auth/AuthContext";
 import CartItem from "../components/CartItem";
 
@@ -11,15 +11,26 @@ export default function CartPage() {
     shops: [],
   });
   const { user } = useAuth();
+  const [total,setTotal]=useState(0)
+  const updateTotal=()=>{
+    let tmp=0;
+    carts.shops.map((shop)=>{
+      shop.products.map((product)=>{
+        tmp=tmp+(product.quantity*product.productInfo.unitPrice)
+      })
+    })
+    setTotal(tmp)
+  }
   useEffect(() => {
     if (user) {
       getCarts(user?.id as string).then((data) => {
         setCarts(data[0]);
       });
     }
+    updateTotal()
   }, [user]);
-  const updateQuantity = (shopId: string, productId: string, newQuantity: number) =>()=>{
-    setCarts((prevCart) => ({
+  const updateQuantity = (idCart:string,shopId: string, productId: string, newQuantity: number)=>{
+     setCarts((prevCart) => ({
       ...prevCart,
       shops: prevCart.shops.map((shop) =>
         shop.shopId === shopId
@@ -34,6 +45,8 @@ export default function CartPage() {
           : shop
       ),
     }));
+    updateTotal()
+    editQuantity(carts.id,idCart,productId,newQuantity)
   };
   return (
     <section className="bg-white py-8 antialiased  md:py-16">
@@ -59,9 +72,10 @@ export default function CartPage() {
                     <span className="font-semibold">{shop.shopInfo.name}</span>
                   </div>
                   {shop.products.map((product)=>(
-                    <div className="space-y-3">
+                    <div>
                       <CartItem ProductCart={product}
-                      onQuantityChange={updateQuantity(shop.shopId,product.idProduct,product.quantity)}/>
+                      onQuantityChange={(productId, newQuantity) => 
+                        updateQuantity(product.id, shop.shopId, productId, newQuantity)}/>
                     </div>
                   ))}
                 </div>
@@ -85,7 +99,7 @@ export default function CartPage() {
                       Original price
                     </dt>
                     <dd className="text-base font-medium text-gray-900 ">
-                      $7,592.00
+                      {total} VNĐ
                     </dd>
                   </dl>
 
@@ -94,7 +108,7 @@ export default function CartPage() {
                       Store Pickup
                     </dt>
                     <dd className="text-base font-medium text-gray-900 ">
-                      $99
+                      30000 VNĐ
                     </dd>
                   </dl>
                 </div>
@@ -102,7 +116,7 @@ export default function CartPage() {
                 <dl className="flex items-center justify-between gap-4 border-t border-gray-200 pt-2 dark:border-gray-700">
                   <dt className="text-base font-bold text-gray-900 ">Total</dt>
                   <dd className="text-base font-bold text-gray-900 ">
-                    $8,191.00
+                    {total+30000} VNĐ
                   </dd>
                 </dl>
               </div>

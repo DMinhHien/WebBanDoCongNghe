@@ -33,3 +33,13 @@ export const getCarts=async(id:string)=>{
       throw error
   }
 }
+
+export const editQuantity=async(idCart:string,id:string,idProduct:string,quantity:number)=>{
+  try {
+    const token =localStorage.getItem("token")
+    await axios.post("https://localhost:7183/Cart/editCartDetail",{data:{id,idCart,idProduct,quantity}},{ headers: { Authorization: `Bearer ${token}` } })
+  } catch (error) {
+    console.error("Không thể lhay đổi quantity", error);
+      throw error
+  }
+}

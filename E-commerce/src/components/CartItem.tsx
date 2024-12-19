@@ -3,7 +3,7 @@ import { useState } from "react";
 
 interface CartItemProps {
   ProductCart: ProductCart;
-  onQuantityChange: (id: string, newQuantity: number) => void; // Callback để thông báo thay đổi
+  onQuantityChange: (productId: string, newQuantity: number) => void; // Callback để thông báo thay đổi
 }
 
 export default function CartItem({ ProductCart, onQuantityChange }: CartItemProps) {
@@ -27,8 +27,6 @@ export default function CartItem({ ProductCart, onQuantityChange }: CartItemProp
       className="rounded-lg border bg-white p-4 shadow-sm dark:border-gray-700 md:p-6 mt-3"
     >
       <div className="flex flex-wrap items-center justify-between gap-4 md:flex-nowrap">
-        <input type="checkbox" />
-
         {/* Image */}
         <img
           className="h-20 w-20"

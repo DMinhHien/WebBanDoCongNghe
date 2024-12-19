@@ -1,5 +1,6 @@
-import { Order } from "../components/OrderList/OrderList";
+
 import axios from "axios";
+import { Order } from "../data/order";
 export const getListOrder= async(id:string) =>{
     try 
     {
