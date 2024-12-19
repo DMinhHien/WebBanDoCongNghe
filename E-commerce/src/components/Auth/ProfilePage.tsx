@@ -14,24 +14,17 @@ import {
 import { useAuth } from './AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { Shop } from '../../data/shop';
-import ProfileEditDialog from '../Profile/ProfileEditDialog';
+
 const ProfilePage: React.FC = () => {
   const { user } = useAuth();
   const [shop, setShop] = useState<Shop | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [tabIndex, setTabIndex] = useState<number>(0);
   const navigate = useNavigate();
-  const [openEditDialog, setOpenEditDialog] = useState<boolean>(false);
-  const [userInfo, setUserInfo] = useState({
-    id:user?.id||'',
-    AccountName: user?.accountName || '',
-    Password:"",
-    Role:"",
-    Email: user?.email || '',
-    BirthDate: user?.birthDate||new Date, // You can set this to user.birthDate if available
-    Address: user?.address||'', // Same as above
-    PhoneNumber:  user?.phoneNumber||'', // Same as above
-  });
+
+  const cancel = () => {
+    navigate("/profile");
+  };
   // Fetch Shop Data
   useEffect(() => {
     if (user) {
@@ -46,39 +39,9 @@ const ProfilePage: React.FC = () => {
   const handleTabChange = (_: React.SyntheticEvent, newIndex: number) => {
     setTabIndex(newIndex);
   };
-  const handleDialogOpen = () => {
-    setUserInfo({
-      id:user?.id||'',
-      AccountName: user?.accountName || '',
-      Password:"",
-      Role:"",
-      Email: user?.email || '',
-      BirthDate: user?.birthDate||new Date, // You can set this to user.birthDate if available
-      Address: user?.address||'', 
-      PhoneNumber: user?.phoneNumber||'', 
-    });
-    setOpenEditDialog(true);
-  };
+ 
 
-  const handleDialogClose = () => {
-    setOpenEditDialog(false);
-  };
 
-  const handleSave = (updatedInfo: {
-    id:string;
-    AccountName: string;
-    Password:string,
-    Role:string,
-    Email: string;
-    BirthDate: Date;
-    Address: string;
-    PhoneNumber: string;
-  }) => {
-    // Add logic to save the updated user information
-    console.log('Saving user info:', updatedInfo);
-    setUserInfo(updatedInfo);
-    setOpenEditDialog(false);
-  };
   if (!user) {
     return (
       <Container>
@@ -108,7 +71,7 @@ const ProfilePage: React.FC = () => {
               ) : (
                 <Tab label="Tạo Shop" onClick={() => navigate('/newShop')} />
               )}
-              <Tab label="Chỉnh sửa thông tin cá nhân" onClick={handleDialogOpen} />
+              <Tab label="Chỉnh sửa thông tin cá nhân" onClick={() => navigate(`/profile/edit/${user.id}`)} />
             </Tabs>
           </Grid>
 
@@ -157,13 +120,6 @@ const ProfilePage: React.FC = () => {
         </Grid>
       </Paper>
 
-      {/* Profile Edit Dialog */}
-      <ProfileEditDialog
-        open={openEditDialog}
-        onClose={handleDialogClose}
-        userInfo={userInfo}
-        onSave={handleSave}
-      />
     </Container>
   );
 };

@@ -29,6 +29,7 @@ import Layout_admin from "./pages/Layout_admin";
 import CartPage from "./pages/CartPage";
 import QuanLyMuaHang from "./pages/QuanLyMuaHang";
 import ChiTietDonHang from "./components/QuanLyMuaHang/OrderDetail";
+import EditProfilePage from "./components/Profile/ProfileEditPage";
 const router = createBrowserRouter([
     {
       path: "/",
@@ -186,6 +187,12 @@ const router = createBrowserRouter([
       element: <Layout_admin />,
       errorElement: <ErrorPage />,
       children: [{ index: true, element: <AdminQuanLySP /> }],
+    },
+    {
+      path: "/profile/edit/:id",
+      element: <Layout_admin />,
+      errorElement: <ErrorPage />,
+      children: [{ index: true, element: <EditProfilePage /> }],
     },
   ]);
   
