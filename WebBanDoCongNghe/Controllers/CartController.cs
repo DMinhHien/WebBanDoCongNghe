@@ -98,7 +98,8 @@ namespace WebBanDoCongNghe.Controllers
                                     .Select(p => new
                                     {
                                         p.productName,
-                                        p.unitPrice
+                                        p.unitPrice,
+                                        p.image
                                     }).FirstOrDefault()
                             }).ToList()
                         }).ToList()
