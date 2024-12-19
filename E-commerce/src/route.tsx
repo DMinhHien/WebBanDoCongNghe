@@ -47,13 +47,13 @@ const router = createBrowserRouter([
       path: "/categories",
       element: <Layout />,
       errorElement: <ErrorPage />,
-      children: [{ index: true, element: <CartPage /> }],
+      children: [{ index: true, element: <CategoriesPage /> }],
     },
     {
       path: "/cart",
       element: <Layout />,
       errorElement: <ErrorPage />,
-      children: [{ index: true, element: <CategoriesPage /> }],
+      children: [{ index: true, element: <CartPage /> }],
     },
     {
       path: "/productscategory/:categoryId",

@@ -71,7 +71,7 @@ const Navbar = () => {
       </ListItemButton>
       <ListItemButton component = {Link} to ="/categories">
         <ListItemText
-          primary="Danh mục sản phẩm"
+          primary="Sản phẩm"
           primaryTypographyProps={{ noWrap: true }}
         />
       </ListItemButton>
@@ -81,18 +81,8 @@ const Navbar = () => {
           primaryTypographyProps={{ noWrap: true }}
         />
       </ListItemButton>
-      <ListItemButton>
-        <ListItemText
-          primary="Best Sellers"
-          primaryTypographyProps={{ noWrap: true }}
-        />
-      </ListItemButton>
-      <ListItemButton>
-        <ListItemText
-          primary="Reviews"
-          primaryTypographyProps={{ noWrap: true }}
-        />
-      </ListItemButton>
+     
+      
       <ListItemButton>
         <ListItemText
           primary="About"
@@ -137,16 +127,10 @@ const Navbar = () => {
                     <ListItemText primary="Trang chủ" />
                   </ListItemButton>
                   <ListItemButton component = {Link} to ="/categories">
-                    <ListItemText primary="Danh mục sản phẩm" />
+                    <ListItemText primary="Sản phẩm" />
                   </ListItemButton>
                   <ListItemButton component = {Link} to ="/shops">
                     <ListItemText primary="Shops" />
-                  </ListItemButton>
-                  <ListItemButton>
-                    <ListItemText primary="Best Sellers" />
-                  </ListItemButton>
-                  <ListItemButton>
-                    <ListItemText primary="Reviews" />
                   </ListItemButton>
                   <ListItemButton>
                     <ListItemText primary="About" />
