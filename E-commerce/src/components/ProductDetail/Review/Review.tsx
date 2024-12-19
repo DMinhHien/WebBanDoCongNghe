@@ -4,17 +4,6 @@ import ReviewList from "./ReviewList";
 import {Comment} from "../../../data/comment"
 import { useEffect, useState } from "react";
 import {fetchComments} from "../../../services/reviewService"
-// const reviews = [
-//   {
-//     name: "Samantha87",
-//     rating: 5,
-//     date: "20/11/2024 12:34",
-//     comment:
-//       "Amazing product! My skin feels so soft and hydrated. Will definitely buy again.",
-//     reply:
-//       "Thank you for your kind words! We're so glad the product worked well for you.",
-//   },
-// ];
 interface Props {
   productId: string;
 }

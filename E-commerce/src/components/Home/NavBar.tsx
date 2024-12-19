@@ -14,11 +14,13 @@ import {
   Avatar,
   Button,
 } from "@mui/material";
-import { Search, ShoppingCart,  Menu } from "@mui/icons-material";
+import { Search, ShoppingCart,  Menu, } from "@mui/icons-material";
 import logo from "../../assets/logo.jpg";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../Auth/AuthContext";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+
 
 const Navbar = () => {
   const theme = useTheme();
@@ -172,7 +174,7 @@ const Navbar = () => {
             {user ? (
           <>
             <IconButton color="inherit" onClick={handleProfileClick}>
-              <Avatar>N</Avatar>
+              <AccountCircleIcon/>
             </IconButton>
             <IconButton color="inherit" onClick={handleCart}>
               <ShoppingCart></ShoppingCart>

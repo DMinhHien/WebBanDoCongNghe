@@ -5,6 +5,8 @@ export interface Comment {
     productId: string;
     rating: number;
     date: Date;
+    onEdit: (id: string) => void; 
+    onDelete: (id: string) => void;
   }
   export interface CommentDTO {
     id: string;
