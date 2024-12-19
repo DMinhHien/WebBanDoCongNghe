@@ -47,7 +47,12 @@ namespace WebBanDoCongNghe.Controllers
             _context.SaveChanges();
             return Json(model);
         }
-
+        [HttpGet("getElementById/{id}")]
+        public IActionResult getElementById([FromRoute] string id)
+        {
+            var model = _context.Comments.SingleOrDefault(x => x.id == id);
+            return Json(model);
+        }
         // POST: CommentController/Delete/5
         [Authorize]
         [HttpPost("delete")]
