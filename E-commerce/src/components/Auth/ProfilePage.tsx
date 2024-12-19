@@ -22,9 +22,6 @@ const ProfilePage: React.FC = () => {
   const [tabIndex, setTabIndex] = useState<number>(0);
   const navigate = useNavigate();
 
-  const cancel = () => {
-    navigate("/profile");
-  };
   // Fetch Shop Data
   useEffect(() => {
     if (user) {

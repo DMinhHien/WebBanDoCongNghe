@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Box, Typography, Rating, IconButton, Menu, MenuItem } from "@mui/material";
+import { Box, Button, Typography, Rating, IconButton, Menu, MenuItem, TextField } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { useAuth } from "../../Auth/AuthContext"; // Import AuthContext từ vị trí của bạn
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
   productId: string;
   rating: number;
   date: Date | string; // Allowing both Date and string types
-  onEdit: (id: string) => void; // Function to handle edit action
+  onEdit: (id: string, updatedContent: string, updatedRating: number) => void; // Function to handle edit action
   onDelete: (id: string) => void; // Function to handle delete action
 }
 
@@ -22,6 +22,19 @@ const ReviewItem = ({ id, username, rating, date, content, onEdit, onDelete }: P
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const isMenuOpen = Boolean(anchorEl);
 
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedContent, setEditedContent] = useState(content);
+  const [editedRating, setEditedRating] = useState(rating);
+  const handleSave = () => {
+    onEdit(id, editedContent, editedRating);
+    setIsEditing(false);
+  };
+
+  const handleCancel = () => {
+    setEditedContent(content);
+    setEditedRating(rating);
+    setIsEditing(false);
+  };
   // Menu handlers
   const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -50,20 +63,59 @@ const ReviewItem = ({ id, username, rating, date, content, onEdit, onDelete }: P
             </IconButton>
           )}
       </Box>
-      <Rating
-        value={rating}
-        readOnly
-        size="small"
-        sx={{
-          "& .MuiRating-iconFilled": {
-            color: "black",
-          },
-          "& .MuiRating-iconEmpty": {
-            color: "black",
-          },
-        }}
-      />
-      <Typography sx={{ mt: 1 }}>{content}</Typography>
+      {isEditing ? (
+        <Box mt={2}>
+          <TextField
+            fullWidth
+            variant="outlined"
+            value={editedContent}
+            onChange={(e) => setEditedContent(e.target.value)}
+            placeholder="Edit your review"
+            multiline
+            rows={3}
+          />
+          <Rating
+            value={editedRating}
+            onChange={(_, newValue) => setEditedRating(newValue || 0)}
+            size="medium"
+            sx={{
+              mt: 2,
+              "& .MuiRating-iconFilled": {
+                color: "black",
+              },
+              "& .MuiRating-iconEmpty": {
+                color: "black",
+              },
+            }}
+          />
+          <Box mt={2} display="flex" gap={1}>
+            <Button variant="contained" color="primary" onClick={handleSave}>
+              Save
+            </Button>
+            <Button variant="outlined" onClick={handleCancel}>
+              Cancel
+            </Button>
+          </Box>
+        </Box>
+      ) : (
+        <>
+          <Rating
+            value={rating}
+            readOnly
+            size="small"
+            sx={{
+              "& .MuiRating-iconFilled": {
+                color: "black",
+              },
+              "& .MuiRating-iconEmpty": {
+                color: "black",
+              },
+            }}
+          />
+          <Typography sx={{ mt: 1 }}>{content}</Typography>
+        </>
+      )}
+    
     {/* Menu for Edit/Delete */}
     <Menu
         anchorEl={anchorEl}
@@ -78,7 +130,7 @@ const ReviewItem = ({ id, username, rating, date, content, onEdit, onDelete }: P
         <MenuItem
           onClick={() => {
             handleMenuClose();
-            onEdit(id);
+            setIsEditing(true);
           }}
         >
           Edit
