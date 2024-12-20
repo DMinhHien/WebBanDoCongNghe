@@ -30,6 +30,7 @@ import CartPage from "./pages/CartPage";
 import QuanLyMuaHang from "./pages/QuanLyMuaHang";
 import ChiTietDonHang from "./components/QuanLyMuaHang/OrderDetail";
 import EditProfilePage from "./components/Profile/ProfileEditPage";
+import ReceiptPage from "./pages/ReceiptPage";
 const router = createBrowserRouter([
     {
       path: "/",
@@ -193,6 +194,12 @@ const router = createBrowserRouter([
       element: <Layout_admin />,
       errorElement: <ErrorPage />,
       children: [{ index: true, element: <EditProfilePage /> }],
+    },
+    {
+      path: "/receipt/:id",
+      element: <Layout />,
+      errorElement: <ErrorPage />,
+      children: [{ index: true, element: <ReceiptPage/> }],
     },
   ]);
   

@@ -21,7 +21,7 @@ namespace WebBanDoCongNghe.Controllers
             _context = context;
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpPost("create")]
         public ActionResult Create([FromBody] JObject json)
         {

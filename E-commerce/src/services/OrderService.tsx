@@ -35,9 +35,20 @@ export const getListOrderDetail= async(id:string) =>{
 export const createReceipt=async(userId:string,ProductList:ProductCart[])=>{
     try {
         const token=localStorage.getItem("token")
-        await axios.post(`https://localhost:7183/Receipt/create/${userId}`,{data:ProductList},{ headers: { Authorization: `Bearer ${token}` } }) 
+        const res=await axios.post(`https://localhost:7183/Receipt/create/${userId}`,{data:ProductList},{ headers: { Authorization: `Bearer ${token}` } }) 
+        return res.data
     } catch (error) {
         console.error("không thể tạo đơn hàng",error);
+        throw error
+    }
+}
+
+export const getReceiptDetail=async(id:string)=>{
+    try {
+        const res=await axios.get(`https://localhost:7183/Receipt/getReceiptDetail/${id}`) 
+        return res.data
+    } catch (error) {
+        console.error("không thể lấy danh sách ReceiptDetail",error);
         throw error
     }
 }

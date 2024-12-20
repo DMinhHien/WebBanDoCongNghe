@@ -1,9 +1,15 @@
 import { useEffect, useState } from "react";
-import { Cart } from "../data/Cart";
-import { deleteCartItem, editQuantity, getCarts } from "../services/cartService";
+import { Cart, ProductCart } from "../data/Cart";
+import {
+  deleteCartItem,
+  editQuantity,
+  getCarts,
+} from "../services/cartService";
 import { useAuth } from "../components/Auth/AuthContext";
 import CartItem from "../components/CartItem";
 import { createReceipt } from "../services/OrderService";
+import { useNavigate } from "react-router-dom";
+import logo from "../../public/check (1).png";
 
 export default function CartPage() {
   const [carts, setCarts] = useState<Cart>({
@@ -12,21 +18,22 @@ export default function CartPage() {
     shops: [],
   });
   const { user } = useAuth();
-  const [total,setTotal]=useState(0)
-  const updateTotal=()=>{
-    let tmp=0;
-    carts.shops.map((shop)=>{
-      shop.products.map((product)=>{
-        tmp=tmp+(product.quantity*product.productInfo.unitPrice)
-      })
-    })
-    setTotal(tmp)
-  }
+  const nav = useNavigate();
+  const [total, setTotal] = useState(0);
+  const updateTotal = () => {
+    let tmp = 0;
+    carts.shops.map((shop) => {
+      shop.products.map((product) => {
+        tmp = tmp + product.quantity * product.productInfo.unitPrice;
+      });
+    });
+    setTotal(tmp);
+  };
   useEffect(() => {
     if (user) {
       getCarts(user?.id as string).then((data) => {
         setCarts(data[0]);
-        updateTotal()
+        updateTotal();
       });
     }
   }, [user]);
@@ -35,8 +42,8 @@ export default function CartPage() {
       updateTotal();
     }
   }, [carts]);
-  const DeleteCartItem=(id:string)=>{
-    deleteCartItem(id)
+  const DeleteCartItem = (id: string) => {
+    deleteCartItem(id);
     setCarts((prevCarts) => {
       const updatedShops = prevCarts.shops.map((shop) => ({
         ...shop,
@@ -44,9 +51,14 @@ export default function CartPage() {
       }));
       return { ...prevCarts, shops: updatedShops };
     });
-  }
-  const updateQuantity = (idCart:string,shopId: string, productId: string, newQuantity: number)=>{
-     setCarts((prevCart) => ({
+  };
+  const updateQuantity = (
+    idCart: string,
+    shopId: string,
+    productId: string,
+    newQuantity: number
+  ) => {
+    setCarts((prevCart) => ({
       ...prevCart,
       shops: prevCart.shops.map((shop) =>
         shop.shopId === shopId
@@ -61,14 +73,23 @@ export default function CartPage() {
           : shop
       ),
     }));
-    editQuantity(carts.id,idCart,productId,newQuantity)
+    editQuantity(carts.id, idCart, productId, newQuantity);
   };
-  const CreateReceipt=()=>{
-    carts.shops.map((shop)=>{
-      createReceipt(carts.userId,shop.products)
-    })
-  }
-  
+  const CreateReceipt = async () => {
+    if (!carts || !carts.shops) {
+      console.error("Giỏ hàng trống hoặc không hợp lệ");
+      return;
+    }
+
+    // Gom toàn bộ sản phẩm từ các cửa hàng
+    const tmp = carts.shops.flatMap((shop) => shop.products);
+
+    // Gửi dữ liệu tạo hóa đơn
+      createReceipt(carts.userId, tmp as ProductCart[]).then((data)=>{
+        nav(`/receipt/${data.id}`)
+      })
+  };
+
   return (
     <section className="bg-white py-8 antialiased  md:py-16">
       <div className="mx-auto max-w-screen-xl px-4 2xl:px-0">
@@ -92,12 +113,20 @@ export default function CartPage() {
                     />
                     <span className="font-semibold">{shop.shopInfo.name}</span>
                   </div>
-                  {shop.products.map((product)=>(
+                  {shop.products.map((product) => (
                     <div>
-                      <CartItem ProductCart={product}
-                      onQuantityChange={(productId, newQuantity) => 
-                        updateQuantity(product.id, shop.shopId, productId, newQuantity)}
-                        DeleteCartItem={() => DeleteCartItem(product.id)}/>
+                      <CartItem
+                        ProductCart={product}
+                        onQuantityChange={(productId, newQuantity) =>
+                          updateQuantity(
+                            product.id,
+                            shop.shopId,
+                            productId,
+                            newQuantity
+                          )
+                        }
+                        DeleteCartItem={() => DeleteCartItem(product.id)}
+                      />
                     </div>
                   ))}
                 </div>
@@ -138,13 +167,15 @@ export default function CartPage() {
                 <dl className="flex items-center justify-between gap-4 border-t border-gray-200 pt-2 dark:border-gray-700">
                   <dt className="text-base font-bold text-gray-900 ">Total</dt>
                   <dd className="text-base font-bold text-gray-900 ">
-                    {total+30000} VNĐ
+                    {total + 30000} VNĐ
                   </dd>
                 </dl>
               </div>
 
-              <button className=" p-1 w-full border bg-white text-black rounded-md"
-              onClick={CreateReceipt}>
+              <button
+                className=" p-1 w-full border bg-white text-black rounded-md"
+                onClick={CreateReceipt}
+              >
                 Xác nhận
               </button>
             </div>
