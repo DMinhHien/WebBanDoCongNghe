@@ -196,7 +196,7 @@ const router = createBrowserRouter([
       children: [{ index: true, element: <EditProfilePage /> }],
     },
     {
-      path: "/receipt/:id",
+      path: "/receipt",
       element: <Layout />,
       errorElement: <ErrorPage />,
       children: [{ index: true, element: <ReceiptPage/> }],

@@ -41,4 +41,5 @@ export interface OrderDetail{
     idProduct:string;
     productName: string;
     quantity: number;
+    unitPrice:number;
 }

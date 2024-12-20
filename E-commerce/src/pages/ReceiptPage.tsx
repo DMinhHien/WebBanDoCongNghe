@@ -1,19 +1,36 @@
 import { useEffect, useState } from "react";
 import logo from "../../public/check (1).png";
 import { OrderDetail } from "../data/order";
-import { useParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { getReceiptDetail } from "../services/OrderService";
+import { getUser } from "../services/UserService";
+import { User } from "../data/User";
 
 export default function ReceiptPage() {
     const [OrderDetails,setOrderDetails]=useState<OrderDetail[]>([]);
-    const { id } = useParams<{ id: string }>();
+    const[user,setUser]=useState<User>()
+    const location = useLocation();
+    const nav=useNavigate()
+    const { receiptData } = location.state || {};
     useEffect(()=>{
-        if(id)
-            getReceiptDetail(id).then((data)=>{
-                console.log(data)
+        if(receiptData.id)
+            getReceiptDetail(receiptData.id).then((data)=>{
                 setOrderDetails(data)
         })
+        getUser(receiptData.userId).then((data)=>{
+          setUser(data[0])
+        })
     },[])
+    const total=()=>{
+      let tmp=0
+      OrderDetails.map((OrderDetail)=>{
+        tmp=tmp+(OrderDetail.unitPrice*OrderDetail.quantity)
+      })
+      return tmp
+    }
+    const home=()=>{
+      nav("/")
+    }
   return (
     <section className="py-20">
       <div className="max-w-2xl mx-auto py-0 md:py-16">
@@ -31,40 +48,51 @@ export default function ReceiptPage() {
               <p className="font-medium text-sm text-gray-400">
                 Tên khách hàng
               </p>
-              <p className=" text-sm"> ABC </p>
+              <p className=" text-sm">{user?.accountName}</p>
               <p className="font-medium text-sm text-gray-400">
                 Ngày tạo đơn hàng
               </p>
-              <p className=" text-sm"> đ/mm//yyyy </p>
+              <p className=" text-sm"> {receiptData.date} </p>
             </div>
             <table className="w-full divide-y divide-gray-200 text-sm">
               <thead>
-                <tr>
+                <tr style={{ backgroundColor: "#FBFAF1" }} >
                   <th
                     scope="col"
-                    className="w-3/4 px-9 py-4 text-left font-semibold text-gray-400"
+                    className="w-3/5 px-9 py-4 text-left font-semibold text-gray-900"
                   >
-                    Item
+                    Sản phẩm
                   </th>
                   <th
                     scope="col"
-                    className="py-3 text-left font-semibold text-gray-400"
+                    className="text-left font-semibold text-gray-900"
                   >
-                    Amount
+                    Số lượng
+                  </th>
+                  <th
+                    scope="col"
+                    className="py-3 text-left font-semibold text-gray-900"
+                  >
+                    Thành tiền
                   </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
-                <tr>
+                {OrderDetails.map((OrderDetail)=>(
+                  <tr>
                   <td className="px-9 py-5 whitespace-nowrap space-x-1 flex items-center">
                     <div>
-                      <p> Jericho III (YA-4) </p>
+                      <p>{OrderDetail.productName}</p>
                     </div>
                   </td>
                   <td className="whitespace-nowrap text-gray-600 truncate">
-                    $380,000.00
+                    {OrderDetail.quantity}
+                  </td>
+                  <td className="whitespace-nowrap text-gray-600 truncate">
+                    {OrderDetail.unitPrice*OrderDetail.quantity}
                   </td>
                 </tr>
+                ))}
               </tbody>
             </table>
             <div className="p-9 border-b border-gray-200">
@@ -73,19 +101,13 @@ export default function ReceiptPage() {
                   <div>
                     <p className="text-gray-500 text-sm"> Subtotal </p>
                   </div>
-                  <p className="text-gray-500 text-sm"> $660,000.00 </p>
+                  <p className="text-gray-500 text-sm">{total()} VNĐ  </p>
                 </div>
                 <div className="flex justify-between">
                   <div>
-                    <p className="text-gray-500 text-sm"> Tax </p>
+                    <p className="text-gray-500 text-sm"> Phí vận chuyển </p>
                   </div>
-                  <p className="text-gray-500 text-sm"> $0.00 </p>
-                </div>
-                <div className="flex justify-between">
-                  <div>
-                    <p className="text-gray-500 text-sm"> Total </p>
-                  </div>
-                  <p className="text-gray-500 text-sm"> $660,000.00 </p>
+                  <p className="text-gray-500 text-sm"> 30000 VNĐ </p>
                 </div>
               </div>
             </div>
@@ -95,9 +117,10 @@ export default function ReceiptPage() {
                   <div>
                     <p className="font-bold text-black text-lg"> Amount Due </p>
                   </div>
-                  <p className="font-bold text-black text-lg"> $360.00 </p>
+                  <p className="font-bold text-black text-lg">  {total()+30000} VNĐ </p>
                 </div>
               </div>
+              <button onClick={home} style={{ backgroundColor: "#FBFAF1" }} className="shadow-md rounded-lg border p-3 mt-8 w-full">Tiếp tục mua hàng</button>
             </div>
           </div>
         </article>

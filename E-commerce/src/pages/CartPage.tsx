@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Cart, ProductCart } from "../data/Cart";
+import { Cart } from "../data/Cart";
 import {
   deleteCartItem,
   editQuantity,
@@ -9,7 +9,6 @@ import { useAuth } from "../components/Auth/AuthContext";
 import CartItem from "../components/CartItem";
 import { createReceipt } from "../services/OrderService";
 import { useNavigate } from "react-router-dom";
-import logo from "../../public/check (1).png";
 
 export default function CartPage() {
   const [carts, setCarts] = useState<Cart>({
@@ -76,7 +75,7 @@ export default function CartPage() {
     editQuantity(carts.id, idCart, productId, newQuantity);
   };
   const CreateReceipt = async () => {
-    if (!carts || !carts.shops) {
+    if (!carts || carts.shops.length==0) {
       console.error("Giỏ hàng trống hoặc không hợp lệ");
       return;
     }
@@ -85,8 +84,11 @@ export default function CartPage() {
     const tmp = carts.shops.flatMap((shop) => shop.products);
 
     // Gửi dữ liệu tạo hóa đơn
-      createReceipt(carts.userId, tmp as ProductCart[]).then((data)=>{
-        nav(`/receipt/${data.id}`)
+      createReceipt(carts.userId, tmp).then((data)=>{
+        nav(`/receipt`, { state: { receiptData: data } });
+      })
+      tmp.map((item)=>{
+        deleteCartItem(item.id)
       })
   };
 
