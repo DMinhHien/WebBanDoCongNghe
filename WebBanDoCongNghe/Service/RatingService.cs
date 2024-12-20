@@ -37,6 +37,7 @@ namespace WebBanDoCongNghe.Service
             average = shopProducts.Count() > 0 ? average / shopProducts.Count() : 0;
             shop.rating = average;
             _context.Shops.Update(shop);
+            _context.SaveChanges();
         }
     }
 }

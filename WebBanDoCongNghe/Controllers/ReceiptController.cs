@@ -95,6 +95,8 @@ namespace WebBanDoCongNghe.Controllers
                     rd.id,
                     rd.idProduct,
                     rd.quantity,
+                    UnitPrice= _context.Products.Where(p => p.id == rd.idProduct)
+                            .Select(p => p.unitPrice).FirstOrDefault(),
                     ProductName = _context.Products.Where(p => p.id == rd.idProduct)
                             .Select(p => p.productName).FirstOrDefault()
                 }).ToList();

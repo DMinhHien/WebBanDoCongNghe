@@ -31,8 +31,8 @@ namespace WebBanDoCongNghe.Controllers
             model.id = Guid.NewGuid().ToString().Substring(0, 10);
             model.date= DateTime.Now;
             _context.Comments.Add(model);
-            _ratingService.UpdateProductAndShopRating(model.productId);
             _context.SaveChanges();
+            _ratingService.UpdateProductAndShopRating(model.productId);
             return Json(model);
         }
 
@@ -43,8 +43,8 @@ namespace WebBanDoCongNghe.Controllers
         {
             var model = JsonConvert.DeserializeObject<Comment>(json.GetValue("data").ToString());
             _context.Comments.Update(model);
-            _ratingService.UpdateProductAndShopRating(model.productId);
             _context.SaveChanges();
+            _ratingService.UpdateProductAndShopRating(model.productId);
             return Json(model);
         }
         [HttpGet("getElementById/{id}")]
@@ -69,8 +69,8 @@ namespace WebBanDoCongNghe.Controllers
                 }
             }
             _context.Comments.Remove(result);
-            _ratingService.UpdateProductAndShopRating(result.productId);
             _context.SaveChanges();
+            _ratingService.UpdateProductAndShopRating(result.productId);
             return Json(result);
 
         }
