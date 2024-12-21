@@ -125,5 +125,11 @@ namespace WebBanDoCongNghe.Controllers
             _context.SaveChanges();
             return Json(model);
         }
+        [HttpPost("getCartId/{userId}")]
+        public IActionResult getCartId([FromRoute] string userId)
+        {
+            var result=_context.Carts.AsQueryable().Where(x=>x.userId == userId).Select(x=>x.id);
+            return Json(result);
+        }
     }
 }
