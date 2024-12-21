@@ -19,12 +19,18 @@ import ChinhSuaShop from "./pages/ChinhSuaShop"
 import QuanLyCategories from "./pages/QuanLyCategories";
 import QuanLyUser from "./pages/QuanLyUser";
 import QuanLyShop from "./pages/QuanLyShop";
-import { Create } from "@mui/icons-material";
 import CreateUser from "./pages/CreateUser";
 import EditUser from "./pages/EditUser";
 import CreateShop from "./pages/CreateShop";
 import EditShop from "./pages/EditShop";
 import AdminQuanLySP from "./pages/AdminQuanLySP";
+import CreateShopAdmin from "./pages/CreateShopAdmin";
+import Layout_admin from "./pages/Layout_admin";
+import CartPage from "./pages/CartPage";
+import QuanLyMuaHang from "./pages/QuanLyMuaHang";
+import ChiTietDonHang from "./components/QuanLyMuaHang/OrderDetail";
+import EditProfilePage from "./components/Profile/ProfileEditPage";
+import ReceiptPage from "./pages/ReceiptPage";
 const router = createBrowserRouter([
     {
       path: "/",
@@ -43,6 +49,12 @@ const router = createBrowserRouter([
       element: <Layout />,
       errorElement: <ErrorPage />,
       children: [{ index: true, element: <CategoriesPage /> }],
+    },
+    {
+      path: "/cart",
+      element: <Layout />,
+      errorElement: <ErrorPage />,
+      children: [{ index: true, element: <CartPage /> }],
     },
     {
       path: "/productscategory/:categoryId",
@@ -67,7 +79,7 @@ const router = createBrowserRouter([
       element: <LoginPage />,
     },
     {
-      path: "/signup",
+      path: "/register",
       element: < SignUpPage/>,
     },
     {
@@ -101,6 +113,18 @@ const router = createBrowserRouter([
       children: [{ index: true, element: <QuanLyDonHang /> }],
     },
     {
+      path: "/QuanLyMuaHang",
+      element: <Layout />,
+      errorElement: <ErrorPage />,
+      children: [{ index: true, element: <QuanLyMuaHang /> }],
+    },
+    {
+      path: "/chitiet/:id",
+      element: <Layout />,
+      errorElement: <ErrorPage />,
+      children: [{ index: true, element: <ChiTietDonHang /> }],
+    },
+    {
       path: "/quanlyshop/QuanLyThongTin",
       element: <Layout />,
       errorElement: <ErrorPage />,
@@ -114,51 +138,68 @@ const router = createBrowserRouter([
     },
     {
       path: "/admin",
-      element: <Layout />,
+      element: <Layout_admin />,
       errorElement: <ErrorPage />,
       children: [{ index: true, element: <QuanLyCategories /> }],
     },
     {
       path: "/admin/QuanLyUser",
-      element: <Layout />,
+      element: <Layout_admin />,
       errorElement: <ErrorPage />,
       children: [{ index: true, element: <QuanLyUser /> }],
     },
     {
       path: "/admin/QuanLyShop",
-      element: <Layout />,
+      element: <Layout_admin />,
       errorElement: <ErrorPage />,
       children: [{ index: true, element: <QuanLyShop /> }],
     },
     {
       path: "/admin/QuanLyUser/new",
-      element: <Layout />,
+      element: <Layout_admin />,
       errorElement: <ErrorPage />,
       children: [{ index: true, element: <CreateUser /> }],
     },
     {
       path: "/admin/QuanLyUser/edit/:id",
-      element: <Layout />,
+      element: <Layout_admin />,
       errorElement: <ErrorPage />,
       children: [{ index: true, element: <EditUser /> }],
     },
     {
       path: "/admin/QuanLyShop/new",
-      element: <Layout />,
+      element: <Layout_admin />,
+      errorElement: <ErrorPage />,
+      children: [{ index: true, element: <CreateShopAdmin /> }],
+    },
+    {
+      path: "/newShop",
       errorElement: <ErrorPage />,
       children: [{ index: true, element: <CreateShop /> }],
     },
     {
       path: "/admin/QuanLyShop/edit/:id",
-      element: <Layout />,
+      element: <Layout_admin />,
       errorElement: <ErrorPage />,
       children: [{ index: true, element: <EditShop /> }],
     },
     {
       path: "/admin/QuanLyShop/xemSP/:id",
-      element: <Layout />,
+      element: <Layout_admin />,
       errorElement: <ErrorPage />,
       children: [{ index: true, element: <AdminQuanLySP /> }],
+    },
+    {
+      path: "/profile/edit/:id",
+      element: <Layout_admin />,
+      errorElement: <ErrorPage />,
+      children: [{ index: true, element: <EditProfilePage /> }],
+    },
+    {
+      path: "/receipt",
+      element: <Layout />,
+      errorElement: <ErrorPage />,
+      children: [{ index: true, element: <ReceiptPage/> }],
     },
   ]);
   

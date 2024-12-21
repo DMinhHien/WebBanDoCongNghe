@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import { fetchShops, Shop } from '../../services/shopService';
+import { fetchShops } from '../../services/shopService';
 import ShopCard from '../ShopCard/ShopCard';
-
+import {Shop} from '../../data/shop'
 import {Typography, Container, Box} from '@mui/material';
 
 const ShopList: React.FC = () => {

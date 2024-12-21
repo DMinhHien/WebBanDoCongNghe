@@ -22,14 +22,14 @@ namespace WebBanDoCongNghe.Controllers
 
         // POST: ProductController/Create
         [Authorize]
-        [HttpPost("create")]
-        public ActionResult Create([FromBody] JObject json)
+        [HttpPost("create/{userId}")]
+        public ActionResult Create([FromBody] JObject json, [FromRoute] string userId)
         {
             var receipt = new Receipt();
             var receiptDetailsJson = json.GetValue("data");
             var receiptDetails = JsonConvert.DeserializeObject<List<ReceiptDetail>>(receiptDetailsJson.ToString());
             receipt.id = Guid.NewGuid().ToString().Substring(0, 10);
-            receipt.userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            receipt.userId = userId;
             receipt.date = DateTime.Now;
             _context.Receipts.Add(receipt);
             foreach (var detail in receiptDetails)
@@ -86,35 +86,82 @@ namespace WebBanDoCongNghe.Controllers
             }
             return Json(sum);
         }
-        [HttpGet("getListUse")]
-        public IActionResult getListUse()
+        [HttpGet("getReceiptDetail/{receiptId}")]
+        public IActionResult getReceiptDetail([FromRoute] string receiptId)
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var result=_context.ReceiptDetails.Where(x=>x.idReceipt==receiptId)
+                .Select(rd=>new
+                {
+                    rd.id,
+                    rd.idProduct,
+                    rd.quantity,
+                    UnitPrice= _context.Products.Where(p => p.id == rd.idProduct)
+                            .Select(p => p.unitPrice).FirstOrDefault(),
+                    ProductName = _context.Products.Where(p => p.id == rd.idProduct)
+                            .Select(p => p.productName).FirstOrDefault()
+                }).ToList();
+            return Json(result);
+        }
+        [HttpGet("getListUse/{userId}")]
+        public IActionResult getListUse([FromRoute] string userId)
+        {
             var result = _context.Receipts
                 .Where(x => x.userId == userId)
                 .Select(receipt => new
                 {
                     receipt.id,
                     receipt.date,
-                    receipt.userId,
-                    ReceiptDetails = _context.ReceiptDetails
+                    TotalAmount = _context.ReceiptDetails
+                .Where(rd => rd.idReceipt == receipt.id)
+                .Join(
+                    _context.Products,
+                    rd => rd.idProduct,
+                    p => p.id,
+                    (rd, p) => new { rd.quantity, p.unitPrice } // Gộp quantity và unitPrice
+                )
+                .Sum(item => item.quantity * item.unitPrice),
+                    ShopName = _context.ReceiptDetails
                         .Where(rd => rd.idReceipt == receipt.id)
-                        .Select(rd => new
-                        {
-                            rd.id,
-                            rd.idProduct,
-                            rd.quantity,
-                            Product = _context.Products.Where(p => p.id == rd.idProduct)
-                            .Select(p => new
-                            {
-                                p.id,
-                                p.productName,
-                                p.unitPrice
-                            }).FirstOrDefault()
-                }).ToList()
-                }).ToList();
+                        .OrderBy(rd => rd.id) // Lấy ReceiptDetail đầu tiên
+                        .Select(rd => _context.Products
+                            .Where(p => p.id == rd.idProduct)
+                            .Select(p => _context.Shops
+                                .Where(s => s.id == p.idShop) // Truy vấn Shop dựa trên idShop
+                                .Select(s => s.name)
+                                .FirstOrDefault())
+                            .FirstOrDefault())
+                        .FirstOrDefault() // ShopName của ReceiptDetail đầu tiên
+                })
+                .ToList();
+
             return Json(result);
         }
+
+        [HttpGet("getListUseUser/{userId}")]
+        public IActionResult getListUseUser([FromRoute] string userId)
+        {
+            var result = _context.ReceiptDetails
+                .Where(rd => _context.Receipts
+                    .Any(r => r.userId == userId && r.id == rd.idReceipt)) // Lọc ReceiptDetail theo idReceipt
+                .Select(rd => new
+                {
+                    rd.id,
+                    rd.idReceipt,
+                    rd.idProduct,
+                    rd.quantity,
+                    Product = _context.Products
+                        .Where(p => p.id == rd.idProduct)
+                        .Select(p => new
+                        {
+                            p.id,
+                            p.productName,
+                            p.unitPrice
+                        }).FirstOrDefault()
+                }).ToList();
+
+            return Json(result);
+        }
+
         [HttpGet("getListUseShop/{shopId}")]
         public IActionResult getListUseShop([FromRoute] string shopId)
         {
@@ -134,7 +181,8 @@ namespace WebBanDoCongNghe.Controllers
                         .Select(r => new
                         {
                             r.userId,
-                            r.date
+                            r.date,
+                            AccountName=_context.Users.Where(x=>x.Id==r.userId).Select(x=>x.AccountName).FirstOrDefault(),
                         }).FirstOrDefault(),
                     // Lấy thông tin Product
                     Product = _context.Products
@@ -143,7 +191,8 @@ namespace WebBanDoCongNghe.Controllers
                         {
                             p.id,
                             p.productName,
-                            p.unitPrice
+                            p.unitPrice,
+                            TotalPrice = receiptDetail.quantity*p.unitPrice
                         }).FirstOrDefault()
                 }).ToList();
 

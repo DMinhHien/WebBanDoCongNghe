@@ -1,15 +1,16 @@
 import { Box, Button, Typography, LinearProgress, Rating } from "@mui/material";
 
-interface Review {
-  name: string;
+interface Comment {
+  id: string;
+  content:string;
+  username:string;
+  productId: string;
   rating: number;
-  date: string;
-  comment: string;
-  reply: string;
+  date: Date;
 }
 
 interface Props {
-  reviews: Review[];
+  reviews: Comment[];
 }
 
 const ReviewSummary = ({ reviews }: Props) => {

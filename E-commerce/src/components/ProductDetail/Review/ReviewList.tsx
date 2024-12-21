@@ -4,11 +4,12 @@ import ReviewItem from "./ReviewItem";
 
 interface Props {
   reviews: Array<{
-    name: string;
+    id: string;
+    content:string;
+    username:string;
+    productId: string;
     rating: number;
-    date: string;
-    comment: string;
-    reply?: string;
+    date: Date;
   }>;
 }
 

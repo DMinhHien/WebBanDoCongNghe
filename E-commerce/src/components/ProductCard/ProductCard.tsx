@@ -41,10 +41,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => (
       >
         <CardMedia
               component="img"
-              image={Iphone}
+              image={product.image}
               sx={{
                 width: "100%",
-                height: "auto",
+                aspectRatio:1,
                 borderRadius: 3,
               }}
             />

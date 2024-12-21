@@ -3,30 +3,37 @@ import DashboardNav from "../components/DashboardNav";
 import { ShopDetails } from "../data/shopdetail";
 import { useNavigate } from "react-router-dom";
 import { deleteshop, fetchShopDetails } from "../services/shopService";
-
+import {getShopId} from "../services/shopService"
+import { useAuth } from '../components/Auth/AuthContext';
 export default function QuanLyThongTin() {
+  const { user: authUser  } = useAuth();
   const [shopDetail, setShopDetail] = useState<ShopDetails>();
   const nav=useNavigate();
   //Call api getShop
+  const shopIdPromise = authUser?.id ? getShopId(authUser.id) : null; 
   useEffect(()=>{
-    fetchShopDetails("ddcf2539-4").then((data)=>{
+    shopIdPromise?.then((shopId: string) => {
+    fetchShopDetails(shopId).then((data)=>{
       setShopDetail(data)
     })
+  });
   },[])
   const editHandle = () => {
     nav(`/quanlyshop/QuanLyThongTin/edit`);
   };
   //Call api deleteShop
   const DeleteShop=()=>{
-    deleteshop("ddcf2539-4").then(()=>{
+    shopIdPromise?.then((shopId: string) => {
+    deleteshop(shopId).then(()=>{
       nav("/quanlyshop")
     })
+  });
   }
   return (
     <div className="flex w-screen">
       <DashboardNav />
       <div className="mt-10 ml-10 w-[75vw] flex">
-        <div className="w-80 h-[50vh] p-4 bg-white rounded-lg shadow-md transform hover:scale-105 transition-transform duration-300 ease-in-out">
+        <div className="w-80 h-[65vh] p-4 bg-white rounded-lg shadow-md transform hover:scale-105 transition-transform duration-300 ease-in-out">
           <h1 className="text-2xl font-bold mb-6 text-gray-800">
             Thông tin cửa hàng
           </h1>

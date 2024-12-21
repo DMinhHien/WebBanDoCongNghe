@@ -5,9 +5,10 @@ import { Product } from "../../../data/products";
 
 interface Props {
     product: Product;
+    idProduct:string
 }
 
-const MainLayout = ({ product }: Props) => {
+const MainLayout = ({ product,idProduct }: Props) => {
     return (
       <Box
         sx={{
@@ -27,7 +28,7 @@ const MainLayout = ({ product }: Props) => {
                 padding: 2,
               }}
             >
-              <MainInfo product={product} />
+              <MainInfo product={product}productId={idProduct}  />
             </Box>
           </Grid>
   
@@ -38,7 +39,7 @@ const MainLayout = ({ product }: Props) => {
                 padding: 2,
               }}
             >
-              <MainImage />
+              <MainImage product={product} />
             </Box>
           </Grid>
         </Grid>

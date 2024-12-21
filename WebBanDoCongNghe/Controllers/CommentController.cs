@@ -5,19 +5,21 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Authorization;
+using WebBanDoCongNghe.Service;
 
 namespace WebBanDoCongNghe.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    [Authorize]
     public class CommentController : Controller
     {
         private readonly ProductDbContext _context;
+        private readonly RatingService _ratingService;
         // GET: ProductController
-        public CommentController(ProductDbContext context)
+        public CommentController(ProductDbContext context, RatingService ratingService)
         {
             _context = context;
+            _ratingService = ratingService;
         }
 
         // POST: ProductController/Create
@@ -27,11 +29,12 @@ namespace WebBanDoCongNghe.Controllers
         {
             var model = JsonConvert.DeserializeObject<Comment>(json.GetValue("data").ToString());
             model.id = Guid.NewGuid().ToString().Substring(0, 10);
+            model.date= DateTime.Now;
             _context.Comments.Add(model);
             _context.SaveChanges();
+            _ratingService.UpdateProductAndShopRating(model.productId);
             return Json(model);
         }
-
 
         // POST: CommentController/Edit/5
         [Authorize]
@@ -41,9 +44,15 @@ namespace WebBanDoCongNghe.Controllers
             var model = JsonConvert.DeserializeObject<Comment>(json.GetValue("data").ToString());
             _context.Comments.Update(model);
             _context.SaveChanges();
+            _ratingService.UpdateProductAndShopRating(model.productId);
             return Json(model);
         }
-
+        [HttpGet("getElementById/{id}")]
+        public IActionResult getElementById([FromRoute] string id)
+        {
+            var model = _context.Comments.SingleOrDefault(x => x.id == id);
+            return Json(model);
+        }
         // POST: CommentController/Delete/5
         [Authorize]
         [HttpPost("delete")]
@@ -61,11 +70,12 @@ namespace WebBanDoCongNghe.Controllers
             }
             _context.Comments.Remove(result);
             _context.SaveChanges();
+            _ratingService.UpdateProductAndShopRating(result.productId);
             return Json(result);
 
         }
         [HttpGet("getListUse/{productId}")]
-        public IActionResult getListUse([FromBody] string productId)
+        public IActionResult getListUse([FromRoute] string productId)
         {
             var result = _context.Comments.AsQueryable().Where(x=>x.productId == productId).
                  Select(d => new
@@ -73,7 +83,10 @@ namespace WebBanDoCongNghe.Controllers
                      id = d.id,
                      content = d.content,
                      userId= d.userId,
-                     likes=_context.CommentLikes.AsQueryable().Where(x=>x.idComment==d.id).ToList().Count(),
+                     username=_context.Users.Where(x=>x.Id==d.userId).Select(s=>s.AccountName).FirstOrDefault(),
+                     date=d.date,
+                     rating=d.rating,
+                     likes=_context.CommentLikes.Where(x=>x.idComment==d.id).Count(),
                  }).ToList();
             return Json(result);
         }

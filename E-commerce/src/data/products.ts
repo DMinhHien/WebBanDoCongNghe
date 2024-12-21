@@ -1,5 +1,5 @@
 export interface Product {
-    id: number;
+    id: string;
     productName: string;
     unitPrice: string;
     description: string;
@@ -11,9 +11,9 @@ export interface Product {
   }
   export const categories = [
     "Iphone",
-    "May Tinh Bang",
+    "Máy tính Bảng ",
     "Ti vi",
-    "Dien Thoai",
+    "Điện Thoại",
     "Tay cam",
   ];
 //  export const sampleProducts: Product[] = Array.from({length: 30}, (_, i) => ({

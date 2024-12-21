@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Box,
   Typography,
@@ -13,15 +13,29 @@ import {
   Paper,
 } from "@mui/material";
 import { Product } from "../../../data/products";
+import { useAuth } from "../../Auth/AuthContext";
+import { addCartItem, getCartId } from "../../../services/cartService";
 
 interface Props {
   product: Product;
+  productId:string;
 }
 
-const MainInfo = ({ product }: Props) => {
+const MainInfo = ({ product,productId}: Props) => {
   const [quantity, setQuantity] = useState(1);
   const [Option, setOption] = useState("DuyBeoU");
+  const { user } = useAuth();
+  let cartId="";
+  useEffect(()=>{
+    if(user)
+      getCartId(user.id).then((data)=>{
+      cartId=data[0];
+    })
+  })
 
+  const add=()=>{
+    addCartItem(cartId,productId,quantity)
+  }
   const handleQuantityChange = (change: number) => {
     setQuantity((prev) => Math.max(1, prev + change));
   };
@@ -31,6 +45,8 @@ const MainInfo = ({ product }: Props) => {
       fontFamily: "Nunito",
     },
   });
+
+  
 
   return (
     <ThemeProvider theme={theme}>
@@ -148,6 +164,7 @@ const MainInfo = ({ product }: Props) => {
         {/* Action Buttons */}
         <Stack direction="row" spacing={2} mt={3}>
           <Button
+          onClick={add}
             variant="outlined"
             sx={{
               fontSize: "17px",

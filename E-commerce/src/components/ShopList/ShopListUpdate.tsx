@@ -10,7 +10,7 @@ import {
 
 import ShopCard from '../ShopCard/ShopCardUpdate';
 import { Shop } from '../../data/shop';
-import SearchFilter from '../Filter/SearchFilter';
+import SearchFilter from '../ShopFilter/SearchFilter';
 
 import useShopStore from '../../zustand/useShopStore';
 import ShopGrid from '../ShowShop/ShopGrid';

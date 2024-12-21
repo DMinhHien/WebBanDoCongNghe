@@ -24,7 +24,11 @@ const LoginPage: React.FC = () => {
         const data = await response.json();
         login(data.user, data.token); // Cập nhật trạng thái đăng nhập
         localStorage.setItem("token", data.token); // Lưu token vào localStorage
-        navigate('/'); // Điều hướng về trang chủ
+        if (data.user.role === 'Admin') {
+          navigate('/admin'); // Điều hướng đến trang admin
+        } else {
+          navigate('/'); // Điều hướng về trang người dùng
+        }
       } else {
         alert('Đăng nhập không thành công!');
       }
