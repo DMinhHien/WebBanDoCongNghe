@@ -54,5 +54,23 @@ export const deleteCartItem=async(id:string)=>{
   }
 }
 
+export const getCartId=async(id:string)=>{
+  try {
+    const res=await axios.post(`https://localhost:7183/Cart/getCartId/${id}`)
+    return res.data
+  } catch (error) {
+    console.error("Không thể lấy cartId", error);
+    throw error
+  }
+}
 
+export const addCartItem=async(idCart:string,idProduct:string,quantity:number)=>{
+  try {
+    const token =localStorage.getItem("token")
+    await axios.post(`https://localhost:7183/Cart/addCartProduct`,{data:{idCart,idProduct,quantity}},{ headers: { Authorization: `Bearer ${token}` } })
+  } catch (error) {
+    console.error("Không thể thêm cartitem", error);
+    throw error
+  }
+}
 

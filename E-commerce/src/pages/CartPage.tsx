@@ -41,15 +41,16 @@ export default function CartPage() {
       updateTotal();
     }
   }, [carts]);
-  const DeleteCartItem = (id: string) => {
-    deleteCartItem(id);
-    setCarts((prevCarts) => {
-      const updatedShops = prevCarts.shops.map((shop) => ({
-        ...shop,
-        products: shop.products.filter((product) => product.id !== id),
-      }));
-      return { ...prevCarts, shops: updatedShops };
-    });
+  const DeleteCartItem = async (id: string) => {
+    try {
+      await deleteCartItem(id); // Xóa sản phẩm khỏi server
+  
+      // Lấy lại danh sách giỏ hàng từ server sau khi xóa
+      const updatedCarts = await getCarts(user?.id as string);
+      setCarts(updatedCarts[0]); // Cập nhật lại state với danh sách mới
+    } catch (error) {
+      console.error("Error deleting cart item:", error);
+    }
   };
   const updateQuantity = (
     idCart: string,
@@ -110,10 +111,10 @@ export default function CartPage() {
                   >
                     <img
                       className="w-auto h-10 object-contain"
-                      src={shop.shopInfo.image}
+                      src={shop.shopInfo?.image}
                       alt="shop.shopInfo.name"
                     />
-                    <span className="font-semibold">{shop.shopInfo.name}</span>
+                    <span className="font-semibold">{shop.shopInfo?.name}</span>
                   </div>
                   {shop.products.map((product) => (
                     <div>
