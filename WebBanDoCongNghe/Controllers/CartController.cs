@@ -21,7 +21,7 @@ namespace WebBanDoCongNghe.Controllers
             _context = context;
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpPost("create")]
         public ActionResult Create([FromBody] JObject json)
         {
@@ -115,7 +115,7 @@ namespace WebBanDoCongNghe.Controllers
 
             return Json(result);
         }
-        //[Authorize]
+        [Authorize]
         [HttpPost("addCartProduct")]
         public IActionResult addCartProduct([FromBody] JObject json)
         {
