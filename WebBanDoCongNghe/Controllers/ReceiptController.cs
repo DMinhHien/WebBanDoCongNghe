@@ -66,7 +66,10 @@ namespace WebBanDoCongNghe.Controllers
             {
                 foreach (var detail in detailList)
                 {
+                    var product = _context.Products.FirstOrDefault(x => x.id == detail.idProduct);
+                    product.quantity = product.quantity - detail.quantity;
                     _context.ReceiptDetails.Remove(detail);
+                    _context.Products.Update(product);
                 }
             }
             _context.Receipts.Remove(result);
