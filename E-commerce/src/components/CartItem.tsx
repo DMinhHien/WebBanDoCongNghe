@@ -11,7 +11,16 @@ export default function CartItem({ ProductCart, onQuantityChange,DeleteCartItem 
   const [quantity, setQuantity] = useState(ProductCart.quantity);
 
   const handleIncrease = () => {
-    const newQuantity = quantity + 1;
+    let newQuantity=0;
+    if(quantity<ProductCart.productInfo.quantity)
+    {
+      newQuantity=quantity+1;
+    }
+    else
+    {
+      newQuantity=ProductCart.productInfo.quantity
+      alert("số lượng sản phẩm còn lại không đủ!!!!")
+    }
     setQuantity(newQuantity);
     onQuantityChange(ProductCart.idProduct, newQuantity);
   };
