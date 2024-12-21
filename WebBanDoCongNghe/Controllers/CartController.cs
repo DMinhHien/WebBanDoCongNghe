@@ -107,7 +107,8 @@ namespace WebBanDoCongNghe.Controllers
                                     {
                                         p.productName,
                                         p.unitPrice,
-                                        p.image
+                                        p.image,
+                                        p.quantity
                                     }).FirstOrDefault()
                             }).ToList()
                         }).ToList()

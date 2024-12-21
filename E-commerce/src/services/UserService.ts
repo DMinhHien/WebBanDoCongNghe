@@ -45,10 +45,10 @@ export const getUser = async (id: string) => {
 export const editUser = async (user: User) => {
     try {
         const token = localStorage.getItem("token")
-        const { Password, ...tmp } = user
+        const { password, ...tmp } = user
         await axios.put(`https://localhost:7183/User/EditUser`, {
             data: {
-                accountName: tmp.AccountName, address: tmp.Address, email: tmp.Email, birthDate: tmp.BirthDate, id: tmp.id, userName: tmp.Email
+                accountName: tmp.accountName, address: tmp.address, email: tmp.email, birthDate: tmp.birthDate, id: tmp.id, userName: tmp.email
             }
         }, { headers: { Authorization: `Bearer ${token}` } })
     } catch (error) {
