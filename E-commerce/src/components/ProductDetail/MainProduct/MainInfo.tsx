@@ -37,7 +37,11 @@ const MainInfo = ({ product,productId}: Props) => {
     addCartItem(cartId,productId,quantity)
   }
   const handleQuantityChange = (change: number) => {
-    setQuantity((prev) => Math.max(1, prev + change));
+    if (change > 0 && quantity + change > parseInt(product.quantity)) {
+      alert("Số lượng sản phẩm còn lại không đủ!!!!");
+    } else {
+      setQuantity((prev) => Math.max(1, prev + change));
+    }
   };
 
   const theme = createTheme({

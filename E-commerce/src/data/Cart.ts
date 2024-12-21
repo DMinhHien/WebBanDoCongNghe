@@ -2,7 +2,8 @@
 interface ProductInfo {
     productName: string;
     unitPrice: number;
-    image:string
+    image:string;
+    quantity:number;
   }
   
   // Chi tiết sản phẩm trong giỏ hàng
