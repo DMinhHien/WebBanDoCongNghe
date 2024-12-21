@@ -32,9 +32,9 @@ export default function CartItem({ ProductCart, onQuantityChange,DeleteCartItem 
       <div className="flex flex-wrap items-center justify-between gap-4 md:flex-nowrap">
         {/* Image */}
         <img
-          className="h-20 w-20"
-          src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/iphone-light.svg"
-          alt="iPhone image"
+          className="w-20 h-20 object-contain"
+          src={ProductCart.productInfo.image}
+          alt={ProductCart.productInfo.productName}
         />
 
         {/* Item Details */}

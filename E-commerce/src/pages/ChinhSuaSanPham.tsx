@@ -102,6 +102,13 @@ export default function ChinhSuaSP() {
     >
   ) => {
     const { name, value } = e.target;
+    if (name === "unitPrice" || name === "quantity") {
+      const numericValue = parseFloat(value);
+      if (numericValue < 0) {
+        alert("Giá trị không được nhỏ hơn 0");
+        return;
+      }
+    }
     await setProductData((prev) => ({
       ...prev,
       [name]: value,
