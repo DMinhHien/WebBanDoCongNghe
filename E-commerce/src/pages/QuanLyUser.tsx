@@ -71,7 +71,7 @@ export default function QuanLyUser() {
     editRole(userId, role).then(() => {
       setUsers((prevUsers) =>
         prevUsers.map((user) =>
-          user.id === userId ? { ...user, Role: role } : user
+          user.id === userId ? { ...user, role: role } : user
         )
       );
     });

@@ -37,7 +37,7 @@ export default function EditUser() {
   //call api editUser
   const edit = () => {
     const isEmptyField = Object.entries(user).some(([key, value]) => {
-      if (key === "BirthDate" || key === "id" || key === "Password")
+      if (key === "birthDate" || key === "id" || key === "password")
         return false;
       return value === "";
     });
@@ -58,7 +58,7 @@ export default function EditUser() {
     const { name, value } = e.target;
     setUser((prev) => ({
       ...prev,
-      [name]: name === "BirthDate" ? new Date(value) : value,
+      [name]: name === "birthDate" ? new Date(value) : value,
     }));
   };
   return (
