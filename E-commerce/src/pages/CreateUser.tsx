@@ -54,7 +54,7 @@ export default function CreateUser() {
             <input
               type="text"
               value={user?.email}
-              name="Email"
+              name="email"
               onChange={handleChange}
               className="px-4 py-2 border border-gray-300 w-full rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-700"
             />
@@ -67,7 +67,7 @@ export default function CreateUser() {
             <input
               type="text"
               value={user?.accountName}
-              name="AccountName"
+              name="accountName"
               onChange={handleChange}
               className="px-4 py-2 border border-gray-300 w-full rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-700"
             />
@@ -80,7 +80,7 @@ export default function CreateUser() {
             <input
               type="text"
               value={user?.password}
-              name="Password"
+              name="password"
               onChange={handleChange}
               className="px-4 py-2 border border-gray-300 w-full rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-700"
             />
@@ -93,7 +93,7 @@ export default function CreateUser() {
             <input
               type="date"
               value={user.birthDate.toISOString().split("T")[0]}
-              name="BirthDate"
+              name="birthDate"
               onChange={handleChange}
               className="px-4 py-2 border border-gray-300 w-full rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-700"
             />
@@ -106,7 +106,7 @@ export default function CreateUser() {
             <input
               type="text"
               value={user?.address}
-              name="Address"
+              name="address"
               onChange={handleChange}
               className="px-4 py-2 border border-gray-300 w-full rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-700"
             />
@@ -118,7 +118,7 @@ export default function CreateUser() {
             <input
               type="text"
               value={user?.phoneNumber}
-              name="PhoneNumber"
+              name="phoneNumber"
               onChange={handleChange}
               className="px-4 py-2 border border-gray-300 w-full rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-700"
             />
