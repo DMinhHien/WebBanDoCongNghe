@@ -121,8 +121,19 @@ namespace WebBanDoCongNghe.Controllers
         public IActionResult addCartProduct([FromBody] JObject json)
         {
             var model = JsonConvert.DeserializeObject<CartDetail>(json.GetValue("data").ToString());
-            model.id = Guid.NewGuid().ToString().Substring(0, 10);
-            _context.CartDetails.Add(model);
+            var cartId = model.idCart;
+            var existsProduct=_context.CartDetails.Where(x=>x.idProduct==model.idProduct && x.idCart==cartId).FirstOrDefault();
+            if (existsProduct != null)
+            {
+                var cartDetail = _context.CartDetails.Where(x => x.idProduct == model.idProduct).FirstOrDefault();
+                cartDetail.quantity += 1;
+                _context.CartDetails.Update(cartDetail);
+            }
+            else
+            {
+                model.id = Guid.NewGuid().ToString().Substring(0, 10);
+                _context.CartDetails.Add(model);
+            }
             _context.SaveChanges();
             return Json(model);
         }
