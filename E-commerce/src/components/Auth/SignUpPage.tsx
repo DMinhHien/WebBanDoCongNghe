@@ -40,7 +40,7 @@ const SignUpPage: React.FC = () => {
           navigate('/');
         } else {
           const errorData = await response.json();
-          setError(errorData.message || 'Đăng ký thất bại');
+          setError(errorData.message || 'Đăng ký thất bại, hãy chắc chắn điền đầy đủ thông tin cá nhân, gmail đúng định dạng, mật khẩu phải có chữ cái đặc biệt, số, chữ in hoa !');
         }
       } catch (error) {
         setError('Đã xảy ra lỗi khi đăng ký');

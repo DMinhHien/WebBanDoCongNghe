@@ -43,8 +43,8 @@ const ProductList: React.FC = () => {
     },[filteredProducts]);
     
     const displayedProducts = filteredProducts?.length
-    ? filteredProducts
-    : products;
+    ? filteredProducts.filter(product => Number(product.quantity) > 0)
+    : products.filter(product => Number(product.quantity) > 0);
 
     if (loading) return <p>Đang tải dữ liệu...</p>;
     if (error) return <p>{error}</p>;

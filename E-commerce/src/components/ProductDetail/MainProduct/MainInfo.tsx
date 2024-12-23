@@ -81,7 +81,7 @@ const MainInfo = ({ product,productId}: Props) => {
               }}
             />
             <Typography variant="body1" color="textSecondary">
-              {5 > 0 ? `${5} items available` : "Out of stock"}
+              {product.quantity ? product.quantity +` items available` : "Out of stock"}
             </Typography>
           </Box>
         </Box>
@@ -96,11 +96,11 @@ const MainInfo = ({ product,productId}: Props) => {
             ({product.rating})
           </Typography>
           <Typography fontWeight="500" fontSize="16px" color="#C45C00">
-            Product.Sold
+            Rating
           </Typography>
         </Box>
         <Typography variant="h4" color="textPrimary" fontWeight="600" my={3}>
-          ${product.unitPrice}{" "}
+          {product.unitPrice}{" "}VND
         </Typography>
 
         {/* Description */}
@@ -199,7 +199,7 @@ const MainInfo = ({ product,productId}: Props) => {
               },
             }}
           >
-            BUY NOW
+            Liên hệ người bán
           </Button>
         </Stack>
       </Box>

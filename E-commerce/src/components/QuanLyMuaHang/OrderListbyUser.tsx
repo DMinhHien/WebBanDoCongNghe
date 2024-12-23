@@ -30,6 +30,15 @@ export default function OrderList({orders}:OrderListProps) {
     const handleViewDetail = (orderId: string) => {
         navigate(`/chitiet/${orderId}`);
     };
+
+    const handleDeleteOrder = (orderId: string) => {
+      const confirmed = window.confirm("Bạn có chắc chắn muốn xóa đơn hàng này?");
+      if (confirmed) {
+        // Perform the delete operation here (e.g., call an API to delete the order)
+        console.log(`Order with ID ${orderId} deleted`);
+        // Optionally, remove the order from the displayed list
+      }
+    };
     return (
     <div className="overflow-x-auto w-[75vw]">
       <h2 className="text-xl font-bold mb-2 ">Danh sách Đơn hàng</h2>
@@ -51,12 +60,20 @@ export default function OrderList({orders}:OrderListProps) {
               <td className="border border-gray-300 py-2 px-4 border-b">{order.totalAmount?.toLocaleString('vi-VN')} VND</td>
               <td className="border border-gray-300 py-2 px-4 border-b"> {order.date ? new Date(order.date).toLocaleDateString() : 'N/A'}</td>
                 <td className="border border-gray-300 py-2 px-4 border-b">
+                <div className="flex space-x-2">
                                 <button
                                      onClick={() => handleViewDetail(order.id)}
                                     className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-1 px-3 rounded"
                                 >
                                     Xem chi tiết
                                 </button>
+                                <button
+                                    onClick={() => handleDeleteOrder(order.id)}
+                                    className="bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-3 rounded"
+                                  >
+                                    Xóa
+                                  </button>
+                                </div>
                             </td>
             </tr>
           ))}

@@ -42,4 +42,5 @@ export interface OrderDetail{
     productName: string;
     quantity: number;
     unitPrice:number;
+    image: string;
 }

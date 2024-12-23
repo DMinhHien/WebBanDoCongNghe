@@ -37,9 +37,6 @@ const ReviewSummary = ({ reviews }: Props) => {
           <Typography variant="h5" fontWeight="700">
             {totalReviews} review{totalReviews > 1 ? "s" : ""}
           </Typography>
-          <Button variant="outlined" color="primary">
-            Write a review
-          </Button>
         </Box>
   
         {/* Content Section */}
