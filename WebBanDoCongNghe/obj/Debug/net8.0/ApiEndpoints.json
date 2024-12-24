@@ -113,6 +113,22 @@
   },
   {
     "ContainingType": "WebBanDoCongNghe.Controllers.CartController",
+    "Method": "GetCartTotalId",
+    "RelativePath": "Cart/getCartTotalId/{userId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebBanDoCongNghe.Controllers.CartController",
     "Method": "getListUse",
     "RelativePath": "Cart/getListUse/{userId}",
     "HttpMethod": "GET",
