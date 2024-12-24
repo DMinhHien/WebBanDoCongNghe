@@ -83,7 +83,7 @@ const Navbar = () => {
           primaryTypographyProps={{ noWrap: true }}
         />
       </ListItemButton>
-      <ListItemButton>
+      <ListItemButton component = {Link} to ="/about">
         <ListItemText
           primary="About"
           primaryTypographyProps={{ noWrap: true }}
@@ -137,7 +137,7 @@ const Navbar = () => {
                   <ListItemButton component = {Link} to ="/shops">
                     <ListItemText primary="Shops" />
                   </ListItemButton>
-                  <ListItemButton>
+                  <ListItemButton component = {Link} to ="/about">
                     <ListItemText primary="About" />
                   </ListItemButton>
                 </List>

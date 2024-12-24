@@ -31,6 +31,7 @@ import QuanLyMuaHang from "./pages/QuanLyMuaHang";
 import ChiTietDonHang from "./components/QuanLyMuaHang/OrderDetail";
 import EditProfilePage from "./components/Profile/ProfileEditPage";
 import ReceiptPage from "./pages/ReceiptPage";
+import About from "./components/About/About";
 const router = createBrowserRouter([
     {
       path: "/",
@@ -200,6 +201,12 @@ const router = createBrowserRouter([
       element: <Layout />,
       errorElement: <ErrorPage />,
       children: [{ index: true, element: <ReceiptPage/> }],
+    },
+    {
+      path: "/about",
+      element: <Layout />,
+      errorElement: <ErrorPage />,
+      children: [{ index: true, element: <About/> }],
     },
   ]);
   
