@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AdminNav from "../components/AdminNav";
 import { User } from "../data/User";
-import { createUser } from "../services/UserService";
+import { addRole, createUser } from "../services/UserService";
 
 export default function CreateUser() {
   const [user, setUser] = useState<User>({
@@ -18,8 +18,9 @@ export default function CreateUser() {
   const nav = useNavigate();
   //call api createUser
   const create = () => {
+    console.log(user)
     const isEmptyField = Object.entries(user).some(([key, value]) => {
-      if (key === "BirthDate" || key === "id") return false;
+      if (key === "birthDate" || key === "id" ||key==="role") return false;
       return value === "";
     });
 
@@ -28,6 +29,9 @@ export default function CreateUser() {
       return;
     }
     createUser(user).then(() => {
+         var id=user.id
+          var role="User"
+          addRole(id,role)
       nav("/admin/QuanLyUser");
     });
   };
@@ -35,7 +39,7 @@ export default function CreateUser() {
     const { name, value } = e.target;
     setUser((prev) => ({
       ...prev,
-      [name]: name === "BirthDate" ? new Date(value) : value,
+      [name]: name === "birthDate" ? new Date(value) : value,
     }));
   };
   const cancel = () => {
