@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Box, Button, Typography, Rating, IconButton, Menu, MenuItem, TextField } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { useAuth } from "../../Auth/AuthContext"; // Import AuthContext từ vị trí của bạn
+import {editComment,deleteComment} from "../../../services/reviewService"
+import { CommentDTO } from "../../../data/comment";
 interface Props {
   id: string;
   content: string;
@@ -9,11 +11,9 @@ interface Props {
   productId: string;
   rating: number;
   date: Date | string; // Allowing both Date and string types
-  onEdit: (id: string, updatedContent: string, updatedRating: number) => void; // Function to handle edit action
-  onDelete: (id: string) => void; // Function to handle delete action
 }
 
-const ReviewItem = ({ id, username, rating, date, content, onEdit, onDelete }: Props) => {
+const ReviewItem = ({ id, username,productId, rating, date, content }: Props) => {
   const { user } = useAuth();
   // Ensure date is a valid Date object
   
@@ -21,12 +21,30 @@ const ReviewItem = ({ id, username, rating, date, content, onEdit, onDelete }: P
   // State for menu
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const isMenuOpen = Boolean(anchorEl);
-
+  const [comment, setComment]=useState<CommentDTO>({
+    id: "",
+    content: "",
+    userId:"",
+    productId: "",
+    rating: 0,
+    date: new Date
+  })
   const [isEditing, setIsEditing] = useState(false);
   const [editedContent, setEditedContent] = useState(content);
   const [editedRating, setEditedRating] = useState(rating);
   const handleSave = () => {
-    onEdit(id, editedContent, editedRating);
+    const updatedComment: CommentDTO = {
+      id, // Sử dụng id từ props
+      content: editedContent,
+      userId: user?.id || "", // Lấy từ AuthContext hoặc props
+      productId, // Sử dụng productId từ props
+      rating: editedRating,
+      date: new Date(), // Lấy ngày hiện tại hoặc từ input nếu có
+    };
+    setComment(updatedComment); // Cập nhật state (nếu cần)
+    editComment(updatedComment).then(() => {
+      window.location.reload(); // Tải lại toàn bộ trang
+    });; // Gọi hàm service để lưu thay đổi
     setIsEditing(false);
   };
 
@@ -138,7 +156,9 @@ const ReviewItem = ({ id, username, rating, date, content, onEdit, onDelete }: P
         <MenuItem
           onClick={() => {
             handleMenuClose();
-            onDelete(id);
+            deleteComment(id).then(() => {
+              window.location.reload(); // Tải lại toàn bộ trang
+            });;
           }}
         >
           Delete

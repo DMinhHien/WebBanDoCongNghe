@@ -92,6 +92,7 @@ export default function ChiTietDonHang() {
                     <tr className="text-left" style={{ backgroundColor: '#FBFAF1' }}>
                         <th className="border border-gray-300 py-2 px-4">Mã sản phẩm</th>
                         <th className="border border-gray-300 py-2 px-4">Tên sản phẩm</th>
+                        <th className="border border-gray-300 py-2 px-4">Hình ảnh</th>
                         <th className="border border-gray-300 py-2 px-4">Số lượng</th>
                         <th className="border border-gray-300 py-2 px-4">Tương tác</th>
                     </tr>
@@ -101,6 +102,14 @@ export default function ChiTietDonHang() {
                         <tr key={detail.id}>
                              <td className="border border-gray-300 py-2 px-4">{detail.idProduct}</td>
                             <td className="border border-gray-300 py-2 px-4">{detail.productName}</td>
+                            <td className="border border-gray-300 py-2 px-4">
+                                {/* Display product image */}
+                                <img 
+                                    src={detail.image} // Assuming `productImage` contains the URL of the image
+                                    alt={detail.productName} 
+                                    className="w-16 h-16 object-cover rounded" 
+                                />
+                                </td>
                             <td className="border border-gray-300 py-2 px-4">{detail.quantity}</td>
                             <td className="border border-gray-300 py-2 px-4">
                                 <button

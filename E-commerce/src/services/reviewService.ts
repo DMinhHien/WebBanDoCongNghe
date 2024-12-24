@@ -21,6 +21,25 @@ export const fetchComments = async (productId: string): Promise<Comment[]> => {
         throw error
     }
 }
- 
+export const editComment=async(Comment:CommentDTO)=>{
+  try {
+      const token=localStorage.getItem("token")
+      await axios.post(`https://localhost:7183/Comment/edit`,{data:Comment },{ headers: {Authorization:`Bearer ${token}`} })
+  } catch (error) {
+      console.error("không thể chỉnh sửa sản phẩm",error);
+      throw error
+  }
+}
+
+export const deleteComment=async(id:string)=>{
+  try {
+      const token=localStorage.getItem("token")
+      const res=await axios.post(`https://localhost:7183/Comment/delete`,{id},{headers:{Authorization:`Bearer ${token}`}})
+      return res.data
+  } catch (error) {
+      console.error("không thể xóa sản phẩm",error);
+      throw error
+  }
+}
 
   

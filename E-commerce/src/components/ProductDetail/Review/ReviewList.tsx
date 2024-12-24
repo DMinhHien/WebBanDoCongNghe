@@ -10,8 +10,6 @@ interface Props {
     productId: string;
     rating: number;
     date: Date;
-    onEdit: (id: string) => void; 
-    onDelete: (id: string) => void;
   }>;
 }
 

@@ -12,20 +12,20 @@ export default function QuanLyUser() {
   const nav = useNavigate();
 
   const filteredUsers = users.filter((user) =>
-    user.AccountName?.toLowerCase().includes(searchTerm.toLowerCase())
+    user.accountName?.toLowerCase().includes(searchTerm.toLowerCase())
   );
   //Call api getListUsers
   useEffect(() => {
     getListUsers().then((data) => {
       const transformedUsers = data.map((item: any) => ({
         id: item.id,
-        AccountName: item.accountname,
-        BirthDate: new Date(item.birthdate),
-        Address: item.address,
-        Email: item.email,
-        Password: "",
-        Role: item.role.length === 0 ? "User" : item.role,
-        PhoneNumber:""
+        accountName: item.accountname,
+        birthDate: new Date(item.birthdate),
+        address: item.address,
+        email: item.email,
+        password: "",
+        role: item.role.length === 0 ? "User" : item.role,
+        phoneNumber:""
       }));
       setUsers(transformedUsers);
     });
@@ -71,7 +71,7 @@ export default function QuanLyUser() {
     editRole(userId, role).then(() => {
       setUsers((prevUsers) =>
         prevUsers.map((user) =>
-          user.id === userId ? { ...user, Role: role } : user
+          user.id === userId ? { ...user, role: role } : user
         )
       );
     });
@@ -163,26 +163,26 @@ export default function QuanLyUser() {
                       />
                     </td>
                     <td className="border border-gray-300 p-2">
-                      {user.AccountName}
+                      {user.accountName}
                     </td>
-                    <td className="border border-gray-300 p-2">{user.Email}</td>
+                    <td className="border border-gray-300 p-2">{user.email}</td>
                     <td className="border border-gray-300 p-2">
-                      {user?.BirthDate
-                        ? new Date(user.BirthDate).getTime()
+                      {user?.birthDate
+                        ? new Date(user.birthDate).getTime()
                           ? new Intl.DateTimeFormat("vi-VN", {
                               year: "2-digit",
                               month: "2-digit",
                               day: "2-digit",
-                            }).format(new Date(user.BirthDate))
+                            }).format(new Date(user.birthDate))
                           : "Ngày không hợp lệ"
                         : "Chưa có dữ liệu"}
                     </td>
                     <td className="border border-gray-300 p-2">
-                      {user.Address}
+                      {user.address}
                     </td>
                     <td className="border border-gray-300 p-2">
                       <select
-                      value={user.Role}
+                      value={user.role}
                       onChange={(e)=>{
                         changeRole(user.id,e.target.value)()
                       }}

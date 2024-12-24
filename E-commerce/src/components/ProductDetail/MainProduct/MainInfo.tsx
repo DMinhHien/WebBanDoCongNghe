@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Box,
   Typography,
@@ -13,17 +13,35 @@ import {
   Paper,
 } from "@mui/material";
 import { Product } from "../../../data/products";
+import { useAuth } from "../../Auth/AuthContext";
+import { addCartItem, getCartId } from "../../../services/cartService";
 
 interface Props {
   product: Product;
+  productId:string;
 }
 
-const MainInfo = ({ product }: Props) => {
+const MainInfo = ({ product,productId}: Props) => {
   const [quantity, setQuantity] = useState(1);
   const [Option, setOption] = useState("DuyBeoU");
+  const { user } = useAuth();
+  let cartId="";
+  useEffect(()=>{
+    if(user)
+      getCartId(user.id).then((data)=>{
+      cartId=data[0];
+    })
+  })
 
+  const add=()=>{
+    addCartItem(cartId,productId,quantity)
+  }
   const handleQuantityChange = (change: number) => {
-    setQuantity((prev) => Math.max(1, prev + change));
+    if (change > 0 && quantity + change > parseInt(product.quantity)) {
+      alert("Số lượng sản phẩm còn lại không đủ!!!!");
+    } else {
+      setQuantity((prev) => Math.max(1, prev + change));
+    }
   };
 
   const theme = createTheme({
@@ -31,6 +49,8 @@ const MainInfo = ({ product }: Props) => {
       fontFamily: "Nunito",
     },
   });
+
+  
 
   return (
     <ThemeProvider theme={theme}>
@@ -61,7 +81,7 @@ const MainInfo = ({ product }: Props) => {
               }}
             />
             <Typography variant="body1" color="textSecondary">
-              {5 > 0 ? `${5} items available` : "Out of stock"}
+              {product.quantity ? product.quantity +` items available` : "Out of stock"}
             </Typography>
           </Box>
         </Box>
@@ -76,11 +96,11 @@ const MainInfo = ({ product }: Props) => {
             ({product.rating})
           </Typography>
           <Typography fontWeight="500" fontSize="16px" color="#C45C00">
-            Product.Sold
+            Rating
           </Typography>
         </Box>
         <Typography variant="h4" color="textPrimary" fontWeight="600" my={3}>
-          ${product.unitPrice}{" "}
+          {product.unitPrice}{" "}VND
         </Typography>
 
         {/* Description */}
@@ -148,6 +168,7 @@ const MainInfo = ({ product }: Props) => {
         {/* Action Buttons */}
         <Stack direction="row" spacing={2} mt={3}>
           <Button
+          onClick={add}
             variant="outlined"
             sx={{
               fontSize: "17px",
@@ -178,7 +199,7 @@ const MainInfo = ({ product }: Props) => {
               },
             }}
           >
-            BUY NOW
+            Liên hệ người bán
           </Button>
         </Stack>
       </Box>

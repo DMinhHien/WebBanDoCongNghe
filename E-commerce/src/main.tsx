@@ -24,7 +24,7 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: "Playwrite GB S",
+    fontFamily: "Helvetica",
     fontWeightRegular: "500",
   },
 });

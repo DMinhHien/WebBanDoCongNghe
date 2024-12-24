@@ -21,7 +21,7 @@ namespace WebBanDoCongNghe.Controllers
         }
 
         // POST: ProductController/Create
-        //[Authorize]
+        [Authorize]
         [HttpPost("create/{userId}")]
         public ActionResult Create([FromBody] JObject json, [FromRoute] string userId)
         {
@@ -34,8 +34,11 @@ namespace WebBanDoCongNghe.Controllers
             _context.Receipts.Add(receipt);
             foreach (var detail in receiptDetails)
             {
+                var product = _context.Products.FirstOrDefault(x => x.id == detail.idProduct);
+                product.quantity = product.quantity - detail.quantity;
                 detail.id = Guid.NewGuid().ToString(); 
-                detail.idReceipt = receipt.id;          
+                detail.idReceipt = receipt.id;
+                _context.Products.Update(product);
                 _context.ReceiptDetails.Add(detail);
             }
             _context.SaveChanges();
@@ -66,7 +69,7 @@ namespace WebBanDoCongNghe.Controllers
             {
                 foreach (var detail in detailList)
                 {
-                    _context.ReceiptDetails.Remove(detail);
+                    _context.ReceiptDetails.Remove(detail);  
                 }
             }
             _context.Receipts.Remove(result);
@@ -95,6 +98,10 @@ namespace WebBanDoCongNghe.Controllers
                     rd.id,
                     rd.idProduct,
                     rd.quantity,
+                    Image = _context.Products.Where(p => p.id == rd.idProduct)
+                            .Select(p => p.image).FirstOrDefault(),
+                    UnitPrice = _context.Products.Where(p => p.id == rd.idProduct)
+                            .Select(p => p.unitPrice).FirstOrDefault(),
                     ProductName = _context.Products.Where(p => p.id == rd.idProduct)
                             .Select(p => p.productName).FirstOrDefault()
                 }).ToList();

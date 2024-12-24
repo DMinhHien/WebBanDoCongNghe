@@ -59,7 +59,7 @@ const ProductDetail: React.FC = () => {
 return (
   <ThemeProvider theme={theme}>
   <Box px={3} pt={5} justifyContent="center" alignItems="center">
-    <MainProduct product={product} />
+    <MainProduct product={product} idProduct={proId}  />
     <DividerSection />
     <Reviews productId={proId} />
     <DividerSection />

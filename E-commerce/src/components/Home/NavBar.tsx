@@ -14,6 +14,7 @@ import {
   useTheme,
   Avatar,
   Button,
+  Badge
 } from "@mui/material";
 import { Search, ShoppingCart,  Menu, } from "@mui/icons-material";
 import logo from "../../assets/logo.jpg";
@@ -82,7 +83,7 @@ const Navbar = () => {
           primaryTypographyProps={{ noWrap: true }}
         />
       </ListItemButton>
-      <ListItemButton>
+      <ListItemButton component = {Link} to ="/about">
         <ListItemText
           primary="About"
           primaryTypographyProps={{ noWrap: true }}
@@ -136,7 +137,7 @@ const Navbar = () => {
                   <ListItemButton component = {Link} to ="/shops">
                     <ListItemText primary="Shops" />
                   </ListItemButton>
-                  <ListItemButton>
+                  <ListItemButton component = {Link} to ="/about">
                     <ListItemText primary="About" />
                   </ListItemButton>
                 </List>
@@ -155,7 +156,16 @@ const Navbar = () => {
               <AccountCircleIcon/>
             </IconButton>
             <IconButton color="inherit" onClick={handleCart}>
+                <Badge
+                  badgeContent= {5}
+                  color="error"
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                >
               <ShoppingCart></ShoppingCart>
+              </Badge>
             </IconButton>
             <Button color="inherit" onClick={handleLogout}>Đăng Xuất</Button>
           </>

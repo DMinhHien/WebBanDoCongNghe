@@ -2,24 +2,25 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AdminNav from "../components/AdminNav";
 import { User } from "../data/User";
-import { createUser } from "../services/UserService";
+import { addRole, createUser } from "../services/UserService";
 
 export default function CreateUser() {
   const [user, setUser] = useState<User>({
     id: "",
-    Email: "",
-    AccountName: "",
-    Password: "",
-    BirthDate: new Date(),
-    Address: "",
-    Role: "",
-    PhoneNumber:""
+    email: "",
+    accountName: "",
+    password: "",
+    birthDate: new Date(),
+    address: "",
+    role: "",
+    phoneNumber:""
   });
   const nav = useNavigate();
   //call api createUser
   const create = () => {
+    console.log(user)
     const isEmptyField = Object.entries(user).some(([key, value]) => {
-      if (key === "BirthDate" || key === "id") return false;
+      if (key === "birthDate" || key === "id" ||key==="role") return false;
       return value === "";
     });
 
@@ -28,6 +29,9 @@ export default function CreateUser() {
       return;
     }
     createUser(user).then(() => {
+         var id=user.id
+          var role="User"
+          addRole(id,role)
       nav("/admin/QuanLyUser");
     });
   };
@@ -35,7 +39,7 @@ export default function CreateUser() {
     const { name, value } = e.target;
     setUser((prev) => ({
       ...prev,
-      [name]: name === "BirthDate" ? new Date(value) : value,
+      [name]: name === "birthDate" ? new Date(value) : value,
     }));
   };
   const cancel = () => {
@@ -53,8 +57,8 @@ export default function CreateUser() {
             </label>
             <input
               type="text"
-              value={user?.Email}
-              name="Email"
+              value={user?.email}
+              name="email"
               onChange={handleChange}
               className="px-4 py-2 border border-gray-300 w-full rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-700"
             />
@@ -66,8 +70,8 @@ export default function CreateUser() {
             </label>
             <input
               type="text"
-              value={user?.AccountName}
-              name="AccountName"
+              value={user?.accountName}
+              name="accountName"
               onChange={handleChange}
               className="px-4 py-2 border border-gray-300 w-full rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-700"
             />
@@ -79,8 +83,8 @@ export default function CreateUser() {
             </label>
             <input
               type="text"
-              value={user?.Password}
-              name="Password"
+              value={user?.password}
+              name="password"
               onChange={handleChange}
               className="px-4 py-2 border border-gray-300 w-full rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-700"
             />
@@ -92,8 +96,8 @@ export default function CreateUser() {
             </label>
             <input
               type="date"
-              value={user.BirthDate.toISOString().split("T")[0]}
-              name="BirthDate"
+              value={user.birthDate.toISOString().split("T")[0]}
+              name="birthDate"
               onChange={handleChange}
               className="px-4 py-2 border border-gray-300 w-full rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-700"
             />
@@ -105,8 +109,8 @@ export default function CreateUser() {
             </label>
             <input
               type="text"
-              value={user?.Address}
-              name="Address"
+              value={user?.address}
+              name="address"
               onChange={handleChange}
               className="px-4 py-2 border border-gray-300 w-full rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-700"
             />
@@ -117,8 +121,8 @@ export default function CreateUser() {
             </label>
             <input
               type="text"
-              value={user?.PhoneNumber}
-              name="PhoneNumber"
+              value={user?.phoneNumber}
+              name="phoneNumber"
               onChange={handleChange}
               className="px-4 py-2 border border-gray-300 w-full rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-700"
             />
