@@ -143,5 +143,35 @@ namespace WebBanDoCongNghe.Controllers
             var result=_context.Carts.AsQueryable().Where(x=>x.userId == userId).Select(x=>x.id);
             return Json(result);
         }
+        [HttpPost("getCartTotalId/{userId}")]
+        public IActionResult GetCartTotalId([FromRoute] string userId)
+        {
+            try
+            {
+                // Lấy danh sách id của Cart theo userId
+                var cartIds = _context.Carts
+                    .Where(x => x.userId == userId)
+                    .Select(x => x.id)
+                    .ToList();
+
+                // Nếu không tìm thấy cart nào, trả về kết quả 0
+                if (!cartIds.Any())
+                {
+                    return Json(0);
+                }
+
+                // Đếm tổng số CartDetails có idCart thuộc danh sách cartIds
+                var result = _context.CartDetails
+                    .Where(x => cartIds.Contains(x.idCart))
+                    .Count();
+
+                return Json(result);
+            }
+            catch (Exception ex)
+            {
+                // Xử lý lỗi nếu cần
+                return BadRequest(new { message = "Error fetching cart details", error = ex.Message });
+            }
+        }
     }
 }
