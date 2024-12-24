@@ -14,6 +14,7 @@ import {
   useTheme,
   Avatar,
   Button,
+  Badge
 } from "@mui/material";
 import { Search, ShoppingCart,  Menu, } from "@mui/icons-material";
 import logo from "../../assets/logo.jpg";
@@ -155,7 +156,16 @@ const Navbar = () => {
               <AccountCircleIcon/>
             </IconButton>
             <IconButton color="inherit" onClick={handleCart}>
+                <Badge
+                  badgeContent= {5}
+                  color="error"
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                >
               <ShoppingCart></ShoppingCart>
+              </Badge>
             </IconButton>
             <Button color="inherit" onClick={handleLogout}>Đăng Xuất</Button>
           </>
