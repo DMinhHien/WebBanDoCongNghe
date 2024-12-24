@@ -15,7 +15,7 @@ import {
 import { Product } from "../../../data/products";
 import { useAuth } from "../../Auth/AuthContext";
 import { addCartItem, getCartId } from "../../../services/cartService";
-
+import useCartStore from "../../../zustand/useCartStore";
 interface Props {
   product: Product;
   productId:string;
@@ -32,9 +32,11 @@ const MainInfo = ({ product,productId}: Props) => {
       cartId=data[0];
     })
   })
+  const { incrementCartDetail } = useCartStore();
 
   const add=()=>{
-    addCartItem(cartId,productId,quantity)
+    addCartItem(cartId,productId,quantity);
+    incrementCartDetail(1);
   }
   const handleQuantityChange = (change: number) => {
     if (change > 0 && quantity + change > parseInt(product.quantity)) {

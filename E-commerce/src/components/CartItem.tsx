@@ -65,7 +65,7 @@ export default function CartItem({ ProductCart, onQuantityChange,DeleteCartItem 
           {/* Quantity Controller */}
           <div className="flex items-center gap-2">
             <button
-              className="h-6 w-6 flex items-center justify-center rounded border bg-black hover:bg-gray-700"
+              className="h-6 w-6 flex items-center justify-center rounded border bg-green hover:bg-red-700"
               onClick={handleDecrease}
             >
               <svg
@@ -84,7 +84,7 @@ export default function CartItem({ ProductCart, onQuantityChange,DeleteCartItem 
               readOnly
             />
             <button
-              className="h-6 w-6 flex items-center justify-center rounded border bg-black hover:bg-gray-700"
+              className="h-6 w-6 flex items-center justify-center rounded border bg-green hover:bg-red-700"
               onClick={handleIncrease}
             >
               <svg

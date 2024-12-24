@@ -9,7 +9,7 @@ import { useAuth } from "../components/Auth/AuthContext";
 import CartItem from "../components/CartItem";
 import { createReceipt } from "../services/OrderService";
 import { useNavigate } from "react-router-dom";
-
+import useCartStore from "../zustand/useCartStore";
 export default function CartPage() {
   const [carts, setCarts] = useState<Cart>({
     id: "",
@@ -17,6 +17,7 @@ export default function CartPage() {
     shops: [],
   });
   const { user } = useAuth();
+  const { setCartDetail } = useCartStore();
   const nav = useNavigate();
   const [total, setTotal] = useState(0);
   const updateTotal = () => {
@@ -28,6 +29,13 @@ export default function CartPage() {
     });
     setTotal(tmp);
   };
+  useEffect(() => {
+    const totalCartDetail = carts.shops.reduce(
+      (sum, shop) => sum + shop.products.length,
+      0
+    );
+    setCartDetail(totalCartDetail);
+  }, [carts]);
   useEffect(() => {
     if (user) {
       getCarts(user?.id as string).then((data) => {

@@ -9,6 +9,7 @@ import {
     RadioGroup,
     Radio,
     Grid,
+    Button,
   } from "@mui/material";
   import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
   import useProductStore from "../../zustand/useProductStore"
@@ -37,7 +38,11 @@ import {
       setSelectedCategory(category);
       setCategoryFilter(category);
     };
-  
+    const handleClearSelection = () => {
+      // Clear selected category
+      setSelectedCategory("");
+      setCategoryFilter(""); // Remove filter
+    };
     return (
       <Accordion
         sx={{ bgcolor: "transparent", boxShadow: "none" }}
@@ -68,6 +73,14 @@ import {
               ))}
             </Grid>
           </RadioGroup>
+          <Button
+          variant="outlined"
+          color="primary"
+          onClick={handleClearSelection}
+          sx={{ marginTop: 2 }}
+        >
+          Bỏ chọn
+        </Button>
         </AccordionDetails>
       </Accordion>
     );

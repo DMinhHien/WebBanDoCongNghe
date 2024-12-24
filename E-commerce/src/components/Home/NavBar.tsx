@@ -22,13 +22,13 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../Auth/AuthContext";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-
+import useCartStore from "../../zustand/useCartStore";
 
 const Navbar = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [drawerOpen, setDrawerOpen] = React.useState<boolean>(false);
-
+  const { cartDetail } = useCartStore();
   const {user, logout} = useAuth();
   const navigate = useNavigate();
   useEffect(() => {
@@ -36,6 +36,8 @@ const Navbar = () => {
       navigate("/admin"); // Điều hướng đến trang admin nếu là admin
     }
   }, [user, navigate]);
+  useEffect(() => {
+  }, [cartDetail]);
   const handleProfileClick = () => {
     navigate('/profile'); // Điều hướng đến trang chỉnh sửa thông tin cá nhân
   };
@@ -157,7 +159,7 @@ const Navbar = () => {
             </IconButton>
             <IconButton color="inherit" onClick={handleCart}>
                 <Badge
-                  badgeContent= {5}
+                  badgeContent= {cartDetail}
                   color="error"
                   anchorOrigin={{
                     vertical: "top",

@@ -43,7 +43,7 @@ const ShopList: React.FC = () => {
     
     const displayedShops = filteredShops?.length
     ? filteredShops
-    : shops;
+    : [];
 
     if (loading) return <p>Đang tải dữ liệu...</p>;
     if (error) return <p>{error}</p>;
@@ -95,7 +95,7 @@ const ShopList: React.FC = () => {
           </Grid>
         </Grid>
          {/* Bottom-right: ProductGrid */}
-         <Grid item xs={12} md={9}>
+         <Grid item xs={12} >
           <ShopGrid shops={paginatedShops} />
 
           {/* Pagination */}

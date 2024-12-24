@@ -72,7 +72,7 @@ const ShopCard: React.FC<ShopCardProps> = ({ shop }) => (
                   mt: 0.5,
                 }}
               >
-                ${shop.address}
+                {shop.address}
               </Typography>
         </CardContent>
       </Card>

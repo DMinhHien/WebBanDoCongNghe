@@ -75,12 +75,12 @@ const MainInfo = ({ shop }: Props) => {
         </Typography>
 
         {/* Description */}
-        <Typography variant="h6" fontWeight="700" mb={1}>
+        {/* <Typography variant="h6" fontWeight="700" mb={1}>
           DESCRIPTION
         </Typography>
         <Typography variant="body1" color="textPrimary" mb={2}>
          Shop được sỡ hữu bởi {shop.userName}
-        </Typography>
+        </Typography> */}
 
         <Divider sx={{ my: 3 }} />
 

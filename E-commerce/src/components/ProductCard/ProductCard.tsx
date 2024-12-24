@@ -73,7 +73,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => (
                   mt: 0.5,
                 }}
               >
-                ${product.unitPrice}
+                {product.unitPrice} VND
               </Typography>
         </CardContent>
       </Card>

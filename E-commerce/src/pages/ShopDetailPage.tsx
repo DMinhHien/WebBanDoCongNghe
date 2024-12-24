@@ -47,7 +47,7 @@ const ShopDetailPage: React.FC = () => {
   if (loading) {
     return <CircularProgress />;
   }
-
+  const filteredProducts = products.filter((product) => Number(product.quantity) > 0);
   return (
     <Container>
       {shopDetails && 
@@ -62,9 +62,9 @@ const ShopDetailPage: React.FC = () => {
       <Typography variant="h5" sx={{ marginTop: 4 }}>
         Danh sách sản phẩm của cửa hàng {shopDetails?.name}
       </Typography>
-      {products.length > 0 ? (
+      {filteredProducts.length > 0 ? (
          <div className={styles.productList}>
-         {products.map((product) => (
+         {filteredProducts.map((product) => (
            <ProductCard key={product.id} product={product} />
          ))}
        </div>
