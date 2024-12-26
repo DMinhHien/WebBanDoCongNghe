@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import AdminNav from "../components/AdminNav";
 import { User } from "../data/User";
 import { addRole, createUser } from "../services/UserService";
+import { createCart } from "../services/cartService";
 
 export default function CreateUser() {
   const [user, setUser] = useState<User>({
@@ -32,6 +33,7 @@ export default function CreateUser() {
          var id=user.id
           var role="User"
           addRole(id,role)
+          createCart(id)
       nav("/admin/QuanLyUser");
     });
   };
