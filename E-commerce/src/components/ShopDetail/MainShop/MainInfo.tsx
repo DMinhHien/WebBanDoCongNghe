@@ -67,7 +67,7 @@ const MainInfo = ({ shop }: Props) => {
             ({shop.rating})
           </Typography>
           <Typography fontWeight="500" fontSize="16px" color="#C45C00">
-            Rating
+            Đánh giá
           </Typography>
         </Box>
         <Typography variant="h4" color="textPrimary" fontWeight="600" my={3}>

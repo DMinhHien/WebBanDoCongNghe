@@ -30,7 +30,7 @@ const Footer = () => {
             variant="h5"
             sx={{ fontWeight: "bold", marginLeft: "10px" }}
           >
-            BRAND.
+            SecondHand
           </Typography>
         </Box>
 
@@ -92,18 +92,18 @@ const Footer = () => {
             fontSize: "14px",
           }}
         >
-          ©2024. Made with <span style={{ color: "#FF6347" }}>❤️</span> by
-          41 Groups
+          ©2024. Tạo bởi <span style={{ color: "#FF6347" }}>❤️</span> 
+          Nhóm 5
         </Typography>
 
         {/* Privacy Policy and Terms */}
         <Box>
           <Link href="#" color="#333" underline="none">
-            Privacy Policy
+            Chính Sách Bảo Mật
           </Link>{" "}
           |{" "}
           <Link href="#" color="#333" underline="none">
-            Terms & Conditions
+            Điều khoản & Điều kiện
           </Link>
         </Box>
       </Box>

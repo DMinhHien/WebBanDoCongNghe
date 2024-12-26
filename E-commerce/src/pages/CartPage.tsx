@@ -105,7 +105,7 @@ export default function CartPage() {
     <section className="bg-white py-8 antialiased  md:py-16">
       <div className="mx-auto max-w-screen-xl px-4 2xl:px-0">
         <h2 className="text-xl font-semibold text-gray-900 sm:text-2xl">
-          Shopping Cart
+          Giỏ Hàng
         </h2>
 
         <div className="mt-6 sm:mt-8 md:gap-6 lg:flex lg:items-start xl:gap-8">
@@ -151,14 +151,14 @@ export default function CartPage() {
               className="space-y-4 rounded-lg border border-gray-200 bg-white p-4 shadow-sm sm:p-6"
             >
               <p className="text-xl font-semibold text-gray-900 ">
-                Order summary
+                Đơn Hàng
               </p>
 
               <div className="space-y-4">
                 <div className="space-y-2">
                   <dl className="flex items-center justify-between gap-4">
                     <dt className="text-base font-normal text-gray-500 dark:text-gray-400">
-                      Original price
+                      Giá Gốc
                     </dt>
                     <dd className="text-base font-medium text-gray-900 ">
                       {total} VNĐ
@@ -167,7 +167,7 @@ export default function CartPage() {
 
                   <dl className="flex items-center justify-between gap-4">
                     <dt className="text-base font-normal text-gray-500 dark:text-gray-400">
-                      Store Pickup
+                      Phí Ship
                     </dt>
                     <dd className="text-base font-medium text-gray-900 ">
                       30000 VNĐ
@@ -176,7 +176,7 @@ export default function CartPage() {
                 </div>
 
                 <dl className="flex items-center justify-between gap-4 border-t border-gray-200 pt-2 dark:border-gray-700">
-                  <dt className="text-base font-bold text-gray-900 ">Total</dt>
+                  <dt className="text-base font-bold text-gray-900 ">Thành Tiền</dt>
                   <dd className="text-base font-bold text-gray-900 ">
                     {total + 30000} VNĐ
                   </dd>

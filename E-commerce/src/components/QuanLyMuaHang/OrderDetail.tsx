@@ -116,7 +116,7 @@ export default function ChiTietDonHang() {
                                      onClick={() => openDialog(detail.idProduct, detail.productName)}
                                     className="bg-green-500 hover:bg-green-600 text-white py-1 px-3 rounded"
                                 >
-                                    Thêm review
+                                    Thêm Đánh Giá
                                 </button>
                             </td>
                         </tr>

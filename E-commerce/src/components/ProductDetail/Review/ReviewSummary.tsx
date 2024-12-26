@@ -35,7 +35,7 @@ const ReviewSummary = ({ reviews }: Props) => {
         {/* Header Section */}
         <Box display="flex" justifyContent="space-between" mb={2}>
           <Typography variant="h5" fontWeight="700">
-            {totalReviews} review{totalReviews > 1 ? "s" : ""}
+            {totalReviews} đánh giá{totalReviews > 1 ? "s" : ""}
           </Typography>
         </Box>
   

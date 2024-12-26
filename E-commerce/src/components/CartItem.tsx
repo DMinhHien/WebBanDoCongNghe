@@ -56,7 +56,7 @@ export default function CartItem({ ProductCart, onQuantityChange,DeleteCartItem 
             className="mt-2 text-sm font-medium text-red-600 hover:underline dark:text-red-500"
             onClick={()=>DeleteCartItem(ProductCart.id)}
           >
-            Remove
+            Xóa
           </button>
         </div>
 
