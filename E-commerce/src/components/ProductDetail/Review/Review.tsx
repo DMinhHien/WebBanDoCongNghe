@@ -25,7 +25,7 @@ const Reviews = ({ productId }: Props) => {
   return (
     <Box width="90%" margin="0 auto">
       <Typography variant="h3" fontWeight={700} mb={3}>
-        Reviews
+        Đánh giá
       </Typography>
       <Grid container spacing={4}>
         <Grid item xs={12} md={4}>

@@ -83,7 +83,7 @@ const MainInfo = ({ product,productId}: Props) => {
               }}
             />
             <Typography variant="body1" color="textSecondary">
-              {product.quantity ? product.quantity +` items available` : "Out of stock"}
+              {product.quantity ? product.quantity +` sản phẩm hiện có` : "Hết hàng"}
             </Typography>
           </Box>
         </Box>
@@ -98,7 +98,7 @@ const MainInfo = ({ product,productId}: Props) => {
             ({product.rating})
           </Typography>
           <Typography fontWeight="500" fontSize="16px" color="#C45C00">
-            Rating
+            Đánh giá
           </Typography>
         </Box>
         <Typography variant="h4" color="textPrimary" fontWeight="600" my={3}>
@@ -107,7 +107,7 @@ const MainInfo = ({ product,productId}: Props) => {
 
         {/* Description */}
         <Typography variant="h6" fontWeight="700" mb={1}>
-          DESCRIPTION
+          MÔ TẢ
         </Typography>
         <Typography variant="body1" color="textPrimary" mb={2}>
          {product.description}
@@ -140,7 +140,7 @@ const MainInfo = ({ product,productId}: Props) => {
           {/* Quantity Section */}
           <Box>
             <Typography variant="h6" fontWeight="700">
-              QUANTITY
+              SỐ LƯỢNG
             </Typography>
             <Box display="flex" alignItems="center" sx={{ mt: 1 }}>
               <Button
@@ -185,7 +185,7 @@ const MainInfo = ({ product,productId}: Props) => {
               },
             }}
           >
-            ADD TO CART
+            THÊM VÀO GIỎ HÀNG
           </Button>
 
           <Button
@@ -201,7 +201,7 @@ const MainInfo = ({ product,productId}: Props) => {
               },
             }}
           >
-            Liên hệ người bán
+            LIÊN HỆ NGƯỜI BÁN
           </Button>
         </Stack>
       </Box>

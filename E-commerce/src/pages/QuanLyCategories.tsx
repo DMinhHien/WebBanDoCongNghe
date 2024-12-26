@@ -77,7 +77,7 @@ export default function QuanLyCategories() {
           <div className="flex flex-col space-y-4 w-full">
             <div className="flex w-full mb-12">
               <InputBase
-                placeholder="Category name"
+                placeholder="Tên Thể Loại"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 style={{
@@ -93,14 +93,14 @@ export default function QuanLyCategories() {
                   className="border p-2 rounded-md w-[150px] text-center"
                   onClick={create}
                 >
-                  Thêm Category
+                  Thêm Thể Loại
                 </button>
                 <button
                   style={{ backgroundColor: "#FBFAF1" }}
                   className="border p-2 rounded-md w-[150px] text-center"
                   onClick={DeleteCategory}
                 >
-                  Xóa Category
+                  Xóa Thể Loại
                 </button>
               </div>
             </div>
@@ -124,7 +124,7 @@ export default function QuanLyCategories() {
 
         {/* Category List */}
         <div className="mt-8">
-          <h2 className="text-xl font-bold mb-4">Danh sách Category</h2>
+          <h2 className="text-xl font-bold mb-4">Danh sách Thể Loại</h2>
           <div className="overflow-x-auto">
             <table className="min-w-[40%] border border-gray-300">
               <thead>

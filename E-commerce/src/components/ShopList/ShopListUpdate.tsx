@@ -60,8 +60,8 @@ const ShopList: React.FC = () => {
 
     const categoryTitle =
     filteredShops.length === 0
-      ? "Electronic Shop"
-      : "Electronic Shop";
+      ? "SHOPS"
+      : "SHOPS";
 
     return (
       <Box sx={{ width: "80%", margin: "0 auto", padding: 3 }}>
