@@ -30,7 +30,7 @@ const SearchFilter = () => {
       }}
     >
       <TextField
-        label="Search for shops..."
+        label="Tìm kiếm shops..."
         variant="outlined"
         value={query}
         onChange={handleSearchChange}

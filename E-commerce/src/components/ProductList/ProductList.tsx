@@ -61,8 +61,8 @@ const ProductList: React.FC = () => {
 
     const categoryTitle =
     filteredProducts.length === 0
-      ? "Electronic Product"
-      : filters.category || "Electronic Product";
+      ? "Sản Phẩm"
+      : filters.category || "Sản Phẩm";
 
     return (
       <Box sx={{ width: "80%", margin: "0 auto", padding: 3 }}>

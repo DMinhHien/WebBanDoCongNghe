@@ -50,7 +50,7 @@ import {
       >
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
           <Typography fontWeight={700} fontSize={18}>
-            Category
+            Thể Loại
           </Typography>
         </AccordionSummary>
         <AccordionDetails>

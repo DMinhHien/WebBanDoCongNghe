@@ -115,7 +115,7 @@ export default function ReceiptPage() {
               <div className="space-y-3">
                 <div className="flex justify-between">
                   <div>
-                    <p className="font-bold text-black text-lg"> Amount Due </p>
+                    <p className="font-bold text-black text-lg"> Tổng Cộng </p>
                   </div>
                   <p className="font-bold text-black text-lg">  {total()+30000} VNĐ </p>
                 </div>
