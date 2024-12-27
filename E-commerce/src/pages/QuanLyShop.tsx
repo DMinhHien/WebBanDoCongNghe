@@ -132,7 +132,7 @@ export default function QuanLyShop() {
                   <th className="border border-gray-300 p-2 text-left">
                     Địa chỉ
                   </th>
-                  <th className="border border-gray-300 p-2 text-left">
+                  <th className="border w-60 border-gray-300 p-2 text-left">
                     Chức năng
                   </th>
                 </tr>

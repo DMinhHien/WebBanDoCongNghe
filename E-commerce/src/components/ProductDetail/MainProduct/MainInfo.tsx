@@ -112,7 +112,14 @@ const MainInfo = ({ product,productId}: Props) => {
         <Typography variant="body1" color="textPrimary" mb={2}>
          {product.description}
         </Typography>
-
+        <Box display="flex" alignItems="center" mb={2}>
+          <Typography variant="h6" fontWeight="700" mr={1}>
+            Tình trạng:
+          </Typography>
+          <Typography variant="body1" color="textPrimary">
+             {product.status}
+               </Typography>
+          </Box>
         <Divider sx={{ my: 3 }} />
 
         <Box display="flex" alignItems="center" gap={2}>
